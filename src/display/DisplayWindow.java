@@ -16,9 +16,6 @@ public class DisplayWindow extends IWindow{
 	
 	public DisplayWindow(){
 		menu = new DisplayMenu(this);
-		
-		SPanel = new ShapePanel();
-		add(SPanel);
 	}
 	
 	public void showWindow(){
@@ -26,6 +23,9 @@ public class DisplayWindow extends IWindow{
 	    setSize(600, 400);
 	    setLocationRelativeTo(null);
 	    setLayout(new BorderLayout());
+
+		SPanel = new ShapePanel();
+		this.add(SPanel,BorderLayout.CENTER);
 	    
 	    setJMenuBar(menu.getMenuBar());
 	    setVisible(true);
@@ -33,10 +33,9 @@ public class DisplayWindow extends IWindow{
 
 	public void drawPointsInPanel(MyPoint[] points) {
 		SPanel.setPointsToPaint(points);
-		
-		SPanel.switchShown();
-				
+		SPanel.switchShown();	
 		repaint();
+		validate();
 	}
 	
 	/*public void abrirArchivo(){

@@ -11,9 +11,8 @@ import utilities.MyPoint;
 
 public class ShapePanel extends JPanel {
 	private MyPoint[] points;
-	private boolean shown = true;
+	private boolean shown = false;
     
-    /*Recibe el numero de puntos a dibujar y las coordenadas*/
     public ShapePanel(){
     	
     }
@@ -46,16 +45,13 @@ public class ShapePanel extends JPanel {
     @Override
     public void paintComponent(Graphics g) {   
         super.paintComponent(g);
+        System.out.print("oooo");
         if(shown)
         	doDrawing(g);
     }
 
     public void switchShown(){
-    	shown = !shown;
-    }
-    
-    @Override
-    public Dimension getPreferredSize() {
-        return new Dimension(300, 200);
+    	if(!shown)
+    		shown = !shown;
     }
 }
