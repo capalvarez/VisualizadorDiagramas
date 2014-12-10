@@ -64,11 +64,7 @@ public class DisplayWindow extends IWindow{
 	
 	
 	
-	/*public void abrirArchivo(){
-		JFileChooser fileopen = new JFileChooser();
-		int ret = fileopen.showDialog(panel, "Abrir archivo");
-	
-	}
+	/*
 	
 	public void abrirTablaManual(){
 		JTable table = new JTable();
