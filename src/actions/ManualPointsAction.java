@@ -18,20 +18,9 @@ public class ManualPointsAction extends AbstractAction{
 		
 	@Override
 	public void actionPerformed(ActionEvent event) {
-		Component origen = (Component) event.getSource();
-		while(origen!=null){ 
-			if( origen instanceof DisplayWindow ) {
-				break;
-			}
-
-			if( origen instanceof JPopupMenu ) {
-				origen = ((JPopupMenu)origen).getInvoker();
-			}
-			else {
-				origen = origen.getParent();
-			}
-		}
-	
+		
+		
+		
 		((DisplayWindow)origen).abrirTablaManual();
 		((DisplayWindow)origen).repaint();//Importante!
 		

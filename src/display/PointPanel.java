@@ -12,23 +12,24 @@ import javax.swing.JPanel;
 import utilities.MyPoint;
 
 public class PointPanel extends ICenterPanel{
-    private boolean shown = false;
 	private MyPoint[] points;
-	private int nPoints;
+	private boolean shown = false;
     
-    /*Recibe el numero de puntos a dibujar y las coordenadas*/
-    public PointPanel(int n,MyPoint[] points){
-    	this.points = points;
-    	this.nPoints = n; 	
-    }
-    
+	public PointPanel(){
+
+	}
+	    
+	public void setPointsToPaint(MyPoint[] points){
+		this.points = points;
+	}
+	    
     private void doDrawing(Graphics g) {
 
         Graphics2D g2d = (Graphics2D) g;
 
         g2d.setColor(Color.blue);
 
-        for (int i = 0; i < nPoints; i++) {
+        for (int i = 0; i < points.length; i++) {
         	
             g2d.drawLine(points[i].getX(), points[i].getY(), points[i].getX(), points[i].getY());
         

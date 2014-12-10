@@ -66,9 +66,4 @@ public class VoronoiOFFReader implements VoronoiFileReader{
 	public String[] getRegionList() {
 		return voronoiRegionList;
 	}
-	
-	public String[] getEdgeList(){
-		return null;
-	}
-	
 }

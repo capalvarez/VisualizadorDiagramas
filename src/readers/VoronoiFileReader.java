@@ -7,6 +7,5 @@ public interface VoronoiFileReader {
 	/*Devolver strings[] o un formato mas estandar?*/
 	public String[] getPointList();
 	public String[] getRegionList();
-	public String[] getEdgeList();
 
 }

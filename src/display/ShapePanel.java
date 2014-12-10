@@ -30,22 +30,12 @@ public class ShapePanel extends JPanel {
         int height = Math.abs(points[0].getY()-points[1].getY());
         int width = Math.abs(points[0].getX()-points[1].getX());			
         
-        g2d.drawRect(points[0].getX(),points[0].getY(),width,height);
-        
-        
-        /*Dibujado con lineas
-        for (int i = 0; i < nPoints - 1; i++) {
-        	g2d.drawLine(points[i].getX(), points[i].getY(), points[i+1].getX(), points[i+1].getY());
-        }
-        Cerrar la figura
-        g2d.drawLine(points[0].getX(), points[0].getY(), points[nPoints-1].getX(), points[nPoints-1].getY());*/
-        
+        g2d.drawRect(points[0].getX(),points[0].getY(),width,height);       
     }
 
     @Override
     public void paintComponent(Graphics g) {   
         super.paintComponent(g);
-        System.out.print("oooo");
         if(shown)
         	doDrawing(g);
     }

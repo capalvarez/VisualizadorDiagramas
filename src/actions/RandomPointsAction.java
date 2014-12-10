@@ -1,9 +1,14 @@
 package actions;
 
 import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
+import java.util.Random;
 
 import javax.swing.*;
+
+import utilities.MyPoint;
 import display.DisplayWindow;
 import display.IWindow;
 
@@ -23,11 +28,23 @@ public class RandomPointsAction extends AbstractAction{
 		int n = Integer.parseInt(number);
 		
 		/*Generar puntos aleatoriamente*/
+		MyPoint[] pointArray = new MyPoint[n];
 		
+		Dimension size = window.getSize();
+		Insets insets = window.getInsets();
 		
-		//PointPanel panel = new PointPanel(n,);
+		int w =  size.width - insets.left - insets.right;
+		int h =  size.height - insets.top - insets.bottom;
+		Random r = new Random();
 		
-		//window.dibujar(panel);
-		window.repaint();//Importante!
+		for(int i=0;i<n;i++){		
+			int x = Math.abs(r.nextInt()) % w;
+			int y = Math.abs(r.nextInt()) % h;
+			
+			pointArray[i] = new MyPoint(x,y);
+		}
+	
+		window.drawDiagramInPanel(pointArray);
+		window.repaint();
 	}	
 }

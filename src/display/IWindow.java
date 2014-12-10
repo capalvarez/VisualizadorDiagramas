@@ -6,5 +6,7 @@ import utilities.MyPoint;
 
 public abstract class IWindow extends JFrame{
 
-	public abstract void drawPointsInPanel(MyPoint[] points); 
+	public abstract void drawPointsInPanel(MyPoint[] points);
+
+	public abstract void drawDiagramInPanel(MyPoint[] points); 
 }
