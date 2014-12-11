@@ -13,6 +13,8 @@ import actions.*;
 public class DisplayMenu {
 	private JMenuBar menubar;
 	private IWindow window;
+	JMenuItem delaunay;
+	JMenuItem voronoi;
 	
 	public DisplayMenu(IWindow window){
 		menubar = new JMenuBar();
@@ -23,11 +25,16 @@ public class DisplayMenu {
 		setPuntosMenu(puntos);
 		menubar.add(puntos);
 		
-		JMenu dibujar = new JMenu("Voronoi");
+		JMenu dibujar = new JMenu("Puntos");
 		dibujar.setMnemonic(KeyEvent.VK_V);
 		setDibujarMenu(dibujar);
 		menubar.add(dibujar);
-			
+	
+		JMenu diagramas = new JMenu("Diagrama");
+		diagramas.setMnemonic(KeyEvent.VK_D);
+		setDiagramasMenu(diagramas);
+		menubar.add(diagramas);
+		
 	}
 	
 	public JMenuBar getMenuBar(){
@@ -74,5 +81,24 @@ public class DisplayMenu {
 		azar.setMnemonic(KeyEvent.VK_Z);
 		puntos.add(azar);
 	}
+	
+	public void setDiagramasMenu(JMenu diagramas){
+		delaunay =  new JMenuItem("Delaunay");
+		delaunay.addActionListener(new DelaunayDiagramAction(window));
+		delaunay.setMnemonic(KeyEvent.VK_Y);
+		diagramas.add(delaunay);
+		delaunay.setEnabled(false);
+		
+		voronoi =  new JMenuItem("Voronoi");
+		voronoi.addActionListener(new VoronoiDiagramAction(window));
+		voronoi.setMnemonic(KeyEvent.VK_V);
+		diagramas.add(voronoi);
+		voronoi.setEnabled(false);	
+	}
 
+	public void setDiagramasEnabled(){
+		delaunay.setEnabled(true);
+		voronoi.setEnabled(true);
+	}
+	
 }

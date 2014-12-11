@@ -1,14 +1,6 @@
 package display;
 
-import java.awt.BorderLayout;
 import java.awt.CardLayout;
-
-import javax.swing.JFileChooser;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-
 import utilities.MyPoint;
 
 public class DisplayWindow extends IWindow{
@@ -52,24 +44,11 @@ public class DisplayWindow extends IWindow{
 	}
 	
 	public void drawDiagramInPanel(MyPoint[] points){
+		menu.setDiagramasEnabled();
 		layout.show(getContentPane(),"pointPanel");
 		PPanel.setPointsToPaint(points);
 		PPanel.switchShown();	
 		repaint();
-		validate();
-		/*Incluir un boton que permita ver diagrama de Voronoi (incluso de Delaunay)*/
-	
-	
+		validate();	
 	}
-	
-	
-	
-	/*
-	
-	public void abrirTablaManual(){
-		JTable table = new JTable();
-	    JScrollPane scrollpane = new JScrollPane(table);
-	 
-	}*/
-	
 }

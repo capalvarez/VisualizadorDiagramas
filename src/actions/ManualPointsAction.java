@@ -1,8 +1,7 @@
 package actions;
 
 import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.GridLayout;
+import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -38,7 +37,7 @@ public class ManualPointsAction extends AbstractAction{
 	public void actionPerformed(ActionEvent event) {
 		/*Pedir input al usuario*/	
 		InputDialog input = new InputDialog(window);
-		input.setSize(500, 300);	
+		input.setSize(500, 174);	
 	}
 	
 	public class InputDialog extends JDialog{
@@ -50,7 +49,7 @@ public class ManualPointsAction extends AbstractAction{
 				BorderLayout borderLayout1 = new BorderLayout();
 				JScrollPane theScrollPane = new JScrollPane();				
 				String[] columnNames = {"x","y","z"};		
-				int numRows = 5;
+				int numRows = 1;
 				final DefaultTableModel model = new DefaultTableModel(numRows, columnNames.length) ;
 				model.setColumnIdentifiers(columnNames);
 				JTable table = new JTable(model);
@@ -63,7 +62,7 @@ public class ManualPointsAction extends AbstractAction{
 				theScrollPane.getViewport().add(table, null);
 
 				JPanel buttonPanel = new JPanel();
-				buttonPanel.setLayout(new GridLayout(0,2));
+				buttonPanel.setLayout(new FlowLayout());
 								
 				final JButton button = new JButton("OK");
 				button.addActionListener(new AbstractAction(){
@@ -74,7 +73,9 @@ public class ManualPointsAction extends AbstractAction{
 						Vector data = model.getDataVector();
 						MyPoint[] pointsArray = processPoints(data);
 						window.drawDiagramInPanel(pointsArray);
-						window.repaint();	
+						window.repaint();
+						setVisible(false);
+						dispose();
 					}
 					
 					private MyPoint[] processPoints(Vector data){
@@ -106,8 +107,7 @@ public class ManualPointsAction extends AbstractAction{
 				});
 				
 				buttonPanel.add(button);
-				button.setPreferredSize(new Dimension(20, 20));	
-				
+								
 				JButton button2 = new JButton("Cancel");
 				button2.addActionListener(new AbstractAction(){
 					public void actionPerformed(ActionEvent e) {
@@ -116,9 +116,22 @@ public class ManualPointsAction extends AbstractAction{
 					}					
 				});
 				buttonPanel.add(button2);
-				button2.setPreferredSize(new Dimension(20, 20));
-				
 				messagePane.add(buttonPanel,BorderLayout.SOUTH);
+
+				JPanel addRow = new JPanel();
+				addRow.setLayout(new FlowLayout());
+				
+				JButton addButton = new JButton("Agregar");
+				addButton.addActionListener(new AbstractAction(){
+					@Override
+					public void actionPerformed(ActionEvent event) {
+						model.insertRow(model.getRowCount(), new Object[] {null, null, null} );
+					}	
+				});
+				
+				addRow.add(addButton);
+				messagePane.add(addRow,BorderLayout.WEST);
+				
 				
 				pack();
 				setVisible(true);	
