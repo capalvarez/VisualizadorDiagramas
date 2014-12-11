@@ -28,11 +28,13 @@ public class PointPanel extends ICenterPanel{
         Graphics2D g2d = (Graphics2D) g;
 
         g2d.setColor(Color.blue);
-
-        for (int i = 0; i < points.length; i++) {
-        	
-            g2d.drawLine(points[i].getX(), points[i].getY(), points[i].getX(), points[i].getY());
         
+        int r = 5;
+        
+        for (int i = 0; i < points.length; i++) {
+        	int x = points[i].getX()-(r/2);
+        	int y = points[i].getY()-(r/2);
+        	g2d.fillOval(x,y,r,r);   
         }
     }
 
