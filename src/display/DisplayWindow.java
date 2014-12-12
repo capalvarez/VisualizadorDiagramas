@@ -1,12 +1,15 @@
 package display;
 
 import java.awt.CardLayout;
+
+import utilities.MyEdge;
 import utilities.MyPoint;
 
 public class DisplayWindow extends IWindow{
 	DisplayMenu menu;
 	ShapePanel SPanel;
 	PointPanel PPanel;
+	DiagramPanel DPanel;
 	CardLayout layout;
 		
 	public DisplayWindow(){
@@ -32,10 +35,13 @@ public class DisplayWindow extends IWindow{
 	    
 		PPanel = new PointPanel();
 		getContentPane().add(PPanel,"pointPanel");
+		
+		DPanel = new DiagramPanel();
+		getContentPane().add(DPanel,"diagramPanel");
 	}
 	
 	
-	public void drawPointsInPanel(MyPoint[] points) {
+	public void drawRegionInPanel(MyPoint[] points) {
 		layout.show(getContentPane(),"shapePanel");
 		SPanel.setPointsToPaint(points);
 		SPanel.switchShown();	
@@ -43,7 +49,7 @@ public class DisplayWindow extends IWindow{
 		validate();
 	}
 	
-	public void drawDiagramInPanel(MyPoint[] points){
+	public void drawPointsInPanel(MyPoint[] points){
 		menu.setDiagramasEnabled();
 		layout.show(getContentPane(),"pointPanel");
 		PPanel.setPointsToPaint(points);
@@ -51,4 +57,13 @@ public class DisplayWindow extends IWindow{
 		repaint();
 		validate();	
 	}
+	
+	public void drawDiagramInPanel(MyPoint[] points, MyEdge[] edges){
+		layout.show(getContentPane(),"diagramPanel");
+		DPanel.setLinesToPaint(points,edges);
+		DPanel.switchShown();	
+		repaint();
+		validate();	
+	}
+	
 }

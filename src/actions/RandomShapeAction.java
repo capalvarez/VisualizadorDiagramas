@@ -43,7 +43,7 @@ public class RandomShapeAction extends AbstractAction {
 		
 		MyPoint[] pointArray = {left,right};
 		
-		window.drawPointsInPanel(pointArray);
+		window.drawRegionInPanel(pointArray);
 	}
 
 }

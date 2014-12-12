@@ -2,8 +2,10 @@ package dataProcessors;
 
 import java.util.ArrayList;
 
+import utilities.MyEdge;
+
 public class VoronoiEdgeProcess {
-	private ArrayList<String> edgeList = new ArrayList<String>();
+	private ArrayList<MyEdge> edgeList = new ArrayList<MyEdge>();
 	
 	public VoronoiEdgeProcess(String[] regions){
 		processRegions(regions);
@@ -14,17 +16,17 @@ public class VoronoiEdgeProcess {
 			String[] regInfo = regionList[i].split(" ");
 			
 			for(int j=1;j<Integer.parseInt(regInfo[0])-1;j++){
-				edgeList.add(regInfo[j]+" "+regInfo[j+1]);
+				edgeList.add(new MyEdge(Integer.parseInt(regInfo[j]),Integer.parseInt(regInfo[j+1])));
 			}
 			
-			edgeList.add(regInfo[Integer.parseInt(regInfo[0])]+" "+regInfo[0]);		
+			edgeList.add(new MyEdge(Integer.parseInt(regInfo[Integer.parseInt(regInfo[0])]),Integer.parseInt(regInfo[0])));		
 		}
 	}
 	
-	public String[] getEdgeList(){
-		String[] edgeArr = new String[edgeList.size()];
-		edgeArr = edgeList.toArray(edgeArr);
+	public MyEdge[] getEdgeList(){	
+		MyEdge[] edgeArray = new MyEdge[edgeList.size()];
+		edgeArray = edgeList.toArray(edgeArray);
 		
-		return edgeArr;
+		return edgeArray;
 	}
 }

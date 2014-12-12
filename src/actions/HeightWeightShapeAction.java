@@ -77,7 +77,7 @@ public class HeightWeightShapeAction extends AbstractAction {
 			MyPoint p2 = new MyPoint(newX,newY);
 			MyPoint[] pointArray = {origen,p2};
 			
-			window.drawPointsInPanel(pointArray);
+			window.drawRegionInPanel(pointArray);
 			window.repaint();
 		}
 		

@@ -60,7 +60,7 @@ public class SelectFilePointsAction extends AbstractAction{
 		if (ret == JFileChooser.APPROVE_OPTION) {
             File file = fileopen.getSelectedFile();
             MyPoint[] pointArray = (new PointFileReader(file)).getPointList();
-            window.drawDiagramInPanel(pointArray);
+            window.drawPointsInPanel(pointArray);
     		window.repaint();
 		}
 	}		

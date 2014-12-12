@@ -44,7 +44,7 @@ public class RandomPointsAction extends AbstractAction{
 			pointArray[i] = new MyPoint(x,y);
 		}
 	
-		window.drawDiagramInPanel(pointArray);
+		window.drawPointsInPanel(pointArray);
 		window.repaint();
 	}	
 }

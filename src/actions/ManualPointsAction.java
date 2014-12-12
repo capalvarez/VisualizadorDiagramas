@@ -72,7 +72,7 @@ public class ManualPointsAction extends AbstractAction{
 						button.requestFocus();
 						Vector data = model.getDataVector();
 						MyPoint[] pointsArray = processPoints(data);
-						window.drawDiagramInPanel(pointsArray);
+						window.drawPointsInPanel(pointsArray);
 						window.repaint();
 						setVisible(false);
 						dispose();

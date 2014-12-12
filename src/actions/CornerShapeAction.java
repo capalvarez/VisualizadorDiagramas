@@ -66,7 +66,7 @@ public class CornerShapeAction extends AbstractAction {
 			MyPoint p2 = new MyPoint(Integer.parseInt(xFieldP2.getText()),Integer.parseInt(yFieldP2.getText()));
 			MyPoint[] pointArray = {p1,p2};
 			
-			window.drawPointsInPanel(pointArray);
+			window.drawRegionInPanel(pointArray);
 			window.repaint();
 		}
 	}
