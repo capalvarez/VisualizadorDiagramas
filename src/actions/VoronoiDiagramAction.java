@@ -1,5 +1,6 @@
 package actions;
 
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
 
@@ -12,6 +13,7 @@ import utilities.MyPoint;
 
 import libraryCallers.VoronoiLibraryCall;
 
+import dataProcessors.PointProcess;
 import dataProcessors.VoronoiEdgeProcess;
 import display.IWindow;
 
@@ -33,9 +35,24 @@ public class VoronoiDiagramAction extends AbstractAction {
 			/*Si llamada es exitosa puedo leer del archivo de output*/
 			VoronoiOFFReader reader = new VoronoiOFFReader(output);
 			String[] points = reader.getPointList();
-			//MyEdge[] edges = (new VoronoiEdgeProcess(reader.getRegionList())).getEdgeList();
+			MyEdge[] edges = (new VoronoiEdgeProcess(reader.getRegionList())).getEdgeList();
 			
-			//window.drawDiagramInPanel(points,edges);
+			Dimension size = window.getSize();
+			
+			MyPoint[] pointsToDraw = (new PointProcess(points, size.height, size.width)).getPointList();
+			
+			for(int i=0;i<pointsToDraw.length;i++){
+				System.out.println(pointsToDraw[i].toString());
+			}
+			
+			System.out.println(" ");
+			
+			for(int i=0;i<edges.length;i++){
+				System.out.println(edges[i].toString());
+			}
+			
+			
+			window.drawDiagramInPanel(pointsToDraw,edges);
 			
 		}catch (IOException e1) {
 			e1.printStackTrace();

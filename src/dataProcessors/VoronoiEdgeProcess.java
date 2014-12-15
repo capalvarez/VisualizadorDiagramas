@@ -13,13 +13,14 @@ public class VoronoiEdgeProcess {
 
 	private void processRegions(String[] regionList){
 		for(int i=0; i<regionList.length;i++){
+			
 			String[] regInfo = regionList[i].split(" ");
 			
 			for(int j=1;j<Integer.parseInt(regInfo[0])-1;j++){
 				edgeList.add(new MyEdge(Integer.parseInt(regInfo[j]),Integer.parseInt(regInfo[j+1])));
 			}
 			
-			edgeList.add(new MyEdge(Integer.parseInt(regInfo[Integer.parseInt(regInfo[0])]),Integer.parseInt(regInfo[0])));		
+			edgeList.add(new MyEdge(Integer.parseInt(regInfo[Integer.parseInt(regInfo[0])]),Integer.parseInt(regInfo[1])));		
 		}
 	}
 	

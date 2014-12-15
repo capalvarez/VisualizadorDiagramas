@@ -16,4 +16,10 @@ public class MyEdge {
 	public int getIndexSecond(){
 		return i2;
 	}	
+
+	public String toString(){
+		return this.i1+"->"+this.i2;
+	}
+
+	
 }
