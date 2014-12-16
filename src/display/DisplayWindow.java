@@ -11,6 +11,7 @@ public class DisplayWindow extends IWindow{
 	PointPanel PPanel;
 	DiagramPanel DPanel;
 	CardLayout layout;
+	MyPoint[] currentPoints;
 		
 	public DisplayWindow(){
 		menu = new DisplayMenu(this);
@@ -49,10 +50,11 @@ public class DisplayWindow extends IWindow{
 		validate();
 	}
 	
-	public void drawPointsInPanel(MyPoint[] points){
+	public void drawPointsInPanel(MyPoint[] pointsToDraw, MyPoint[] points){
 		menu.setDiagramasEnabled();
+		currentPoints = points;
 		layout.show(getContentPane(),"pointPanel");
-		PPanel.setPointsToPaint(points);
+		PPanel.setPointsToPaint(pointsToDraw);
 		PPanel.switchShown();	
 		repaint();
 		validate();	
@@ -66,4 +68,7 @@ public class DisplayWindow extends IWindow{
 		validate();	
 	}
 	
+	public MyPoint[] getCurrentPoints(){
+		return currentPoints;
+	}
 }

@@ -1,6 +1,7 @@
 package actions;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
@@ -23,6 +24,7 @@ import javax.swing.JTable;
 import javax.swing.KeyStroke;
 import javax.swing.table.DefaultTableModel;
 
+import dataProcessors.PointProcess;
 import display.IWindow;
 import utilities.MyPoint;
 
@@ -71,15 +73,19 @@ public class ManualPointsAction extends AbstractAction{
 					public void actionPerformed(ActionEvent e) {
 						button.requestFocus();
 						Vector data = model.getDataVector();
-						MyPoint[] pointsArray = processPoints(data);
-						window.drawPointsInPanel(pointsArray);
+						String[] pointsArray = processPoints(data);
+						Dimension size = window.getSize();
+						
+						PointProcess pp = new PointProcess(pointsArray, size.height, size.width);
+						MyPoint[] pointsToDraw = pp.getPointList();
+						window.drawPointsInPanel(pointsToDraw,pp.getInitPointsList());
 						window.repaint();
 						setVisible(false);
 						dispose();
 					}
 					
-					private MyPoint[] processPoints(Vector data){
-						List<MyPoint> points = new ArrayList<MyPoint>();
+					private String[] processPoints(Vector data){
+						List<String> points = new ArrayList<String>();
 						Iterator it = data.iterator();
 						
 						while(it.hasNext()){
@@ -95,12 +101,12 @@ public class ManualPointsAction extends AbstractAction{
 							 }
 							
 							 if(z==null){
-								points.add(new MyPoint(Integer.parseInt((String)x),Integer.parseInt((String)y))); 
+								points.add(x+" "+y); 
 							 }			 
 						 }
 						 
-						 MyPoint[] pointArray = new MyPoint[points.size()];
-						 pointArray = points.toArray(pointArray);
+						String[] pointArray = new String[points.size()];
+						pointArray = points.toArray(pointArray);
 							
 						return pointArray;					
 					}

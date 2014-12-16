@@ -10,7 +10,8 @@ import java.util.List;
 import utilities.MyPoint;
 
 public class PointFileReader {
-	MyPoint[] pointList;
+	String[] pointList;
+	MyPoint[] points;
 	
 	public PointFileReader(File input){
 		readFile(input);
@@ -27,7 +28,8 @@ public class PointFileReader {
 
 			/*Leemos la segunda linea, que contiene el numero de puntos*/
 			int nPoints = Integer.parseInt(br.readLine().trim());  
-			pointList = new MyPoint[nPoints];
+			pointList = new String[nPoints];
+			points = new MyPoint[nPoints];
 			
 			int i = 0;
 			while((currentLine=br.readLine())!=null){
@@ -35,7 +37,8 @@ public class PointFileReader {
 				
 				if(coord.length>0){
 					/*Para asegurarse de no tomar lineas vacias*/
-					pointList[i] = new MyPoint(Integer.parseInt(coord[0].trim()),Integer.parseInt(coord[1].trim()));
+					pointList[i] = (coord[0].trim() +" " + (coord[1].trim()));
+					points[i] = new MyPoint(Integer.parseInt(coord[0].trim()),Integer.parseInt(coord[1].trim()));
 				}
 				
 				i++;
@@ -54,8 +57,12 @@ public class PointFileReader {
 		}
 	}
 	
-	public MyPoint[] getPointList(){
+	public String[] getPointList(){
 		return pointList;
+	}
+	
+	public MyPoint[] getPoints(){
+		return points;
 	}
 	
 }

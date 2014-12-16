@@ -25,6 +25,9 @@ public class RandomPointsAction extends AbstractAction{
 		String number = (String)JOptionPane.showInputDialog(window,
                 	"Ingrese numero de puntos a generar:",
                 	"Generación aleatoria", JOptionPane.QUESTION_MESSAGE, null, null, null);
+		
+		/*Verificar que el usuario haya ingresado un numero valido (o haya ingresado algo)*/
+		
 		int n = Integer.parseInt(number);
 		
 		/*Generar puntos aleatoriamente*/
@@ -44,7 +47,7 @@ public class RandomPointsAction extends AbstractAction{
 			pointArray[i] = new MyPoint(x,y);
 		}
 	
-		window.drawPointsInPanel(pointArray);
+		window.drawPointsInPanel(pointArray,pointArray);
 		window.repaint();
 	}	
 }

@@ -1,6 +1,7 @@
 package actions;
 
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.io.BufferedReader;
 import java.io.File;
@@ -16,6 +17,7 @@ import readers.PointFileReader;
 
 import utilities.MyPoint;
 
+import dataProcessors.PointProcess;
 import display.DisplayWindow;
 import display.IWindow;
 
@@ -59,8 +61,13 @@ public class SelectFilePointsAction extends AbstractAction{
 		/*Solamente leemos el archivo si el usuario apreta OK*/
 		if (ret == JFileChooser.APPROVE_OPTION) {
             File file = fileopen.getSelectedFile();
-            MyPoint[] pointArray = (new PointFileReader(file)).getPointList();
-            window.drawPointsInPanel(pointArray);
+            PointFileReader pfr = new PointFileReader(file);
+            String[] pointArray = pfr.getPointList();
+            
+            Dimension size = window.getSize();
+			MyPoint[] pointsToDraw = (new PointProcess(pointArray, size.height, size.width)).getPointList();
+            
+			window.drawPointsInPanel(pointsToDraw,pfr.getPoints());
     		window.repaint();
 		}
 	}		
