@@ -28,13 +28,11 @@ public class PointPanel extends AbstractPanel{
         Graphics2D g2d = (Graphics2D) g;
 
         g2d.setColor(color);
-        
-        int r = 5;
-        
+               
         for (int i = 0; i < points.length; i++) {
-        	int x = points[i].getX()-(r/2);
-        	int y = points[i].getY()-(r/2);
-        	g2d.fillOval(x,y,r,r);   
+        	int x = points[i].getX()-(pointSize/2);
+        	int y = points[i].getY()-(pointSize/2);
+        	g2d.fillOval(x,y,pointSize,pointSize);   
         }
     }
 

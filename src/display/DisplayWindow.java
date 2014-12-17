@@ -90,4 +90,14 @@ public class DisplayWindow extends IWindow{
 		repaint();
 	}
 	
+	public void changePointSize(int size){
+		SPanel.setPointSize(size);
+		PPanel.setPointSize(size);
+		DPanel.setPointSize(size);
+		repaint();
+	}
+	
+	public int getCurrPointSize(){
+		return PPanel.getPointSize();
+	}
 }

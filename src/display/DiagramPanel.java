@@ -51,14 +51,12 @@ public class DiagramPanel extends AbstractPanel {
     					     points[index1].getX()+points[index1].getInfinityX(), points[index1].getY());
     		}    		
     	}
-    	
-    	int r = 5;
-    	
+    	    	
     	/*Dibujar los puntos de input*/
     	for(int i=0;i<pointsToDraw.length;i++){
-    		int x = pointsToDraw[i].getX()-(r/2);
-        	int y = pointsToDraw[i].getY()-(r/2);
-        	g2d.fillOval(x,y,r,r);  
+    		int x = pointsToDraw[i].getX()-(pointSize/2);
+        	int y = pointsToDraw[i].getY()-(pointSize/2);
+        	g2d.fillOval(x,y,pointSize,pointSize);  
     	}
     	
     }

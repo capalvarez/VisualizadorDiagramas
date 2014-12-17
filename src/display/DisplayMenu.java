@@ -112,7 +112,12 @@ public class DisplayMenu {
 		backG.setToolTipText("Cambia el color del fondo");
 		backG.addActionListener(new ColourBackGroundChangeAction(window));
 		backG.setMnemonic(KeyEvent.VK_O);
-		preferencias.add(backG);	
+		preferencias.add(backG);
+		
+		JMenuItem pointS =  new JMenuItem("Tamaño de puntos");
+		pointS.addActionListener(new PointSizeChangeAction(window));
+		pointS.setMnemonic(KeyEvent.VK_T);
+		preferencias.add(pointS);
 	}
 	
 	public void setDiagramasEnabled(){

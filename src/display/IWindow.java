@@ -20,4 +20,8 @@ public abstract class IWindow extends JFrame{
 	public abstract void changeColorDiagram(Color color);
 
 	public abstract void changeBackGroundColor(Color color);
+
+	public abstract int getCurrPointSize();
+
+	public abstract void changePointSize(int value); 
 }
