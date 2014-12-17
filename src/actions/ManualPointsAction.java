@@ -24,7 +24,7 @@ import javax.swing.JTable;
 import javax.swing.KeyStroke;
 import javax.swing.table.DefaultTableModel;
 
-import dataProcessors.PointProcess;
+import dataProcessors.PointStringProcess;
 import display.IWindow;
 import utilities.MyPoint;
 
@@ -76,7 +76,7 @@ public class ManualPointsAction extends AbstractAction{
 						String[] pointsArray = processPoints(data);
 						Dimension size = window.getSize();
 						
-						PointProcess pp = new PointProcess(pointsArray, size.height, size.width);
+						PointStringProcess pp = new PointStringProcess(pointsArray, size.height, size.width);
 						MyPoint[] pointsToDraw = pp.getPointList();
 						window.drawPointsInPanel(pointsToDraw,pp.getInitPointsList());
 						window.repaint();

@@ -11,7 +11,7 @@ import javax.swing.JPanel;
 
 import utilities.MyPoint;
 
-public class PointPanel extends ICenterPanel{
+public class PointPanel extends AbstractPanel{
 	private MyPoint[] points;
 	private boolean shown = false;
     
@@ -27,7 +27,7 @@ public class PointPanel extends ICenterPanel{
 
         Graphics2D g2d = (Graphics2D) g;
 
-        g2d.setColor(Color.blue);
+        g2d.setColor(color);
         
         int r = 5;
         

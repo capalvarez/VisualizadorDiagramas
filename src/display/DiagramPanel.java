@@ -9,7 +9,7 @@ import javax.swing.JPanel;
 import utilities.MyEdge;
 import utilities.MyPoint;
 
-public class DiagramPanel extends JPanel {
+public class DiagramPanel extends AbstractPanel {
 	private MyPoint[] points;
 	private MyEdge[] edges;
 	private MyPoint[] pointsToDraw;
@@ -32,7 +32,7 @@ public class DiagramPanel extends JPanel {
 
     	Graphics2D g2d = (Graphics2D) g;
 
-    	g2d.setColor(Color.blue);
+    	g2d.setColor(color);
     	
     	/*Dibujar los arcos de Voronoi*/
     	for(int i=0;i<edges.length;i++){
@@ -55,11 +55,11 @@ public class DiagramPanel extends JPanel {
     	int r = 5;
     	
     	/*Dibujar los puntos de input*/
-    	/*for(int i=0;i<pointsToDraw.length;i++){
+    	for(int i=0;i<pointsToDraw.length;i++){
     		int x = pointsToDraw[i].getX()-(r/2);
         	int y = pointsToDraw[i].getY()-(r/2);
         	g2d.fillOval(x,y,r,r);  
-    	}*/
+    	}
     	
     }
 

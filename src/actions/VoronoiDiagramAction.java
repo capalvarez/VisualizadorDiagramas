@@ -16,7 +16,7 @@ import writers.PointInputWriter;
 
 import libraryCallers.VoronoiLibraryCall;
 
-import dataProcessors.PointProcess;
+import dataProcessors.PointStringProcess;
 import dataProcessors.VoronoiEdgeProcess;
 import display.IWindow;
 
@@ -50,7 +50,7 @@ public class VoronoiDiagramAction extends AbstractAction {
 			
 			Dimension size = window.getSize();
 			
-			MyPoint[] pointsToDraw = (new PointProcess(points, size.height, size.width)).getPointList();
+			MyPoint[] pointsToDraw = (new PointStringProcess(points, size.height, size.width)).getPointList();
 			
 			window.drawDiagramInPanel(pointsToDraw,edges);
 			

@@ -1,6 +1,9 @@
 package display;
 
 import java.awt.CardLayout;
+import java.awt.Color;
+
+import dataProcessors.PointMyPointProcess;
 
 import utilities.MyEdge;
 import utilities.MyPoint;
@@ -63,6 +66,7 @@ public class DisplayWindow extends IWindow{
 	public void drawDiagramInPanel(MyPoint[] points, MyEdge[] edges){
 		layout.show(getContentPane(),"diagramPanel");
 		DPanel.setLinesToPaint(points,edges);
+		DPanel.setPointsToPaint((new PointMyPointProcess(currentPoints,this.getSize().height,this.getSize().width)).getPointList());
 		DPanel.switchShown();	
 		repaint();
 		validate();	
@@ -71,4 +75,19 @@ public class DisplayWindow extends IWindow{
 	public MyPoint[] getCurrentPoints(){
 		return currentPoints;
 	}
+	
+	public void changeColorDiagram(Color color){
+		SPanel.setColor(color);
+		PPanel.setColor(color);
+		DPanel.setColor(color);
+		repaint();
+	}
+	
+	public void changeBackGroundColor(Color color){
+		SPanel.setBackGroundColor(color);
+		PPanel.setBackGroundColor(color);
+		DPanel.setBackGroundColor(color);
+		repaint();
+	}
+	
 }

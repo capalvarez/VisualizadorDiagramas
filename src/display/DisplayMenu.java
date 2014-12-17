@@ -1,9 +1,8 @@
 package display;
 
-import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 
-import javax.swing.JFileChooser;
+import javax.swing.Box;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -26,7 +25,7 @@ public class DisplayMenu {
 		menubar.add(puntos);
 		
 		JMenu dibujar = new JMenu("Puntos");
-		dibujar.setMnemonic(KeyEvent.VK_V);
+		dibujar.setMnemonic(KeyEvent.VK_P);
 		setDibujarMenu(dibujar);
 		menubar.add(dibujar);
 	
@@ -34,6 +33,12 @@ public class DisplayMenu {
 		diagramas.setMnemonic(KeyEvent.VK_D);
 		setDiagramasMenu(diagramas);
 		menubar.add(diagramas);
+		
+		JMenu preferencias = new JMenu("Preferencias");
+		preferencias.setMnemonic(KeyEvent.VK_F);
+		setPreferenciasMenu(preferencias);
+		menubar.add(Box.createHorizontalGlue());
+		menubar.add(preferencias);
 		
 	}
 	
@@ -96,6 +101,20 @@ public class DisplayMenu {
 		voronoi.setEnabled(false);	
 	}
 
+	public void setPreferenciasMenu(JMenu preferencias){
+		JMenuItem color =  new JMenuItem("Color de dibujo");
+		color.setToolTipText("Cambia el color en que se dibujan puntos y lineas");
+		color.addActionListener(new ColourChangeAction(window));
+		color.setMnemonic(KeyEvent.VK_C);
+		preferencias.add(color);	
+		
+		JMenuItem backG =  new JMenuItem("Color de fondo");
+		backG.setToolTipText("Cambia el color del fondo");
+		backG.addActionListener(new ColourBackGroundChangeAction(window));
+		backG.setMnemonic(KeyEvent.VK_O);
+		preferencias.add(backG);	
+	}
+	
 	public void setDiagramasEnabled(){
 		delaunay.setEnabled(true);
 		voronoi.setEnabled(true);

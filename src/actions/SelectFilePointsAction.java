@@ -17,7 +17,7 @@ import readers.PointFileReader;
 
 import utilities.MyPoint;
 
-import dataProcessors.PointProcess;
+import dataProcessors.PointStringProcess;
 import display.DisplayWindow;
 import display.IWindow;
 
@@ -65,7 +65,7 @@ public class SelectFilePointsAction extends AbstractAction{
             String[] pointArray = pfr.getPointList();
             
             Dimension size = window.getSize();
-			MyPoint[] pointsToDraw = (new PointProcess(pointArray, size.height, size.width)).getPointList();
+			MyPoint[] pointsToDraw = (new PointStringProcess(pointArray, size.height, size.width)).getPointList();
             
 			window.drawPointsInPanel(pointsToDraw,pfr.getPoints());
     		window.repaint();

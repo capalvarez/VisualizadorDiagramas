@@ -9,7 +9,7 @@ import javax.swing.JPanel;
 
 import utilities.MyPoint;
 
-public class ShapePanel extends JPanel {
+public class ShapePanel extends AbstractPanel {
 	private MyPoint[] points;
 	private boolean shown = false;
     
@@ -25,7 +25,7 @@ public class ShapePanel extends JPanel {
     	
         Graphics2D g2d = (Graphics2D) g;
 
-        g2d.setColor(Color.blue);
+        g2d.setColor(color);
 
         int height = Math.abs(points[0].getY()-points[1].getY());
         int width = Math.abs(points[0].getX()-points[1].getX());			
