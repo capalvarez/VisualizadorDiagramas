@@ -50,8 +50,11 @@ public class VoronoiDiagramAction extends AbstractAction {
 			
 			Dimension size = window.getSize();
 			
-			MyPoint[] pointsToDraw = (new PointStringProcess(points, size.height, size.width)).getPointList();
+			PointStringProcess psp = new PointStringProcess(points, size.height, size.width);			
 			
+			MyPoint[] pointsToDraw = psp.getPointList();
+						
+			window.setScaleToDraw(psp.getScale());
 			window.drawDiagramInPanel(pointsToDraw,edges);
 			
 		}catch (IOException e1) {

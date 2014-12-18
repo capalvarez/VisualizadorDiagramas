@@ -4,6 +4,10 @@ import utilities.MyPoint;
 
 public class PointStringProcess extends PointProcess{
 	private String[] initPoints;
+	double xMin = 1000000000;
+	double xMax = -1000000000;
+	double yMin = 1000000000;
+	double yMax = -1000000000;
 		
 	public PointStringProcess(String[] points, int height, int width){
 		initPoints = points;
@@ -19,11 +23,6 @@ public class PointStringProcess extends PointProcess{
 		/*Por ahora solamente valido para puntos en 2D*/
 		
 		/*Buscar los valores minimos y maximos en x e y para ajustar al tamaño de la ventana*/
-		double xMin = 1000000000;
-		double xMax = -1000000000;
-		double yMin = 1000000000;
-		double yMax = -1000000000;
-		
 		double xMed = 0;
 		double yMed = 0;
 		
@@ -53,11 +52,16 @@ public class PointStringProcess extends PointProcess{
 			double x1 = Double.parseDouble(info[0]);
 			double y1 = Double.parseDouble(info[1]);
 					
-			int x = (int) Math.round(wWidth/(1.5*(xMax-xMin))*(x1-1.5*xMin));
+			int x = (int) Math.round(wWidth*(x1-1.5*xMin)/(1.5*(xMax-xMin)));
 			int y = (int) Math.round(wHeight/(1.5*(yMax-yMin))*(y1-1.5*yMin));
 							
 			endPoints[i] = new MyPoint(x,y,x1<xMed? -1 : 1, y1<yMed? -1 : 1);	
 			initPointsList[i] =  endPoints[i];
 		}
+	}
+	
+	public double[] getScale(){
+		double[] scale = {xMax,xMin,yMax,yMin};
+		return scale;
 	}
 }

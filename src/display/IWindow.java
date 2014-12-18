@@ -8,6 +8,7 @@ import utilities.MyEdge;
 import utilities.MyPoint;
 
 public abstract class IWindow extends JFrame{
+	double[] scaleToDraw;
 	
 	public abstract void drawPointsInPanel(MyPoint[] pointsToDraw,MyPoint[] points);
 
@@ -24,4 +25,8 @@ public abstract class IWindow extends JFrame{
 	public abstract int getCurrPointSize();
 
 	public abstract void changePointSize(int value); 
+	
+	public void setScaleToDraw(double[] scale){
+ 		scaleToDraw = scale;
+ 	}
 }

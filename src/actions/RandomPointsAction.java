@@ -27,6 +27,9 @@ public class RandomPointsAction extends AbstractAction{
                 	"Generación aleatoria", JOptionPane.QUESTION_MESSAGE, null, null, null);
 		
 		/*Verificar que el usuario haya ingresado un numero valido (o haya ingresado algo)*/
+		if(number==null){
+			return;
+		}
 		
 		int n = Integer.parseInt(number);
 		
