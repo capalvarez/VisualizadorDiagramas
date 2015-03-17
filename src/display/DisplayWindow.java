@@ -4,7 +4,7 @@ import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 
-import dataProcessors.PointScaleProcess;
+import dataProcessors.*;
 
 import utilities.MyEdge;
 import utilities.MyPoint;
@@ -16,7 +16,7 @@ public class DisplayWindow extends IWindow{
 	DiagramPanel DPanel;
 	CardLayout layout;
 	MyPoint[] currentPoints;
-		
+			
 	public DisplayWindow(){
 		menu = new DisplayMenu(this);
 		layout = new CardLayout();
@@ -48,7 +48,9 @@ public class DisplayWindow extends IWindow{
 	
 	public void drawRegionInPanel(MyPoint[] points) {
 		layout.show(getContentPane(),"shapePanel");
-		SPanel.setPointsToPaint(points);
+		
+		Dimension size = getSize();
+		SPanel.setPointsToPaint(new PointInitProcess(points,size.width, size.height).getPointList());
 		SPanel.switchShown();	
 		repaint();
 		validate();

@@ -74,17 +74,35 @@ public class MyPoint {
 	
 	public MyPoint getPointRight(MyPoint p2){
 		if(this.x<=p2.getX()){
+			return p2;
+		}else{
+			return this;
+		}	
+	}
+	
+	public MyPoint getPointLeft(MyPoint p2){
+		if(this.x<=p2.getX()){
 			return this;
 		}else{
 			return p2;
 		}	
 	}
 	
-	public MyPoint getPointLeft(MyPoint p2){
-		if(this.x<=p2.getX()){
-			return p2;
-		}else{
+	public MyPoint getPointDown(MyPoint p2){
+		if(this.y<=p2.getY()){
 			return this;
+		}else{
+			return p2;
 		}	
 	}
+	
+	public MyPoint getPointUp(MyPoint p2){
+		if(this.y>=p2.getY()){
+			return this;
+		}else{
+			return p2;
+		}	
+	}
+	
+	
 }

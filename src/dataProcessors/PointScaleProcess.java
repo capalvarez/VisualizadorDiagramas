@@ -13,7 +13,7 @@ public class PointScaleProcess extends PointProcess{
 		
 		processPoints();
 	}
-	
+		
 	private void processPoints(){
 		endPoints = new MyPoint[initPointsList.length];
 		double xMed = 0;
