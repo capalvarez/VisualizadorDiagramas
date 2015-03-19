@@ -10,17 +10,20 @@ import java.util.Random;
 import javax.swing.JPanel;
 
 import utilities.MyPoint;
+import utilities.MyRegion;
 
 public class PointPanel extends AbstractPanel{
 	private MyPoint[] points;
+	private MyRegion region;
 	private boolean shown = false;
     
 	public PointPanel(){
 
 	}
 	    
-	public void setPointsToPaint(MyPoint[] points){
+	public void setPointsToPaint(MyPoint[] points, MyRegion region){
 		this.points = points;
+		this.region = region;
 	}
 	    
     private void doDrawing(Graphics g) {
@@ -34,6 +37,8 @@ public class PointPanel extends AbstractPanel{
         	int y = points[i].getY()-(pointSize/2);
         	g2d.fillOval(x,y,pointSize,pointSize);   
         }
+        
+        region.drawRegion(g2d);        
     }
 
     @Override

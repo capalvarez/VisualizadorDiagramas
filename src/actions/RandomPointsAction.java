@@ -8,7 +8,7 @@ import java.util.Random;
 
 import javax.swing.*;
 
-import utilities.MyPoint;
+import utilities.*;
 import display.DisplayWindow;
 import display.IWindow;
 
@@ -35,17 +35,15 @@ public class RandomPointsAction extends AbstractAction{
 		
 		/*Generar puntos aleatoriamente*/
 		MyPoint[] pointArray = new MyPoint[n];
-		
-		Dimension size = window.getSize();
-		Insets insets = window.getInsets();
-		
-		int w =  size.width - insets.left - insets.right;
-		int h =  size.height - insets.top - insets.bottom;
+		MyRegion region = window.getCurrentRegion();
+				
+		int w =  region.getWidth();
+		int h =  region.getHeight();
 		Random r = new Random();
 		
 		for(int i=0;i<n;i++){		
-			int x = Math.abs(r.nextInt()) % w;
-			int y = Math.abs(r.nextInt()) % h;
+			int x = Math.abs(r.nextInt()) % w + region.getLeftCorner();
+			int y = Math.abs(r.nextInt()) % h + region.getUpCorner();
 			
 			pointArray[i] = new MyPoint(x,y);
 		}

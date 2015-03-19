@@ -28,8 +28,11 @@ public class PointInitProcess extends PointProcess {
 			int nXR = (int) Math.round(rel*wHeight+slope*(right.getY()-down.getX()));
 			int nXL = (int) Math.round(rel*wHeight+slope*(left.getY()-down.getX()));
 			
-			MyPoint p1 = new MyPoint(nXR,(int)Math.round(rel*wHeight));
-			MyPoint p2 = new MyPoint(nXL,(int)Math.round(wHeight*(1-rel)));
+			int[] valuesToCenter = {nXR, nXL};
+			int[] values = (new ValueCenter(wWidth,valuesToCenter)).getCenteredValues();
+			
+			MyPoint p1 = new MyPoint(values[0],(int)Math.round(rel*wHeight));
+			MyPoint p2 = new MyPoint(values[1],(int)Math.round(wHeight*(1-rel)));
 			
 			endPoints[0] = p1;
 			endPoints[1] = p2;
@@ -39,11 +42,11 @@ public class PointInitProcess extends PointProcess {
 			int nYUp = (int) Math.round(rel*wWidth+slope*(up.getY()-left.getX()));
 			int nYDown = (int) Math.round(rel*wWidth+slope*(down.getY()-left.getX()));
 			
-			//int[] valuesToCenter = {nYUp, nYDown};
-			//int[] values = (new ValueCenter(wHeight,valuesToCenter)).getCenteredValues();
+			int[] valuesToCenter = {nYUp, nYDown};
+			int[] values = (new ValueCenter(wHeight,valuesToCenter)).getCenteredValues();
 			
-			MyPoint p1 = new MyPoint((int)Math.round(rel*wWidth),nYDown);
-			MyPoint p2 = new MyPoint((int)Math.round(wWidth*(1-rel)),nYUp);
+			MyPoint p1 = new MyPoint((int)Math.round(rel*wWidth),values[1]);
+			MyPoint p2 = new MyPoint((int)Math.round(wWidth*(1-rel)),values[0]);
 			
 			endPoints[0] = p1;
 			endPoints[1] = p2;

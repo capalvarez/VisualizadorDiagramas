@@ -8,6 +8,7 @@ import dataProcessors.*;
 
 import utilities.MyEdge;
 import utilities.MyPoint;
+import utilities.MyRegion;
 
 public class DisplayWindow extends IWindow{
 	DisplayMenu menu;
@@ -16,6 +17,7 @@ public class DisplayWindow extends IWindow{
 	DiagramPanel DPanel;
 	CardLayout layout;
 	MyPoint[] currentPoints;
+	MyRegion currentRegion;
 			
 	public DisplayWindow(){
 		menu = new DisplayMenu(this);
@@ -50,7 +52,11 @@ public class DisplayWindow extends IWindow{
 		layout.show(getContentPane(),"shapePanel");
 		
 		Dimension size = getSize();
-		SPanel.setPointsToPaint(new PointInitProcess(points,size.width, size.height).getPointList());
+		MyPoint[] regionPoints = new PointInitProcess(points,size.width, size.height).getPointList();
+		SPanel.setPointsToPaint(regionPoints);
+		
+		currentRegion = new MyRegion(regionPoints[0],regionPoints[1]);
+		
 		SPanel.switchShown();	
 		repaint();
 		validate();
@@ -60,7 +66,7 @@ public class DisplayWindow extends IWindow{
 		menu.setDiagramasEnabled();
 		currentPoints = points;
 		layout.show(getContentPane(),"pointPanel");
-		PPanel.setPointsToPaint(pointsToDraw);
+		PPanel.setPointsToPaint(pointsToDraw, currentRegion);
 		PPanel.switchShown();	
 		repaint();
 		validate();	
@@ -88,6 +94,10 @@ public class DisplayWindow extends IWindow{
  	public MyPoint[] getCurrentPoints(){
 		return currentPoints;
 	}	
+ 	
+ 	public MyRegion getCurrentRegion(){
+ 		return currentRegion;
+ 	}
  	
 	public void changeColorDiagram(Color color){
 		SPanel.setColor(color);

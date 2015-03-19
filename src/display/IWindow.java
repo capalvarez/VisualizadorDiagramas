@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 
 import utilities.MyEdge;
 import utilities.MyPoint;
+import utilities.MyRegion;
 
 public abstract class IWindow extends JFrame{
 	double[] scaleToDraw;
@@ -18,12 +19,14 @@ public abstract class IWindow extends JFrame{
 
 	public abstract MyPoint[] getCurrentPoints();
 
+	public abstract MyRegion getCurrentRegion();
+	
 	public abstract void changeColorDiagram(Color color);
 
 	public abstract void changeBackGroundColor(Color color);
 
 	public abstract int getCurrPointSize();
-
+	
 	public abstract void changePointSize(int value); 
 	
 	public void setScaleToDraw(double[] scale){
