@@ -28,7 +28,15 @@ public class ShapePanel extends AbstractPanel {
         g2d.setColor(color);
 
         int height = Math.abs(points[0].getY()-points[1].getY());
-        int width = Math.abs(points[0].getX()-points[1].getX());			
+        int width = Math.abs(points[0].getX()-points[1].getX());
+        
+    	int x = points[0].getX()-(pointSize/2);
+    	int y = points[0].getY()-(pointSize/2);
+    	g2d.fillOval(x,y,pointSize,pointSize);  
+    	
+    	int x2 = points[1].getX()-(pointSize/2);
+    	int y2 = points[1].getY()-(pointSize/2);
+    	g2d.fillOval(x2,y2,pointSize,pointSize); 
         
         g2d.drawRect(points[0].getX(),points[0].getY(),width,height);       
     }

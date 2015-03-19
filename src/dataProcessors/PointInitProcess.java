@@ -1,5 +1,6 @@
 package dataProcessors;
 
+import generalTools.ValueCenter;
 import utilities.MyPoint;
 
 public class PointInitProcess extends PointProcess {
@@ -21,10 +22,6 @@ public class PointInitProcess extends PointProcess {
 		MyPoint down = initPointsList[0].getPointDown(initPointsList[1]);
 		double rel = 0.05;
 		
-		System.out.println(right.toString()+" "+left.toString());
-		System.out.println(up.toString()+" "+down.toString());
-		
-		
 		if((right.getX()-left.getX())<=(up.getY()-down.getY())){
 			/*Coordenada mas larga es la vertical, se usa esta escala*/
 			double slope = wHeight*(1-2*rel)/(up.getY()-down.getY());
@@ -36,22 +33,20 @@ public class PointInitProcess extends PointProcess {
 			
 			endPoints[0] = p1;
 			endPoints[1] = p2;
-			
-			System.out.println(endPoints[0].toString()+ " " + endPoints[1].toString());
 				
 		}else{
 			double slope = wWidth*(1-2*rel)/(right.getX()-left.getX());
 			int nYUp = (int) Math.round(rel*wWidth+slope*(up.getY()-left.getX()));
 			int nYDown = (int) Math.round(rel*wWidth+slope*(down.getY()-left.getX()));
 			
-			MyPoint p1 = new MyPoint((int)Math.round(rel*wWidth),nYUp);
-			MyPoint p2 = new MyPoint((int)Math.round(wWidth*(1-rel)),nYDown);
+			//int[] valuesToCenter = {nYUp, nYDown};
+			//int[] values = (new ValueCenter(wHeight,valuesToCenter)).getCenteredValues();
+			
+			MyPoint p1 = new MyPoint((int)Math.round(rel*wWidth),nYDown);
+			MyPoint p2 = new MyPoint((int)Math.round(wWidth*(1-rel)),nYUp);
 			
 			endPoints[0] = p1;
 			endPoints[1] = p2;
-			
-			System.out.println(slope);
-			System.out.println(endPoints[0].toString()+ " " + endPoints[1].toString());
 			
 		}
 	}
