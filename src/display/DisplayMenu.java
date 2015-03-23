@@ -14,6 +14,8 @@ public class DisplayMenu {
 	private IWindow window;
 	JMenuItem delaunay;
 	JMenuItem voronoi;
+	JMenu ingresarItem;
+	JMenuItem azarItem;
 	
 	public DisplayMenu(IWindow window){
 		menubar = new JMenuBar();
@@ -47,7 +49,7 @@ public class DisplayMenu {
 	}
     
 	public void setDibujarMenu(JMenu dibujar){	
-		JMenu ingresarItem = new JMenu("Ingresar puntos");
+		ingresarItem = new JMenu("Ingresar puntos");
 		ingresarItem.setMnemonic(KeyEvent.VK_I);
 
 		JMenuItem archivo = new JMenuItem("Desde archivo");
@@ -60,13 +62,15 @@ public class DisplayMenu {
 		ingresarItem.add(manual);
 		
 		dibujar.add(ingresarItem);
-	
-		JMenuItem azarItem = new JMenuItem("Puntos al azar");
+		ingresarItem.setEnabled(false);
+		
+		azarItem = new JMenuItem("Puntos al azar");
 		azarItem.setMnemonic(KeyEvent.VK_A);
 		azarItem.addActionListener(new RandomPointsAction(window));
 		azarItem.setToolTipText("Generar puntos aleatoriamente");
 		
 		dibujar.add(azarItem);
+		azarItem.setEnabled(false);
 	}
 	
 	public void setPuntosMenu(JMenu puntos){
@@ -123,6 +127,11 @@ public class DisplayMenu {
 	public void setDiagramasEnabled(){
 		delaunay.setEnabled(true);
 		voronoi.setEnabled(true);
+	}
+	
+	public void setPuntosEnabled(){
+		ingresarItem.setEnabled(true);
+		azarItem.setEnabled(true);
 	}
 	
 }

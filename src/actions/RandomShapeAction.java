@@ -25,6 +25,7 @@ public class RandomShapeAction extends AbstractAction {
 		Dimension size = window.getSize();
 		Insets insets = window.getInsets();
 		
+		/*Limitar de alguna forma que todo quede dentro de la pantalla*/
 		int w =  size.width - insets.left - insets.right;
 		int h =  size.height - insets.top - insets.bottom;
 		

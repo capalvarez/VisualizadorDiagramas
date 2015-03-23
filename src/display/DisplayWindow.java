@@ -25,7 +25,7 @@ public class DisplayWindow extends IWindow{
 	}
 	
 	public void showWindow(){
-		setTitle("Primera ventana");
+		setTitle("Diagramas :P");
 	    setSize(600, 400);
 	    setLocationRelativeTo(null);
 	    getContentPane().setLayout(layout);
@@ -49,6 +49,7 @@ public class DisplayWindow extends IWindow{
 	
 	
 	public void drawRegionInPanel(MyPoint[] points) {
+		menu.setPuntosEnabled();
 		layout.show(getContentPane(),"shapePanel");
 		
 		Dimension size = getSize();

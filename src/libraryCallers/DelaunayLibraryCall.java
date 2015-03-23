@@ -2,18 +2,18 @@ package libraryCallers;
 
 import java.io.IOException;
 
-public class VoronoiLibraryCall extends LibraryCall{
+public class DelaunayLibraryCall extends LibraryCall{
 
-	public VoronoiLibraryCall(String input){
+	public DelaunayLibraryCall(String input){
 		inputFile = input;
 		createOutputFile();
 	}
 			
 	public String callSystem() throws IOException, InterruptedException{
+		//Cambiar al comando para llamar a qdelaunay
 		ProcessBuilder pb = new ProcessBuilder("qvoronoi","o","TI",inputFile,"TO",outputFile);
 		callBashMethod(pb);
 				
 		return outputFile;
 	}
-	
 }
