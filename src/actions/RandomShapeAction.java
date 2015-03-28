@@ -11,7 +11,6 @@ import javax.swing.AbstractAction;
 import utilities.MyPoint;
 
 import display.IWindow;
-import display.ShapePanel;
 
 public class RandomShapeAction extends AbstractAction {
 	private IWindow window;	

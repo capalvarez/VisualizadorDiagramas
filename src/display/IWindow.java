@@ -32,4 +32,7 @@ public abstract class IWindow extends JFrame{
 	public void setScaleToDraw(double[] scale){
  		scaleToDraw = scale;
  	}
+
+	public abstract AbstractPanel getPanel();
+
 }

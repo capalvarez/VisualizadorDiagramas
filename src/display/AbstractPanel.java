@@ -4,7 +4,7 @@ import java.awt.Color;
 
 import javax.swing.JPanel;
 
-public class AbstractPanel extends JPanel {
+public abstract class AbstractPanel extends JPanel {
 	protected Color color = Color.blue;
 	protected int pointSize = 5;
 	
@@ -25,5 +25,12 @@ public class AbstractPanel extends JPanel {
 		pointSize = newPoint;
 	}
 	
+	public void drawCoordinateSystem(){
+		
+	}
+
+	public abstract void switchDiagram();
+	public abstract void switchPoints();
+	public abstract void switchRegion();
 	
 }

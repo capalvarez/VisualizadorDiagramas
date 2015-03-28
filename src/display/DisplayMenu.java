@@ -16,6 +16,7 @@ public class DisplayMenu {
 	JMenuItem voronoi;
 	JMenu ingresarItem;
 	JMenuItem azarItem;
+	JMenu uniformeItem;
 	
 	public DisplayMenu(IWindow window){
 		menubar = new JMenuBar();
@@ -36,11 +37,16 @@ public class DisplayMenu {
 		setDiagramasMenu(diagramas);
 		menubar.add(diagramas);
 		
+		JMenu reset = new JMenu("Limpiar");
+		reset.setMnemonic(KeyEvent.VK_L);
+		setResetMenu(reset);
+		menubar.add(Box.createHorizontalGlue());
+		menubar.add(reset);
+		
 		JMenu preferencias = new JMenu("Preferencias");
 		preferencias.setMnemonic(KeyEvent.VK_F);
 		setPreferenciasMenu(preferencias);
-		menubar.add(Box.createHorizontalGlue());
-		menubar.add(preferencias);
+		menubar.add(preferencias);	
 		
 	}
 	
@@ -71,6 +77,25 @@ public class DisplayMenu {
 		
 		dibujar.add(azarItem);
 		azarItem.setEnabled(false);
+		
+		uniformeItem = new JMenu("Generacion uniforme");
+		uniformeItem.setMnemonic(KeyEvent.VK_U);
+		
+		JMenuItem distancia = new JMenuItem("Ingresar separacion");
+		distancia.addActionListener(new UniformSepPointsAction(window));
+		
+		JMenuItem numero = new JMenuItem("Ingresar numero de puntos");
+		numero.addActionListener(new UniformNumPointsAction(window));
+
+		uniformeItem.add(distancia);
+		uniformeItem.add(numero);
+		
+		
+		dibujar.add(uniformeItem);
+		uniformeItem.setEnabled(false);
+		
+		
+		
 	}
 	
 	public void setPuntosMenu(JMenu puntos){
@@ -88,7 +113,8 @@ public class DisplayMenu {
 		JMenuItem azar = new JMenuItem("Al azar");
 		azar.addActionListener(new RandomShapeAction(window));
 		azar.setMnemonic(KeyEvent.VK_Z);
-		puntos.add(azar);
+		puntos.add(azar); 
+	
 	}
 	
 	public void setDiagramasMenu(JMenu diagramas){
@@ -124,6 +150,27 @@ public class DisplayMenu {
 		preferencias.add(pointS);
 	}
 	
+	public void setResetMenu(JMenu reset){
+		JMenuItem borrarDiagrama = new JMenuItem("Borrar diagrama");
+		borrarDiagrama.setToolTipText("Borra diagrama, dejando puntos y region");
+		borrarDiagrama.addActionListener(new DiagramDeleteAction(window));
+		borrarDiagrama.setMnemonic(KeyEvent.VK_D);
+		reset.add(borrarDiagrama);	
+		
+		JMenuItem borrarPuntos = new JMenuItem("Borrar puntos");
+		borrarPuntos.setToolTipText("Borra el diagrama y los puntos, dejando la region");
+		borrarPuntos.addActionListener(new PointDeleteAction(window));
+		borrarPuntos.setMnemonic(KeyEvent.VK_P);
+		reset.add(borrarPuntos);
+				
+		JMenuItem resetear = new JMenuItem("Resetear");
+		resetear.setToolTipText("Resetea completamente la ventana");
+		resetear.addActionListener(new ResetAction(window));
+		resetear.setMnemonic(KeyEvent.VK_R);
+		reset.add(resetear);
+	}
+	
+	
 	public void setDiagramasEnabled(){
 		delaunay.setEnabled(true);
 		voronoi.setEnabled(true);
@@ -132,6 +179,7 @@ public class DisplayMenu {
 	public void setPuntosEnabled(){
 		ingresarItem.setEnabled(true);
 		azarItem.setEnabled(true);
+		uniformeItem.setEnabled(true);
 	}
 	
 }

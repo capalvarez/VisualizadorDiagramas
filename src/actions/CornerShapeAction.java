@@ -13,7 +13,6 @@ import javax.swing.JTextField;
 import utilities.MyPoint;
 
 import display.IWindow;
-import display.ShapePanel;
 
 public class CornerShapeAction extends AbstractAction {
 	private IWindow window;	

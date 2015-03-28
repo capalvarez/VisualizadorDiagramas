@@ -12,53 +12,35 @@ import utilities.MyRegion;
 
 public class DisplayWindow extends IWindow{
 	DisplayMenu menu;
-	ShapePanel SPanel;
-	PointPanel PPanel;
-	DiagramPanel DPanel;
-	CardLayout layout;
+	DrawPanel Panel;
 	MyPoint[] currentPoints;
 	MyRegion currentRegion;
 			
 	public DisplayWindow(){
 		menu = new DisplayMenu(this);
-		layout = new CardLayout();
 	}
 	
 	public void showWindow(){
 		setTitle("Diagramas :P");
 	    setSize(600, 400);
 	    setLocationRelativeTo(null);
-	    getContentPane().setLayout(layout);
-
-	    addPanels();
+	    Panel = new DrawPanel();
+	    getContentPane().add(Panel);
 	    
 	    setJMenuBar(menu.getMenuBar());
 	    setVisible(true);
 	}
 
-	private void addPanels(){
-		SPanel = new ShapePanel();
-		getContentPane().add(SPanel, "shapePanel");
-	    
-		PPanel = new PointPanel();
-		getContentPane().add(PPanel,"pointPanel");
-		
-		DPanel = new DiagramPanel();
-		getContentPane().add(DPanel,"diagramPanel");
-	}
-	
 	
 	public void drawRegionInPanel(MyPoint[] points) {
 		menu.setPuntosEnabled();
-		layout.show(getContentPane(),"shapePanel");
 		
 		Dimension size = getSize();
 		MyPoint[] regionPoints = new PointInitProcess(points,size.width, size.height).getPointList();
-		SPanel.setPointsToPaint(regionPoints);
-		
 		currentRegion = new MyRegion(regionPoints[0],regionPoints[1]);
+		Panel.setRegion(currentRegion);	
 		
-		SPanel.switchShown();	
+		Panel.switchRegion();	
 		repaint();
 		validate();
 	}
@@ -66,22 +48,21 @@ public class DisplayWindow extends IWindow{
 	public void drawPointsInPanel(MyPoint[] pointsToDraw, MyPoint[] points){
 		menu.setDiagramasEnabled();
 		currentPoints = points;
-		layout.show(getContentPane(),"pointPanel");
-		PPanel.setPointsToPaint(pointsToDraw, currentRegion);
-		PPanel.switchShown();	
+
+		Panel.setPointsToPaint(pointsToDraw);
+		Panel.switchPoints();	
 		repaint();
 		validate();	
 	}
 	
 	public void drawDiagramInPanel(MyPoint[] points, MyEdge[] edges){
-		layout.show(getContentPane(),"diagramPanel");
-		DPanel.setLinesToPaint(points,edges);
+		Panel.setLinesToPaint(points,edges);
 		
 		Dimension size = getSize();
 		MyPoint[] newCPoints = (new PointScaleProcess(currentPoints,scaleToDraw, size.width, size.height)).getPointList();
 				
-		DPanel.setPointsToPaint(newCPoints);
-		DPanel.switchShown();	
+		Panel.setPointsToPaint(newCPoints);
+		Panel.switchDiagram();	
 		repaint();
 		validate();	
 	}
@@ -101,27 +82,26 @@ public class DisplayWindow extends IWindow{
  	}
  	
 	public void changeColorDiagram(Color color){
-		SPanel.setColor(color);
-		PPanel.setColor(color);
-		DPanel.setColor(color);
+		Panel.setColor(color);
 		repaint();
 	}
 	
 	public void changeBackGroundColor(Color color){
-		SPanel.setBackGroundColor(color);
-		PPanel.setBackGroundColor(color);
-		DPanel.setBackGroundColor(color);
+		Panel.setBackGroundColor(color);
 		repaint();
 	}
 	
 	public void changePointSize(int size){
-		SPanel.setPointSize(size);
-		PPanel.setPointSize(size);
-		DPanel.setPointSize(size);
+		Panel.setPointSize(size);
 		repaint();
 	}
 	
 	public int getCurrPointSize(){
-		return PPanel.getPointSize();
+		return Panel.getPointSize();
 	}
+	
+	public AbstractPanel getPanel(){
+		return Panel;
+	}
+
 }
