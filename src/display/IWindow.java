@@ -21,6 +21,10 @@ public abstract class IWindow extends JFrame{
 
 	public abstract MyRegion getCurrentRegion();
 	
+	public abstract MyPoint[] getVoronoiPoints();
+	
+	public abstract MyEdge[] getVoronoiEdges();
+	
 	public abstract void changeColorDiagram(Color color);
 
 	public abstract void changeBackGroundColor(Color color);
@@ -35,4 +39,5 @@ public abstract class IWindow extends JFrame{
 
 	public abstract AbstractPanel getPanel();
 
+	
 }

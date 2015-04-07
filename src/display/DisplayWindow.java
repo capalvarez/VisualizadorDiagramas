@@ -15,6 +15,8 @@ public class DisplayWindow extends IWindow{
 	DrawPanel Panel;
 	MyPoint[] currentPoints;
 	MyRegion currentRegion;
+	MyPoint[] voronoiPoints;
+	MyEdge[] voronoiEdges;
 			
 	public DisplayWindow(){
 		menu = new DisplayMenu(this);
@@ -57,7 +59,9 @@ public class DisplayWindow extends IWindow{
 	
 	public void drawDiagramInPanel(MyPoint[] points, MyEdge[] edges){
 		Panel.setLinesToPaint(points,edges);
-		
+		voronoiPoints = points;
+		voronoiEdges = edges;
+				
 		Dimension size = getSize();
 		MyPoint[] newCPoints = (new PointScaleProcess(currentPoints,scaleToDraw, size.width, size.height)).getPointList();
 				
@@ -79,6 +83,14 @@ public class DisplayWindow extends IWindow{
  	
  	public MyRegion getCurrentRegion(){
  		return currentRegion;
+ 	}
+ 	
+ 	public MyPoint[] getVoronoiPoints(){
+ 		return voronoiPoints;
+ 	}
+ 	
+ 	public MyEdge[] getVoronoiEdges(){
+ 		return voronoiEdges;
  	}
  	
 	public void changeColorDiagram(Color color){

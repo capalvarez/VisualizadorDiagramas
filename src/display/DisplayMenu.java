@@ -37,10 +37,15 @@ public class DisplayMenu {
 		setDiagramasMenu(diagramas);
 		menubar.add(diagramas);
 		
+		JMenu print = new JMenu("Imprimir");
+		print.setMnemonic(KeyEvent.VK_I);
+		setPrintMenu(print);
+		menubar.add(Box.createHorizontalGlue());
+		menubar.add(print);
+				
 		JMenu reset = new JMenu("Limpiar");
 		reset.setMnemonic(KeyEvent.VK_L);
 		setResetMenu(reset);
-		menubar.add(Box.createHorizontalGlue());
 		menubar.add(reset);
 		
 		JMenu preferencias = new JMenu("Preferencias");
@@ -93,8 +98,6 @@ public class DisplayMenu {
 		
 		dibujar.add(uniformeItem);
 		uniformeItem.setEnabled(false);
-		
-		
 		
 	}
 	
@@ -168,6 +171,14 @@ public class DisplayMenu {
 		resetear.addActionListener(new ResetAction(window));
 		resetear.setMnemonic(KeyEvent.VK_R);
 		reset.add(resetear);
+	}
+	
+	public void setPrintMenu(JMenu print){
+		JMenuItem imprimir = new JMenuItem("Imprimir archivo");
+		imprimir.setToolTipText("Crea archivo de output");
+		imprimir.addActionListener(new OutputFileAction(window));
+		imprimir.setMnemonic(KeyEvent.VK_P);
+		print.add(imprimir);		
 	}
 	
 	
