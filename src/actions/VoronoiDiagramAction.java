@@ -17,7 +17,7 @@ import writers.PointInputWriter;
 import libraryCallers.VoronoiLibraryCall;
 
 import dataProcessors.PointStringProcess;
-import dataProcessors.VoronoiEdgeProcess;
+import dataProcessors.VoronoiRegionProcess;
 import display.IWindow;
 
 public class VoronoiDiagramAction extends AbstractAction {
@@ -46,7 +46,7 @@ public class VoronoiDiagramAction extends AbstractAction {
 			/*Si llamada es exitosa puedo leer del archivo de output*/
 			VoronoiOFFReader reader = new VoronoiOFFReader(output);
 			String[] points = reader.getPointList();
-			MyEdge[] edges = (new VoronoiEdgeProcess(reader.getRegionList())).getEdgeList();
+			MyEdge[] edges = (new VoronoiRegionProcess(reader.getRegionList())).getEdgeList();
 			
 			Dimension size = window.getSize();
 			

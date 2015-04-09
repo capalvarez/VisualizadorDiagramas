@@ -10,15 +10,13 @@ import utilities.*;
 public class OutputFileWriter {
 	MyPoint[] points;
 	MyPoint[] voronoiPoints;
-	int[][] voronoiEdges;
-	MyCell[] voronoiCells;
+	MyEdge[] voronoiEdges;
 	File outputFile;
 	
-	public OutputFileWriter(MyPoint[] points, MyPoint[] vPoints, int[][] vEdges, MyCell[] vCells, File out){
+	public OutputFileWriter(MyPoint[] points, MyPoint[] vPoints, MyEdge[] vEdges, File out){
 		this.points = points;
 		voronoiPoints = vPoints;
 		voronoiEdges = vEdges;
-		voronoiCells = vCells;
 		outputFile = out;
 	}
 	
@@ -50,17 +48,17 @@ public class OutputFileWriter {
 		/*Escribir los arcos de Voronoi*/
 		for(int i=0;i<voronoiEdges.length;i++){
 			/*Por ahora, se asume trabajar en 2D*/
-			writer.write(voronoiEdges[i][0] + "    " + voronoiEdges[i][1]);
+			writer.write(voronoiEdges.toString());
 		}
 				
 		/*Escribir el numero de regiones de Voronoi*/
-		writer.write(voronoiCells.length);
+		//writer.write(voronoiCells.length);
 		
 		/*Escribir las regiones de Voronoi*/
-		for(int i=0;i<voronoiCells.length;i++){
+		//for(int i=0;i<voronoiCells.length;i++){
 			/*Por ahora, se asume trabajar en 2D*/
-			writer.write(voronoiCells[i].toString());
-		}
+		//	writer.write(voronoiCells[i].toString());
+		//}
 				
 		writer.close();
 	}

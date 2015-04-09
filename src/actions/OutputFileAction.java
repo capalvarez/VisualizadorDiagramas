@@ -28,8 +28,8 @@ public class OutputFileAction extends AbstractAction {
 		  
 		 if (userSelection == JFileChooser.APPROVE_OPTION) {
 		     File fileToSave = fileChooser.getSelectedFile();		     
-		     
-		     OutputFileWrite ofw = new OutputFileWriter(window.getCurrentPoints(),window.getVoronoiPoints(),window.getVoronoiEdges(),fileToSave);
+		     /*Tengo las aristas y tengo que encontrar los indices de los puntos que la componen*/
+		     OutputFileWriter ofw = new OutputFileWriter(window.getCurrentPoints(),window.getVoronoiPoints(),window.getVoronoiEdges(), fileToSave);
 		     
 		 }
 
