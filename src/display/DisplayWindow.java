@@ -71,11 +71,12 @@ public class DisplayWindow extends IWindow{
 		validate();	
 	}
 	
-	private void printPoints(MyPoint[] points){
-		for(int i=0;i<points.length;i++){
-			System.out.println(points[i].toString());
-		}
+	public void drawCoordSysInPanel(MyPoint origin){			
+		Panel.switchCoordSys(origin);	
+		repaint();
+		validate();	
 	}
+	
 	
  	public MyPoint[] getCurrentPoints(){
 		return currentPoints;

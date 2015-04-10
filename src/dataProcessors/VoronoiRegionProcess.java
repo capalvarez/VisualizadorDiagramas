@@ -21,11 +21,13 @@ public class VoronoiRegionProcess {
 			for(int j=1;j<Integer.parseInt(regInfo[0])-1;j++){
 				edgeList.add(new MyEdge(Integer.parseInt(regInfo[j]),Integer.parseInt(regInfo[j+1])));
 				edgeIndex.add(regInfo[j] + " " + regInfo[j+1]);
-				regionIndex.add(null);
+				
 			}
 			
 			edgeList.add(new MyEdge(Integer.parseInt(regInfo[Integer.parseInt(regInfo[0])]),Integer.parseInt(regInfo[1])));		
 			edgeIndex.add(regInfo[0] + " " + regInfo[1]);
+			regionIndex.add(Integer.parseInt(regInfo[0])+1 + " " );
+			
 		}
 	}
 	

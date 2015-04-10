@@ -33,6 +33,8 @@ public abstract class IWindow extends JFrame{
 	
 	public abstract void changePointSize(int value); 
 	
+	public abstract void drawCoordSysInPanel(MyPoint origin);
+	
 	public void setScaleToDraw(double[] scale){
  		scaleToDraw = scale;
  	}

@@ -8,14 +8,18 @@ public class CoordSysDrawer {
 	private MyPoint origin;
 	private int scaleToDraw;
 	
-	public CoordSysDrawer(MyPoint origin, int scale){
+	public CoordSysDrawer(int scale){
 		this.origin = origin;
 		this.scaleToDraw = scale;
 	}
 	
+	public void setOrigin(MyPoint point){
+		origin = point;
+	}
+	
 	public void drawOrigin(Graphics2D g2d){
 		g2d.drawLine(origin.getX(), origin.getY(), origin.getX()+5*scaleToDraw, origin.getY());
-		g2d.drawLine(origin.getX(), origin.getY(), origin.getX(), origin.getY()+5*scaleToDraw);
+		g2d.drawLine(origin.getX(), origin.getY(), origin.getX(), origin.getY()-5*scaleToDraw);
 	}
 
 }

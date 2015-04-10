@@ -4,6 +4,7 @@ package display;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
+import drawers.CoordSysDrawer;
 import drawers.PointDrawer;
 import drawers.VoronoiDrawer;
 
@@ -16,10 +17,12 @@ public class DrawPanel extends AbstractPanel{
 	private MyRegion region;
 	private MyEdge[] edges;
 	private MyPoint[] diagramPoints;
-	
+	private CoordSysDrawer sysDrawer = new CoordSysDrawer(5);
+			
 	private boolean shownRegion = false;
 	private boolean shownPoints = false;
 	private boolean shownDiagram = false;
+	private boolean shownCoordSys = false;
     
     public DrawPanel(){
     	
@@ -41,16 +44,14 @@ public class DrawPanel extends AbstractPanel{
     private void doDrawingRegion(Graphics g) {	
         Graphics2D g2d = (Graphics2D) g;
         g2d.setColor(color);
-        region.drawRegion(g2d); 
-        //(new CoordSysDrawer(             ,5)).drawOrigin();
+        region.drawRegion(g2d);      
     }
     
     private void doDrawingPoints(Graphics g){
     	Graphics2D g2d = (Graphics2D) g;
         g2d.setColor(color);
         (new PointDrawer(points,pointSize)).drawPoints(g2d);
-        region.drawRegion(g2d);
-        
+        region.drawRegion(g2d);    
     }
     
     private void doDrawingDiagram(Graphics g){
@@ -64,6 +65,11 @@ public class DrawPanel extends AbstractPanel{
     	 (new PointDrawer(points,pointSize)).drawPoints(g2d);
     }
 
+    private void doDrawingCoord(Graphics g){
+    	Graphics2D g2d = (Graphics2D) g; 
+    	sysDrawer.drawOrigin(g2d);
+    }
+    
     @Override
     public void paintComponent(Graphics g) {   
         super.paintComponent(g);
@@ -78,7 +84,11 @@ public class DrawPanel extends AbstractPanel{
         
         if(shownDiagram){
         	doDrawingDiagram(g);
-        }       
+        } 
+        
+        if(shownCoordSys){
+        	doDrawingCoord(g);
+        }
     }
 
     public void switchRegion(){
@@ -93,6 +103,10 @@ public class DrawPanel extends AbstractPanel{
    		shownDiagram = !shownDiagram;
     }
 	
+    public void switchCoordSys(MyPoint origin){
+    	sysDrawer.setOrigin(origin);
+    	shownCoordSys = !shownCoordSys;
+    }
 	
 	
 }

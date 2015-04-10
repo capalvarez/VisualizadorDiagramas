@@ -151,6 +151,12 @@ public class DisplayMenu {
 		pointS.addActionListener(new PointSizeChangeAction(window));
 		pointS.setMnemonic(KeyEvent.VK_T);
 		preferencias.add(pointS);
+		
+		JMenuItem coordSys =  new JMenuItem("Mostrar sistema de coordenadas");
+		coordSys.addActionListener(new CoordinateSystemAction(window));
+		coordSys.setMnemonic(KeyEvent.VK_C);
+		preferencias.add(coordSys);
+		
 	}
 	
 	public void setResetMenu(JMenu reset){
