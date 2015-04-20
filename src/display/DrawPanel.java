@@ -1,6 +1,8 @@
 package display;
 
 
+import java.awt.BasicStroke;
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
@@ -62,11 +64,13 @@ public class DrawPanel extends AbstractPanel{
     	(new VoronoiDrawer(diagramPoints,edges)).drawDiagram(g2d);
     	    	
     	/*Dibujar los puntos de input*/
-    	 (new PointDrawer(points,pointSize)).drawPoints(g2d);
+    	(new PointDrawer(points,pointSize)).drawPoints(g2d);
     }
 
     private void doDrawingCoord(Graphics g){
-    	Graphics2D g2d = (Graphics2D) g; 
+    	Graphics2D g2d = (Graphics2D) g;
+    	g2d.setColor(Color.BLACK);
+    	g2d.setStroke(new BasicStroke(5));
     	sysDrawer.drawOrigin(g2d);
     }
     

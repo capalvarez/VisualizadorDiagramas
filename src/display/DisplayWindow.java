@@ -9,6 +9,7 @@ import dataProcessors.*;
 import utilities.MyEdge;
 import utilities.MyPoint;
 import utilities.MyRegion;
+import utilities.MyScale;
 
 public class DisplayWindow extends IWindow{
 	DisplayMenu menu;
@@ -17,7 +18,8 @@ public class DisplayWindow extends IWindow{
 	MyRegion currentRegion;
 	MyPoint[] voronoiPoints;
 	MyEdge[] voronoiEdges;
-			
+	MyScale scale;
+				
 	public DisplayWindow(){
 		menu = new DisplayMenu(this);
 	}
@@ -38,7 +40,10 @@ public class DisplayWindow extends IWindow{
 		menu.setPuntosEnabled();
 		
 		Dimension size = getSize();
-		MyPoint[] regionPoints = new PointInitProcess(points,size.width, size.height).getPointList();
+		PointInitProcess pip = new PointInitProcess(points,size.width, size.height);
+		MyPoint[] regionPoints = pip.getPointList();
+		scale = pip.getScale();
+		
 		currentRegion = new MyRegion(regionPoints[0],regionPoints[1]);
 		Panel.setRegion(currentRegion);	
 		
@@ -63,9 +68,9 @@ public class DisplayWindow extends IWindow{
 		voronoiEdges = edges;
 				
 		Dimension size = getSize();
-		MyPoint[] newCPoints = (new PointScaleProcess(currentPoints,scaleToDraw, size.width, size.height)).getPointList();
+		//MyPoint[] newCPoints = (new PointScaleProcess(currentPoints,scaleToDraw, size.width, size.height)).getPointList();
 				
-		Panel.setPointsToPaint(newCPoints);
+		Panel.setPointsToPaint(points);
 		Panel.switchDiagram();	
 		repaint();
 		validate();	
@@ -117,4 +122,12 @@ public class DisplayWindow extends IWindow{
 		return Panel;
 	}
 
+	public void setScale(MyScale s){
+		scale = s;
+	}
+	
+	public MyScale getScale(){
+		return scale;
+	}
+	
 }

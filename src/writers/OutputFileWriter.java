@@ -18,7 +18,16 @@ public class OutputFileWriter {
 		voronoiPoints = vPoints;
 		voronoiEdges = vEdges;
 		outputFile = out;
+	
+		asignPointsToEdges();
 	}
+	
+	private void asignPointsToEdges(){
+		for(int i = 0;i<voronoiEdges.length;i++){
+			voronoiEdges[i].setPoints(voronoiPoints[voronoiEdges[i].getIndexFirst()], voronoiPoints[voronoiEdges[i].getIndexSecond()]);
+		}
+	}
+	
 	
 	public void writeInFile() throws IOException{
 		FileOutputStream fos = new FileOutputStream(outputFile);
@@ -29,8 +38,7 @@ public class OutputFileWriter {
 		
 		/*Escribir uno a uno los puntos a usados*/
 		for(int i=0;i<points.length;i++){
-			/*Por ahora, se asume trabajar en 2D*/
-			writer.write(points[i].toString());
+				writer.write(points[i].toString());
 		}
 		
 		/*Escribir el numero de puntos de Voronoi*/
@@ -38,7 +46,6 @@ public class OutputFileWriter {
 		
 		/*Escribir los puntos de Voronoi*/
 		for(int i=0;i<voronoiPoints.length;i++){
-			/*Por ahora, se asume trabajar en 2D*/
 			writer.write(voronoiPoints[i].toString());
 		}
 				

@@ -7,10 +7,9 @@ import javax.swing.JFrame;
 import utilities.MyEdge;
 import utilities.MyPoint;
 import utilities.MyRegion;
+import utilities.MyScale;
 
 public abstract class IWindow extends JFrame{
-	double[] scaleToDraw;
-	
 	public abstract void drawPointsInPanel(MyPoint[] pointsToDraw,MyPoint[] points);
 
 	public abstract void drawRegionInPanel(MyPoint[] points); 
@@ -35,11 +34,10 @@ public abstract class IWindow extends JFrame{
 	
 	public abstract void drawCoordSysInPanel(MyPoint origin);
 	
-	public void setScaleToDraw(double[] scale){
- 		scaleToDraw = scale;
- 	}
-
 	public abstract AbstractPanel getPanel();
 
+	public abstract void setScale(MyScale scale);
+	
+	public abstract MyScale getScale();
 	
 }
