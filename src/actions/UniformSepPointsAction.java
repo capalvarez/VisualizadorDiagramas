@@ -13,6 +13,7 @@ import javax.swing.JTextField;
 
 import utilities.MyPoint;
 import utilities.MyRegion;
+import utilities.MyScale;
 
 import display.IWindow;
 
@@ -49,14 +50,19 @@ public class UniformSepPointsAction extends AbstractAction {
 			int dX = Integer.parseInt(deltaX.getText());
 			int dY = Integer.parseInt(deltaY.getText());		
 			
-			int numX = (int)Math.floor(window.getWidth()/dX);
-			int numY = (int)Math.floor(window.getHeight()/dY);
-			
 			MyRegion current = window.getCurrentRegion();
+		
+			int numX = (int)Math.floor(current.getWidth()/dX) - 1;
+			int numY = (int)Math.floor(current.getHeight()/dY) -1;			
 			
 			/*Generar los puntos*/
 			MyPoint[] pointArray = (new PointGenerator(numX,dX,numY,dY,current.getUpCorner(),current.getLeftCorner())).getPoints();
-						
+			MyScale scale = window.getScale();
+			
+			for(int i=0;i<pointArray.length;i++){
+				pointArray[i] = scale.getPixelValue(pointArray[i]);
+			}
+			
 			/*Dibujar los puntos y dejarlos guardados en la ventana*/
 			window.drawPointsInPanel(pointArray,pointArray);
 			window.repaint();

@@ -44,7 +44,8 @@ public class DisplayWindow extends IWindow{
 		MyPoint[] regionPoints = pip.getPointList();
 		scale = pip.getScale();
 		
-		currentRegion = new MyRegion(regionPoints[0],regionPoints[1]);
+		currentRegion = new MyRegion(points[0],points[1]);
+		currentRegion.setPixelValues(regionPoints[0],regionPoints[1]);
 		Panel.setRegion(currentRegion);	
 		
 		Panel.switchRegion();	

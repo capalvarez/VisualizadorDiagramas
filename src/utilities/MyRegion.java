@@ -3,36 +3,43 @@ package utilities;
 import java.awt.Graphics2D;
 
 public class MyRegion {
-	MyPoint upLeft;
-	MyPoint downRight;
-	
+	MyPoint upLeftReal;
+	MyPoint downRightReal;
+	MyPoint upLeftPixel;
+	MyPoint downRightPixel;
+		
 	public MyRegion(MyPoint pUL, MyPoint pDR){
-		upLeft = pUL;
-		downRight = pDR;
+		upLeftReal = pUL;
+		downRightReal = pDR;
+	}
+	
+	public void setPixelValues(MyPoint uL, MyPoint dR){
+		upLeftPixel = uL;
+		downRightPixel = dR;
 	}
 	
 	public void drawRegion(Graphics2D g2d){
-        int height = Math.abs(upLeft.getY()- downRight.getY());
-        int width = Math.abs(upLeft.getX()- downRight.getX());
+        int height = Math.abs(upLeftPixel.getY()- downRightPixel.getY());
+        int width = Math.abs(upLeftPixel.getX()- downRightPixel.getX());
        
-        g2d.drawRect(upLeft.getX(),upLeft.getY(),width,height);
+        g2d.drawRect(upLeftPixel.getX(),upLeftPixel.getY(),width,height);
 		
 	}
 	
 	public int getHeight(){
-		return upLeft.getY() - downRight.getY(); 
+		return Math.abs(upLeftReal.getY() - downRightReal.getY()); 
 	}
 	
 	public int getWidth(){
-		return downRight.getX() - upLeft.getX();
+		return downRightReal.getX() - upLeftReal.getX();
 	}
 	
 	public int getLeftCorner(){
-		return upLeft.getX();
+		return upLeftReal.getX();
 	}
 	
 	public int getUpCorner(){
-		return upLeft.getY();
+		return upLeftReal.getY();
 	}
 	
 	

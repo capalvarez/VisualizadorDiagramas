@@ -30,18 +30,12 @@ public class PointInitProcess extends PointProcess {
 			int nXR = (int) Math.round(rel*wHeight+slope*(right.getY()-down.getX()));
 			int nXL = (int) Math.round(rel*wHeight+slope*(left.getY()-down.getX()));
 			
-			System.out.println("nueva derecha" + nXR);
-			System.out.println("nueva izquierda" + nXL);
-			
 			int[] valuesToCenter = {nXR, nXL};
 			int[] values = (new ValueCenter(wWidth,valuesToCenter)).getCenteredValues();
 			
 			MyPoint p1 = new MyPoint(values[1],(int)Math.round(rel*wHeight));
 			MyPoint p2 = new MyPoint(values[0],(int)Math.round(wHeight*(1-2*rel)));
-			
-			System.out.println("nueva derecha despues de centrar" + values[0]);
-			System.out.println("nueva izquierda despues de centrar" + values[1]);
-			
+
 			endPoints[0] = p1;
 			endPoints[1] = p2;
 				
