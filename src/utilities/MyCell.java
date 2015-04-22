@@ -14,7 +14,9 @@ public class MyCell {
 			result = result + edges[i] + " ";
 		}
 				
-		return result;
+		return result;	
 	}
+	
+	
 	
 }

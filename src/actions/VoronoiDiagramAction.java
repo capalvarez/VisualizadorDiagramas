@@ -43,6 +43,7 @@ public class VoronoiDiagramAction extends AbstractAction {
 		VoronoiLibraryCall v = new VoronoiLibraryCall(fileName);
 		try {
 			String output = v.callSystem();
+			
 			/*Si llamada es exitosa puedo leer del archivo de output*/
 			VoronoiOFFReader reader = new VoronoiOFFReader(output);
 			String[] points = reader.getPointList();
@@ -50,7 +51,7 @@ public class VoronoiDiagramAction extends AbstractAction {
 			
 			Dimension size = window.getSize();
 			
-			PointStringProcess psp = new PointStringProcess(points, size.height, size.width);			
+			PointStringProcess psp = new PointStringProcess(points);			
 			
 			MyPoint[] pointsToDraw = psp.getPointList();
 						
