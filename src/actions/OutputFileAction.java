@@ -1,15 +1,12 @@
 package actions;
 
-import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.io.File;
-
+import java.io.IOException;
 import javax.swing.AbstractAction;
-import javax.swing.JColorChooser;
 import javax.swing.JFileChooser;
 
 import writers.OutputFileWriter;
-
 import display.IWindow;
 
 public class OutputFileAction extends AbstractAction {
@@ -29,8 +26,11 @@ public class OutputFileAction extends AbstractAction {
 		 if (userSelection == JFileChooser.APPROVE_OPTION) {
 		     File fileToSave = fileChooser.getSelectedFile();		     
 		     /*Tengo las aristas y tengo que encontrar los indices de los puntos que la componen*/
-		     OutputFileWriter ofw = new OutputFileWriter(window.getCurrentPoints(),window.getVoronoiPoints(),window.getVoronoiEdges(), fileToSave);
-		     
+		     try {
+				OutputFileWriter ofw = new OutputFileWriter(window.getCurrentPoints(),window.getVoronoiPoints(),window.getVoronoiEdges(), fileToSave);
+		     }catch (IOException e) {
+				e.printStackTrace();
+		     }		     
 		 }
 
 	}

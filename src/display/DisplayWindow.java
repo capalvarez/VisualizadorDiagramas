@@ -59,7 +59,12 @@ public class DisplayWindow extends IWindow{
 		menu.setDiagramasEnabled();
 		currentPoints = points;
 
-		Panel.setPointsToPaint(pointsToDraw);
+		MyPoint[] pixelPoints = new MyPoint[pointsToDraw.length];
+		for(int i=0; i<pixelPoints.length; i++){
+			pixelPoints[i] = scale.getPixelValue(pointsToDraw[i]);
+		}
+		
+		Panel.setPointsToPaint(pixelPoints);
 		Panel.switchPoints();	
 		repaint();
 		validate();	
@@ -68,10 +73,7 @@ public class DisplayWindow extends IWindow{
 	public void drawDiagramInPanel(MyPoint[] points, MyEdge[] edges){
 		Panel.setLinesToPaint(points,edges);
 		voronoiPoints = points;
-		voronoiEdges = edges;
-				
-		Dimension size = getSize();
-		//MyPoint[] newCPoints = (new PointScaleProcess(currentPoints,scaleToDraw, size.width, size.height)).getPointList();
+		voronoiEdges = edges;		
 				
 		Panel.setPointsToPaint(points);
 		Panel.switchDiagram();	

@@ -55,19 +55,12 @@ public class UniformNumPointsAction extends AbstractAction {
 			
 			/*Generar los puntos*/
 			MyPoint[] pointArray = (new PointGenerator(nX,dX,nY,dY,current.getUpCorner(),current.getLeftCorner())).getPoints();
-			MyScale scale = window.getScale();
-			
-			for(int i=0;i<pointArray.length;i++){
-				pointArray[i] = scale.getPixelValue(pointArray[i]);
-			}
-			
+				
 			/*Dibujar los puntos y dejarlos guardados en la ventana*/
 			window.drawPointsInPanel(pointArray,pointArray);
 			window.repaint();
-			
-			
+	
 		}
-
 	}
 
 }

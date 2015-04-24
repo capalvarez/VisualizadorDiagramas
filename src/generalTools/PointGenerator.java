@@ -20,7 +20,6 @@ public class PointGenerator {
 				pointArray[index] = new MyPoint(posX,(j+1)*dY + yInit);	
 			}
 		}
-
 	}
 	
 	public MyPoint[] getPoints(){

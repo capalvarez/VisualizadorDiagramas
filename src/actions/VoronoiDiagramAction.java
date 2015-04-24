@@ -52,9 +52,7 @@ public class VoronoiDiagramAction extends AbstractAction {
 			VoronoiRegionProcess vrp = new VoronoiRegionProcess(reader.getRegionList(),pointArray);
 			MyEdge[] edges = vrp.getEdgeList();
 			MyCell[] voronoiCells = vrp.getCellList();  
-			
-			Dimension size = window.getSize();
-			
+						
 			PointStringProcess psp = new PointStringProcess(points);			
 			
 			MyPoint[] pointsToDraw = psp.getPointList();

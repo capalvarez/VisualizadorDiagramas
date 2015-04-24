@@ -17,6 +17,7 @@ public class DisplayMenu {
 	JMenu ingresarItem;
 	JMenuItem azarItem;
 	JMenu uniformeItem;
+	JMenuItem imprimir;
 	
 	public DisplayMenu(IWindow window){
 		menubar = new JMenuBar();
@@ -187,13 +188,17 @@ public class DisplayMenu {
 	}
 	
 	public void setPrintMenu(JMenu print){
-		JMenuItem imprimir = new JMenuItem("Imprimir archivo");
+		imprimir = new JMenuItem("Imprimir archivo");
 		imprimir.setToolTipText("Crea archivo de output");
 		imprimir.addActionListener(new OutputFileAction(window));
 		imprimir.setMnemonic(KeyEvent.VK_P);
+		imprimir.setEnabled(false);
 		print.add(imprimir);		
 	}
 	
+	public void setPrintEnabled(){
+		imprimir.setEnabled(true);
+	}
 	
 	public void setDiagramasEnabled(){
 		delaunay.setEnabled(true);

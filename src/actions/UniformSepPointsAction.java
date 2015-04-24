@@ -57,12 +57,7 @@ public class UniformSepPointsAction extends AbstractAction {
 			
 			/*Generar los puntos*/
 			MyPoint[] pointArray = (new PointGenerator(numX,dX,numY,dY,current.getUpCorner(),current.getLeftCorner())).getPoints();
-			MyScale scale = window.getScale();
-			
-			for(int i=0;i<pointArray.length;i++){
-				pointArray[i] = scale.getPixelValue(pointArray[i]);
-			}
-			
+						
 			/*Dibujar los puntos y dejarlos guardados en la ventana*/
 			window.drawPointsInPanel(pointArray,pointArray);
 			window.repaint();
