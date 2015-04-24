@@ -94,8 +94,7 @@ public class DisplayMenu {
 
 		uniformeItem.add(distancia);
 		uniformeItem.add(numero);
-		
-		
+				
 		dibujar.add(uniformeItem);
 		uniformeItem.setEnabled(false);
 		
@@ -156,6 +155,14 @@ public class DisplayMenu {
 		coordSys.addActionListener(new CoordinateSystemAction(window));
 		coordSys.setMnemonic(KeyEvent.VK_C);
 		preferencias.add(coordSys);
+		
+		JMenuItem origin =  new JMenuItem("Mostrar origen");
+		origin.addActionListener(new OriginSystemAction(window));
+		origin.setMnemonic(KeyEvent.VK_G);
+		preferencias.add(origin);
+
+		
+		
 		
 	}
 	

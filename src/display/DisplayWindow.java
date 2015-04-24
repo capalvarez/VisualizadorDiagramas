@@ -6,6 +6,7 @@ import java.awt.Dimension;
 
 import dataProcessors.*;
 
+import utilities.MyCell;
 import utilities.MyEdge;
 import utilities.MyPoint;
 import utilities.MyRegion;
@@ -18,6 +19,7 @@ public class DisplayWindow extends IWindow{
 	MyRegion currentRegion;
 	MyPoint[] voronoiPoints;
 	MyEdge[] voronoiEdges;
+	MyCell[] voronoiCells;
 	MyScale scale;
 				
 	public DisplayWindow(){
@@ -129,6 +131,10 @@ public class DisplayWindow extends IWindow{
 	
 	public MyScale getScale(){
 		return scale;
+	}
+	
+	public void setVoronoiCells(MyCell[] cells){
+		voronoiCells = cells;
 	}
 	
 }

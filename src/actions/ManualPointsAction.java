@@ -74,9 +74,8 @@ public class ManualPointsAction extends AbstractAction{
 						button.requestFocus();
 						Vector data = model.getDataVector();
 						String[] pointsArray = processPoints(data);
-						Dimension size = window.getSize();
-						
-						PointStringProcess pp = new PointStringProcess(pointsArray, size.height, size.width);
+								
+						PointStringProcess pp = new PointStringProcess(pointsArray);
 						MyPoint[] pointsToDraw = pp.getPointList();
 						window.drawPointsInPanel(pointsToDraw,pp.getInitPointsList());
 						window.repaint();

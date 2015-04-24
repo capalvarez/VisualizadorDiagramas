@@ -4,6 +4,7 @@ import java.awt.Color;
 
 import javax.swing.JFrame;
 
+import utilities.MyCell;
 import utilities.MyEdge;
 import utilities.MyPoint;
 import utilities.MyRegion;
@@ -39,5 +40,7 @@ public abstract class IWindow extends JFrame{
 	public abstract void setScale(MyScale scale);
 	
 	public abstract MyScale getScale();
+	
+	public abstract void setVoronoiCells(MyCell[] cells);
 	
 }

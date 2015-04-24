@@ -65,7 +65,7 @@ public class SelectFilePointsAction extends AbstractAction{
             String[] pointArray = pfr.getPointList();
             
             Dimension size = window.getSize();
-			MyPoint[] pointsToDraw = (new PointStringProcess(pointArray, size.height, size.width)).getPointList();
+			MyPoint[] pointsToDraw = (new PointStringProcess(pointArray)).getPointList();
             
 			window.drawPointsInPanel(pointsToDraw,pfr.getPoints());
     		window.repaint();

@@ -10,6 +10,7 @@ import javax.swing.AbstractAction;
 
 import readers.VoronoiOFFReader;
 
+import utilities.MyCell;
 import utilities.MyEdge;
 import utilities.MyPoint;
 import writers.PointInputWriter;
@@ -47,15 +48,18 @@ public class VoronoiDiagramAction extends AbstractAction {
 			/*Si llamada es exitosa puedo leer del archivo de output*/
 			VoronoiOFFReader reader = new VoronoiOFFReader(output);
 			String[] points = reader.getPointList();
-			MyEdge[] edges = (new VoronoiRegionProcess(reader.getRegionList())).getEdgeList();
+			
+			VoronoiRegionProcess vrp = new VoronoiRegionProcess(reader.getRegionList(),pointArray);
+			MyEdge[] edges = vrp.getEdgeList();
+			MyCell[] voronoiCells = vrp.getCellList();  
 			
 			Dimension size = window.getSize();
 			
 			PointStringProcess psp = new PointStringProcess(points);			
 			
 			MyPoint[] pointsToDraw = psp.getPointList();
-						
-			window.setScaleToDraw(psp.getScale());
+	
+			window.setVoronoiCells(voronoiCells);
 			window.drawDiagramInPanel(pointsToDraw,edges);
 			
 		}catch (IOException e1) {

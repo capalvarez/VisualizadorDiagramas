@@ -16,6 +16,14 @@ public class MyEdge {
 		this.p2 = p2;
 	}
 	
+	public MyPoint[] getPoints(){
+		MyPoint[] points = new MyPoint[2];
+		points[0] = p1;
+		points[1] = p2;
+				
+		return points;
+	}
+	
 	public int getIndexFirst(){
 		return i1;
 	}
@@ -36,6 +44,18 @@ public class MyEdge {
 		return coord1 + " " + coord2;
 	
 	}
+	
+	public boolean equals(MyEdge e2){
+		return (e2.p1.equals(this.p1) && e2.p2.equals(this.p2)) ||
+			   (e2.p1.equals(this.p2) && e2.p1.equals(this.p1));
+	}
 
+	public int getNormalDir(MyEdge e){
+		if(e.p1.equals(this.p1) && e.p2.equals(this.p2)){
+			return 1;
+		}else{
+			return -1;
+		}
+	}
 	
 }

@@ -2,32 +2,55 @@ package dataProcessors;
 
 import java.util.ArrayList;
 
+import utilities.MyCell;
 import utilities.MyEdge;
+import utilities.MyPoint;
 
 public class VoronoiRegionProcess {
 	private ArrayList<MyEdge> edgeList = new ArrayList<MyEdge>();
-	private ArrayList<String> edgeIndex = new ArrayList<String>();
-	private ArrayList<String> regionIndex = new ArrayList<String>();
+	private ArrayList<MyCell> cellList = new ArrayList<MyCell>();
 	
-	public VoronoiRegionProcess(String[] regions){
-		processRegions(regions);
+	public VoronoiRegionProcess(String[] regions, MyPoint[] inputPoints){
+		processRegions(regions,inputPoints);
 	}
 
-	private void processRegions(String[] regionList){		
+	private void processRegions(String[] regionList,MyPoint[] inputPoints){		
+		int count = 1;
 		for(int i=0; i<regionList.length;i++){
 			
-			String[] regInfo = regionList[i].split(" ");
+			String[] regInfo = regionList[i].split(" ");			
+			MyCell newCell = new MyCell();
 			
 			for(int j=1;j<Integer.parseInt(regInfo[0])-1;j++){
-				edgeList.add(new MyEdge(Integer.parseInt(regInfo[j]),Integer.parseInt(regInfo[j+1])));
-				edgeIndex.add(regInfo[j] + " " + regInfo[j+1]);
+				MyEdge newEdge = new MyEdge(Integer.parseInt(regInfo[j]),Integer.parseInt(regInfo[j+1])); 
 				
+				if(!edgeList.contains(newEdge)){
+					edgeList.add(newEdge);
+					newCell.addEdge(count,newEdge,1);
+					
+					count++;					
+				}else{
+					MyEdge oldEdge = edgeList.get(edgeList.indexOf(newEdge));
+					int nDir = oldEdge.getNormalDir(newEdge);
+							
+					newCell.addEdge(edgeList.indexOf(newEdge), newEdge, nDir);
+				}
 			}
 			
-			edgeList.add(new MyEdge(Integer.parseInt(regInfo[Integer.parseInt(regInfo[0])]),Integer.parseInt(regInfo[1])));		
-			edgeIndex.add(regInfo[0] + " " + regInfo[1]);
-			regionIndex.add(Integer.parseInt(regInfo[0])+1 + " " );
+			MyEdge newEdge = new MyEdge(Integer.parseInt(regInfo[Integer.parseInt(regInfo[0])]),Integer.parseInt(regInfo[1])); 		
+			if(!edgeList.contains(newEdge)){
+				edgeList.add(newEdge);
+				newCell.addEdge(count,newEdge,1);
+				count++;					
+			}else{
+				MyEdge oldEdge = edgeList.get(edgeList.indexOf(newEdge));
+				int nDir = oldEdge.getNormalDir(newEdge);
+				
+				newCell.addEdge(edgeList.indexOf(newEdge), newEdge, nDir);
+			}
 			
+			newCell.setCenterPoint(inputPoints[i]);
+			cellList.add(newCell);
 		}
 	}
 	
@@ -38,11 +61,10 @@ public class VoronoiRegionProcess {
 		return edgeArray;
 	}
 	
-	public String[] getEdgeIndexList(){
-		String[] edgeIndexArray = new String[edgeIndex.size()];
-		edgeIndexArray = edgeIndex.toArray(edgeIndexArray);
+	public MyCell[] getCellList(){	
+		MyCell[] cellArray = new MyCell[cellList.size()];
+		cellArray = cellList.toArray(cellArray);
 		
-		return edgeIndexArray;
-		
-	}
+		return cellArray;
+	}	
 }
