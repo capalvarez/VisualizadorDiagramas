@@ -52,8 +52,8 @@ public class UniformSepPointsAction extends AbstractAction {
 			
 			MyRegion current = window.getCurrentRegion();
 		
-			int numX = (int)Math.floor(current.getWidth()/dX) - 1;
-			int numY = (int)Math.floor(current.getHeight()/dY) -1;			
+			int numX = (int)Math.floor(current.getWidth()/dX)+1;
+			int numY = (int)Math.floor(current.getHeight()/dY)+1;			
 			
 			/*Generar los puntos*/
 			MyPoint[] pointArray = (new PointGenerator(numX,dX,numY,dY,current.getUpCorner(),current.getLeftCorner())).getPoints();

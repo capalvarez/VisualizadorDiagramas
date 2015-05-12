@@ -71,6 +71,8 @@ public class DisplayWindow extends IWindow{
 	}
 	
 	public void drawDiagramInPanel(MyPoint[] points, MyEdge[] edges){
+		menu.setPrintEnabled();
+		
 		Panel.setLinesToPaint(points,edges);
 		voronoiPoints = points;
 		voronoiEdges = edges;		

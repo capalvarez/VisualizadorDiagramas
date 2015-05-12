@@ -50,8 +50,8 @@ public class UniformNumPointsAction extends AbstractAction {
 			
 			MyRegion current = window.getCurrentRegion();
 			
-			int dX = (int)Math.floor(current.getWidth()/nX);
-			int dY = (int)Math.floor(current.getHeight()/nY);
+			int dX = (int)Math.floor(current.getWidth()/(nX-1));
+			int dY = (int)Math.floor(current.getHeight()/(nY-1));
 			
 			/*Generar los puntos*/
 			MyPoint[] pointArray = (new PointGenerator(nX,dX,nY,dY,current.getUpCorner(),current.getLeftCorner())).getPoints();

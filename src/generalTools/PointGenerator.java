@@ -13,11 +13,11 @@ public class PointGenerator {
 		pointArray = new MyPoint[numX*numY];
 			
 		for(int i = 0; i<numX; i++){
-			int posX = (i+1)*dX + xInit; 
+			int posX = i*dX + xInit; 
 			
 			for(int j = 0; j<numY; j++){
 				int index = numY*i + j;
-				pointArray[index] = new MyPoint(posX,(j+1)*dY + yInit);	
+				pointArray[index] = new MyPoint(posX,j*dY + yInit);	
 			}
 		}
 	}

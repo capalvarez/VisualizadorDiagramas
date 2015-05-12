@@ -1,5 +1,7 @@
 package utilities;
 
+import generalTools.LineIntersector;
+
 import java.awt.Graphics2D;
 
 public class MyRegion {
@@ -7,10 +9,27 @@ public class MyRegion {
 	MyPoint downRightReal;
 	MyPoint upLeftPixel;
 	MyPoint downRightPixel;
+	MyEdge[] regionSides;
 		
 	public MyRegion(MyPoint pUL, MyPoint pDR){
 		upLeftReal = pUL;
 		downRightReal = pDR;
+		
+		MyPoint left = upLeftReal.getPointLeft(downRightReal);
+		MyPoint right = upLeftReal.getPointRight(downRightReal);
+		MyPoint up = upLeftReal.getPointUp(downRightReal);
+		MyPoint down = upLeftReal.getPointDown(downRightReal);	
+		
+		MyEdge e1 = new MyEdge(new MyPoint(left.getX(),up.getY()),new MyPoint(left.getX(),down.getY()));
+		MyEdge e2 = new MyEdge(new MyPoint(left.getX(),down.getY()),new MyPoint(right.getX(),down.getY()));
+		MyEdge e3 = new MyEdge(new MyPoint(right.getX(),up.getY()),new MyPoint(right.getX(),down.getY()));
+		MyEdge e4 = new MyEdge(new MyPoint(left.getX(),up.getY()),new MyPoint(right.getX(),up.getY()));	
+		
+		regionSides = new MyEdge[4];
+		regionSides[0] = e1;
+		regionSides[1] = e2; 
+		regionSides[2] = e3;
+		regionSides[3] = e4;	
 	}
 	
 	public void setPixelValues(MyPoint uL, MyPoint dR){
@@ -42,6 +61,18 @@ public class MyRegion {
 		return upLeftReal.getY();
 	}
 	
-	
+	public MyEdge getIntersection(MyEdge e){
+		LineIntersector lI = new LineIntersector(e); 
+		
+		for(MyEdge regEd: regionSides){
+			MyEdge intersect = lI.getIntersection(regEd);
+			
+			if(intersect!=null){
+				return intersect;
+			}
+		}
+		
+		return null;		
+	}
 	
 }

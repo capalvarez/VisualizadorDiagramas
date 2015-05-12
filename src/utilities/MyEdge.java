@@ -6,6 +6,10 @@ public class MyEdge {
 	private MyPoint p1;
 	private MyPoint p2;
 	
+	public MyEdge(MyPoint p1, MyPoint p2){
+		setPoints(p1,p2);
+	}
+	
 	public MyEdge(int i, int j){
 		i1 = i;
 		i2 = j;
@@ -32,6 +36,14 @@ public class MyEdge {
 		return i2;
 	}	
 
+	public MyPoint getFirstPoint(){
+		return p1;
+	}
+
+	public MyPoint getSecondPoint(){
+		return p2;
+	}
+		
 	public String toString(){
 		return this.i1+" "+this.i2 + " " + getNormal();
 	}
@@ -56,6 +68,13 @@ public class MyEdge {
 		}else{
 			return -1;
 		}
+	}
+
+	public MyPoint[] getBoundingBox() {
+		MyPoint[] result = new MyPoint[2];
+		result[0] = new MyPoint(Math.min(p1.getX(), p2.getX()), Math.min(p1.getY(), p2.getY()));
+		result[1] = new MyPoint(Math.max(p1.getX(), p2.getX()), Math.max(p1.getY(), p2.getY()));
+		return result;
 	}
 	
 }
