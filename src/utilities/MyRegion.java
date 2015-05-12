@@ -61,11 +61,11 @@ public class MyRegion {
 		return upLeftReal.getY();
 	}
 	
-	public MyEdge getIntersection(MyEdge e){
+	public MyPoint getIntersection(MyEdge e){
 		LineIntersector lI = new LineIntersector(e); 
 		
 		for(MyEdge regEd: regionSides){
-			MyEdge intersect = lI.getIntersection(regEd);
+			MyPoint intersect = lI.getIntersection(regEd);
 			
 			if(intersect!=null){
 				return intersect;
