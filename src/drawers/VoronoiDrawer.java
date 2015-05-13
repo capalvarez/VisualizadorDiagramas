@@ -22,8 +22,6 @@ public class VoronoiDrawer {
     		MyPoint p1 = edges[i].getFirstPoint();
     		MyPoint p2 = edges[i].getSecondPoint();
     
-    		System.out.println(p1);
-    		System.out.println(p2);
     		MyPoint pixelP1 = scale.getPixelValue(p1);
     		MyPoint pixelP2 = scale.getPixelValue(p2);
     		

@@ -66,6 +66,7 @@ public class CornerShapeAction extends AbstractAction {
 			
 			window.drawRegionInPanel(pointArray);
 			window.repaint();
+			System.out.println("");
 		}
 	}
 	

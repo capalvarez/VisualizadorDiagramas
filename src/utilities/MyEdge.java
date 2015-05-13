@@ -49,7 +49,12 @@ public class MyEdge {
 	}
 	
 	public String getNormal(){
-		double norm = Math.sqrt(Math.pow((p2.getX() - p2.getX()),2) + Math.pow((p2.getY() - p1.getY()),2));
+		
+		double norm = Math.sqrt(Math.pow((p2.getX() - p1.getX()),2) + Math.pow((p2.getY() - p1.getY()),2));
+		if(norm==0){
+			System.out.println("norma cero!");
+		}
+		
 		double coord1 = -(p2.getY() - p1.getY())/norm;
 		double coord2 = (p2.getX() - p1.getX())/norm;
 		

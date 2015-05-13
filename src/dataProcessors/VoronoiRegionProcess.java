@@ -18,7 +18,13 @@ public class VoronoiRegionProcess {
 		processRegions(regions,inputPoints,voronoiPoints, currentRegion);
 	}
 
-	private void processRegions(String[] regionList, MyPoint[] inputPoints, ArrayList<MyPoint> voronoiPoints, MyRegion region){		
+	private void processRegions(String[] regionList, MyPoint[] inputPoints, ArrayList<MyPoint> voronoiPoints, MyRegion region){				
+		/*System.out.println("Voronoi antes");
+		for(int i=0;i<voronoiPoints.size();i++){
+			System.out.println(voronoiPoints.get(i).toString());
+		}
+		System.out.println("");*/
+		
 		int count = 1;
 		for(int i=0; i<regionList.length;i++){
 			
@@ -31,7 +37,7 @@ public class VoronoiRegionProcess {
 							
 				MyEdge newEdge = new MyEdge(i1,i2);
 				newEdge.setPoints(voronoiPoints.get(i1), voronoiPoints.get(i2));
-				
+											
 				MyPoint interPoint = region.getIntersection(newEdge); 
 				
 				if(interPoint!=null){
@@ -45,8 +51,7 @@ public class VoronoiRegionProcess {
 					}else{
 						newEdge = new MyEdge(voronoiPoints.indexOf(interPoint),i2);						
 						newEdge.setPoints(voronoiPoints.get(i1), interPoint);
-					}
-					 
+					}	 
 				}
 				
 				if(!edgeList.contains(newEdge)){
@@ -61,8 +66,7 @@ public class VoronoiRegionProcess {
 					newCell.addEdge(edgeList.indexOf(newEdge), newEdge, nDir);
 				}
 			}
-			
-			 		
+						 		
 			int i1 = Integer.parseInt(regInfo[Integer.parseInt(regInfo[0])]);
 			int i2 = Integer.parseInt(regInfo[1]);
 					

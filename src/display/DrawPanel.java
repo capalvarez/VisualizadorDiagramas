@@ -63,7 +63,8 @@ public class DrawPanel extends AbstractPanel{
     
         /*Dibujar los arcos de Voronoi*/
     	(new VoronoiDrawer(edges,scale)).drawDiagram(g2d);
-    	    	
+    	 
+    	 g2d.setColor(Color.RED);
     	/*Dibujar los puntos de input*/
     	(new PointDrawer(points,pointSize)).drawPoints(g2d);
     }

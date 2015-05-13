@@ -96,7 +96,7 @@ public class MyRegion {
 		}*/
 		
 		if(p.getX()>upLeftReal.getX() && p.getX()<downRightReal.getX() &&
-		   p.getY()<upLeftReal.getY() && p.getX()>downRightReal.getY()){
+		   p.getY()>upLeftReal.getY() && p.getX()<downRightReal.getY()){
 			return true;
 		}
 		

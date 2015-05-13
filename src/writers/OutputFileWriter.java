@@ -19,17 +19,9 @@ public class OutputFileWriter {
 		voronoiEdges = vEdges;
 		outputFile = out;
 	
-		asignPointsToEdges();
 		writeInFile();
 	}
-	
-	private void asignPointsToEdges(){
-		for(int i = 0;i<voronoiEdges.length;i++){
-			voronoiEdges[i].setPoints(voronoiPoints[voronoiEdges[i].getIndexFirst()], voronoiPoints[voronoiEdges[i].getIndexSecond()]);
-		}
-	}
-	
-	
+		
 	public void writeInFile() throws IOException{
 		FileOutputStream fos = new FileOutputStream(outputFile);
 		OutputStreamWriter writer = new OutputStreamWriter(fos);
@@ -39,25 +31,25 @@ public class OutputFileWriter {
 		
 		/*Escribir uno a uno los puntos a usados*/
 		for(int i=0;i<points.length;i++){
-				writer.write(points[i].toString() + "\n");
+			writer.write(points[i].toString() + "\n");
 		}
 		
 		/*Escribir el numero de puntos de Voronoi*/
-		//writer.write(voronoiPoints.length);
+		writer.write(voronoiPoints.length + "\n");
 		
 		/*Escribir los puntos de Voronoi*/
-		//for(int i=0;i<voronoiPoints.length;i++){
-			//writer.write(voronoiPoints[i].toString());
-		//}
+		for(int i=0;i<voronoiPoints.length;i++){
+			writer.write(voronoiPoints[i].toString() + "\n");
+		}
 				
 		/*Escribir el numero de arcos de Voronoi*/
-		//writer.write(voronoiEdges.length);
+		writer.write(voronoiEdges.length + "\n");
 				
 		/*Escribir los arcos de Voronoi*/
-		//for(int i=0;i<voronoiEdges.length;i++){
+		for(int i=0;i<voronoiEdges.length;i++){
 			/*Por ahora, se asume trabajar en 2D*/
-			//writer.write(voronoiEdges.toString());
-		//}
+			writer.write(voronoiEdges[i].toString() + "\n");
+		}
 				
 		/*Escribir el numero de regiones de Voronoi*/
 		//writer.write(voronoiCells.length);

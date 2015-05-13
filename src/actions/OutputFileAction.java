@@ -27,7 +27,7 @@ public class OutputFileAction extends AbstractAction {
 		     File fileToSave = fileChooser.getSelectedFile();		     
 		     /*Tengo las aristas y tengo que encontrar los indices de los puntos que la componen*/
 		     try {
-				OutputFileWriter ofw = new OutputFileWriter(window.getCurrentPoints(),window.getVoronoiPoints(),window.getVoronoiEdges(), fileToSave);
+				(new OutputFileWriter(window.getCurrentPoints(),window.getVoronoiPoints(),window.getVoronoiEdges(), fileToSave)).writeInFile();
 		     }catch (IOException e) {
 				e.printStackTrace();
 		     }		     

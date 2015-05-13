@@ -1,6 +1,5 @@
 package display;
 
-import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 
@@ -76,13 +75,7 @@ public class DisplayWindow extends IWindow{
 		Panel.setLinesToPaint(edges,scale);
 		voronoiPoints = points;
 		voronoiEdges = edges;		
-				
-		MyPoint[] pixelPoints = new MyPoint[points.length];
-		for(int i=0; i<pixelPoints.length; i++){
-			pixelPoints[i] = scale.getPixelValue(points[i]);
-		}
-		
-		Panel.setPointsToPaint(pixelPoints);
+
 		Panel.switchDiagram();	
 		repaint();
 		validate();	

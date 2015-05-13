@@ -41,7 +41,7 @@ public class SelectFilePointsAction extends AbstractAction{
 
             while ((line = brd.readLine()) != null) {
                 fileBuffer.append(line).append(
-                        System.getProperty("line.separator"));
+                      System.getProperty("line.separator"));
             }
 
             in.close();
