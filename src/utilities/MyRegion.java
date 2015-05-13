@@ -15,15 +15,10 @@ public class MyRegion {
 		upLeftReal = pUL;
 		downRightReal = pDR;
 		
-		MyPoint left = upLeftReal.getPointLeft(downRightReal);
-		MyPoint right = upLeftReal.getPointRight(downRightReal);
-		MyPoint up = upLeftReal.getPointUp(downRightReal);
-		MyPoint down = upLeftReal.getPointDown(downRightReal);	
-		
-		MyEdge e1 = new MyEdge(new MyPoint(left.getX(),up.getY()),new MyPoint(left.getX(),down.getY()));
-		MyEdge e2 = new MyEdge(new MyPoint(left.getX(),down.getY()),new MyPoint(right.getX(),down.getY()));
-		MyEdge e3 = new MyEdge(new MyPoint(right.getX(),up.getY()),new MyPoint(right.getX(),down.getY()));
-		MyEdge e4 = new MyEdge(new MyPoint(left.getX(),up.getY()),new MyPoint(right.getX(),up.getY()));	
+		MyEdge e1 = new MyEdge(new MyPoint(upLeftReal.getX(),upLeftReal.getY()),new MyPoint(upLeftReal.getX(),downRightReal.getY()));
+		MyEdge e2 = new MyEdge(new MyPoint(upLeftReal.getX(),downRightReal.getY()),new MyPoint(downRightReal.getX(),downRightReal.getY()));
+		MyEdge e3 = new MyEdge(new MyPoint(downRightReal.getX(),upLeftReal.getY()),new MyPoint(downRightReal.getX(),downRightReal.getY()));
+		MyEdge e4 = new MyEdge(new MyPoint(upLeftReal.getX(),upLeftReal.getY()),new MyPoint(downRightReal.getX(),upLeftReal.getY()));	
 		
 		regionSides = new MyEdge[4];
 		regionSides[0] = e1;
@@ -36,6 +31,16 @@ public class MyRegion {
 		upLeftPixel = uL;
 		downRightPixel = dR;
 	}
+	
+	public MyPoint[] getPoints(){
+		MyPoint p2 = new MyPoint(upLeftReal.getX(),downRightReal.getY());
+		MyPoint p4 = new MyPoint(downRightReal.getX(),upLeftReal.getY());
+		
+		MyPoint[] points = {upLeftReal,p2,downRightReal,p4};
+		
+		return points;
+	}
+	
 	
 	public void drawRegion(Graphics2D g2d){
         int height = Math.abs(upLeftPixel.getY()- downRightPixel.getY());
@@ -73,6 +78,36 @@ public class MyRegion {
 		}
 		
 		return null;		
+	}
+	
+	public boolean contains(MyPoint p){
+		int i;
+		int j;
+		
+		MyPoint[] points = getPoints();
+				
+		/*for (i = 0, j = points.length - 1; i < points.length; j = i++) {			
+			if ((points[i].getY() > p.getY()) != (points[j].getY() > p.getY() && 
+				(p.getX() < (points[j].getX() - points[i].getX())* (p.getY() - points[i].getY())
+							/ (points[j].getY() - points[i].getY()) + points[i].getX()))) {
+				result = !result;
+			}
+		}*/
+		
+		if(p.getX()>upLeftReal.getX() && p.getX()<downRightReal.getX() &&
+		   p.getY()<upLeftReal.getY() && p.getX()>downRightReal.getY()){
+			return true;
+		}
+		
+		return false;
+	}
+	
+	public int getInsidePoint(MyEdge e){
+		if(contains(e.getFirstPoint())){
+			return 0;
+		}else{
+			return 1;
+		}
 	}
 	
 }

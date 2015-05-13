@@ -13,12 +13,13 @@ import drawers.VoronoiDrawer;
 import utilities.MyEdge;
 import utilities.MyPoint;
 import utilities.MyRegion;
+import utilities.MyScale;
 
 public class DrawPanel extends AbstractPanel{
 	private MyPoint[] points;
 	private MyRegion region;
 	private MyEdge[] edges;
-	private MyPoint[] diagramPoints;
+	private MyScale scale;
 	private CoordSysDrawer sysDrawer = new CoordSysDrawer(5);
 			
 	private boolean shownRegion = false;
@@ -38,9 +39,9 @@ public class DrawPanel extends AbstractPanel{
     	this.region = region;
     }
     
-    public void setLinesToPaint(MyPoint[] points, MyEdge[] edges){
-    	this.diagramPoints = points;
-    	this.edges = edges;
+    public void setLinesToPaint(MyEdge[] edges, MyScale scale){
+      	this.edges = edges;
+      	this.scale = scale;
     }
     
     private void doDrawingRegion(Graphics g) {	
@@ -61,7 +62,7 @@ public class DrawPanel extends AbstractPanel{
         g2d.setColor(color);
     
         /*Dibujar los arcos de Voronoi*/
-    	(new VoronoiDrawer(diagramPoints,edges)).drawDiagram(g2d);
+    	(new VoronoiDrawer(edges,scale)).drawDiagram(g2d);
     	    	
     	/*Dibujar los puntos de input*/
     	(new PointDrawer(points,pointSize)).drawPoints(g2d);

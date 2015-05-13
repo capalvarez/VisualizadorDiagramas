@@ -4,33 +4,30 @@ import java.awt.Graphics2D;
 
 import utilities.MyEdge;
 import utilities.MyPoint;
+import utilities.MyScale;
 
 public class VoronoiDrawer {
-	private MyPoint[] voronoiPoints;
 	private MyEdge[] edges;
+	private MyScale scale;
 	
-	public VoronoiDrawer(MyPoint[] points, MyEdge[] edges){
+	public VoronoiDrawer(MyEdge[] edges, MyScale scale){
 		this.edges = edges;
-		this.voronoiPoints = points;	
+		this.scale = scale;
 	}
 	
 	public void drawDiagram(Graphics2D g2d){
 		/*Dibujar los arcos de Voronoi*/
     	for(int i=0;i<edges.length;i++){
-    		int index1 = edges[i].getIndexFirst();
-    		int index2 = edges[i].getIndexSecond();
+    		MyPoint p1 = edges[i].getFirstPoint();
+    		MyPoint p2 = edges[i].getSecondPoint();
+    
+    		System.out.println(p1);
+    		System.out.println(p2);
+    		MyPoint pixelP1 = scale.getPixelValue(p1);
+    		MyPoint pixelP2 = scale.getPixelValue(p2);
     		
-    		if(index1!=0 && index2!=0){
-    			/*Caso en que se dibuja entre vertices "reales"*/ 
-    			g2d.drawLine(voronoiPoints[index1].getX(), voronoiPoints[index1].getY(), voronoiPoints[index2].getX(), voronoiPoints[index2].getY());
-    		}else{
-    			/*Caso en que se debe dibujar hasta el infinito*/
-    			g2d.drawLine(voronoiPoints[index1].getX(), voronoiPoints[index1].getY(),
-    					voronoiPoints[index1].getX(), voronoiPoints[index1].getY()+voronoiPoints[index1].getInfinityY());
-    			
-    			g2d.drawLine(voronoiPoints[index1].getX(), voronoiPoints[index1].getY(), 
-    					voronoiPoints[index1].getX()+voronoiPoints[index1].getInfinityX(), voronoiPoints[index1].getY());
-    		}    		
+    		g2d.drawLine(pixelP1.getX(), pixelP1.getY(), pixelP2.getX(), pixelP2.getY());
+    		
     	}
 	}
 	

@@ -73,11 +73,16 @@ public class DisplayWindow extends IWindow{
 	public void drawDiagramInPanel(MyPoint[] points, MyEdge[] edges){
 		menu.setPrintEnabled();
 		
-		Panel.setLinesToPaint(points,edges);
+		Panel.setLinesToPaint(edges,scale);
 		voronoiPoints = points;
 		voronoiEdges = edges;		
 				
-		Panel.setPointsToPaint(points);
+		MyPoint[] pixelPoints = new MyPoint[points.length];
+		for(int i=0; i<pixelPoints.length; i++){
+			pixelPoints[i] = scale.getPixelValue(points[i]);
+		}
+		
+		Panel.setPointsToPaint(pixelPoints);
 		Panel.switchDiagram();	
 		repaint();
 		validate();	

@@ -48,14 +48,13 @@ public class VoronoiDiagramAction extends AbstractAction {
 			/*Si llamada es exitosa puedo leer del archivo de output*/
 			VoronoiOFFReader reader = new VoronoiOFFReader(output);
 			String[] points = reader.getPointList();
-			
-			VoronoiRegionProcess vrp = new VoronoiRegionProcess(reader.getRegionList(),pointArray);
-			MyEdge[] edges = vrp.getEdgeList();
-			MyCell[] voronoiCells = vrp.getCellList();  
+			PointStringProcess psp = new PointStringProcess(points);
 						
-			PointStringProcess psp = new PointStringProcess(points);			
+			VoronoiRegionProcess vrp = new VoronoiRegionProcess(reader.getRegionList(),pointArray,psp.getPointList(),window.getCurrentRegion());
+			MyEdge[] edges = vrp.getEdgeList();
+			MyCell[] voronoiCells = vrp.getCellList();  			
 			
-			MyPoint[] pointsToDraw = psp.getPointList();
+			MyPoint[] pointsToDraw = vrp.getPointList();
 	
 			window.setVoronoiCells(voronoiCells);
 			window.drawDiagramInPanel(pointsToDraw,edges);
