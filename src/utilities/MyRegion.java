@@ -3,6 +3,7 @@ package utilities;
 import generalTools.LineIntersector;
 
 import java.awt.Graphics2D;
+import java.awt.geom.Rectangle2D;
 
 public class MyRegion {
 	MyPoint upLeftReal;
@@ -43,26 +44,26 @@ public class MyRegion {
 	
 	
 	public void drawRegion(Graphics2D g2d){
-        int height = Math.abs(upLeftPixel.getY()- downRightPixel.getY());
-        int width = Math.abs(upLeftPixel.getX()- downRightPixel.getX());
+        double height = Math.abs(upLeftPixel.getY()- downRightPixel.getY());
+        double width = Math.abs(upLeftPixel.getX()- downRightPixel.getX());
        
-        g2d.drawRect(upLeftPixel.getX(),upLeftPixel.getY(),width,height);
+        g2d.draw(new Rectangle2D.Double(upLeftPixel.getX(),upLeftPixel.getY(),width,height));
 		
 	}
 	
-	public int getHeight(){
+	public double getHeight(){
 		return Math.abs(upLeftReal.getY() - downRightReal.getY()); 
 	}
 	
-	public int getWidth(){
+	public double getWidth(){
 		return downRightReal.getX() - upLeftReal.getX();
 	}
 	
-	public int getLeftCorner(){
+	public double getLeftCorner(){
 		return upLeftReal.getX();
 	}
 	
-	public int getUpCorner(){
+	public double getUpCorner(){
 		return upLeftReal.getY();
 	}
 	

@@ -37,13 +37,13 @@ public class RandomPointsAction extends AbstractAction{
 		MyPoint[] pointArray = new MyPoint[n];
 		MyRegion region = window.getCurrentRegion();
 				
-		int w =  region.getWidth();
-		int h =  region.getHeight();
+		double w =  region.getWidth();
+		double h =  region.getHeight();
 		Random r = new Random();
 		
 		for(int i=0;i<n;i++){		
-			int x = Math.abs(r.nextInt()) % w + region.getLeftCorner();
-			int y = Math.abs(r.nextInt()) % h + region.getUpCorner();
+			double x = Math.abs(r.nextInt()) % w + region.getLeftCorner();
+			double y = Math.abs(r.nextInt()) % h + region.getUpCorner();
 			
 			pointArray[i] = new MyPoint(x,y);
 		}

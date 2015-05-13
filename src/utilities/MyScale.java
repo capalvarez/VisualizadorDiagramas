@@ -14,8 +14,8 @@ public class MyScale {
 	}
 	
 	public MyPoint getPixelValue(MyPoint toChange){
-		int xPix = upLeftPixel.getX() + Math.round((toChange.getX() - upLeftReal.getX())*(downRightPixel.getX() - upLeftPixel.getX())/(downRightReal.getX() - upLeftReal.getX()));
-		int yPix = upLeftPixel.getY() + Math.round((toChange.getY() - upLeftReal.getY())*(downRightPixel.getY() - upLeftPixel.getY())/(downRightReal.getY() - upLeftReal.getY()));	
+		double xPix = upLeftPixel.getX() + (toChange.getX() - upLeftReal.getX())*(downRightPixel.getX() - upLeftPixel.getX())/(downRightReal.getX() - upLeftReal.getX());
+		double yPix = upLeftPixel.getY() + (toChange.getY() - upLeftReal.getY())*(downRightPixel.getY() - upLeftPixel.getY())/(downRightReal.getY() - upLeftReal.getY());	
 		
 		return new MyPoint(xPix,yPix);
 	

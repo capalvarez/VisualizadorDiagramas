@@ -1,6 +1,7 @@
 package drawers;
 
 import java.awt.Graphics2D;
+import java.awt.geom.Line2D;
 
 import utilities.MyEdge;
 import utilities.MyPoint;
@@ -26,7 +27,7 @@ public class VoronoiDrawer {
     		MyPoint pixelP1 = scale.getPixelValue(p1);
     		MyPoint pixelP2 = scale.getPixelValue(p2);
     		
-    		g2d.drawLine(pixelP1.getX(), pixelP1.getY(), pixelP2.getX(), pixelP2.getY());
+    		g2d.draw(new Line2D.Double(pixelP1.getX(), pixelP1.getY(), pixelP2.getX(), pixelP2.getY()));
     		
     	}
 	}

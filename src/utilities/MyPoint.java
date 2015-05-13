@@ -1,21 +1,21 @@
 package utilities;
 
 public class MyPoint {
-	private int x;
-	private int y;
-	private int z;
+	private double x;
+	private double y;
+	private double z;
 	private int dimension;
 	private int infXS = 1;
 	private int infYS = 1;
 	
-	public MyPoint(int x, int y, int z){
+	public MyPoint(double x, double y, double z){
 		this.x = x;
 		this.y = y;
 		this.z = z;
 		this.dimension = 3;
 	}
 	
-	public MyPoint(int x, int y){
+	public MyPoint(double x, double y){
 		this.x = x;
 		this.y = y;
 		this.z = 0;
@@ -31,15 +31,15 @@ public class MyPoint {
 		this.infYS = ySign;	
 	}
 		
-	public int getX(){
+	public double getX(){
 		return this.x;
 	}
 	
-	public int getY(){
+	public double getY(){
 		return this.y;
 	}
 	
-	public int getZ(){
+	public double getZ(){
 		return this.z;
 	}
 	
@@ -60,8 +60,8 @@ public class MyPoint {
 	}
 	
 	public boolean equals(MyPoint p2){
-		return p2.getX()==this.getY() && p2.getY()==this.getY()
-			   && p2.getZ()==this.getZ();			   	
+		return p2.getX()-this.getY()<0.000001 && p2.getY()-this.getY()<0.000001
+			   && p2.getZ()-this.getZ()<0.000001;			   	
 	}
 	
 	public String toString(){

@@ -20,7 +20,7 @@ public class OriginDrawer {
 	
 	public void drawOrigin(JPanel panel){
 		JLabel originLabel = new JLabel("(0,0)");
-		originLabel.setLocation(origin.getX(),origin.getY());	
+		originLabel.setLocation((int)origin.getX(),(int)origin.getY());	
 		panel.add(originLabel);
 	}
 
