@@ -18,13 +18,7 @@ public class VoronoiRegionProcess {
 		processRegions(regions,inputPoints,voronoiPoints, currentRegion);
 	}
 
-	private void processRegions(String[] regionList, MyPoint[] inputPoints, ArrayList<MyPoint> voronoiPoints, MyRegion region){				
-		/*System.out.println("Voronoi antes");
-		for(int i=0;i<voronoiPoints.size();i++){
-			System.out.println(voronoiPoints.get(i).toString());
-		}
-		System.out.println("");*/
-		
+	private void processRegions(String[] regionList, MyPoint[] inputPoints, ArrayList<MyPoint> voronoiPoints, MyRegion region){					
 		int count = 1;
 		for(int i=0; i<regionList.length;i++){
 			
