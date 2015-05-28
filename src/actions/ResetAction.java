@@ -16,11 +16,7 @@ public class ResetAction extends AbstractAction {
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		AbstractPanel Panel = window.getPanel();
-		Panel.switchRegion();
-		window.repaint();
-		window.validate();
-
+		window.deleteRegion();
 	}
 
 }

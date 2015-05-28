@@ -29,8 +29,9 @@ public abstract class AbstractPanel extends JPanel {
 		
 	}
 
-	public abstract void switchDiagram();
-	public abstract void switchPoints();
-	public abstract void switchRegion();
+	public abstract void switchDiagram(boolean shown);
+	public abstract void switchPoints(boolean shown);
+	public abstract void switchRegion(boolean shown);
+	public abstract void switchDelaunay(boolean shown);
 	
 }

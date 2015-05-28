@@ -7,7 +7,7 @@ import java.io.IOException;
 
 import utilities.MyPoint;
 
-public class VoronoiOFFReader implements VoronoiFileReader{
+public class VoronoiOFFReader{
 	private int dimension;
 	private int inputPoints;
 	private int voronoiPoints;

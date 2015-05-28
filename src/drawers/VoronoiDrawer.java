@@ -28,7 +28,5 @@ public class VoronoiDrawer {
     		g2d.draw(new Line2D.Double(pixelP1.getX(), pixelP1.getY(), pixelP2.getX(), pixelP2.getY()));
     		
     	}
-	}
-	
-
+	}	
 }

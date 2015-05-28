@@ -196,19 +196,19 @@ public class DisplayMenu {
 		print.add(imprimir);		
 	}
 	
-	public void setPrintEnabled(){
-		imprimir.setEnabled(true);
+	public void setPrintEnabled(boolean shown){
+		imprimir.setEnabled(shown);
 	}
 	
-	public void setDiagramasEnabled(){
-		delaunay.setEnabled(true);
-		voronoi.setEnabled(true);
+	public void setDiagramasEnabled(boolean shown){
+		delaunay.setEnabled(shown);
+		voronoi.setEnabled(shown);
 	}
 	
-	public void setPuntosEnabled(){
-		ingresarItem.setEnabled(true);
-		azarItem.setEnabled(true);
-		uniformeItem.setEnabled(true);
+	public void setPuntosEnabled(boolean shown){
+		ingresarItem.setEnabled(shown);
+		azarItem.setEnabled(shown);
+		uniformeItem.setEnabled(shown);
 	}
 	
 }

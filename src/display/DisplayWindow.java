@@ -10,6 +10,7 @@ import utilities.MyEdge;
 import utilities.MyPoint;
 import utilities.MyRegion;
 import utilities.MyScale;
+import utilities.MyTriangle;
 
 public class DisplayWindow extends IWindow{
 	DisplayMenu menu;
@@ -38,7 +39,7 @@ public class DisplayWindow extends IWindow{
 
 	
 	public void drawRegionInPanel(MyPoint[] points) {
-		menu.setPuntosEnabled();
+		menu.setPuntosEnabled(true);
 		
 		Dimension size = getSize();
 		PointInitProcess pip = new PointInitProcess(points,size.width, size.height);
@@ -49,13 +50,13 @@ public class DisplayWindow extends IWindow{
 		currentRegion.setPixelValues(regionPoints[0],regionPoints[1]);
 		Panel.setRegion(currentRegion);	
 		
-		Panel.switchRegion();	
+		Panel.switchRegion(true);	
 		repaint();
 		validate();
 	}
 	
 	public void drawPointsInPanel(MyPoint[] pointsToDraw, MyPoint[] points){
-		menu.setDiagramasEnabled();
+		menu.setDiagramasEnabled(true);
 		currentPoints = points;
 
 		MyPoint[] pixelPoints = new MyPoint[pointsToDraw.length];
@@ -64,29 +65,38 @@ public class DisplayWindow extends IWindow{
 		}
 		
 		Panel.setPointsToPaint(pixelPoints);
-		Panel.switchPoints();	
+		Panel.switchPoints(true);	
 		repaint();
 		validate();	
 	}
 	
 	public void drawDiagramInPanel(MyPoint[] points, MyEdge[] edges){
-		menu.setPrintEnabled();
+		menu.setPrintEnabled(true);
 		
 		Panel.setLinesToPaint(edges,scale);
 		voronoiPoints = points;
 		voronoiEdges = edges;		
 
-		Panel.switchDiagram();	
+		Panel.switchDiagram(true);	
 		repaint();
 		validate();	
 	}
 	
 	public void drawCoordSysInPanel(MyPoint origin){			
-		Panel.switchCoordSys(origin);	
+		Panel.switchCoordSys(origin,true);	
 		repaint();
 		validate();	
 	}
 	
+	public void drawDelaunay(MyTriangle[] triangles){
+		menu.setPrintEnabled(true);
+		Panel.setTriangles(triangles,scale);
+		Panel.switchDelaunay(true);
+		
+		repaint();
+		validate();	
+		
+	}
 	
  	public MyPoint[] getCurrentPoints(){
 		return currentPoints;
@@ -137,6 +147,34 @@ public class DisplayWindow extends IWindow{
 	
 	public void setVoronoiCells(MyCell[] cells){
 		voronoiCells = cells;
+	}
+	
+	public void deleteDiagram(){
+		Panel.switchDiagram(false);
+		Panel.switchDelaunay(false);
+		
+		menu.setPrintEnabled(false);
+		
+		repaint();
+		validate();	
+	}
+	
+	public void deletePoints(){
+		Panel.switchPoints(false);
+			
+		menu.setDiagramasEnabled(false);
+		
+		repaint();
+		validate();	
+	}
+	
+	public void deleteRegion(){
+		Panel.switchRegion(false);
+			
+		menu.setPuntosEnabled(false);
+		
+		repaint();
+		validate();	
 	}
 	
 }

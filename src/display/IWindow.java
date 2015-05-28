@@ -9,6 +9,7 @@ import utilities.MyEdge;
 import utilities.MyPoint;
 import utilities.MyRegion;
 import utilities.MyScale;
+import utilities.MyTriangle;
 
 public abstract class IWindow extends JFrame{
 	public abstract void drawPointsInPanel(MyPoint[] pointsToDraw,MyPoint[] points);
@@ -42,5 +43,14 @@ public abstract class IWindow extends JFrame{
 	public abstract MyScale getScale();
 	
 	public abstract void setVoronoiCells(MyCell[] cells);
+
+	public abstract void drawDelaunay(MyTriangle[] triangleList);
+	
+	public abstract void deleteDiagram();
+	
+	public abstract void deletePoints();
+	
+	public abstract void deleteRegion();
+	
 	
 }

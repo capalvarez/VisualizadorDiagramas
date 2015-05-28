@@ -15,7 +15,7 @@ public class PointInputWriter {
 	}
 	
 	public String writeInFile() throws FileNotFoundException, UnsupportedEncodingException{
-		String fileName = RandomStringUtils.random(8, true, true);
+		String fileName = "./data/" + RandomStringUtils.random(8, true, true);
 		
 		PrintWriter writer = new PrintWriter(fileName, "UTF-8");
 		

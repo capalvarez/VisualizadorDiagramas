@@ -9,7 +9,7 @@ public abstract class LibraryCall {
 	protected String outputFile;
 	
 	protected void createOutputFile(){
-		outputFile = "output" + RandomStringUtils.random(8, true, true);
+		outputFile = "./data/output" + RandomStringUtils.random(8, true, true);
 	}
 
 	protected void callBashMethod(ProcessBuilder pb) throws InterruptedException{

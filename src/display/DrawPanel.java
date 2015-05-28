@@ -14,18 +14,21 @@ import utilities.MyEdge;
 import utilities.MyPoint;
 import utilities.MyRegion;
 import utilities.MyScale;
+import utilities.MyTriangle;
 
 public class DrawPanel extends AbstractPanel{
 	private MyPoint[] points;
 	private MyRegion region;
 	private MyEdge[] edges;
 	private MyScale scale;
+	private MyTriangle[] triangles;
 	private CoordSysDrawer sysDrawer = new CoordSysDrawer(5);
 			
 	private boolean shownRegion = false;
 	private boolean shownPoints = false;
 	private boolean shownDiagram = false;
 	private boolean shownCoordSys = false;
+	private boolean shownDelaunay = false;
     
     public DrawPanel(){
     	
@@ -42,6 +45,11 @@ public class DrawPanel extends AbstractPanel{
     public void setLinesToPaint(MyEdge[] edges, MyScale scale){
       	this.edges = edges;
       	this.scale = scale;
+    }
+    
+    public void setTriangles(MyTriangle[] t, MyScale scale){
+    	triangles = t;
+    	this.scale = scale;
     }
     
     private void doDrawingRegion(Graphics g) {	
@@ -76,6 +84,15 @@ public class DrawPanel extends AbstractPanel{
     	sysDrawer.drawOrigin(g2d);
     }
     
+    private void doDrawingDelaunay(Graphics g){
+    	Graphics2D g2d = (Graphics2D) g;
+        g2d.setColor(color);
+        
+    	for(int i=0;i<triangles.length;i++){
+    		triangles[i].draw(g2d, scale);
+    	}
+    }
+    
     @Override
     public void paintComponent(Graphics g) {   
         super.paintComponent(g);
@@ -95,24 +112,31 @@ public class DrawPanel extends AbstractPanel{
         if(shownCoordSys){
         	doDrawingCoord(g);
         }
+        
+        if(shownDelaunay){
+        	doDrawingDelaunay(g);
+        }
     }
 
-    public void switchRegion(){
-   		shownRegion = !shownRegion;
+    public void switchRegion(boolean shown){
+   		shownRegion = shown;
     }
     
-    public void switchPoints(){
-   		shownPoints = !shownPoints;
+    public void switchPoints(boolean shown){
+   		shownPoints = shown;
     }
     
-    public void switchDiagram(){
-   		shownDiagram = !shownDiagram;
+    public void switchDiagram(boolean shown){
+   		shownDiagram = shown;
     }
 	
-    public void switchCoordSys(MyPoint origin){
+    public void switchCoordSys(MyPoint origin, boolean shown){
     	sysDrawer.setOrigin(origin);
-    	shownCoordSys = !shownCoordSys;
+    	shownCoordSys = shown;
     }
 	
+    public void switchDelaunay(boolean shown){
+    	shownDelaunay = shown;
+    }
 	
 }

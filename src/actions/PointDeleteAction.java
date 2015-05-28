@@ -16,10 +16,7 @@ public class PointDeleteAction extends AbstractAction {
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		AbstractPanel Panel = window.getPanel();
-		Panel.switchPoints();
-		window.repaint();
-		window.validate();
+		window.deletePoints();
 	}
 
 }

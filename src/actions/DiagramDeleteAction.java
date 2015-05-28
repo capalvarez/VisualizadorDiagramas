@@ -16,10 +16,7 @@ public class DiagramDeleteAction extends AbstractAction {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		AbstractPanel Panel = window.getPanel();
-		Panel.switchDiagram();
-		window.repaint();
-		window.validate();
+		window.deleteDiagram();
 	}
 
 }
