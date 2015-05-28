@@ -1,1 +1,5 @@
 data/
+bin/
+.classpath
+.project
+.directory
