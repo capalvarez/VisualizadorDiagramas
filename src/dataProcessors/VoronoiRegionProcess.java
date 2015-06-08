@@ -29,6 +29,10 @@ public class VoronoiRegionProcess {
 				int i1 = Integer.parseInt(regInfo[j]);
 				int i2 = Integer.parseInt(regInfo[j+1]);
 							
+				if(i1==0){
+					
+				}
+				
 				MyEdge newEdge = new MyEdge(i1,i2);
 				newEdge.setPoints(voronoiPoints.get(i1), voronoiPoints.get(i2));
 											

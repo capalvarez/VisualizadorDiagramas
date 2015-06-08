@@ -81,20 +81,7 @@ public class MyRegion {
 		return null;		
 	}
 	
-	public boolean contains(MyPoint p){
-		int i;
-		int j;
-		
-		MyPoint[] points = getPoints();
-				
-		/*for (i = 0, j = points.length - 1; i < points.length; j = i++) {			
-			if ((points[i].getY() > p.getY()) != (points[j].getY() > p.getY() && 
-				(p.getX() < (points[j].getX() - points[i].getX())* (p.getY() - points[i].getY())
-							/ (points[j].getY() - points[i].getY()) + points[i].getX()))) {
-				result = !result;
-			}
-		}*/
-		
+	public boolean contains(MyPoint p){	
 		if(p.getX()>upLeftReal.getX() && p.getX()<downRightReal.getX() &&
 		   p.getY()>upLeftReal.getY() && p.getX()<downRightReal.getY()){
 			return true;
