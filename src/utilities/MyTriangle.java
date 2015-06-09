@@ -91,16 +91,19 @@ public class MyTriangle {
 	
 	public boolean contains(MyPoint p){
 		ArrayList<TriangleEdge> edges = this.getEdges();
-		
-		if(orientationTest(edges.get(0).getP1(),p,edges.get(0).getP2())){
+		for(int i=0;i<edges.size();i++){
+			System.out.println(edges.get(i));
+		}
+				
+		if(orientationTest(edges.get(0).getP1(),p,edges.get(0).getP2())<0){
 			return false;
 		}
 		
-		if(orientationTest(edges.get(1).getP1(),p,edges.get(1).getP2())){
+		if(orientationTest(edges.get(1).getP1(),p,edges.get(1).getP2())<0){
 			return false;
 		}
 		
-		if(orientationTest(edges.get(2).getP1(),p,edges.get(2).getP2())){
+		if(orientationTest(edges.get(2).getP1(),p,edges.get(2).getP2())<0){
 			return false;
 		}
 		
@@ -108,8 +111,22 @@ public class MyTriangle {
 		
 	}
 	
-	private boolean orientationTest(MyPoint pA, MyPoint pB, MyPoint pC){
-		return (pB.getX() - pA.getX())*(pC.getY() - pA.getY()) - (pC.getX() - pA.getX())*(pB.getY() - pA.getY())<0;
+	@Override
+	public String toString(){
+		return "(" + points.get(0).toString() + ")" + "(" + points.get(1).toString() + ")" +"(" +points.get(2).toString() + ")";
+	}
+	
+	
+	private double orientationTest(MyPoint pA, MyPoint pB, MyPoint pC){
+		return (pB.getX() - pA.getX())*(pC.getY() - pA.getY()) - (pC.getX() - pA.getX())*(pB.getY() - pA.getY());
 	}
 
+	public static void main(String[] args){
+		MyPoint[] points = {new MyPoint(0,0),new MyPoint(0,1),new MyPoint(1,0)};
+		
+		MyTriangle t = new MyTriangle(points);
+		System.out.println(t.contains(new MyPoint(1,1)));		
+	}
+	
+	
 }

@@ -34,8 +34,12 @@ public class TriangleEdge {
 			
 		}else{
 			return false;
-		}
-		
+		}	
+	}
+	
+	@Override
+	public String toString(){
+		return "(" + p1.toString() + "),("+ p2.toString() + ")";
 	}
 	
 	
