@@ -59,11 +59,19 @@ public class MyPoint {
 		return Math.pow(x, 2) + Math.pow(y, 2) + Math.pow(z, 2);
 	}
 	
-	public boolean equals(MyPoint p2){
-		return p2.getX()-this.getY()<0.000001 && p2.getY()-this.getY()<0.000001
-			   && p2.getZ()-this.getZ()<0.000001;			   	
+	@Override
+	public boolean equals(Object o){
+		if(o instanceof MyPoint){
+			MyPoint p2 = (MyPoint)o;
+			
+			return p2.getX()-this.getY()<0.000001 && p2.getY()-this.getY()<0.000001
+					   && p2.getZ()-this.getZ()<0.000001;		
+		}else{
+			return false;
+		}		   	
 	}
 	
+	@Override
 	public String toString(){
 		return this.x + " " + this.y + " " + this.z;
 	}

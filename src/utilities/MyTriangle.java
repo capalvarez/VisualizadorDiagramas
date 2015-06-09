@@ -85,5 +85,31 @@ public class MyTriangle {
 		
 	}
 	
+	public boolean hasNullNeighbours(){
+		return neighbours[0]==null || neighbours[1]==null || neighbours[2]==null; 
+	}
+	
+	public boolean contains(MyPoint p){
+		ArrayList<TriangleEdge> edges = this.getEdges();
+		
+		if(orientationTest(edges.get(0).getP1(),p,edges.get(0).getP2())){
+			return false;
+		}
+		
+		if(orientationTest(edges.get(1).getP1(),p,edges.get(1).getP2())){
+			return false;
+		}
+		
+		if(orientationTest(edges.get(2).getP1(),p,edges.get(2).getP2())){
+			return false;
+		}
+		
+		return true;
+		
+	}
+	
+	private boolean orientationTest(MyPoint pA, MyPoint pB, MyPoint pC){
+		return (pB.getX() - pA.getX())*(pC.getY() - pA.getY()) - (pC.getX() - pA.getX())*(pB.getY() - pA.getY())<0;
+	}
 
 }
