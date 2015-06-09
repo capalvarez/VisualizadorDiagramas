@@ -13,6 +13,30 @@ public class TriangleEdge {
 		return new MyPoint((p1.getX() + p2.getX())/2,(p1.getY() + p2.getY())/2); 
 	}
 	
+	public MyPoint getP1(){
+		return p1;
+	}
+	
+	public MyPoint getP2(){
+		return p2;
+	}
+		
+	@Override
+	public boolean equals(Object o){
+		if(o instanceof TriangleEdge){
+			TriangleEdge e = (TriangleEdge) o;
+			
+			if(e.getP1().equals(this.p1) && e.getP2().equals(this.p2)){
+				return true;
+			}else{
+				return false;
+			}
+			
+		}else{
+			return false;
+		}
+		
+	}
 	
 	
 }

@@ -8,9 +8,14 @@ import java.util.Arrays;
 public class MyTriangle {
 	ArrayList<MyPoint> points;
 	MyTriangle[] neighbours;
+	ArrayList<TriangleEdge> edges = new ArrayList<TriangleEdge>();
+	
 	
 	public MyTriangle(MyPoint[] p){
 		points = new ArrayList<MyPoint>(Arrays.asList(p));
+		edges.add(new TriangleEdge(p[0],p[1]));
+		edges.add(new TriangleEdge(p[1],p[2]));
+		edges.add(new TriangleEdge(p[2],p[0]));
 		
 		neighbours = new MyTriangle[3];	
 	}
@@ -36,19 +41,28 @@ public class MyTriangle {
 	}
 	
 	
-	public MyPoint getInfinityPoint(){
-		ArrayList<TriangleEdge> notNullEdges = new ArrayList<TriangleEdge>();
-		for(int i=0;i<3;i++){
+	public ArrayList<TriangleEdge> nullNeighbours(){
+		ArrayList<TriangleEdge> results = new ArrayList<TriangleEdge>();
+		
+		for(int i=1;i<3;i++){
 			if(neighbours[i]!=null){
-				notNullEdges.add(getCommonEdge(neighbours[i]));
+				results.add(neighbours[i].getCommonEdge(this));
 			}
 		}
-	
-		return null;
 		
+		ArrayList<TriangleEdge> thisEdges = this.getEdges();
+		for(TriangleEdge e: results){
+			thisEdges.remove(e);
+		}
+		
+		return thisEdges;
 		
 	}
 
+	public ArrayList<TriangleEdge> getEdges(){
+		return edges;
+	}
+	
 	public ArrayList<MyPoint> getPoints(){
 		return points;
 	}

@@ -7,14 +7,19 @@ import utilities.MyCell;
 import utilities.MyEdge;
 import utilities.MyPoint;
 import utilities.MyRegion;
+import utilities.MyTriangle;
+import utilities.TriangleEdge;
 
 public class VoronoiRegionProcess {
 	private ArrayList<MyEdge> edgeList = new ArrayList<MyEdge>();
 	private ArrayList<MyCell> cellList = new ArrayList<MyCell>();
 	private ArrayList<MyPoint> voronoiPoints;
+	private MyTriangle[] delaunayTriangles;
 	
-	public VoronoiRegionProcess(String[] regions, MyPoint[] inputPoints, MyPoint[] voronoiP, MyRegion currentRegion){
+	public VoronoiRegionProcess(String[] regions, MyPoint[] inputPoints, MyPoint[] voronoiP, MyRegion currentRegion, MyTriangle[] delaunay){
 		voronoiPoints = new ArrayList<MyPoint>(Arrays.asList(voronoiP));
+		delaunayTriangles = delaunay;
+		
 		processRegions(regions,inputPoints,voronoiPoints, currentRegion);
 	}
 
@@ -28,30 +33,26 @@ public class VoronoiRegionProcess {
 			for(int j=1;j<Integer.parseInt(regInfo[0])-1;j++){
 				int i1 = Integer.parseInt(regInfo[j]);
 				int i2 = Integer.parseInt(regInfo[j+1]);
-							
-				if(i1==0){
 					
-				}
+				MyEdge newEdge;
 				
-				MyEdge newEdge = new MyEdge(i1,i2);
-				newEdge.setPoints(voronoiPoints.get(i1), voronoiPoints.get(i2));
-											
-				MyPoint interPoint = region.getIntersection(newEdge); 
-				
-				if(interPoint!=null){
-					int insideIndex = region.getInsidePoint(newEdge);
-					voronoiPoints.add(interPoint);
+				if(i2==0){
+					MyTriangle container = findTriangle(delaunayTriangles,inputPoints[i]);
+					ArrayList<TriangleEdge> nullEdges = container.nullNeighbours();
 					
-					if(insideIndex==0){
-						newEdge = new MyEdge(i1,voronoiPoints.indexOf(interPoint));						
-						newEdge.setPoints(voronoiPoints.get(i1), interPoint);
+					if(nullEdges.size()==1){					
+						newEdge = new MyEdge(voronoiPoints.get(i1),nullEdges.get(0).getMidPoint());
+						voronoiPoints.add(nullEdges.get(0).getMidPoint());
 					
 					}else{
-						newEdge = new MyEdge(voronoiPoints.indexOf(interPoint),i2);						
-						newEdge.setPoints(voronoiPoints.get(i1), interPoint);
-					}	 
-				}
-				
+						newEdge = null;
+					}
+					
+				}else{
+					newEdge = new MyEdge(i1,i2);
+					newEdge.setPoints(voronoiPoints.get(i1), voronoiPoints.get(i2));
+				}			
+															
 				if(!edgeList.contains(newEdge)){
 					edgeList.add(newEdge);
 					newCell.addEdge(count,newEdge,1);
@@ -71,22 +72,8 @@ public class VoronoiRegionProcess {
 			MyEdge newEdge = new MyEdge(i1,i2);
 			newEdge.setPoints(voronoiPoints.get(i1), voronoiPoints.get(i2));
 			
-			MyPoint interPoint = region.getIntersection(newEdge); 
+			/*revisar aqui, falta*/
 			
-			if(interPoint!=null){
-				int insideIndex = region.getInsidePoint(newEdge);
-				voronoiPoints.add(interPoint);
-				
-				if(insideIndex==0){
-					newEdge = new MyEdge(i1,voronoiPoints.indexOf(interPoint));						
-					newEdge.setPoints(voronoiPoints.get(i1), interPoint);
-				
-				}else{
-					newEdge = new MyEdge(voronoiPoints.indexOf(interPoint),i2);						
-					newEdge.setPoints(voronoiPoints.get(i1), interPoint);
-				}
-				 
-			}
 			
 			if(!edgeList.contains(newEdge)){
 				edgeList.add(newEdge);
@@ -124,5 +111,9 @@ public class VoronoiRegionProcess {
 		pointArray = voronoiPoints.toArray(pointArray);
 		
 		return pointArray;
+	}
+	
+	private MyTriangle findTriangle(MyTriangle[] triangles, MyPoint point){
+		return null;
 	}
 }
