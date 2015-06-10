@@ -67,6 +67,10 @@ public class MyTriangle {
 		return points;
 	}
 	
+	public void setPoints(ArrayList<MyPoint> newPoints){
+		points = newPoints;
+	}
+	
 	private TriangleEdge getCommonEdge(MyTriangle t){
 		ArrayList<MyPoint> otherPoints = t.getPoints();
 		ArrayList<MyPoint> commonPoints = new ArrayList<MyPoint>();
@@ -91,10 +95,7 @@ public class MyTriangle {
 	
 	public boolean contains(MyPoint p){
 		ArrayList<TriangleEdge> edges = this.getEdges();
-		for(int i=0;i<edges.size();i++){
-			System.out.println(edges.get(i));
-		}
-				
+					
 		if(orientationTest(edges.get(0).getP1(),p,edges.get(0).getP2())<0){
 			return false;
 		}
