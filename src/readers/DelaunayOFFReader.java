@@ -5,6 +5,8 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
+import dataProcessors.DelaunayTriangleSorter;
+
 import utilities.MyPoint;
 import utilities.MyTriangle;
 
@@ -58,7 +60,9 @@ public class DelaunayOFFReader {
 		}	
 	}
 
-	public MyTriangle[] getTriangleList() {
+	public MyTriangle[] getTriangleList() {	
+		DelaunayTriangleSorter dts = new DelaunayTriangleSorter(triangleList);
+
 		return triangleList;
 	}
 }

@@ -16,7 +16,7 @@ public class DelaunayTriangleSorter {
 		sortTriangles(delaunay);
 	}
 	
-	private void sortTriangles(MyTriangle[] triangles){
+	private void sortTriangles(MyTriangle[] triangles){		
 		for(int i=0;i<triangles.length;i++){
 			sortPoints(triangles[i]);
 		}	
