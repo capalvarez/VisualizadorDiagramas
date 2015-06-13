@@ -48,9 +48,9 @@ public class DelaunayTriangleSorter {
 			@Override
 			public int compare(Map.Entry<Double, MyPoint> r1,
 					Map.Entry<Double, MyPoint> r2) {
-				if (r1.getKey() < r2.getKey()) {
+				if (r1.getKey() > r2.getKey()) {
 					return -1;
-				} else if (r1.getKey() > r2.getKey()) {
+				} else if (r1.getKey() < r2.getKey()) {
 					return 1;
 				} else {
 					return 0;

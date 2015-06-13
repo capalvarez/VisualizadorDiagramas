@@ -94,21 +94,32 @@ public class MyTriangle {
 	}
 	
 	public boolean contains(MyPoint p){
-		ArrayList<TriangleEdge> edges = this.getEdges();
-					
-		if(orientationTest(edges.get(0).getP1(),p,edges.get(0).getP2())<0){
-			return false;
-		}
+		double a = points.get(0).getX() - p.getX();
+		double b = points.get(0).getY() - p.getY();
+		double c = (Math.pow(points.get(0).getX(),2) - Math.pow(p.getX(),2)) + (Math.pow(points.get(0).getY(),2) - Math.pow(p.getY(),2));
 		
-		if(orientationTest(edges.get(1).getP1(),p,edges.get(1).getP2())<0){
-			return false;
-		}
+		double d = points.get(1).getX() - p.getX();
+		double e = points.get(1).getY() - p.getY();
+		double f = (Math.pow(points.get(1).getX(),2) - Math.pow(p.getX(),2)) + (Math.pow(points.get(1).getY(),2) - Math.pow(p.getY(),2));
+	
+		double g = points.get(2).getX() - p.getX();
+		double h = points.get(2).getY() - p.getY();
+		double i = (Math.pow(points.get(2).getX(),2) - Math.pow(p.getX(),2)) + (Math.pow(points.get(2).getY(),2) - Math.pow(p.getY(),2));
+	
+		double total = a*(e*i-f*h) - d*(b*i-c*h) + g*(b*f-e*c);
 		
-		if(orientationTest(edges.get(2).getP1(),p,edges.get(2).getP2())<0){
+		if(total<0){
 			return false;
+		}else{
+			return true;
 		}
+	
+	}
+	
+	public MyEdge collinearEdge(MyPoint p){
+		ArrayList<TriangleEdge> edges = getEdges();
 		
-		return true;
+		return null;
 		
 	}
 	
@@ -116,17 +127,18 @@ public class MyTriangle {
 	public String toString(){
 		return "(" + points.get(0).toString() + ")" + "(" + points.get(1).toString() + ")" +"(" +points.get(2).toString() + ")";
 	}
-	
-	
-	private double orientationTest(MyPoint pA, MyPoint pB, MyPoint pC){
-		return (pB.getX() - pA.getX())*(pC.getY() - pA.getY()) - (pC.getX() - pA.getX())*(pB.getY() - pA.getY());
-	}
 
 	public static void main(String[] args){
-		MyPoint[] points = {new MyPoint(0,0),new MyPoint(0,1),new MyPoint(1,0)};
+		MyPoint[] points = {new MyPoint(0,75),new MyPoint(0,50),new MyPoint(25,50)};
+		MyPoint[] points2 = {new MyPoint(25,50),new MyPoint(25,75),new MyPoint(0,75)};
 		
+		/*Por alguna extraña razon esto da false para ambos siendo que claramente el punto esta en uno de los
+		 * dos*/
 		MyTriangle t = new MyTriangle(points);
-		System.out.println(t.contains(new MyPoint(1,1)));		
+		MyTriangle t2 = new MyTriangle(points);
+		
+		System.out.println(t.contains(new MyPoint(13,63)));
+		System.out.println(t2.contains(new MyPoint(13,63)));
 	}
 	
 	
