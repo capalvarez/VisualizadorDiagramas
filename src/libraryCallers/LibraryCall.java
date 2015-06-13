@@ -8,8 +8,12 @@ public abstract class LibraryCall {
 	protected String inputFile;
 	protected String outputFile;
 	
-	protected void createOutputFile(){
-		outputFile = "./data/output" + RandomStringUtils.random(8, true, true);
+	protected void createDelaunayOutputFile(){
+		outputFile = "./data/DelaunayOutput" + RandomStringUtils.random(8, true, true);
+	}
+	
+	protected void createVoronoiOutputFile(){
+		outputFile = "./data/VoronoiOutput" + RandomStringUtils.random(8, true, true);
 	}
 
 	protected void callBashMethod(ProcessBuilder pb) throws InterruptedException{

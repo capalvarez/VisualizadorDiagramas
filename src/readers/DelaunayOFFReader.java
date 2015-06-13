@@ -43,11 +43,11 @@ public class DelaunayOFFReader {
 			for(int i=0;i<triangleNumber;i++){
 				currentLine = br.readLine();
 				String[] indexes = currentLine.split("\\s+");
-				
+						
 				for(int j=1;j<4;j++){
 					int index = Integer.parseInt(indexes[j]);
 										
-					if(index>0){
+					if(index>=0){
 						triangleList[i].setNeighbour(triangleList[index],j-1);
 					}else{
 						triangleList[i].setNeighbour(null,j-1);

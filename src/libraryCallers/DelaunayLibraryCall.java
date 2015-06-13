@@ -6,7 +6,7 @@ public class DelaunayLibraryCall extends LibraryCall{
 
 	public DelaunayLibraryCall(String input){
 		inputFile = input;
-		createOutputFile();
+		createDelaunayOutputFile();
 	}
 			
 	public String callSystem() throws IOException, InterruptedException{

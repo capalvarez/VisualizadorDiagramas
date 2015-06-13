@@ -63,7 +63,7 @@ public class VoronoiDiagramAction extends AbstractAction {
 		if(triangles==null){
 			return;
 		}
-		
+			
 		/*Llamar a libreria para obtener diagrama de Voronoi*/
 		VoronoiLibraryCall v = new VoronoiLibraryCall(fileName);
 		try {

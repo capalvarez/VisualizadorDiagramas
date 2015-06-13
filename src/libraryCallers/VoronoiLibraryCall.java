@@ -6,7 +6,7 @@ public class VoronoiLibraryCall extends LibraryCall{
 
 	public VoronoiLibraryCall(String input){
 		inputFile = input;
-		createOutputFile();
+		createVoronoiOutputFile();
 	}
 			
 	public String callSystem() throws IOException, InterruptedException{

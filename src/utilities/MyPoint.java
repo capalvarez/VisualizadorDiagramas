@@ -64,7 +64,7 @@ public class MyPoint {
 		if(o instanceof MyPoint){
 			MyPoint p2 = (MyPoint)o;
 			
-			return p2.getX()-this.getY()<0.000001 && p2.getY()-this.getY()<0.000001
+			return Math.abs(p2.getX()-this.getX())<0.000001 && Math.abs(p2.getY()-this.getY())<0.000001
 					   && p2.getZ()-this.getZ()<0.000001;		
 		}else{
 			return false;

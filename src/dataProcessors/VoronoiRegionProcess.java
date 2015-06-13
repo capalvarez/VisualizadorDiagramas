@@ -20,6 +20,12 @@ public class VoronoiRegionProcess {
 		voronoiPoints = new ArrayList<MyPoint>(Arrays.asList(voronoiP));
 		borderTriangles = 	new ArrayList<MyTriangle>(Arrays.asList(delaunay));
 		
+		/*for(int i=0;i<borderTriangles.size();i++){
+			System.out.println(borderTriangles.get(i));
+			System.out.println(borderTriangles.get(i).nullNeighbours().size());
+		}*/
+		
+		
 		//processDelaunay(delaunay);
 		processRegions(regions,inputPoints,voronoiPoints, currentRegion);
 	}
@@ -45,9 +51,9 @@ public class VoronoiRegionProcess {
 				MyEdge newEdge;
 				
 				if(i2==0){
-					System.out.println(voronoiPoints.get(i1));
-					MyTriangle container = findTriangle(voronoiPoints.get(i1));
-					ArrayList<TriangleEdge> nullEdges = container.nullNeighbours();
+					//System.out.println(voronoiPoints.get(i1));
+					MyTriangle container = findTriangle(voronoiPoints.get(i1));											
+					ArrayList<TriangleEdge> nullEdges = container.nullNeighbours();				
 					
 					if(nullEdges.size()==1){					
 						newEdge = new MyEdge(voronoiPoints.get(i1),nullEdges.get(0).getMidPoint());
@@ -141,9 +147,8 @@ public class VoronoiRegionProcess {
 	}
 	
 	private MyTriangle findTriangle(MyPoint point){
-		for(int i=0;i<borderTriangles.size();i++){
-			System.out.println(borderTriangles.get(i));
-			if(borderTriangles.get(i).contains(point)){
+		for(int i=0;i<borderTriangles.size();i++){			
+			if(borderTriangles.get(i).contains(point) && borderTriangles.get(i).hasNullNeighbours()){
 				return borderTriangles.get(i);
 			}		
 		}
