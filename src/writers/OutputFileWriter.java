@@ -35,10 +35,10 @@ public class OutputFileWriter {
 		}
 		
 		/*Escribir el numero de puntos de Voronoi*/
-		writer.write(voronoiPoints.length + "\n");
+		writer.write(voronoiPoints.length-1 + "\n");
 		
 		/*Escribir los puntos de Voronoi*/
-		for(int i=0;i<voronoiPoints.length;i++){
+		for(int i=1;i<voronoiPoints.length;i++){
 			writer.write(voronoiPoints[i].toString() + "\n");
 		}
 				

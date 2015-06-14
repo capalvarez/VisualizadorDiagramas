@@ -73,7 +73,7 @@ public class MyPoint {
 	
 	@Override
 	public String toString(){
-		return this.x + " " + this.y + " " + this.z;
+		return this.x + " " + this.y;
 	}
 	
 	public double distance(MyPoint p2){

@@ -47,23 +47,32 @@ public class VoronoiRegionProcess {
 					ArrayList<TriangleEdge> nullEdges = container.nullNeighbours();				
 					
 					if(nullEdges.size()==1){					
-						voronoiPoints.add(nullEdges.get(0).getMidPoint());
+						MyPoint midPoint = nullEdges.get(0).getMidPoint(); 
 						
-						newEdge = new MyEdge(i1,voronoiPoints.indexOf(nullEdges.get(0).getMidPoint()));
-						newEdge.setPoints(voronoiPoints.get(i1), nullEdges.get(0).getMidPoint());
+						if(!voronoiPoints.contains(midPoint)){
+							voronoiPoints.add(midPoint);
+						}
+												
+						newEdge = new MyEdge(i1,voronoiPoints.indexOf(midPoint));
+						newEdge.setPoints(voronoiPoints.get(i1),midPoint);
 					
 					}else{
 						MyPoint midPoint = nullEdges.get(0).getMidPoint();
 						
 						if(voronoiPoints.contains(midPoint)){
 							MyPoint otherMidPoint = nullEdges.get(1).getMidPoint();
-							voronoiPoints.add(otherMidPoint);
 							
+							if(!voronoiPoints.contains(otherMidPoint)){
+								voronoiPoints.add(otherMidPoint);
+							}
+						
 							newEdge = new MyEdge(i1,voronoiPoints.indexOf(otherMidPoint));
 							newEdge.setPoints(voronoiPoints.get(i1), otherMidPoint);
 									
 						}else{
-							voronoiPoints.add(midPoint);
+							if(!voronoiPoints.contains(midPoint)){
+								voronoiPoints.add(midPoint);
+							}
 							
 							newEdge = new MyEdge(i1,voronoiPoints.indexOf(midPoint));
 							newEdge.setPoints(voronoiPoints.get(i1), midPoint);
@@ -74,24 +83,33 @@ public class VoronoiRegionProcess {
 					ArrayList<TriangleEdge> nullEdges = container.nullNeighbours();
 					
 					if(nullEdges.size()==1){					
-						voronoiPoints.add(nullEdges.get(0).getMidPoint());
+						MyPoint midPoint = nullEdges.get(0).getMidPoint();
+						
+						if(!voronoiPoints.contains(midPoint)){
+							voronoiPoints.add(midPoint);
+						}
 											
-						newEdge = new MyEdge(voronoiPoints.indexOf(nullEdges.get(0).getMidPoint()),i2);
-						newEdge.setPoints(nullEdges.get(0).getMidPoint(),voronoiPoints.get(i2));
+						newEdge = new MyEdge(voronoiPoints.indexOf(midPoint),i2);
+						newEdge.setPoints(midPoint,voronoiPoints.get(i2));
 						
 					}else{
 						MyPoint midPoint = nullEdges.get(0).getMidPoint();
 						
 						if(voronoiPoints.contains(midPoint)){
 							MyPoint otherMidPoint = nullEdges.get(1).getMidPoint();
-							voronoiPoints.add(otherMidPoint);
+							
+							if(!voronoiPoints.contains(otherMidPoint)){
+								voronoiPoints.add(otherMidPoint);
+							}
 							
 							newEdge = new MyEdge(voronoiPoints.indexOf(otherMidPoint),i2);
 							newEdge.setPoints(otherMidPoint,voronoiPoints.get(i2));
 							
 						}else{
-							voronoiPoints.add(midPoint);
-						
+							if(!voronoiPoints.contains(midPoint)){
+								voronoiPoints.add(midPoint);
+							}
+													
 							newEdge = new MyEdge(voronoiPoints.indexOf(midPoint),i2);
 							newEdge.setPoints(midPoint,voronoiPoints.get(i2));	
 						}	
