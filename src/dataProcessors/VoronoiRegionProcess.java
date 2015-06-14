@@ -51,8 +51,8 @@ public class VoronoiRegionProcess {
 				MyEdge newEdge;
 				
 				if(i2==0){
-					//System.out.println(voronoiPoints.get(i1));
-					MyTriangle container = findTriangle(voronoiPoints.get(i1));											
+					MyTriangle container = findTriangle(voronoiPoints.get(i1));
+					System.out.println("i2 en cero " + container.toString());
 					ArrayList<TriangleEdge> nullEdges = container.nullNeighbours();				
 					
 					if(nullEdges.size()==1){					
@@ -74,6 +74,7 @@ public class VoronoiRegionProcess {
 					}	
 				}else if(i1==0){
 					MyTriangle container = findTriangle(voronoiPoints.get(i2));
+					System.out.println("i1 en cero " + container.toString());
 					ArrayList<TriangleEdge> nullEdges = container.nullNeighbours();
 					
 					if(nullEdges.size()==1){					
@@ -116,7 +117,7 @@ public class VoronoiRegionProcess {
 		}
 	}
 	
-	private void processDelaunay(MyTriangle[] delaunay){	
+	private void pro5cessDelaunay(MyTriangle[] delaunay){	
 		for(int i=0;i<delaunay.length;i++){
 			if(delaunay[i].hasNullNeighbours()){
 				borderTriangles.add(delaunay[i]);

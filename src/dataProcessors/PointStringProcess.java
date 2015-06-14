@@ -19,11 +19,8 @@ public class PointStringProcess extends PointProcess{
 		
 		for(int i=1;i<endPoints.length;i++){
 			String[] info = (initPoints[i].trim()).split("\\s+");
-			double x1 = Double.parseDouble(info[0]);
-			double y1 = Double.parseDouble(info[1]);
-					
-			int x = (int) Math.round(x1);
-			int y = (int) Math.round(y1);
+			double x = Double.parseDouble(info[0]);
+			double y = Double.parseDouble(info[1]);
 							
 			endPoints[i] = new MyPoint(x,y);	
 		}

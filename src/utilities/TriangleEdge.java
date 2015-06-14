@@ -26,7 +26,8 @@ public class TriangleEdge {
 		if(o instanceof TriangleEdge){
 			TriangleEdge e = (TriangleEdge) o;
 			
-			if(e.getP1().equals(this.p1) && e.getP2().equals(this.p2)){
+			if((e.getP1().equals(this.p1) && e.getP2().equals(this.p2)) || 
+					e.getP1().equals(this.p2) && e.getP2().equals(this.p1)){
 				return true;
 			}else{
 				return false;

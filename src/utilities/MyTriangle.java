@@ -54,16 +54,15 @@ public class MyTriangle {
 				results.add(neighbours[i].getCommonEdge(this));
 			}
 		}
-		System.out.println("resultado para " + this.toString());
-		System.out.println(results);
-		
+				
 		ArrayList<TriangleEdge> thisEdges = this.getEdges();
-		for(TriangleEdge e: results){
-			thisEdges.remove(e);
+		for(TriangleEdge e: results){		
+			for(int i=0;i<results.size();i++){
+				if(results.get(i).equals(e)){
+					thisEdges.remove(e);
+				}
+			}
 		}
-		
-		System.out.println(thisEdges);
-		System.out.println(" ");
 		
 		return thisEdges;
 		
