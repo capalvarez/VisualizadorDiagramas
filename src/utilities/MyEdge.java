@@ -62,9 +62,16 @@ public class MyEdge {
 	
 	}
 	
-	public boolean equals(MyEdge e2){
-		return (e2.p1.equals(this.p1) && e2.p2.equals(this.p2)) ||
-			   (e2.p1.equals(this.p2) && e2.p1.equals(this.p1));
+	@Override
+	public boolean equals(Object o){
+		if(o instanceof MyEdge){
+			MyEdge e2 = (MyEdge)o;
+		
+			return (i1==e2.getIndexFirst() && i2==e2.getIndexSecond()) ||
+				   (i2==e2.getIndexFirst() && i1==e2.getIndexSecond()); 		
+		}else{
+			return false;
+		}
 	}
 
 	public int getNormalDir(MyEdge e){

@@ -119,7 +119,7 @@ public class VoronoiRegionProcess {
 					newEdge.setPoints(voronoiPoints.get(i1), voronoiPoints.get(i2));
 				}			
 															
-				if(!edgeList.contains(newEdge)){
+				if(!edgeList.contains(newEdge)){					
 					edgeList.add(newEdge);
 					newCell.addEdge(count,newEdge,1);
 					
