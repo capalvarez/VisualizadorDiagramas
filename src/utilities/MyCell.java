@@ -16,13 +16,20 @@ public class MyCell {
 		normalDir.add(norm);
 	}
 	
+	@Override
 	public String toString(){
 		String result = edges.size() + " ";
 		
-		for(int i = 0;i<edges.size();i++){
-			result = result + edges.get(i) + " ";
+		for(int i = 0;i<edges.size();i++){		
+			result = result + edgeIndexList.get(i) + " ";
+		}
+		
+		for(int i = 0;i<normalDir.size();i++){
+			result = result + normalDir.get(i) + " ";
 		}
 				
+		result = result + getArea();
+		
 		return result;	
 	}
 	

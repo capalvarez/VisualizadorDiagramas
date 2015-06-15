@@ -114,6 +114,10 @@ public class DisplayWindow extends IWindow{
  		return voronoiEdges;
  	}
  	
+ 	public MyCell[] getVoronoiCells(){
+ 		return voronoiCells;
+ 	}
+ 	
 	public void changeColorDiagram(Color color){
 		Panel.setColor(color);
 		repaint();

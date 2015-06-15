@@ -24,7 +24,7 @@ public class VoronoiRegionProcess {
 	}
 
 	private void processRegions(String[] regionList, MyPoint[] inputPoints, ArrayList<MyPoint> voronoiPoints, MyRegion region){					
-		int count = 1;
+
 		for(int i=0; i<regionList.length;i++){
 			String[] regInfo = regionList[i].split(" ");			
 			MyCell newCell = new MyCell();
@@ -121,9 +121,8 @@ public class VoronoiRegionProcess {
 															
 				if(!edgeList.contains(newEdge)){					
 					edgeList.add(newEdge);
-					newCell.addEdge(count,newEdge,1);
-					
-					count++;					
+					newCell.addEdge(edgeList.indexOf(newEdge),newEdge,1);
+							
 				}else{
 					MyEdge oldEdge = edgeList.get(edgeList.indexOf(newEdge));
 					int nDir = oldEdge.getNormalDir(newEdge);
