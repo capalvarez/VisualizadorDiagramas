@@ -59,7 +59,7 @@ public class VoronoiRegionProcess {
 					}else{
 						MyPoint midPoint = nullEdges.get(0).getMidPoint();
 						
-						if(voronoiPoints.contains(midPoint)){
+						if(nullEdges.get(1).inEdge(inputPoints[i]) && voronoiPoints.contains(midPoint)){
 							MyPoint otherMidPoint = nullEdges.get(1).getMidPoint();
 							
 							if(!voronoiPoints.contains(otherMidPoint)){
@@ -95,7 +95,7 @@ public class VoronoiRegionProcess {
 					}else{
 						MyPoint midPoint = nullEdges.get(0).getMidPoint();
 						
-						if(voronoiPoints.contains(midPoint)){
+						if(nullEdges.get(1).inEdge(inputPoints[i]) && voronoiPoints.contains(midPoint)){
 							MyPoint otherMidPoint = nullEdges.get(1).getMidPoint();
 							
 							if(!voronoiPoints.contains(otherMidPoint)){
@@ -118,12 +118,23 @@ public class VoronoiRegionProcess {
 					newEdge = new MyEdge(i1,i2);
 					newEdge.setPoints(voronoiPoints.get(i1), voronoiPoints.get(i2));
 				}			
-															
+				
+				if(i==1){
+					System.out.println(newEdge);
+				}
+								
 				if(!edgeList.contains(newEdge)){					
 					edgeList.add(newEdge);
+					if(i==1){
+						System.out.println(edgeList.indexOf(newEdge));
+					}
 					newCell.addEdge(edgeList.indexOf(newEdge),newEdge,1);
 							
 				}else{
+					if(i==1){
+						System.out.println(edgeList.indexOf(newEdge));
+					}
+					
 					MyEdge oldEdge = edgeList.get(edgeList.indexOf(newEdge));
 					int nDir = oldEdge.getNormalDir(newEdge);
 							

@@ -132,12 +132,6 @@ public class MyTriangle {
 	
 	}
 	
-	public MyEdge collinearEdge(MyPoint p){
-		ArrayList<TriangleEdge> edges = getEdges();
-		return null;
-		
-	}
-	
 	public MyPoint getCircumcenter(){
 		MyPoint A = points.get(0);
 		MyPoint B = points.get(1);

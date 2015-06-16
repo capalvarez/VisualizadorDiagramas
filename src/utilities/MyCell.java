@@ -58,14 +58,8 @@ public class MyCell {
 	public double getTriangleArea(MyPoint pA, MyPoint pB, MyPoint pC){
 		return Math.abs((pA.getX() - pC.getX())*(pB.getY() - pA.getY()) - (pA.getX() - pB.getX())*(pC.getY() - pA.getY()))/2;
 	}
-	
-	
+		
 	public void setCenterPoint(MyPoint center){
 		centerPoint = center;
-	}
-	
-	public int[] getNormalDir(){
-		return null;
-	}
-	
+	}	
 }
