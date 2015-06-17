@@ -183,13 +183,30 @@ public class VoronoiRegionProcess {
 					newCell.addEdge(edgeList.indexOf(newEdge), newEdge, nDir);
 				}
 			}
-			/*if(infinityPoints.size()>0){
+			if(infinityPoints.size()>0){
 				MyEdge closeEdge = new MyEdge(voronoiPoints.indexOf(infinityPoints.get(0)),voronoiPoints.indexOf(infinityPoints.get(1)));
 				closeEdge.setPoints(infinityPoints.get(0), infinityPoints.get(1));
 				
-				edgeList.add(closeEdge);
-				newCell.addEdge(edgeList.indexOf(closeEdge), closeEdge, 1);		
-			}*/
+				if(!closeEdge.inEdge(inputPoints[i])){
+					voronoiPoints.add(inputPoints[i]);
+					
+					MyEdge close1 = new MyEdge(voronoiPoints.indexOf(infinityPoints.get(0)),voronoiPoints.indexOf(inputPoints[i]));
+					close1.setPoints(infinityPoints.get(0), inputPoints[i]); 
+					
+					MyEdge close2 = new MyEdge(voronoiPoints.indexOf(inputPoints[i]),voronoiPoints.indexOf(infinityPoints.get(1)));
+					close2.setPoints(inputPoints[i],infinityPoints.get(1));
+					
+					edgeList.add(close1);
+					newCell.addEdge(edgeList.indexOf(close1), close1, 1);
+					
+					edgeList.add(close2);
+					newCell.addEdge(edgeList.indexOf(close2), close2, 1);
+										
+				}else{
+					edgeList.add(closeEdge);
+					newCell.addEdge(edgeList.indexOf(closeEdge), closeEdge, 1);		
+				}
+			}
 						
 			newCell.setCenterPoint(inputPoints[i]);
 			cellList.add(newCell);

@@ -89,4 +89,10 @@ public class MyEdge {
 		return result;
 	}
 	
+	public boolean inEdge(MyPoint p){
+		double res = p1.getX()*(p2.getY()-p.getY()) + p2.getX()*(p.getY()-p1.getY()) + p.getX()*(p1.getY()-p2.getY()); 
+	
+		return Math.abs(res)<0.00001;
+	}
+	
 }
