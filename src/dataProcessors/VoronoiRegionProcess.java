@@ -20,15 +20,16 @@ public class VoronoiRegionProcess {
 		voronoiPoints = new ArrayList<MyPoint>(Arrays.asList(voronoiP));
 		borderTriangles = 	new ArrayList<MyTriangle>(Arrays.asList(delaunay));
 	
-		processRegions(regions,inputPoints,voronoiPoints, currentRegion);
+		processRegions(regions,inputPoints,voronoiPoints,currentRegion);
 	}
 
 	private void processRegions(String[] regionList, MyPoint[] inputPoints, ArrayList<MyPoint> voronoiPoints, MyRegion region){					
-
+				
 		for(int i=0; i<regionList.length;i++){
 			String[] regInfo = regionList[i].split(" ");			
 			MyCell newCell = new MyCell();
-			
+			ArrayList<MyPoint> infinityPoints = new ArrayList<MyPoint>();
+						
 			for(int j=1;j<=Integer.parseInt(regInfo[0]);j++){
 				int i1,i2;
 				
@@ -48,6 +49,7 @@ public class VoronoiRegionProcess {
 					
 					if(nullEdges.size()==1){					
 						MyPoint midPoint = nullEdges.get(0).getMidPoint(); 
+						infinityPoints.add(midPoint);
 						
 						if(!voronoiPoints.contains(midPoint)){
 							voronoiPoints.add(midPoint);
@@ -58,25 +60,50 @@ public class VoronoiRegionProcess {
 					
 					}else{
 						MyPoint midPoint = nullEdges.get(0).getMidPoint();
-						
-						if(nullEdges.get(1).inEdge(inputPoints[i]) && voronoiPoints.contains(midPoint)){
-							MyPoint otherMidPoint = nullEdges.get(1).getMidPoint();
+												
+						if(nullEdges.get(0).inEdge(inputPoints[i]) && nullEdges.get(1).inEdge(inputPoints[i])){
+					
+							if(infinityPoints.contains(midPoint)){
+								MyPoint otherMidPoint = nullEdges.get(1).getMidPoint();
+								infinityPoints.add(otherMidPoint);
+								
+								if(!voronoiPoints.contains(otherMidPoint)){
+									voronoiPoints.add(otherMidPoint);
+								}
 							
-							if(!voronoiPoints.contains(otherMidPoint)){
-								voronoiPoints.add(otherMidPoint);
-							}
-						
-							newEdge = new MyEdge(i1,voronoiPoints.indexOf(otherMidPoint));
-							newEdge.setPoints(voronoiPoints.get(i1), otherMidPoint);
-									
+								newEdge = new MyEdge(i1,voronoiPoints.indexOf(otherMidPoint));
+								newEdge.setPoints(voronoiPoints.get(i1), otherMidPoint);
+										
+							}else{
+								infinityPoints.add(midPoint);
+								if(!voronoiPoints.contains(midPoint)){
+									voronoiPoints.add(midPoint);
+								}
+								
+								newEdge = new MyEdge(i1,voronoiPoints.indexOf(midPoint));
+								newEdge.setPoints(voronoiPoints.get(i1), midPoint);
+							}	
 						}else{
-							if(!voronoiPoints.contains(midPoint)){
-								voronoiPoints.add(midPoint);
-							}
+							if(nullEdges.get(0).inEdge(inputPoints[i])){
+								infinityPoints.add(midPoint);
+								if(!voronoiPoints.contains(midPoint)){
+									voronoiPoints.add(midPoint);
+								}
+								
+								newEdge = new MyEdge(i1,voronoiPoints.indexOf(midPoint));
+								newEdge.setPoints(voronoiPoints.get(i1), midPoint);
+							}else{
+								MyPoint otherMidPoint = nullEdges.get(1).getMidPoint();
+								infinityPoints.add(otherMidPoint);
+								
+								if(!voronoiPoints.contains(otherMidPoint)){
+									voronoiPoints.add(otherMidPoint);
+								}
 							
-							newEdge = new MyEdge(i1,voronoiPoints.indexOf(midPoint));
-							newEdge.setPoints(voronoiPoints.get(i1), midPoint);
-						}	
+								newEdge = new MyEdge(i1,voronoiPoints.indexOf(otherMidPoint));
+								newEdge.setPoints(voronoiPoints.get(i1), otherMidPoint);
+							}
+						}
 					}	
 				}else if(i1==0){
 					MyTriangle container = findTriangle(voronoiPoints.get(i2));
@@ -84,6 +111,7 @@ public class VoronoiRegionProcess {
 					
 					if(nullEdges.size()==1){					
 						MyPoint midPoint = nullEdges.get(0).getMidPoint();
+						infinityPoints.add(midPoint);
 						
 						if(!voronoiPoints.contains(midPoint)){
 							voronoiPoints.add(midPoint);
@@ -95,53 +123,74 @@ public class VoronoiRegionProcess {
 					}else{
 						MyPoint midPoint = nullEdges.get(0).getMidPoint();
 						
-						if(nullEdges.get(1).inEdge(inputPoints[i]) && voronoiPoints.contains(midPoint)){
-							MyPoint otherMidPoint = nullEdges.get(1).getMidPoint();
+						if(nullEdges.get(0).inEdge(inputPoints[i]) && nullEdges.get(1).inEdge(inputPoints[i])){
+												
+							if(infinityPoints.contains(midPoint)){
+								MyPoint otherMidPoint = nullEdges.get(1).getMidPoint();
+								infinityPoints.add(otherMidPoint);
+								
+								if(!voronoiPoints.contains(otherMidPoint)){
+									voronoiPoints.add(otherMidPoint);
+								}
 							
-							if(!voronoiPoints.contains(otherMidPoint)){
-								voronoiPoints.add(otherMidPoint);
-							}
-							
-							newEdge = new MyEdge(voronoiPoints.indexOf(otherMidPoint),i2);
-							newEdge.setPoints(otherMidPoint,voronoiPoints.get(i2));
-							
+								newEdge = new MyEdge(voronoiPoints.indexOf(otherMidPoint),i2);
+								newEdge.setPoints(otherMidPoint,voronoiPoints.get(i2));
+										
+							}else{
+								infinityPoints.add(midPoint);
+								if(!voronoiPoints.contains(midPoint)){
+									voronoiPoints.add(midPoint);
+								}
+								
+								newEdge = new MyEdge(voronoiPoints.indexOf(midPoint),i2);
+								newEdge.setPoints(midPoint,voronoiPoints.get(i2));
+							}	
 						}else{
-							if(!voronoiPoints.contains(midPoint)){
-								voronoiPoints.add(midPoint);
+							if(nullEdges.get(0).inEdge(inputPoints[i])){
+								infinityPoints.add(midPoint);
+								if(!voronoiPoints.contains(midPoint)){
+									voronoiPoints.add(midPoint);
+								}
+								
+								newEdge = new MyEdge(voronoiPoints.indexOf(midPoint),i2);
+								newEdge.setPoints(midPoint,voronoiPoints.get(i2));
+							}else{
+								MyPoint otherMidPoint = nullEdges.get(1).getMidPoint();
+								infinityPoints.add(otherMidPoint);
+								
+								if(!voronoiPoints.contains(otherMidPoint)){
+									voronoiPoints.add(otherMidPoint);
+								}
+							
+								newEdge = new MyEdge(voronoiPoints.indexOf(otherMidPoint),i2);
+								newEdge.setPoints(otherMidPoint,voronoiPoints.get(i2));
 							}
-													
-							newEdge = new MyEdge(voronoiPoints.indexOf(midPoint),i2);
-							newEdge.setPoints(midPoint,voronoiPoints.get(i2));	
 						}	
 					}	
 				}else{
 					newEdge = new MyEdge(i1,i2);
 					newEdge.setPoints(voronoiPoints.get(i1), voronoiPoints.get(i2));
 				}			
-				
-				if(i==1){
-					System.out.println(newEdge);
-				}
-								
+						
 				if(!edgeList.contains(newEdge)){					
 					edgeList.add(newEdge);
-					if(i==1){
-						System.out.println(edgeList.indexOf(newEdge));
-					}
 					newCell.addEdge(edgeList.indexOf(newEdge),newEdge,1);
 							
 				}else{
-					if(i==1){
-						System.out.println(edgeList.indexOf(newEdge));
-					}
-					
 					MyEdge oldEdge = edgeList.get(edgeList.indexOf(newEdge));
 					int nDir = oldEdge.getNormalDir(newEdge);
 							
 					newCell.addEdge(edgeList.indexOf(newEdge), newEdge, nDir);
 				}
 			}
-					
+			/*if(infinityPoints.size()>0){
+				MyEdge closeEdge = new MyEdge(voronoiPoints.indexOf(infinityPoints.get(0)),voronoiPoints.indexOf(infinityPoints.get(1)));
+				closeEdge.setPoints(infinityPoints.get(0), infinityPoints.get(1));
+				
+				edgeList.add(closeEdge);
+				newCell.addEdge(edgeList.indexOf(closeEdge), closeEdge, 1);		
+			}*/
+						
 			newCell.setCenterPoint(inputPoints[i]);
 			cellList.add(newCell);
 		}
