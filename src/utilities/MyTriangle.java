@@ -157,7 +157,7 @@ public class MyTriangle {
 	}
 
 	public static void main(String[] args){
-		MyPoint[] points = {new MyPoint(0,75),new MyPoint(0,50),new MyPoint(25,50)};
+		MyPoint[] points = {new MyPoint(20,80),new MyPoint(0,100),new MyPoint(0,80)};
 		MyPoint[] points2 = {new MyPoint(25,50),new MyPoint(25,75),new MyPoint(0,75)};
 		
 		/*Por alguna extraña razon esto da false para ambos siendo que claramente el punto esta en uno de los
@@ -165,8 +165,8 @@ public class MyTriangle {
 		MyTriangle t = new MyTriangle(points);
 		MyTriangle t2 = new MyTriangle(points);
 		
-		System.out.println(t.contains(new MyPoint(13,63)));
-		System.out.println(t2.contains(new MyPoint(13,63)));
+		System.out.println(t.contains(new MyPoint(20,100)));
+		//System.out.println(t2.contains(new MyPoint(13,63)));
 	}
 	
 	

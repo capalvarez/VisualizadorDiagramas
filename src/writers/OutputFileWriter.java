@@ -38,10 +38,10 @@ public class OutputFileWriter {
 		}
 		
 		/*Escribir el numero de puntos de Voronoi*/
-		writer.write(voronoiPoints.length + "\n");
+		writer.write(voronoiPoints.length - 1 + "\n");
 		
 		/*Escribir los puntos de Voronoi*/
-		for(int i=0;i<voronoiPoints.length;i++){
+		for(int i=1;i<voronoiPoints.length;i++){
 			writer.write(voronoiPoints[i].toString() + "\n");
 		}
 				
@@ -55,10 +55,10 @@ public class OutputFileWriter {
 		}
 				
 		/*Escribir el numero de regiones de Voronoi*/
-		writer.write(voronoiCells.length + "\n");
+		writer.write(voronoiCells.length - 1 + "\n");
 		
 		/*Escribir las regiones de Voronoi*/
-		for(int i=0;i<voronoiCells.length;i++){
+		for(int i=1;i<voronoiCells.length;i++){
 			/*Por ahora, se asume trabajar en 2D*/
 			writer.write(voronoiCells[i].toString() + "\n");
 		}

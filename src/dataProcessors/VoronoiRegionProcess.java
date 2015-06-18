@@ -24,6 +24,8 @@ public class VoronoiRegionProcess {
 	}
 
 	private void processRegions(String[] regionList, MyPoint[] inputPoints, ArrayList<MyPoint> voronoiPoints, MyRegion region){					
+		edgeList.add(new MyEdge(-1,-1));
+		cellList.add(new MyCell());
 				
 		for(int i=0; i<regionList.length;i++){
 			String[] regInfo = regionList[i].split(" ");			
@@ -44,17 +46,61 @@ public class VoronoiRegionProcess {
 				MyEdge newEdge;
 				
 				if(i2==0){
-					MyTriangle container = findTriangle(voronoiPoints.get(i1));
-					ArrayList<TriangleEdge> nullEdges = container.nullNeighbours();				
+					ArrayList<MyTriangle> containers = findTriangle(voronoiPoints.get(i1),inputPoints[i]);
+					ArrayList<TriangleEdge> nullEdges;			
 					
-					if(nullEdges.size()==1){					
+					if(containers.size()==1 || Integer.parseInt(regInfo[0])!=2){						
+						nullEdges = containers.get(0).nullNeighbours();
+					}else{
+						/*Caso particular en que estoy en una esquina que comparte dos triangulos de Delaunay*/						
+						MyPoint midPoint1 = containers.get(0).nullNeighbours().get(0).getMidPoint();
+						MyPoint midPoint2 = containers.get(1).nullNeighbours().get(0).getMidPoint();
+												
+						if (!voronoiPoints.contains(midPoint1)) {
+							voronoiPoints.add(midPoint1);
+						}
+						if (!voronoiPoints.contains(midPoint2)) {
+							voronoiPoints.add(midPoint2);
+						}
+						if (!voronoiPoints.contains(inputPoints[i])) {
+							voronoiPoints.add(inputPoints[i]);
+						}					
+						
+						MyEdge e1 = new MyEdge(i1,voronoiPoints.indexOf(midPoint1));
+						e1.setPoints(voronoiPoints.get(i1), midPoint1);
+						edgeList.add(e1);
+
+						MyEdge e2 = new MyEdge(voronoiPoints.indexOf(midPoint1),voronoiPoints.indexOf(inputPoints[i]));
+						e2.setPoints(midPoint1,inputPoints[i]);
+						edgeList.add(e2);
+
+						MyEdge e3 = new MyEdge(voronoiPoints.indexOf(inputPoints[i]),voronoiPoints.indexOf(midPoint2));
+						e3.setPoints(inputPoints[i], midPoint2);
+						edgeList.add(e3);
+
+						MyEdge e4 = new MyEdge(voronoiPoints.indexOf(midPoint2),i1);
+						e4.setPoints(midPoint2,voronoiPoints.get(i1));
+						edgeList.add(e4);
+																	
+						newCell.addEdge(edgeList.indexOf(e1), e1, 1);
+						newCell.addEdge(edgeList.indexOf(e2), e2, 1);
+						newCell.addEdge(edgeList.indexOf(e3), e3, 1);
+						newCell.addEdge(edgeList.indexOf(e4), e4, 1);					
+
+						newCell.setCenterPoint(inputPoints[i]);
+						cellList.add(newCell);
+	
+						break;
+					}			
+					
+					if(nullEdges.size()==1){																	
 						MyPoint midPoint = nullEdges.get(0).getMidPoint(); 
 						infinityPoints.add(midPoint);
 						
 						if(!voronoiPoints.contains(midPoint)){
 							voronoiPoints.add(midPoint);
 						}
-												
+					
 						newEdge = new MyEdge(i1,voronoiPoints.indexOf(midPoint));
 						newEdge.setPoints(voronoiPoints.get(i1),midPoint);
 					
@@ -62,7 +108,7 @@ public class VoronoiRegionProcess {
 						MyPoint midPoint = nullEdges.get(0).getMidPoint();
 												
 						if(nullEdges.get(0).inEdge(inputPoints[i]) && nullEdges.get(1).inEdge(inputPoints[i])){
-					
+										
 							if(infinityPoints.contains(midPoint)){
 								MyPoint otherMidPoint = nullEdges.get(1).getMidPoint();
 								infinityPoints.add(otherMidPoint);
@@ -106,9 +152,9 @@ public class VoronoiRegionProcess {
 						}
 					}	
 				}else if(i1==0){
-					MyTriangle container = findTriangle(voronoiPoints.get(i2));
-					ArrayList<TriangleEdge> nullEdges = container.nullNeighbours();
-					
+					ArrayList<MyTriangle> containers = findTriangle(voronoiPoints.get(i2),inputPoints[i]);
+					ArrayList<TriangleEdge> nullEdges = containers.get(0).nullNeighbours();
+				
 					if(nullEdges.size()==1){					
 						MyPoint midPoint = nullEdges.get(0).getMidPoint();
 						infinityPoints.add(midPoint);
@@ -183,12 +229,15 @@ public class VoronoiRegionProcess {
 					newCell.addEdge(edgeList.indexOf(newEdge), newEdge, nDir);
 				}
 			}
-			if(infinityPoints.size()>0){
+					
+			if(infinityPoints.size()==2){
 				MyEdge closeEdge = new MyEdge(voronoiPoints.indexOf(infinityPoints.get(0)),voronoiPoints.indexOf(infinityPoints.get(1)));
 				closeEdge.setPoints(infinityPoints.get(0), infinityPoints.get(1));
 				
-				if(!closeEdge.inEdge(inputPoints[i])){
-					voronoiPoints.add(inputPoints[i]);
+				if(!closeEdge.inEdge(inputPoints[i])){				
+					if(!voronoiPoints.contains(inputPoints[i])){
+						voronoiPoints.add(inputPoints[i]);
+					}				
 					
 					MyEdge close1 = new MyEdge(voronoiPoints.indexOf(infinityPoints.get(0)),voronoiPoints.indexOf(inputPoints[i]));
 					close1.setPoints(infinityPoints.get(0), inputPoints[i]); 
@@ -213,7 +262,8 @@ public class VoronoiRegionProcess {
 		}
 	}
 	
-	public MyEdge[] getEdgeList(){	
+	public MyEdge[] getEdgeList(){
+		edgeList.remove(new MyEdge(-1,-1));
 		MyEdge[] edgeArray = new MyEdge[edgeList.size()];
 		edgeArray = edgeList.toArray(edgeArray);
 		
@@ -234,13 +284,21 @@ public class VoronoiRegionProcess {
 		return pointArray;
 	}
 	
-	private MyTriangle findTriangle(MyPoint point){
+	private ArrayList<MyTriangle> findTriangle(MyPoint point, MyPoint inputPoint){
+		ArrayList<MyTriangle> returnValues = new ArrayList<MyTriangle>();
+				
 		for(int i=0;i<borderTriangles.size();i++){			
 			if(borderTriangles.get(i).contains(point) && borderTriangles.get(i).hasNullNeighbours()){
-				return borderTriangles.get(i);
+				ArrayList<TriangleEdge> edges = borderTriangles.get(i).nullNeighbours();
+				
+				for(int j=0;j<edges.size();j++){
+					if(edges.get(j).inEdge(inputPoint)){
+						returnValues.add(borderTriangles.get(i));
+					}
+				}
 			}		
 		}
-		
-		return null;
+				
+		return returnValues;
 	}
 }
