@@ -135,11 +135,17 @@ public class DisplayMenu {
 	}
 
 	public void setPreferenciasMenu(JMenu preferencias){
-		JMenuItem color =  new JMenuItem("Color de dibujo");
+		JMenuItem color =  new JMenuItem("Color de Voronoi");
 		color.setToolTipText("Cambia el color en que se dibujan puntos y lineas");
 		color.addActionListener(new ColourChangeAction(window));
 		color.setMnemonic(KeyEvent.VK_C);
-		preferencias.add(color);	
+		preferencias.add(color);
+		
+		JMenuItem Dcolor =  new JMenuItem("Color de Delaunay");
+		Dcolor.setToolTipText("Cambia el color en que se dibujan puntos y lineas");
+		Dcolor.addActionListener(new DelaunayColorChangeAction(window));
+		Dcolor.setMnemonic(KeyEvent.VK_D);
+		preferencias.add(Dcolor);		
 		
 		JMenuItem backG =  new JMenuItem("Color de fondo");
 		backG.setToolTipText("Cambia el color del fondo");

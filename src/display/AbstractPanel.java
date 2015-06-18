@@ -6,11 +6,17 @@ import javax.swing.JPanel;
 
 public abstract class AbstractPanel extends JPanel {
 	protected Color color = Color.blue;
+	protected Color DelaunayColor = Color.green;
+	
 	protected int pointSize = 5;
 	
 	
 	public void setColor(Color newColor){
 		color = newColor;
+	}
+	
+	public void setDelaunayColor(Color newColor){
+		DelaunayColor = newColor;
 	}
 	
 	public void setBackGroundColor(Color newColor){

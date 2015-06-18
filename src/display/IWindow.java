@@ -29,6 +29,8 @@ public abstract class IWindow extends JFrame{
 	public abstract MyCell[] getVoronoiCells();
 	
 	public abstract void changeColorDiagram(Color color);
+	
+	public abstract void changeDelaunayColor(Color color);
 
 	public abstract void changeBackGroundColor(Color color);
 

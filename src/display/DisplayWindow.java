@@ -123,6 +123,11 @@ public class DisplayWindow extends IWindow{
 		repaint();
 	}
 	
+	public void changeDelaunayColor(Color color){
+		Panel.setDelaunayColor(color);
+		repaint();
+	}
+	
 	public void changeBackGroundColor(Color color){
 		Panel.setBackGroundColor(color);
 		repaint();
