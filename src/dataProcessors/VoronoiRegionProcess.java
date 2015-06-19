@@ -50,6 +50,11 @@ public class VoronoiRegionProcess {
 					ArrayList<TriangleEdge> nullEdges;			
 					
 					if(containers.size()==1 || Integer.parseInt(regInfo[0])!=2){						
+						if(i==2){
+							System.out.println(inputPoints[i]);
+							System.out.println(containers);
+						}
+						
 						nullEdges = containers.get(0).nullNeighbours();
 					}else{						
 						/*Caso particular en que estoy en una esquina que comparte dos triangulos de Delaunay*/						

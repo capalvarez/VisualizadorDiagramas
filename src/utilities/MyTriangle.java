@@ -133,7 +133,7 @@ public class MyTriangle {
 	
 	}
 	
-	public boolean contains(MyPoint point){
+	public boolean contains(MyPoint point){		
 		return insideTriangle(point) || inEdge(point);
 	}
 		
@@ -148,7 +148,7 @@ public class MyTriangle {
 		double wB = (p.getX()*C.getY() - p.getY()*C.getX())/d;
 		double wC = (p.getY()*B.getY() - p.getX()*B.getX())/d;
 		
-		return Math.abs(wA)<=1 && Math.abs(wB)<=1 && Math.abs(wC)<=1; 	
+		return Math.abs(wA)<1 && Math.abs(wB)<1 && Math.abs(wC)<1; 	
 	}
 	
 	public boolean inEdge(MyPoint p){
@@ -163,7 +163,7 @@ public class MyTriangle {
 	}
 
 	public static void main(String[] args){
-		MyPoint[] points = {new MyPoint(50,75),new MyPoint(0,75),new MyPoint(0,50)};
+		MyPoint[] points = {new MyPoint(25,100),new MyPoint(0,100),new MyPoint(0,75)};
 		MyPoint[] points2 = {new MyPoint(25,50),new MyPoint(25,75),new MyPoint(0,75)};
 		
 		/*Por alguna extraña razon esto da false para ambos siendo que claramente el punto esta en uno de los
@@ -171,7 +171,7 @@ public class MyTriangle {
 		MyTriangle t = new MyTriangle(points);
 		MyTriangle t2 = new MyTriangle(points);
 		 
-		System.out.println(t.contains(new MyPoint(0,76)));
+		System.out.println(t.contains(new MyPoint(0,50)));
 		//System.out.println(t2.contains(new MyPoint(13,63)));
 	}
 	
