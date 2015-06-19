@@ -81,18 +81,17 @@ public class MyEdge {
 			return -1;
 		}
 	}
-
-	public MyPoint[] getBoundingBox() {
-		MyPoint[] result = new MyPoint[2];
-		result[0] = new MyPoint(Math.min(p1.getX(), p2.getX()), Math.min(p1.getY(), p2.getY()));
-		result[1] = new MyPoint(Math.max(p1.getX(), p2.getX()), Math.max(p1.getY(), p2.getY()));
-		return result;
-	}
 	
 	public boolean inEdge(MyPoint p){
 		double res = p1.getX()*(p2.getY()-p.getY()) + p2.getX()*(p.getY()-p1.getY()) + p.getX()*(p1.getY()-p2.getY()); 
 	
 		return Math.abs(res)<0.00001;
+	}
+	
+	public static void main(String[] args){
+		MyEdge e = new MyEdge(new MyPoint(50,75),new MyPoint(0,50));
+	
+		System.out.println(e.inEdge(new MyPoint(0,50)));
 	}
 	
 }

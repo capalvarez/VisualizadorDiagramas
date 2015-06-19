@@ -51,7 +51,7 @@ public class VoronoiRegionProcess {
 					
 					if(containers.size()==1 || Integer.parseInt(regInfo[0])!=2){						
 						nullEdges = containers.get(0).nullNeighbours();
-					}else{
+					}else{						
 						/*Caso particular en que estoy en una esquina que comparte dos triangulos de Delaunay*/						
 						MyPoint midPoint1 = containers.get(0).nullNeighbours().get(0).getMidPoint();
 						MyPoint midPoint2 = containers.get(1).nullNeighbours().get(0).getMidPoint();
@@ -288,14 +288,9 @@ public class VoronoiRegionProcess {
 		ArrayList<MyTriangle> returnValues = new ArrayList<MyTriangle>();
 				
 		for(int i=0;i<borderTriangles.size();i++){			
-			if(borderTriangles.get(i).contains(point) && borderTriangles.get(i).hasNullNeighbours()){
-				ArrayList<TriangleEdge> edges = borderTriangles.get(i).nullNeighbours();
-				
-				for(int j=0;j<edges.size();j++){
-					if(edges.get(j).inEdge(inputPoint)){
-						returnValues.add(borderTriangles.get(i));
-					}
-				}
+			if(borderTriangles.get(i).contains(point) && borderTriangles.get(i).hasNullNeighbours()
+				&& borderTriangles.get(i).contains(inputPoint)){
+				returnValues.add(borderTriangles.get(i));
 			}		
 		}
 				

@@ -8,14 +8,10 @@ import java.util.Arrays;
 public class MyTriangle {
 	ArrayList<MyPoint> points;
 	MyTriangle[] neighbours;
-	ArrayList<TriangleEdge> edges = new ArrayList<TriangleEdge>();
-	
-	
+		
 	public MyTriangle(MyPoint[] p){
 		points = new ArrayList<MyPoint>(Arrays.asList(p));
-		edges.add(new TriangleEdge(p[0],p[1]));
-		edges.add(new TriangleEdge(p[1],p[2]));
-		edges.add(new TriangleEdge(p[2],p[0]));
+
 		
 		neighbours = new MyTriangle[3];
 		
@@ -69,6 +65,12 @@ public class MyTriangle {
 	}
 
 	public ArrayList<TriangleEdge> getEdges(){
+		ArrayList<TriangleEdge> edges = new ArrayList<TriangleEdge>();
+		
+		edges.add(new TriangleEdge(points.get(0),points.get(1)));
+		edges.add(new TriangleEdge(points.get(1),points.get(2)));
+		edges.add(new TriangleEdge(points.get(2),points.get(0)));		
+		
 		return edges;
 	}
 	
@@ -87,8 +89,7 @@ public class MyTriangle {
 	private TriangleEdge getCommonEdge(MyTriangle t){
 		ArrayList<MyPoint> otherPoints = t.getPoints();
 		ArrayList<MyPoint> commonPoints = new ArrayList<MyPoint>();
-	
-		
+			
 		for(int i=0;i<3;i++){
 			for(int j=0;j<3;j++){
 				if(otherPoints.get(j).equals(points.get(i))){
@@ -109,7 +110,7 @@ public class MyTriangle {
 		return neighbours[0]==null || neighbours[1]==null || neighbours[2]==null; 
 	}
 	
-	public boolean contains(MyPoint p){
+	public boolean containsAnt(MyPoint p){
 		double a = points.get(0).getX() - p.getX();
 		double b = points.get(0).getY() - p.getY();
 		double c = (Math.pow(points.get(0).getX(),2) - Math.pow(p.getX(),2)) + (Math.pow(points.get(0).getY(),2) - Math.pow(p.getY(),2));
@@ -123,8 +124,8 @@ public class MyTriangle {
 		double i = (Math.pow(points.get(2).getX(),2) - Math.pow(p.getX(),2)) + (Math.pow(points.get(2).getY(),2) - Math.pow(p.getY(),2));
 	
 		double total = a*(e*i-f*h) - d*(b*i-c*h) + g*(b*f-e*c);
-
-		if(total<0){
+		
+		if(total<-0.00001){
 			return false;
 		}else{
 			return true;
@@ -132,23 +133,28 @@ public class MyTriangle {
 	
 	}
 	
-	public MyPoint getCircumcenter(){
-		MyPoint A = points.get(0);
-		MyPoint B = points.get(1);
-		MyPoint C = points.get(2);
+	public boolean contains(MyPoint point){
+		return insideTriangle(point) || inEdge(point);
+	}
 		
-		double fA = Math.pow(A.getX(),2) + Math.pow(A.getY(),2); 
-		double fB = Math.pow(B.getX(),2) + Math.pow(B.getY(),2);
-		double fC = Math.pow(C.getX(),2) + Math.pow(C.getY(),2);
-				
+	public boolean insideTriangle(MyPoint point){
+		MyPoint p = point.substract(points.get(0));
+		MyPoint B = points.get(1).substract(points.get(0));
+		MyPoint C = points.get(2).substract(points.get(0));
 		
-		double D = 2*(A.getX()*(B.getY()-C.getY()) + B.getY()*(C.getY()-A.getY()) + C.getX()*(A.getY()-B.getY()));
+		double d = B.getX()*C.getY() - C.getX()*B.getY();
 		
-		double uX = (fA*(B.getY()-C.getY())+fB*(C.getY()-A.getY())+fC*(A.getY()-B.getY()))/D;
-		double uY = (fA*(C.getX()-B.getX())+fB*(A.getX()-C.getX())+fC*(B.getX()-A.getX()))/D;
+		double wA = (p.getX()*(B.getY()-C.getY()) + p.getY()*(C.getX()-B.getX()) + B.getX()*C.getY() - C.getX()*B.getY())/d; 	
+		double wB = (p.getX()*C.getY() - p.getY()*C.getX())/d;
+		double wC = (p.getY()*B.getY() - p.getX()*B.getX())/d;
 		
-		return new MyPoint(uX,uY);
-		
+		return Math.abs(wA)<=1 && Math.abs(wB)<=1 && Math.abs(wC)<=1; 	
+	}
+	
+	public boolean inEdge(MyPoint p){
+		ArrayList<TriangleEdge> edges = this.getEdges();
+			
+		return edges.get(0).inEdge(p) || edges.get(1).inEdge(p) || edges.get(2).inEdge(p);  
 	}
 	
 	@Override
@@ -157,15 +163,15 @@ public class MyTriangle {
 	}
 
 	public static void main(String[] args){
-		MyPoint[] points = {new MyPoint(20,80),new MyPoint(0,100),new MyPoint(0,80)};
+		MyPoint[] points = {new MyPoint(50,75),new MyPoint(0,75),new MyPoint(0,50)};
 		MyPoint[] points2 = {new MyPoint(25,50),new MyPoint(25,75),new MyPoint(0,75)};
 		
 		/*Por alguna extraña razon esto da false para ambos siendo que claramente el punto esta en uno de los
 		 * dos*/
 		MyTriangle t = new MyTriangle(points);
 		MyTriangle t2 = new MyTriangle(points);
-		
-		System.out.println(t.contains(new MyPoint(20,100)));
+		 
+		System.out.println(t.contains(new MyPoint(0,75)));
 		//System.out.println(t2.contains(new MyPoint(13,63)));
 	}
 	

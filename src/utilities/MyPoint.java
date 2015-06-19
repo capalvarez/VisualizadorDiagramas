@@ -112,6 +112,13 @@ public class MyPoint {
 		}	
 	}
 	
+	public MyPoint substract(MyPoint p){
+		double x = this.getX() - p.getX();
+		double y = this.getY() - p.getY();
+		
+		return new MyPoint(x,y);
+	}
+	
 	
 	
 	
