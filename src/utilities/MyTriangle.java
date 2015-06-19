@@ -171,7 +171,7 @@ public class MyTriangle {
 		MyTriangle t = new MyTriangle(points);
 		MyTriangle t2 = new MyTriangle(points);
 		 
-		System.out.println(t.contains(new MyPoint(0,75)));
+		System.out.println(t.contains(new MyPoint(0,76)));
 		//System.out.println(t2.contains(new MyPoint(13,63)));
 	}
 	

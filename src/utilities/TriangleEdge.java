@@ -43,10 +43,12 @@ public class TriangleEdge {
 		return "(" + p1.toString() + "),("+ p2.toString() + ")";
 	}
 	
-	public boolean inEdge(MyPoint p){
-		double res = p1.getX()*(p2.getY()-p.getY()) + p2.getX()*(p.getY()-p1.getY()) + p.getX()*(p1.getY()-p2.getY()); 
-	
-		return Math.abs(res)<0.00001;
+	public boolean inEdge(MyPoint p){		
+		double AB = Math.sqrt(Math.pow(p2.getX()-p1.getX(), 2) + Math.pow(p2.getY()-p1.getY(), 2));
+		double AP = Math.sqrt(Math.pow(p.getX()-p1.getX(), 2) + Math.pow(p.getY()-p1.getY(), 2));
+		double PB = Math.sqrt(Math.pow(p2.getX()-p.getX(), 2) + Math.pow(p2.getY()-p.getY(), 2));
+		
+		return Math.abs(AB - (AP + PB))<0.000001;
 	}
 	
 }

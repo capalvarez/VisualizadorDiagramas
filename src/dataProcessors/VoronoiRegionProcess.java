@@ -292,8 +292,7 @@ public class VoronoiRegionProcess {
 				&& borderTriangles.get(i).contains(inputPoint)){
 				returnValues.add(borderTriangles.get(i));
 			}		
-		}
-				
+		}			
 		return returnValues;
 	}
 }
