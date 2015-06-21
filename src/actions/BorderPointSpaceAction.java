@@ -174,7 +174,7 @@ public class BorderPointSpaceAction extends AbstractAction {
 				"Puntos en el borde por separacion", JOptionPane.OK_CANCEL_OPTION);
 		
 		if (result == JOptionPane.OK_OPTION) {
-			if(forAll.isSelected()){
+			if(!forAll.isSelected()){
 				double delta = Double.parseDouble(num1.getText());
 				MyRegion current = window.getCurrentRegion();
 																	
@@ -202,7 +202,35 @@ public class BorderPointSpaceAction extends AbstractAction {
 				window.repaint();
 				
 			}else{
+				double delta1 = Double.parseDouble(num1.getText());
+				double delta2 = Double.parseDouble(num2.getText());
+				double delta3 = Double.parseDouble(num3.getText());
+				double delta4 = Double.parseDouble(num4.getText());
 				
+				MyRegion current = window.getCurrentRegion();
+																	
+				LinePointGenerator lpg = new LinePointGenerator();
+				
+				MyPoint[] pointArrayLine1 = lpg.getPointsX(current.getUpCorner(),current.getDownCorner(),delta1,current.getLeftCorner());
+				MyPoint[] pointArrayLine2 = lpg.getPointsY(current.getLeftCorner(),current.getRightCorner(),delta2,current.getDownCorner());
+				MyPoint[] pointArrayLine3 = lpg.getPointsX(current.getUpCorner(),current.getDownCorner(),delta3,current.getRightCorner());
+				MyPoint[] pointArrayLine4 = lpg.getPointsY(current.getLeftCorner(),current.getRightCorner(),delta4,current.getUpCorner());
+			
+				MyPoint[] both = ArrayUtils.addAll(pointArrayLine1, pointArrayLine2);
+				MyPoint[] both2 = ArrayUtils.addAll(pointArrayLine3,pointArrayLine4);
+				MyPoint[] both3 = ArrayUtils.addAll(both,both2);
+							
+				MyPoint[] currentPoints = window.getCurrentPoints();
+				MyPoint[] finalPoints;
+				
+				if(currentPoints!=null){
+					finalPoints = ArrayUtils.addAll(currentPoints,both3);
+				}else{
+					finalPoints = both3;
+				}
+				
+				window.drawPointsInPanel(finalPoints,finalPoints);
+				window.repaint();
 			}
 
 		}
