@@ -67,6 +67,16 @@ public class MyRegion {
 		return upLeftReal.getY();
 	}
 	
+	public double getRightCorner(){
+		return downRightReal.getX();
+	}
+	
+	public double getDownCorner(){
+		return downRightReal.getY();
+	}
+	
+	
+	
 	public MyPoint getIntersection(MyEdge e){
 		LineIntersector lI = new LineIntersector(e); 
 		

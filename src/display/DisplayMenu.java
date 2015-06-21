@@ -33,6 +33,11 @@ public class DisplayMenu {
 		setDibujarMenu(dibujar);
 		menubar.add(dibujar);
 	
+		JMenu bordes = new JMenu("Bordes");
+		dibujar.setMnemonic(KeyEvent.VK_B);
+		setBordesMenu(bordes);
+		menubar.add(bordes);		
+		
 		JMenu diagramas = new JMenu("Diagrama");
 		diagramas.setMnemonic(KeyEvent.VK_D);
 		setDiagramasMenu(diagramas);
@@ -101,6 +106,19 @@ public class DisplayMenu {
 		
 	}
 	
+	public void setBordesMenu(JMenu bordes){
+		JMenuItem ingresar =  new JMenuItem("Numero de puntos");
+		ingresar.addActionListener(new BorderPointNumberAction(window));
+		ingresar.setMnemonic(KeyEvent.VK_E);
+		ingresar.setToolTipText("Generar region rectangular a partir de dos puntos");
+		bordes.add(ingresar);
+		
+		JMenuItem ancho = new JMenuItem("Separacion");
+		ancho.addActionListener(new BorderPointSpaceAction(window));
+		ancho.setMnemonic(KeyEvent.VK_E);
+		bordes.add(ancho);
+	}
+	
 	public void setPuntosMenu(JMenu puntos){
 		JMenuItem ingresar =  new JMenuItem("Esquinas");
 		ingresar.addActionListener(new CornerShapeAction(window));
@@ -112,12 +130,6 @@ public class DisplayMenu {
 		ancho.addActionListener(new HeightWeightShapeAction(window));
 		ancho.setMnemonic(KeyEvent.VK_L);
 		puntos.add(ancho);
-		
-		JMenuItem azar = new JMenuItem("Al azar");
-		azar.addActionListener(new RandomShapeAction(window));
-		azar.setMnemonic(KeyEvent.VK_Z);
-		puntos.add(azar); 
-	
 	}
 	
 	public void setDiagramasMenu(JMenu diagramas){
