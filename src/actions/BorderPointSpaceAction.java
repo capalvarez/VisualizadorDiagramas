@@ -180,10 +180,10 @@ public class BorderPointSpaceAction extends AbstractAction {
 																	
 				LinePointGenerator lpg = new LinePointGenerator();
 				
-				MyPoint[] pointArrayLine1 = lpg.getPointsX(current.getUpCorner(),current.getDownCorner(),delta,current.getLeftCorner());
-				MyPoint[] pointArrayLine2 = lpg.getPointsY(current.getLeftCorner(),current.getRightCorner(),delta,current.getDownCorner());
-				MyPoint[] pointArrayLine3 = lpg.getPointsX(current.getUpCorner(),current.getDownCorner(),delta,current.getRightCorner());
-				MyPoint[] pointArrayLine4 = lpg.getPointsY(current.getLeftCorner(),current.getRightCorner(),delta,current.getUpCorner());
+				MyPoint[] pointArrayLine1 = lpg.getPointsY(current.getUpCorner(),current.getDownCorner(),delta,current.getLeftCorner());
+				MyPoint[] pointArrayLine2 = lpg.getPointsX(current.getLeftCorner(),current.getRightCorner(),delta,current.getDownCorner());
+				MyPoint[] pointArrayLine3 = lpg.getPointsY(current.getUpCorner(),current.getDownCorner(),delta,current.getRightCorner());
+				MyPoint[] pointArrayLine4 = lpg.getPointsX(current.getLeftCorner(),current.getRightCorner(),delta,current.getUpCorner());
 			
 				MyPoint[] both = ArrayUtils.addAll(pointArrayLine1, pointArrayLine2);
 				MyPoint[] both2 = ArrayUtils.addAll(pointArrayLine3,pointArrayLine4);
@@ -211,10 +211,10 @@ public class BorderPointSpaceAction extends AbstractAction {
 																	
 				LinePointGenerator lpg = new LinePointGenerator();
 				
-				MyPoint[] pointArrayLine1 = lpg.getPointsX(current.getUpCorner(),current.getDownCorner(),delta1,current.getLeftCorner());
-				MyPoint[] pointArrayLine2 = lpg.getPointsY(current.getLeftCorner(),current.getRightCorner(),delta2,current.getDownCorner());
-				MyPoint[] pointArrayLine3 = lpg.getPointsX(current.getUpCorner(),current.getDownCorner(),delta3,current.getRightCorner());
-				MyPoint[] pointArrayLine4 = lpg.getPointsY(current.getLeftCorner(),current.getRightCorner(),delta4,current.getUpCorner());
+				MyPoint[] pointArrayLine1 = lpg.getPointsY(current.getUpCorner(),current.getDownCorner(),delta1,current.getLeftCorner());
+				MyPoint[] pointArrayLine2 = lpg.getPointsX(current.getLeftCorner(),current.getRightCorner(),delta2,current.getDownCorner());
+				MyPoint[] pointArrayLine3 = lpg.getPointsY(current.getUpCorner(),current.getDownCorner(),delta3,current.getRightCorner());
+				MyPoint[] pointArrayLine4 = lpg.getPointsX(current.getLeftCorner(),current.getRightCorner(),delta4,current.getUpCorner());
 			
 				MyPoint[] both = ArrayUtils.addAll(pointArrayLine1, pointArrayLine2);
 				MyPoint[] both2 = ArrayUtils.addAll(pointArrayLine3,pointArrayLine4);
