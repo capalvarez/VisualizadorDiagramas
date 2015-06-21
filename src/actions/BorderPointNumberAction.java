@@ -5,6 +5,8 @@ import generalTools.PointGenerator;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ItemEvent;
@@ -49,27 +51,150 @@ public class BorderPointNumberAction extends AbstractAction {
 		
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		JCheckBox forAll = new JCheckBox("Todos los lados iguales");
+		final JCheckBox forAll = new JCheckBox("Ingresar por lado");
 		forAll.setSelected(true);
-
-		JTextField num = new JTextField(5);
-				
-		JPanel inputPanel = new JPanel();
-		inputPanel.add(forAll);
-		GridLayout layout = new GridLayout(0,1);
-		inputPanel.setLayout(layout);
-		inputPanel.add(new JLabel("Borde 1:"));
 		
-		JPanel xPanel = new JPanel();
-		xPanel.add(num);
-		inputPanel.add(xPanel);
+		final JTextField num1 = new JTextField(5);
+		final JTextField num2 = new JTextField(5);
+		final JTextField num3 = new JTextField(5);
+		final JTextField num4 = new JTextField(5);
+		
+		final JPanel inputPanel = new JPanel();
+		GridBagLayout layout = new GridBagLayout();
+		inputPanel.setLayout(layout);
+		
+		GridBagConstraints constraints = new GridBagConstraints();
+		constraints.gridx = 0; 
+		constraints.gridy = 0; 
+		constraints.gridwidth = 2; 
+		constraints.gridheight = 1; 
+		inputPanel.add(forAll, constraints);
+			
+		forAll.addItemListener(new ItemListener() {
+		    @Override
+		    public void itemStateChanged(ItemEvent e) {
+		        if(e.getStateChange() == ItemEvent.SELECTED) {
+		        	inputPanel.removeAll(); 
+		        
+		        	GridBagConstraints constraints = new GridBagConstraints();
+		    		constraints.gridx = 0; 
+		    		constraints.gridy = 0; 
+		    		constraints.gridwidth = 2; 
+		    		constraints.gridheight = 1; 
+		    		inputPanel.add(forAll, constraints);
+		     
+		        	constraints.gridx = 0; 
+		    		constraints.gridy = 1; 
+		    		constraints.gridwidth = 1; 
+		    		constraints.gridheight = 1;		        	
+		      		inputPanel.add(new JLabel("Lado 1:"),constraints);
+		    		
+		      		constraints.gridx = 1; 
+		    		JPanel panel1 = new JPanel();
+		    		panel1.add(num1);
+		    		inputPanel.add(panel1,constraints);
+		    		
+		    		constraints.gridx = 0; 
+		    		constraints.gridy = 2; 
+		    		inputPanel.add(new JLabel("Lado 2:"),constraints);
+		    		
+		    		constraints.gridx = 1; 
+		    		JPanel panel2 = new JPanel();
+		    		panel2.add(num2);
+		    		inputPanel.add(panel2,constraints);
+		    		
+		    		constraints.gridx = 0; 
+		    		constraints.gridy = 3; 
+		    		inputPanel.add(new JLabel("Lado 3:"),constraints);
+		    		
+		    		constraints.gridx = 1; 
+		    		JPanel panel3 = new JPanel();
+		    		panel3.add(num3);
+		    		inputPanel.add(panel3,constraints);
+		    		
+		    		constraints.gridx = 0; 
+		    		constraints.gridy = 4; 
+		    		inputPanel.add(new JLabel("Lado 4:"),constraints);
+		    		
+		    		constraints.gridx = 1; 
+		    		JPanel panel4 = new JPanel();
+		    		panel4.add(num4);
+		    		inputPanel.add(panel4,constraints);
+		    		
+		    		inputPanel.repaint();
+		       		inputPanel.revalidate();
+	
+		        } else {
+		        	inputPanel.removeAll(); 
+		        	GridBagConstraints constraints = new GridBagConstraints();
+		    		constraints.gridx = 0; 
+		    		constraints.gridy = 0; 
+		    		constraints.gridwidth = 2; 
+		    		constraints.gridheight = 1; 
+		    		inputPanel.add(forAll, constraints);
+		    				
+		    		constraints.gridx = 0; 
+		    		constraints.gridy = 1; 
+		    		constraints.gridwidth = 1; 
+		    		constraints.gridheight = 1;	
+		    				    		
+		    		inputPanel.add(new JLabel("Lados:"),constraints);
+		    		
+		    		constraints.gridx = 1; 		
+		    		JPanel xPanel = new JPanel();
+		    		xPanel.add(num1);
+		    		inputPanel.add(xPanel,constraints);
+		    		
+		    		inputPanel.repaint();
+		    		inputPanel.revalidate();
+		        };
+		    }
+		});
+    
+    	constraints.gridx = 0; 
+		constraints.gridy = 1; 
+		constraints.gridwidth = 1; 
+		constraints.gridheight = 1;		        	
+  		inputPanel.add(new JLabel("Lado 1:"),constraints);
+		
+  		constraints.gridx = 1; 
+		JPanel panel1 = new JPanel();
+		panel1.add(num1);
+		inputPanel.add(panel1,constraints);
+		
+		constraints.gridx = 0; 
+		constraints.gridy = 2; 
+		inputPanel.add(new JLabel("Lado 2:"),constraints);
+		
+		constraints.gridx = 1; 
+		JPanel panel2 = new JPanel();
+		panel2.add(num2);
+		inputPanel.add(panel2,constraints);
+		
+		constraints.gridx = 0; 
+		constraints.gridy = 3; 
+		inputPanel.add(new JLabel("Lado 3:"),constraints);
+		
+		constraints.gridx = 1; 
+		JPanel panel3 = new JPanel();
+		panel3.add(num3);
+		inputPanel.add(panel3,constraints);
+		
+		constraints.gridx = 0; 
+		constraints.gridy = 4; 
+		inputPanel.add(new JLabel("Lado 4:"),constraints);
+		
+		constraints.gridx = 1; 
+		JPanel panel4 = new JPanel();
+		panel4.add(num4);
+		inputPanel.add(panel4,constraints);		
 						
 		int result = JOptionPane.showConfirmDialog(null, inputPanel, 
 				"Puntos en el borde por numero", JOptionPane.OK_CANCEL_OPTION);
 		
 		if (result == JOptionPane.OK_OPTION) {
 			if(forAll.isSelected()){
-				int n = Integer.parseInt(num.getText());
+				int n = Integer.parseInt(num1.getText());
 				MyRegion current = window.getCurrentRegion();
 				
 				double dX = current.getWidth()/(n-1);
