@@ -18,6 +18,8 @@ public class DisplayMenu {
 	JMenuItem azarItem;
 	JMenu uniformeItem;
 	JMenuItem imprimir;
+	JMenuItem ingresarAncho;
+	JMenuItem ingresarPuntos; 
 	
 	public DisplayMenu(IWindow window){
 		menubar = new JMenuBar();
@@ -107,16 +109,18 @@ public class DisplayMenu {
 	}
 	
 	public void setBordesMenu(JMenu bordes){
-		JMenuItem ingresar =  new JMenuItem("Numero de puntos");
-		ingresar.addActionListener(new BorderPointNumberAction(window));
-		ingresar.setMnemonic(KeyEvent.VK_E);
-		ingresar.setToolTipText("Generar region rectangular a partir de dos puntos");
-		bordes.add(ingresar);
+		ingresarPuntos =  new JMenuItem("Numero de puntos");
+		ingresarPuntos.addActionListener(new BorderPointNumberAction(window));
+		ingresarPuntos.setMnemonic(KeyEvent.VK_E);
+		ingresarPuntos.setToolTipText("Generar region rectangular a partir de dos puntos");
+		bordes.add(ingresarPuntos);
+		ingresarPuntos.setEnabled(false);
 		
-		JMenuItem ancho = new JMenuItem("Separacion");
-		ancho.addActionListener(new BorderPointSpaceAction(window));
-		ancho.setMnemonic(KeyEvent.VK_E);
-		bordes.add(ancho);
+		ingresarAncho = new JMenuItem("Separacion");
+		ingresarAncho.addActionListener(new BorderPointSpaceAction(window));
+		ingresarAncho.setMnemonic(KeyEvent.VK_E);
+		bordes.add(ingresarAncho);
+		ingresarAncho.setEnabled(false);
 	}
 	
 	public void setPuntosMenu(JMenu puntos){
@@ -173,16 +177,7 @@ public class DisplayMenu {
 		JMenuItem coordSys =  new JMenuItem("Mostrar sistema de coordenadas");
 		coordSys.addActionListener(new CoordinateSystemAction(window));
 		coordSys.setMnemonic(KeyEvent.VK_C);
-		preferencias.add(coordSys);
-		
-		JMenuItem origin =  new JMenuItem("Mostrar origen");
-		origin.addActionListener(new OriginSystemAction(window));
-		origin.setMnemonic(KeyEvent.VK_G);
-		preferencias.add(origin);
-
-		
-		
-		
+		preferencias.add(coordSys);	
 	}
 	
 	public void setResetMenu(JMenu reset){
@@ -227,6 +222,11 @@ public class DisplayMenu {
 		ingresarItem.setEnabled(shown);
 		azarItem.setEnabled(shown);
 		uniformeItem.setEnabled(shown);
+	}
+	
+	public void setBordesEnabled(boolean shown){
+		ingresarPuntos.setEnabled(shown);
+		ingresarAncho.setEnabled(shown);
 	}
 	
 }

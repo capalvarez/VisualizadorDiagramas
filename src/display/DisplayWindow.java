@@ -40,6 +40,7 @@ public class DisplayWindow extends IWindow{
 	
 	public void drawRegionInPanel(MyPoint[] points) {
 		menu.setPuntosEnabled(true);
+		menu.setBordesEnabled(true);
 		
 		Dimension size = getSize();
 		PointInitProcess pip = new PointInitProcess(points,size.width, size.height);
