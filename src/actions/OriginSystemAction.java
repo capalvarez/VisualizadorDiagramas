@@ -4,6 +4,9 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;
 
+import utilities.MyPoint;
+import utilities.MyScale;
+
 import display.IWindow;
 
 public class OriginSystemAction extends AbstractAction {
@@ -14,8 +17,10 @@ public class OriginSystemAction extends AbstractAction {
 	}
 	
 	public void actionPerformed(ActionEvent arg0) {
+		MyScale scale = window.getScale();
+		MyPoint origin = scale.getPixelValue(new MyPoint(0,0));
 		
-
+		window.drawCoordSysInPanel(origin);
 	}
 
 }
