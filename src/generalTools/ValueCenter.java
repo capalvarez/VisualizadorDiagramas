@@ -2,10 +2,10 @@ package generalTools;
 
 public class ValueCenter {
 	int dimension;
-	int[] valuesToCenter;
-	int[] result;
+	double[] valuesToCenter;
+	double[] result;
 	
-	public ValueCenter(int dim, int[] values){
+	public ValueCenter(int dim, double[] values){
 		valuesToCenter = values;
 		dimension = dim;
 		
@@ -14,16 +14,16 @@ public class ValueCenter {
 	
 	private void centerValues(){
 		int midPoint = dimension/2;
-		int diff = Math.abs(valuesToCenter[0] - valuesToCenter[1])/2;
+		double diff = Math.abs(valuesToCenter[0] - valuesToCenter[1])/2;
 	
-		result = new int[2];
+		result = new double[2];
 		
 		result[0] = midPoint + diff;
 		result[1] = midPoint - diff;
 		
 	}
 	
-	public int[] getCenteredValues(){
+	public double[] getCenteredValues(){
 		return result;
 	}
 }

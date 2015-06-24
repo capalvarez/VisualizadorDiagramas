@@ -80,7 +80,7 @@ public class DrawPanel extends AbstractPanel{
     private void doDrawingCoord(Graphics g){
     	Graphics2D g2d = (Graphics2D) g;
     	g2d.setColor(Color.BLACK);
-    	g2d.setStroke(new BasicStroke(5));
+    	g2d.setStroke(new BasicStroke(2));
     	sysDrawer.drawOrigin(g2d);
     }
     
