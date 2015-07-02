@@ -78,7 +78,7 @@ private IWindow window;
 			double multY = Double.parseDouble(muX.getText());			
 			
 			/*Generar los puntos*/
-			MyPoint[] pointArray = (new NonUniformPointGenerator()).getPoints();
+			MyPoint[] pointArray = (new NonUniformPointGenerator(initX,multX,initY,multY,current.getWidth(),current.getHeight())).getPoints();
 						
 			/*Dibujar los puntos y dejarlos guardados en la ventana*/
 			window.drawPointsInPanel(pointArray,pointArray);
