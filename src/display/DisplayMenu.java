@@ -17,6 +17,7 @@ public class DisplayMenu {
 	JMenu ingresarItem;
 	JMenuItem azarItem;
 	JMenu uniformeItem;
+	JMenu noUniformeItem;
 	JMenuItem imprimir;
 	JMenuItem ingresarAncho;
 	JMenuItem ingresarPuntos; 
@@ -106,6 +107,17 @@ public class DisplayMenu {
 		dibujar.add(uniformeItem);
 		uniformeItem.setEnabled(false);
 		
+		noUniformeItem = new JMenu("Generacion no uniforme");
+		noUniformeItem.setMnemonic(KeyEvent.VK_N);
+		
+		JMenuItem dNoUNi = new JMenuItem("Ingresar");
+		dNoUNi.addActionListener(new NotUniformSepPointsAction(window));
+		
+		noUniformeItem.add(dNoUNi);
+				
+		dibujar.add(noUniformeItem);
+		noUniformeItem.setEnabled(false);
+
 	}
 	
 	public void setBordesMenu(JMenu bordes){
@@ -222,6 +234,7 @@ public class DisplayMenu {
 		ingresarItem.setEnabled(shown);
 		azarItem.setEnabled(shown);
 		uniformeItem.setEnabled(shown);
+		noUniformeItem.setEnabled(shown);
 	}
 	
 	public void setBordesEnabled(boolean shown){
