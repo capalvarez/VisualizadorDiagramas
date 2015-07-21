@@ -110,10 +110,14 @@ public class DisplayMenu {
 		noUniformeItem = new JMenu("Generacion no uniforme");
 		noUniformeItem.setMnemonic(KeyEvent.VK_N);
 		
-		JMenuItem dNoUNi = new JMenuItem("Ingresar");
+		JMenuItem dNoUNi = new JMenuItem("Ingresar linealmente");
 		dNoUNi.addActionListener(new NotUniformSepPointsAction(window));
 		
+		JMenuItem dNoUNiRad = new JMenuItem("Ingresar de forma radial");
+		dNoUNiRad.addActionListener(new NotUniformSepRadialPointsAction(window));
+		
 		noUniformeItem.add(dNoUNi);
+		noUniformeItem.add(dNoUNiRad);
 				
 		dibujar.add(noUniformeItem);
 		noUniformeItem.setEnabled(false);

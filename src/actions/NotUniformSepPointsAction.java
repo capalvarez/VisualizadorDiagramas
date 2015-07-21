@@ -19,7 +19,7 @@ import utilities.MyRegion;
 import display.IWindow;
 
 public class NotUniformSepPointsAction extends AbstractAction {
-private IWindow window;	
+	private IWindow window;	
 	
 	public NotUniformSepPointsAction(IWindow w){
 		window = w;
