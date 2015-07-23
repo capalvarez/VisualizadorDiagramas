@@ -1,7 +1,6 @@
 package actions;
 
 import generalTools.CircularPointGenerator;
-import generalTools.NonUniformPointGenerator;
 
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -42,18 +41,20 @@ private IWindow window;
 		inputPanel.setLayout(layout);
 		
 		inputPanel.add(center);
-		inputPanel.add(x);
 		JPanel xPanel = new JPanel();
+		xPanel.add(x);
 		xPanel.add(centerX);
+		inputPanel.add(xPanel);
 		
-		inputPanel.add(y);
 		JPanel yPanel = new JPanel();
+		yPanel.add(y);
 		yPanel.add(centerY);
+		inputPanel.add(yPanel);
 		
 		JPanel radPanel = new JPanel();
 		
 		radPanel.add(new JLabel("Radio inicial:"));
-		xPanel.add(inRad);
+		radPanel.add(inRad);
 		inputPanel.add(radPanel);
 		
 		JPanel multPanel = new JPanel();
@@ -64,6 +65,7 @@ private IWindow window;
 		JPanel angPanel = new JPanel();
 		angPanel.add(new JLabel("Separacion angular (10° por defecto): "));
 		angPanel.add(sep);
+		inputPanel.add(angPanel);
 		
 		int result = JOptionPane.showConfirmDialog(null, inputPanel, 
 				"Puntos no uniformes", JOptionPane.OK_CANCEL_OPTION);
@@ -75,10 +77,17 @@ private IWindow window;
 			MyRegion current = window.getCurrentRegion();
 		
 			double initRad = Double.parseDouble(inRad.getText());
-			double mul = Double.parseDouble(mult.getText());			
+			double mul = Double.parseDouble(mult.getText());
+			double separation;
+			
+			if(!sep.getText().equals("")){
+				separation = Double.parseDouble(sep.getText());
+			}else{
+				separation = 10;
+			}
 			
 			/*Generar los puntos*/
-			MyPoint[] pointArray = (new CircularPointGenerator(initX,initY,initRad,mul,sep,current.getWidth(),current.getHeight())).getPoints();
+			MyPoint[] pointArray = (new CircularPointGenerator(initX,initY,initRad,mul,separation,current)).getPoints();
 						
 			/*Dibujar los puntos y dejarlos guardados en la ventana*/
 			window.drawPointsInPanel(pointArray,pointArray);
