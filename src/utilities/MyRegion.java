@@ -75,7 +75,10 @@ public class MyRegion {
 		return downRightReal.getY();
 	}
 	
-	
+	@Override
+	public String toString(){
+		return upLeftReal.toString() + " " + downRightReal.toString(); 
+	}
 	
 	public MyPoint getIntersection(MyEdge e){
 		LineIntersector lI = new LineIntersector(e); 

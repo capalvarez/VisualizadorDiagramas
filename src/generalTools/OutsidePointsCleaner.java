@@ -6,8 +6,8 @@ import utilities.MyRegion;
 public class OutsidePointsCleaner {
 	
 	public boolean inside(MyPoint p,MyRegion region){
-		return p.getX()<=region.getRightCorner() && p.getY()<=region.getUpCorner() && 
-			   p.getX()>=region.getLeftCorner() && p.getY()>=region.getDownCorner();
+		return p.getX()<=region.getRightCorner() && p.getY()>=region.getUpCorner() && 
+			   p.getX()>=region.getLeftCorner() && p.getY()<=region.getDownCorner();
 	}
 
 	public static void main(String[] args){

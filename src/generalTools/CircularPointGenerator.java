@@ -15,28 +15,28 @@ public class CircularPointGenerator {
 		result.add(new MyPoint(iX,iY));
 		double currentRad = initRad;
 		boolean inside = true;
+		double sepRad = sep*Math.PI/180;	
 		
 		while(inside){
 			double angle = 0;
 			inside = false;
 			
-			while(angle<=360){
+			while(angle<2*Math.PI){
 				double x = iX + currentRad*Math.cos(angle);
 				double y = iY + currentRad*Math.sin(angle);
 				MyPoint newPoint = new MyPoint(x,y);
-				System.out.println(x);
-				System.out.println(y);
-				
+									
 				if(opc.inside(newPoint, region)){
 					result.add(newPoint);
 					inside = true;
 				}
 				
-				angle = angle + sep;
+				angle = angle + sepRad;
 			}
+			
 			currentRad = currentRad*mult;
 		}
-		
+
 		points = new MyPoint[result.size()];
 		points = result.toArray(points);
 	}
