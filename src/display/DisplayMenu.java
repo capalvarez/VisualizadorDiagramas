@@ -194,6 +194,12 @@ public class DisplayMenu {
 		coordSys.addActionListener(new CoordinateSystemAction(window));
 		coordSys.setMnemonic(KeyEvent.VK_C);
 		preferencias.add(coordSys);	
+		
+		JMenuItem config =  new JMenuItem("Configurar precision");
+		config.addActionListener(new ConfigurePrecisionAction(window));
+		config.setMnemonic(KeyEvent.VK_P);
+		preferencias.add(config);	
+		
 	}
 	
 	public void setResetMenu(JMenu reset){
@@ -214,6 +220,7 @@ public class DisplayMenu {
 		resetear.addActionListener(new ResetAction(window));
 		resetear.setMnemonic(KeyEvent.VK_R);
 		reset.add(resetear);
+		
 	}
 	
 	public void setPrintMenu(JMenu print){

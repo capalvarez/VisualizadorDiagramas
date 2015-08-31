@@ -60,8 +60,8 @@ public class CornerShapeAction extends AbstractAction {
 			
 		/*Solamente hacemos algo si el usuario confirmo el ingreso de los puntos*/
 		if (result == JOptionPane.OK_OPTION) {
-			MyPoint p1 = new MyPoint(Integer.parseInt(xFieldP1.getText()),Integer.parseInt(yFieldP1.getText()));
-			MyPoint p2 = new MyPoint(Integer.parseInt(xFieldP2.getText()),Integer.parseInt(yFieldP2.getText()));
+			MyPoint p1 = new MyPoint(Double.parseDouble(xFieldP1.getText()),Double.parseDouble(yFieldP1.getText()));
+			MyPoint p2 = new MyPoint(Double.parseDouble(xFieldP2.getText()),Double.parseDouble(yFieldP2.getText()));
 			MyPoint[] pointArray = {p1,p2};
 			
 			window.drawRegionInPanel(pointArray);

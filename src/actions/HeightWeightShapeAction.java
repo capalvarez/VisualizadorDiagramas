@@ -62,16 +62,16 @@ public class HeightWeightShapeAction extends AbstractAction {
 		if (result == JOptionPane.OK_OPTION) {
 			/*Chequear si el usuario desea un punto de origen especifico->por ahora asumir buenos usuarios (no va a ingresar
 			 * en un solo espacio)*/
-			int origenX = 0;
-			int origenY = 0;
+			double origenX = 0;
+			double origenY = 0;
 			
 			if(xFieldO.getText().length () != 0){
-				origenX = Integer.parseInt(xFieldO.getText());
-				origenY = Integer.parseInt(yFieldO.getText());
+				origenX = Double.parseDouble(xFieldO.getText());
+				origenY = Double.parseDouble(yFieldO.getText());
 			}
 		
-			int newX = origenX + Integer.parseInt(ancho.getText());
-			int newY = origenY + Integer.parseInt(alto.getText());
+			double newX = origenX + Double.parseDouble(ancho.getText());
+			double newY = origenY + Double.parseDouble(alto.getText());
 			
 			MyPoint origen = new MyPoint(origenX,origenY);
 			MyPoint p2 = new MyPoint(newX,newY);

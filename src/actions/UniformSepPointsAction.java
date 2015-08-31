@@ -47,8 +47,8 @@ public class UniformSepPointsAction extends AbstractAction {
 				"Puntos uniforme por separacion", JOptionPane.OK_CANCEL_OPTION);
 		
 		if (result == JOptionPane.OK_OPTION) {
-			int dX = Integer.parseInt(deltaX.getText());
-			int dY = Integer.parseInt(deltaY.getText());		
+			double dX = Double.parseDouble(deltaX.getText());
+			double dY = Double.parseDouble(deltaY.getText());		
 			
 			MyRegion current = window.getCurrentRegion();
 		

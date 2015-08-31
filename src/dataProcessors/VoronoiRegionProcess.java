@@ -3,6 +3,8 @@ package dataProcessors;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import display.IWindow;
+
 import utilities.MyCell;
 import utilities.MyEdge;
 import utilities.MyPoint;
@@ -15,8 +17,10 @@ public class VoronoiRegionProcess {
 	private ArrayList<MyCell> cellList = new ArrayList<MyCell>();
 	private ArrayList<MyPoint> voronoiPoints;
 	private ArrayList<MyTriangle> borderTriangles;
+	private IWindow window;
 	
-	public VoronoiRegionProcess(String[] regions, MyPoint[] inputPoints, MyPoint[] voronoiP, MyRegion currentRegion, MyTriangle[] delaunay){
+	public VoronoiRegionProcess(String[] regions, MyPoint[] inputPoints, MyPoint[] voronoiP, MyRegion currentRegion, MyTriangle[] delaunay, IWindow w){
+		window = w;
 		voronoiPoints = new ArrayList<MyPoint>(Arrays.asList(voronoiP));
 		borderTriangles = 	new ArrayList<MyTriangle>(Arrays.asList(delaunay));
 	
@@ -290,11 +294,12 @@ public class VoronoiRegionProcess {
 	}
 	
 	private ArrayList<MyTriangle> findTriangle(MyPoint point, MyPoint inputPoint){
+		double precision = window.getPrecision();
 		ArrayList<MyTriangle> returnValues = new ArrayList<MyTriangle>();
 				
 		for(int i=0;i<borderTriangles.size();i++){			
-			if(borderTriangles.get(i).contains(point) && borderTriangles.get(i).hasNullNeighbours()
-				&& borderTriangles.get(i).contains(inputPoint)){
+			if(borderTriangles.get(i).contains(point,precision) && borderTriangles.get(i).hasNullNeighbours()
+				&& borderTriangles.get(i).contains(inputPoint,precision)){
 				returnValues.add(borderTriangles.get(i));
 			}		
 		}			

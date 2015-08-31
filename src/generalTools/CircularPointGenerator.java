@@ -39,6 +39,7 @@ public class CircularPointGenerator {
 
 		points = new MyPoint[result.size()];
 		points = result.toArray(points);
+	
 	}
 
 	

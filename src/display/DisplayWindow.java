@@ -15,6 +15,7 @@ import utilities.MyTriangle;
 public class DisplayWindow extends IWindow{
 	DisplayMenu menu;
 	DrawPanel Panel;
+	double precision;
 	MyPoint[] currentPoints;
 	MyRegion currentRegion;
 	MyPoint[] voronoiPoints;
@@ -24,10 +25,19 @@ public class DisplayWindow extends IWindow{
 				
 	public DisplayWindow(){
 		menu = new DisplayMenu(this);
+		precision = 0.999;
+	}
+	
+	public void setPrecision(double pres){
+		this.precision = pres;
+	}
+	
+	public double getPrecision(){
+		return precision;
 	}
 	
 	public void showWindow(){
-		setTitle("Diagramas :P");
+		setTitle("Diagramas");
 	    setSize(600, 400);
 	    setLocationRelativeTo(null);
 	    Panel = new DrawPanel();
@@ -170,6 +180,7 @@ public class DisplayWindow extends IWindow{
 	}
 	
 	public void deletePoints(){
+		deleteDiagram();
 		Panel.switchPoints(false);
 			
 		menu.setDiagramasEnabled(false);
@@ -179,6 +190,8 @@ public class DisplayWindow extends IWindow{
 	}
 	
 	public void deleteRegion(){
+		deleteDiagram();
+		deletePoints();
 		Panel.switchRegion(false);
 			
 		menu.setPuntosEnabled(false);

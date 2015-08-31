@@ -11,7 +11,6 @@ public class MyTriangle {
 		
 	public MyTriangle(MyPoint[] p){
 		points = new ArrayList<MyPoint>(Arrays.asList(p));
-
 		
 		neighbours = new MyTriangle[3];
 		
@@ -125,7 +124,7 @@ public class MyTriangle {
 	
 		double total = a*(e*i-f*h) - d*(b*i-c*h) + g*(b*f-e*c);
 		
-		if(total<-0.00001){
+		if(total<0.00001){
 			return false;
 		}else{
 			return true;
@@ -133,11 +132,11 @@ public class MyTriangle {
 	
 	}
 	
-	public boolean contains(MyPoint point){		
-		return insideTriangle(point) || inEdge(point);
+	public boolean contains(MyPoint point, double precision){		
+		return insideTriangle(point,precision) || inEdge(point);
 	}
 		
-	public boolean insideTriangle(MyPoint point){
+	public boolean insideTriangle(MyPoint point, double precision){
 		MyPoint p = point.substract(points.get(0));
 		MyPoint B = points.get(1).substract(points.get(0));
 		MyPoint C = points.get(2).substract(points.get(0));
@@ -148,7 +147,7 @@ public class MyTriangle {
 		double wB = (p.getX()*C.getY() - p.getY()*C.getX())/d;
 		double wC = (p.getY()*B.getY() - p.getX()*B.getX())/d;
 		
-		return Math.abs(wA)<1 && Math.abs(wB)<1 && Math.abs(wC)<1; 	
+		return Math.abs(wA)<precision && Math.abs(wB)<precision && Math.abs(wC)<precision; 	
 	}
 	
 	public boolean inEdge(MyPoint p){
@@ -171,7 +170,7 @@ public class MyTriangle {
 		MyTriangle t = new MyTriangle(points);
 		MyTriangle t2 = new MyTriangle(points);
 		 
-		System.out.println(t.contains(new MyPoint(0,50)));
+		System.out.println(t.contains(new MyPoint(0,50), 0.999));
 		//System.out.println(t2.contains(new MyPoint(13,63)));
 	}
 	

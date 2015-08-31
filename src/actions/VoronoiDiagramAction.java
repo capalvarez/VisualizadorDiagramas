@@ -74,7 +74,7 @@ public class VoronoiDiagramAction extends AbstractAction {
 			String[] points = reader.getPointList();
 			PointStringProcess psp = new PointStringProcess(points);		
 						
-			VoronoiRegionProcess vrp = new VoronoiRegionProcess(reader.getRegionList(),pointArray,psp.getPointList(),window.getCurrentRegion(),triangles);
+			VoronoiRegionProcess vrp = new VoronoiRegionProcess(reader.getRegionList(),pointArray,psp.getPointList(),window.getCurrentRegion(),triangles,window);
 			MyEdge[] edges = vrp.getEdgeList();
 			MyCell[] voronoiCells = vrp.getCellList();  			
 			

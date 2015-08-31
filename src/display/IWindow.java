@@ -56,5 +56,9 @@ public abstract class IWindow extends JFrame{
 	
 	public abstract void deleteRegion();
 	
+	public abstract void setPrecision(double precision);
+	
+	public abstract double getPrecision();
+	
 	
 }

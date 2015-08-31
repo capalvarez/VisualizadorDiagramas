@@ -48,7 +48,7 @@ public class TriangleEdge {
 		double AP = Math.sqrt(Math.pow(p.getX()-p1.getX(), 2) + Math.pow(p.getY()-p1.getY(), 2));
 		double PB = Math.sqrt(Math.pow(p2.getX()-p.getX(), 2) + Math.pow(p2.getY()-p.getY(), 2));
 		
-		return Math.abs(AB - (AP + PB))<0.000001;
+		return Math.abs(AB - (AP + PB))<0.0001;
 	}
 	
 }
