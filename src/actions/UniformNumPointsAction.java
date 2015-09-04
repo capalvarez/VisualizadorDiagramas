@@ -73,8 +73,8 @@ public class UniformNumPointsAction extends AbstractAction {
 						/*Filas pares se comportan normalmente*/
 						pointList = (new RowPointGenerator(current.getLeftCorner(),current.getRightCorner(),dX,yValue)).getPoints();	
 					}else{
-						double initX = current.getLeftCorner() + dX/2;
-						double endX = current.getRightCorner() - dX/2;
+						double initX = current.getLeftCorner() + Math.floor(dX/2);
+						double endX = current.getRightCorner() - Math.floor(dX/2);
 						
 						pointList = (new RowPointGenerator(initX,endX,dX,yValue)).getPoints();
 						/*Al estar desfasada naturalmente no se incluyen los puntos de los bordes, asi que 

@@ -25,7 +25,7 @@ public class DisplayWindow extends IWindow{
 				
 	public DisplayWindow(){
 		menu = new DisplayMenu(this);
-		precision = 0.999;
+		precision = 0.99;
 	}
 	
 	public void setPrecision(double pres){
