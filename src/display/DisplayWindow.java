@@ -25,7 +25,7 @@ public class DisplayWindow extends IWindow{
 				
 	public DisplayWindow(){
 		menu = new DisplayMenu(this);
-		precision = 0.99;
+		precision = 0.999;
 	}
 	
 	public void setPrecision(double pres){
@@ -52,14 +52,14 @@ public class DisplayWindow extends IWindow{
 		menu.setPuntosEnabled(true);
 		menu.setBordesEnabled(true);
 		
-		Dimension size = getSize();
-		PointInitProcess pip = new PointInitProcess(points,size.width, size.height);
+		PointInitProcess pip = new PointInitProcess(points,this);
 		MyPoint[] regionPoints = pip.getPointList();
 		scale = pip.getScale();
 		
 		currentRegion = new MyRegion(points[0],points[1]);
 		currentRegion.setPixelValues(regionPoints[0],regionPoints[1]);
 		Panel.setRegion(currentRegion);	
+		Panel.setScale(scale);
 		
 		Panel.switchRegion(true);	
 		repaint();

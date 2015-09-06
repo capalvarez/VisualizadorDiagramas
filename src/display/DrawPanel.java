@@ -1,6 +1,5 @@
 package display;
 
-
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
@@ -23,7 +22,7 @@ public class DrawPanel extends AbstractPanel{
 	private MyScale scale;
 	private MyTriangle[] triangles;
 	private CoordSysDrawer sysDrawer = new CoordSysDrawer(5);
-			
+
 	private boolean shownRegion = false;
 	private boolean shownPoints = false;
 	private boolean shownDiagram = false;
@@ -31,7 +30,7 @@ public class DrawPanel extends AbstractPanel{
 	private boolean shownDelaunay = false;
     
     public DrawPanel(){
-    	
+
     }
     
     public void setPointsToPaint(MyPoint[] points){
@@ -52,9 +51,13 @@ public class DrawPanel extends AbstractPanel{
     	this.scale = scale;
     }
     
+    public void setScale(MyScale s){
+    	scale = s;
+    }
+    
     private void doDrawingRegion(Graphics g) {	
-        Graphics2D g2d = (Graphics2D) g;
-        g2d.setColor(color);
+    	Graphics2D g2d = (Graphics2D) g;
+    	g2d.setColor(color);
         region.drawRegion(g2d);      
     }
     
@@ -96,6 +99,7 @@ public class DrawPanel extends AbstractPanel{
     @Override
     public void paintComponent(Graphics g) {   
         super.paintComponent(g);
+        
         
         if(shownRegion){
         	doDrawingRegion(g);

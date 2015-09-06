@@ -296,13 +296,14 @@ public class VoronoiRegionProcess {
 	private ArrayList<MyTriangle> findTriangle(MyPoint point, MyPoint inputPoint){
 		double precision = window.getPrecision();
 		ArrayList<MyTriangle> returnValues = new ArrayList<MyTriangle>();
-				
+
 		for(int i=0;i<borderTriangles.size();i++){			
 			if(borderTriangles.get(i).contains(point,precision) && borderTriangles.get(i).hasNullNeighbours()
 				&& borderTriangles.get(i).contains(inputPoint,precision)){
 				returnValues.add(borderTriangles.get(i));
 			}		
 		}			
+				
 		return returnValues;
 	}
 }

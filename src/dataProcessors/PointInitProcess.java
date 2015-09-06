@@ -1,15 +1,18 @@
 package dataProcessors;
 
+import display.IWindow;
 import generalTools.ValueCenter;
 import utilities.MyPoint;
 import utilities.MyScale;
 
 public class PointInitProcess extends PointProcess {
 	MyScale scale;
+	IWindow window;
 	
-	public PointInitProcess(MyPoint[] points, int width, int height){
-		wWidth = width;
-		wHeight = (int) (height*0.9);
+	public PointInitProcess(MyPoint[] points, IWindow window){
+		wWidth = window.getWidth();
+		wHeight = (int) (window.getHeight()*0.9);
+		this.window = window; 
 	
 		initPointsList = points;
 		endPoints = new MyPoint[2];
@@ -39,7 +42,7 @@ public class PointInitProcess extends PointProcess {
 			endPoints[0] = p1;
 			endPoints[1] = p2;
 				
-			scale = new MyScale(new MyPoint(left.getX(),down.getY()),p1,new MyPoint(right.getX(),up.getY()),p2);
+			scale = new MyScale(new MyPoint(left.getX(),down.getY()),p1,new MyPoint(right.getX(),up.getY()),p2,window);
 		}else{
 			double slope = wWidth*(1-2*rel)/(right.getX()-left.getX());
 			double nYUp = rel*wWidth+slope*(up.getY()-left.getX());
@@ -53,7 +56,7 @@ public class PointInitProcess extends PointProcess {
 			
 			endPoints[0] = p1;
 			endPoints[1] = p2;
-			scale = new MyScale(new MyPoint(left.getX(),down.getY()),p1,new MyPoint(right.getX(),up.getY()),p2);
+			scale = new MyScale(new MyPoint(left.getX(),down.getY()),p1,new MyPoint(right.getX(),up.getY()),p2,window);
 		}
 	}
 	
