@@ -32,7 +32,7 @@ public class VoronoiOFFReader{
 			currentLine = br.readLine();
 			String[] results = currentLine.split("\\s+");
 		
-			/*Segunda linea contiene NÂ°Ptos de Voronoi - NÂ°de regiones - 1*/
+			/*Segunda linea contiene N°Ptos de Voronoi - N°de regiones - 1*/
 			inputPoints = Integer.parseInt(results[1]);
 			
 			/*Leer el numero de lineas que corresponde al numero de vertices (result[0])*/
