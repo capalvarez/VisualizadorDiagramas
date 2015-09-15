@@ -5,8 +5,6 @@ public class MyPoint {
 	private double y;
 	private double z;
 	private int dimension;
-	private int infXS = 1;
-	private int infYS = 1;
 	
 	public MyPoint(double x, double y, double z){
 		this.x = x;
@@ -22,13 +20,11 @@ public class MyPoint {
 		this.dimension = 2;
 	}
 	
-	public MyPoint(int x, int y, int xSign, int ySign){
+	public MyPoint(int x, int y){
 		this.x = x;
 		this.y = y;
 		this.z = 0;
 		this.dimension = 2;
-		this.infXS = xSign;
-		this.infYS = ySign;	
 	}
 		
 	public double getX(){
@@ -45,14 +41,6 @@ public class MyPoint {
 	
 	public int getDimension(){
 		return dimension;
-	}
-	
-	public int getInfinityX(){
-		return this.infXS*1000;
-	}
-	
-	public int getInfinityY(){
-		return this.infYS*1000;
 	}
 	
 	public double distanceZero(){
@@ -117,9 +105,5 @@ public class MyPoint {
 		double y = this.getY() - p.getY();
 		
 		return new MyPoint(x,y);
-	}
-	
-	
-	
-	
+	}	
 }

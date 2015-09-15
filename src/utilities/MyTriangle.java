@@ -147,8 +147,8 @@ public class MyTriangle {
 		
 		double wA = (p.getX()*(B.getY()-C.getY()) + p.getY()*(C.getX()-B.getX()) + B.getX()*C.getY() - C.getX()*B.getY())/d; 	
 		double wB = (p.getX()*C.getY() - p.getY()*C.getX())/d;
-		double wC = (p.getY()*B.getY() - p.getX()*B.getX())/d;
-		
+		double wC = (p.getY()*B.getX() - p.getX()*B.getY())/d;
+
 		return wA<=precision && wB<=precision && wC<=precision && 0<=wA && 0<=wB && 0<=wC; 	
 	}
 	
@@ -164,14 +164,14 @@ public class MyTriangle {
 	}
 
 	public static void main(String[] args){
-		MyPoint[] points = {new MyPoint(40,0),new MyPoint(30,20),new MyPoint(20,0)};
+		MyPoint[] points = {new MyPoint(12.5,100.0),new MyPoint(0,100.0),new MyPoint(6.0,87.5)};
 		
 		/*Por alguna extraña razon esto da false para ambos siendo que claramente el punto esta en uno de los
 		 * dos*/
 		MyTriangle t = new MyTriangle(points);
 		MyTriangle t2 = new MyTriangle(points);
 		 
-		System.out.println(t.insideTriangle(new MyPoint(10,7.5), 0.9));
+		System.out.println(t.insideTriangle(new MyPoint(6.25,95.31), 0.99));
 		//System.out.println(t2.contains(new MyPoint(13,63)));
 	}
 	
