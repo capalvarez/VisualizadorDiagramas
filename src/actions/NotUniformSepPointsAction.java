@@ -15,7 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import utilities.MyPoint;
-import utilities.MyRegion;
+import utilities.regions.MyRegion;
 import display.IWindow;
 
 public class NotUniformSepPointsAction extends AbstractAction {
@@ -78,7 +78,7 @@ public class NotUniformSepPointsAction extends AbstractAction {
 			double multY = Double.parseDouble(muX.getText());			
 			
 			/*Generar los puntos*/
-			MyPoint[] pointArray = (new NonUniformPointGenerator(initX,multX,initY,multY,current.getWidth(),current.getHeight())).getPoints();
+			MyPoint[] pointArray = current.generateNonUniform(initX,multX,initY,multY);
 						
 			/*Dibujar los puntos y dejarlos guardados en la ventana*/
 			window.drawPointsInPanel(pointArray,pointArray);

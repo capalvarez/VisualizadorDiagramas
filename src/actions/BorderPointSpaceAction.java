@@ -19,7 +19,7 @@ import javax.swing.JTextField;
 import org.apache.commons.lang3.ArrayUtils;
 
 import utilities.MyPoint;
-import utilities.MyRegion;
+import utilities.regions.MyRegion;
 
 import display.IWindow;
 

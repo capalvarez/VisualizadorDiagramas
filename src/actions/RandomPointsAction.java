@@ -9,6 +9,7 @@ import java.util.Random;
 import javax.swing.*;
 
 import utilities.*;
+import utilities.regions.MyRegion;
 import display.DisplayWindow;
 import display.IWindow;
 

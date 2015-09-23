@@ -26,10 +26,10 @@ public class DisplayMenu {
 		menubar = new JMenuBar();
 		this.window = window;
 		
-		JMenu puntos = new JMenu("Region");
-		puntos.setMnemonic(KeyEvent.VK_R);
-		setPuntosMenu(puntos);
-		menubar.add(puntos);
+		JMenu region = new JMenu("Region");
+		region.setMnemonic(KeyEvent.VK_R);
+		setRegionMenu(region);
+		menubar.add(region);
 		
 		JMenu dibujar = new JMenu("Puntos");
 		dibujar.setMnemonic(KeyEvent.VK_P);
@@ -139,17 +139,42 @@ public class DisplayMenu {
 		ingresarAncho.setEnabled(false);
 	}
 	
-	public void setPuntosMenu(JMenu puntos){
+	public void setRegionMenu(JMenu region){
+		JMenu rectangular = new JMenu("Rectangular");
+		
 		JMenuItem ingresar =  new JMenuItem("Esquinas");
 		ingresar.addActionListener(new CornerShapeAction(window));
 		ingresar.setMnemonic(KeyEvent.VK_E);
 		ingresar.setToolTipText("Generar region rectangular a partir de dos puntos");
-		puntos.add(ingresar);
+		rectangular.add(ingresar);
 		
 		JMenuItem ancho = new JMenuItem("Largo/Ancho");
 		ancho.addActionListener(new HeightWeightShapeAction(window));
 		ancho.setMnemonic(KeyEvent.VK_L);
-		puntos.add(ancho);
+		rectangular.add(ancho);
+		
+		region.add(rectangular);
+		
+		JMenu circular = new JMenu("Circular");
+		JMenuItem ingresarC =  new JMenuItem("Ingresar radios");
+		ingresarC.addActionListener(new CircularRegionAction(window));
+		circular.add(ingresarC);
+		
+		region.add(circular);
+		
+		JMenu arbitrario = new JMenu("Arbitraria");
+		JMenuItem ingresarP =  new JMenuItem("Ingresar por puntos");
+		ingresarP.addActionListener(new ArbitraryRegionAction(window));
+		arbitrario.add(ingresarP);
+		
+		region.add(arbitrario);
+		
+		JMenu agujeros = new JMenu("Añadir agujeros");
+		JMenuItem ingresarA =  new JMenuItem("Circular");
+		ingresarA.addActionListener(new CircularHoleAction(window));
+		agujeros.add(ingresarA);
+		
+		region.add(agujeros);
 	}
 	
 	public void setDiagramasMenu(JMenu diagramas){

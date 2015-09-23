@@ -12,7 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import utilities.MyPoint;
-import utilities.MyRegion;
+import utilities.regions.MyRegion;
 import display.IWindow;
 
 public class NotUniformSepRadialPointsAction extends AbstractAction {

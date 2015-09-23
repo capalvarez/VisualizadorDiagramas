@@ -7,14 +7,14 @@ import javax.swing.JFrame;
 import utilities.MyCell;
 import utilities.MyEdge;
 import utilities.MyPoint;
-import utilities.MyRegion;
 import utilities.MyScale;
 import utilities.MyTriangle;
+import utilities.regions.MyRegion;
 
 public abstract class IWindow extends JFrame{
 	public abstract void drawPointsInPanel(MyPoint[] pointsToDraw,MyPoint[] points);
 
-	public abstract void drawRegionInPanel(MyPoint[] points); 
+	public abstract void drawRegionInPanel(MyRegion region, MyScale scale); 
 	
 	public abstract void drawDiagramInPanel(MyPoint[] points, MyEdge[] edges);
 
@@ -59,6 +59,5 @@ public abstract class IWindow extends JFrame{
 	public abstract void setPrecision(double precision);
 	
 	public abstract double getPrecision();
-	
 	
 }

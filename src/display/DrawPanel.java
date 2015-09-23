@@ -1,6 +1,7 @@
 package display;
 
 import java.awt.BasicStroke;
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -11,9 +12,9 @@ import drawers.VoronoiDrawer;
 
 import utilities.MyEdge;
 import utilities.MyPoint;
-import utilities.MyRegion;
 import utilities.MyScale;
 import utilities.MyTriangle;
+import utilities.regions.MyRegion;
 
 public class DrawPanel extends AbstractPanel{
 	private MyPoint[] points;
@@ -30,7 +31,7 @@ public class DrawPanel extends AbstractPanel{
 	private boolean shownDelaunay = false;
     
     public DrawPanel(){
-
+    	
     }
     
     public void setPointsToPaint(MyPoint[] points){

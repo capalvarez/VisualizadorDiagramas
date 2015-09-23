@@ -11,7 +11,11 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import utilities.MyPoint;
+import utilities.MyScale;
+import utilities.regions.MyRegion;
+import utilities.regions.RectangleRegion;
 
+import dataProcessors.PointInitProcess;
 import display.IWindow;
 
 
@@ -77,7 +81,14 @@ public class HeightWeightShapeAction extends AbstractAction {
 			MyPoint p2 = new MyPoint(newX,newY);
 			MyPoint[] pointArray = {origen,p2};
 			
-			window.drawRegionInPanel(pointArray);
+			PointInitProcess pip = new PointInitProcess(pointArray,window);
+			MyPoint[] regionPoints = pip.getPointList();
+			MyScale scale = pip.getScale();
+			
+			MyRegion region = new RectangleRegion(origen,p2);	
+			region.setPixelValues(regionPoints);
+						
+			window.drawRegionInPanel(region,scale);
 			window.repaint();
 		}
 		

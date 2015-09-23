@@ -2,15 +2,18 @@ package display;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
 
 import dataProcessors.*;
 
 import utilities.MyCell;
 import utilities.MyEdge;
 import utilities.MyPoint;
-import utilities.MyRegion;
 import utilities.MyScale;
 import utilities.MyTriangle;
+import utilities.regions.MyRegion;
+import utilities.regions.RectangleRegion;
 
 public class DisplayWindow extends IWindow{
 	DisplayMenu menu;
@@ -43,21 +46,43 @@ public class DisplayWindow extends IWindow{
 	    Panel = new DrawPanel();
 	    getContentPane().add(Panel);
 	    
+	    addComponentListener(new ComponentListener() {
+		    public void componentResized(ComponentEvent e) {
+		    	Panel.revalidate();
+		        repaint();
+		        revalidate();
+		    }
+
+			@Override
+			public void componentHidden(ComponentEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void componentMoved(ComponentEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void componentShown(ComponentEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+	    
 	    setJMenuBar(menu.getMenuBar());
 	    setVisible(true);
 	}
 
 	
-	public void drawRegionInPanel(MyPoint[] points) {
+	public void drawRegionInPanel(MyRegion region, MyScale scale) {
 		menu.setPuntosEnabled(true);
 		menu.setBordesEnabled(true);
 		
-		PointInitProcess pip = new PointInitProcess(points,this);
-		MyPoint[] regionPoints = pip.getPointList();
-		scale = pip.getScale();
+		currentRegion = region;
 		
-		currentRegion = new MyRegion(points[0],points[1]);
-		currentRegion.setPixelValues(regionPoints[0],regionPoints[1]);
 		Panel.setRegion(currentRegion);	
 		Panel.setScale(scale);
 		
@@ -65,6 +90,9 @@ public class DisplayWindow extends IWindow{
 		repaint();
 		validate();
 	}
+	
+	
+	
 	
 	public void drawPointsInPanel(MyPoint[] pointsToDraw, MyPoint[] points){
 		menu.setDiagramasEnabled(true);

@@ -8,9 +8,9 @@ import display.IWindow;
 import utilities.MyCell;
 import utilities.MyEdge;
 import utilities.MyPoint;
-import utilities.MyRegion;
 import utilities.MyTriangle;
 import utilities.TriangleEdge;
+import utilities.regions.MyRegion;
 
 public class VoronoiRegionProcess {
 	private ArrayList<MyEdge> edgeList = new ArrayList<MyEdge>();

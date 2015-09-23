@@ -1,18 +1,25 @@
-package utilities;
+package utilities.regions;
 
 import generalTools.LineIntersector;
+import generalTools.NonUniformPointGenerator;
 
 import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
+import java.util.ArrayList;
 
-public class MyRegion {
+import utilities.MyEdge;
+import utilities.MyPoint;
+import utilities.perforations.Perforation;
+
+public class RectangleRegion implements MyRegion{
 	MyPoint upLeftReal;
 	MyPoint downRightReal;
 	MyPoint upLeftPixel;
 	MyPoint downRightPixel;
 	MyEdge[] regionSides;
-		
-	public MyRegion(MyPoint pUL, MyPoint pDR){
+	ArrayList<Perforation> perforation = new ArrayList<Perforation>();
+			
+	public RectangleRegion(MyPoint pUL, MyPoint pDR){
 		upLeftReal = pUL;
 		downRightReal = pDR;
 		
@@ -28,9 +35,9 @@ public class MyRegion {
 		regionSides[3] = e4;	
 	}
 	
-	public void setPixelValues(MyPoint uL, MyPoint dR){
-		upLeftPixel = uL;
-		downRightPixel = dR;
+	public void setPixelValues(MyPoint[] p){
+		upLeftPixel = p[0];
+		downRightPixel = p[1];
 	}
 	
 	public MyPoint[] getPoints(){
@@ -94,21 +101,13 @@ public class MyRegion {
 		return null;		
 	}
 	
-	public boolean contains(MyPoint p){	
-		if(p.getX()>upLeftReal.getX() && p.getX()<downRightReal.getX() &&
-		   p.getY()>upLeftReal.getY() && p.getX()<downRightReal.getY()){
-			return true;
-		}
-		
-		return false;
+	public boolean isInside(MyPoint p){
+		return p.getX()<=getRightCorner() && p.getY()>=getUpCorner() && 
+			   p.getX()>=getLeftCorner() && p.getY()<=getDownCorner();
 	}
 	
-	public int getInsidePoint(MyEdge e){
-		if(contains(e.getFirstPoint())){
-			return 0;
-		}else{
-			return 1;
-		}
+	public MyPoint[] generateNonUniform(double initX, double multX, double initY, double multY){
+		return (new NonUniformPointGenerator(initX,multX,initY,multY,getWidth(),getHeight())).getPoints();
 	}
 	
 }

@@ -3,7 +3,7 @@ package generalTools;
 import java.util.ArrayList;
 
 import utilities.MyPoint;
-import utilities.MyRegion;
+import utilities.regions.MyRegion;
 
 public class CircularPointGenerator {
 	MyPoint[] points;

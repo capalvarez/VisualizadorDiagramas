@@ -10,7 +10,11 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import utilities.MyPoint;
+import utilities.MyScale;
+import utilities.regions.MyRegion;
+import utilities.regions.RectangleRegion;
 
+import dataProcessors.PointInitProcess;
 import display.IWindow;
 
 public class CornerShapeAction extends AbstractAction {
@@ -64,7 +68,14 @@ public class CornerShapeAction extends AbstractAction {
 			MyPoint p2 = new MyPoint(Double.parseDouble(xFieldP2.getText()),Double.parseDouble(yFieldP2.getText()));
 			MyPoint[] pointArray = {p1,p2};
 			
-			window.drawRegionInPanel(pointArray);
+			PointInitProcess pip = new PointInitProcess(pointArray,window);
+			MyPoint[] regionPoints = pip.getPointList();
+			MyScale scale = pip.getScale();
+			
+			MyRegion region = new RectangleRegion(p1,p2);	
+			region.setPixelValues(regionPoints);
+						
+			window.drawRegionInPanel(region,scale);
 			window.repaint();
 		}
 	}
