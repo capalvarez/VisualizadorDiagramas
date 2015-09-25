@@ -59,45 +59,7 @@ public class UniformSepPointsAction extends AbstractAction {
 			
 			MyRegion current = window.getCurrentRegion();
 		
-			int numX = (int)Math.floor(current.getWidth()/dX)+1;
-			int numY = (int)Math.floor(current.getHeight()/dY)+1;			
-			
-			MyPoint[] pointArray;
-			
-			if(!secondRow.isSelected()){
-				/*Generar los puntos*/
-				pointArray = (new PointGenerator(numX,dX,numY,dY,current.getUpCorner(),current.getLeftCorner())).getPoints();
-			}else{
-				ArrayList<MyPoint> finalList = new ArrayList<MyPoint>();
-				
-				for(int i=0; i<numY;i++){
-					double yValue = i*dY + current.getUpCorner(); 
-					ArrayList<MyPoint> pointList;
-					/*Generar los puntos*/
-					if(i%2==0){
-						/*Filas pares se comportan normalmente*/
-						pointList = (new RowPointGenerator(current.getLeftCorner(),current.getRightCorner(),dX,yValue)).getPoints();	
-					}else{
-						double initX = current.getLeftCorner() + Math.floor(dX/2);
-						double endX = current.getRightCorner() - Math.floor(dX/2);
-						
-						pointList = (new RowPointGenerator(initX,endX,dX,yValue)).getPoints();
-						/*Al estar desfasada naturalmente no se incluyen los puntos de los bordes, asi que 
-						 * hay que ponerlos a mano*/
-						
-						MyPoint initPoint = new MyPoint(current.getLeftCorner(),yValue);
-						MyPoint endPoint = new MyPoint(current.getRightCorner(),yValue);
-						
-						pointList.add(initPoint);
-						pointList.add(endPoint);
-						
-					}
-					finalList.addAll(pointList);
-				}
-				
-				pointArray = new MyPoint[finalList.size()];
-				pointArray = finalList.toArray(pointArray);		
-			}
+			MyPoint[] pointArray = current.generateUniformByDistance(dX, dY, secondRow.isSelected());
 						
 			/*Dibujar los puntos y dejarlos guardados en la ventana*/
 			window.drawPointsInPanel(pointArray,pointArray);

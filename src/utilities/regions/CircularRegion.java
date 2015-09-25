@@ -31,4 +31,35 @@ public class CircularRegion implements MyRegion {
 		
 	}
 
+	@Override
+	public MyPoint[] generateRandom(int number) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public MyPoint[] generateUniformByDistance(double dx, double dy,
+			boolean secondRow) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public MyPoint[] generateUniformByNumber(int nX, int nY, boolean secondRow) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public MyPoint[] generateBorderByNumber(int[] numbers, boolean forAll) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public MyPoint[] generateBorderByDistance(double[] distances, boolean forAll) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

@@ -33,22 +33,8 @@ public class RandomPointsAction extends AbstractAction{
 		}
 		
 		int n = Integer.parseInt(number);
-		
-		/*Generar puntos aleatoriamente*/
-		MyPoint[] pointArray = new MyPoint[n];
-		MyRegion region = window.getCurrentRegion();
-				
-		double w =  region.getWidth();
-		double h =  region.getHeight();
-		Random r = new Random();
-		
-		for(int i=0;i<n;i++){		
-			double x = Math.abs(r.nextInt()) % w + region.getLeftCorner();
-			double y = Math.abs(r.nextInt()) % h + region.getUpCorner();
+		MyPoint[] pointArray = window.getCurrentRegion().generateRandom(n);
 			
-			pointArray[i] = new MyPoint(x,y);
-		}
-	
 		window.drawPointsInPanel(pointArray,pointArray);
 		window.repaint();
 	}	

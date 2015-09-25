@@ -192,74 +192,29 @@ public class BorderPointNumberAction extends AbstractAction {
 		int result = JOptionPane.showConfirmDialog(null, inputPanel, 
 				"Puntos en el borde por numero", JOptionPane.OK_CANCEL_OPTION);
 		
-		if (result == JOptionPane.OK_OPTION) {
+		if (result == JOptionPane.OK_OPTION) {		
+			MyPoint[] borderPoints;
+			
 			if(!forAll.isSelected()){
-				int n = Integer.parseInt(num1.getText());
-				MyRegion current = window.getCurrentRegion();
-				
-				double dX = current.getWidth()/(n-1);
-				double dY = current.getHeight()/(n-1);
-								
-				LinePointGenerator lpg = new LinePointGenerator();
-				
-				MyPoint[] pointArrayLine1 = lpg.getPointsY(current.getUpCorner(),current.getDownCorner(),dY,current.getLeftCorner());
-				MyPoint[] pointArrayLine2 = lpg.getPointsX(current.getLeftCorner(),current.getRightCorner(),dX,current.getDownCorner());
-				MyPoint[] pointArrayLine3 = lpg.getPointsY(current.getUpCorner(),current.getDownCorner(),dY,current.getRightCorner());
-				MyPoint[] pointArrayLine4 = lpg.getPointsX(current.getLeftCorner(),current.getRightCorner(),dX,current.getUpCorner());
-			
-				MyPoint[] both = ArrayUtils.addAll(pointArrayLine1, pointArrayLine2);
-				MyPoint[] both2 = ArrayUtils.addAll(pointArrayLine3,pointArrayLine4);
-				MyPoint[] both3 = ArrayUtils.addAll(both,both2);
-							
-				MyPoint[] currentPoints = window.getCurrentPoints();
-				MyPoint[] finalPoints;
-				
-				if(currentPoints!=null){
-					finalPoints = ArrayUtils.addAll(currentPoints,both3);
-				}else{
-					finalPoints = both3;
-				}
-				
-				window.drawPointsInPanel(finalPoints,finalPoints);
-				window.repaint();
-				
+				int[] numbers = {Integer.parseInt(num1.getText())};
+				borderPoints = window.getCurrentRegion().generateBorderByNumber(numbers, forAll.isSelected());	
 			}else{
-				int n1 = Integer.parseInt(num1.getText());
-				int n2 = Integer.parseInt(num2.getText());
-				int n3 = Integer.parseInt(num3.getText());
-				int n4 = Integer.parseInt(num4.getText());
-				
-				MyRegion current = window.getCurrentRegion();
-				
-				double d1 = current.getHeight()/(n1-1);
-				double d2 = current.getWidth()/(n2-1);
-				double d3 = current.getHeight()/(n3-1);
-				double d4 = current.getWidth()/(n4-1);
-													
-				LinePointGenerator lpg = new LinePointGenerator();
-				
-				MyPoint[] pointArrayLine1 = lpg.getPointsY(current.getUpCorner(),current.getDownCorner(),d1,current.getLeftCorner());
-				MyPoint[] pointArrayLine2 = lpg.getPointsX(current.getLeftCorner(),current.getRightCorner(),d2,current.getDownCorner());
-				MyPoint[] pointArrayLine3 = lpg.getPointsY(current.getUpCorner(),current.getDownCorner(),d3,current.getRightCorner());
-				MyPoint[] pointArrayLine4 = lpg.getPointsX(current.getLeftCorner(),current.getRightCorner(),d4,current.getUpCorner());
+				int[] numbers = {Integer.parseInt(num1.getText()), Integer.parseInt(num2.getText()),
+						         Integer.parseInt(num3.getText()), Integer.parseInt(num4.getText())};
+				borderPoints = window.getCurrentRegion().generateBorderByNumber(numbers, forAll.isSelected());
+			}		
+						
+			MyPoint[] currentPoints = window.getCurrentPoints();
+			MyPoint[] finalPoints;
 			
-				MyPoint[] both = ArrayUtils.addAll(pointArrayLine1, pointArrayLine2);
-				MyPoint[] both2 = ArrayUtils.addAll(pointArrayLine3,pointArrayLine4);
-				MyPoint[] both3 = ArrayUtils.addAll(both,both2);
-							
-				MyPoint[] currentPoints = window.getCurrentPoints();
-				MyPoint[] finalPoints;
-				
-				if(currentPoints!=null){
-					finalPoints = ArrayUtils.addAll(currentPoints,both3);
-				}else{
-					finalPoints = both3;
-				}
-				
-				window.drawPointsInPanel(finalPoints,finalPoints);
-				window.repaint();
-	
+			if(currentPoints!=null){
+				finalPoints = ArrayUtils.addAll(currentPoints,borderPoints);
+			}else{
+				finalPoints = borderPoints;
 			}
+			
+			window.drawPointsInPanel(finalPoints,finalPoints);
+			window.repaint();
 
 		}
 	
