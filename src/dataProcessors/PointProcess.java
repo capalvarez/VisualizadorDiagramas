@@ -15,4 +15,5 @@ public abstract class PointProcess {
 	public MyPoint[] getInitPointsList(){
 		return initPointsList;
 	}
+
 }

@@ -24,6 +24,11 @@ public class MyScale {
 		return new MyPoint(xPix, 0.9*window.getHeight() - yPix);
 	
 	}
+	
+	public void printScale(){
+		System.out.println("Real: " + upLeftReal.toString() + "         En pixeles: " + upLeftPixel.toString());
+		System.out.println("Real: " + downRightReal.toString() + "         En pixeles: " + downRightPixel.toString());
+	}
 
 }
 

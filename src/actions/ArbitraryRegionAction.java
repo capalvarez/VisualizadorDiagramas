@@ -84,11 +84,10 @@ public class ArbitraryRegionAction extends AbstractAction {
 						MyPoint[] points = pp.getPointList();
 						
 						PointInitProcess pip = new PointInitProcess(points,window);
-						MyPoint[] regionPoints = pip.getPointList();
-						MyScale scale = pip.getScale();
+							
+						MyScale scale = pip.getScale();																
+						MyRegion region = new ArbitraryRegion(points,scale);					
 						
-						MyRegion region = new ArbitraryRegion(regionPoints,scale);
-												
 						window.drawRegionInPanel(region,scale);
 						window.repaint();
 						setVisible(false);
