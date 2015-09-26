@@ -23,8 +23,7 @@ public class RectangleRegion implements MyRegion{
 	MyPoint downRightReal;
 	MyScale scale;
 	MyEdge[] regionSides;
-	ArrayList<Perforation> perforation = new ArrayList<Perforation>();
-			
+				
 	public RectangleRegion(MyPoint pUL, MyPoint pDR, MyScale scale){
 		upLeftReal = pUL;
 		downRightReal = pDR;

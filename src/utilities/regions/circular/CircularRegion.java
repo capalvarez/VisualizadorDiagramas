@@ -1,23 +1,31 @@
-package utilities.regions;
+package utilities.regions.circular;
 
 import java.awt.Graphics2D;
 
 import utilities.MyPoint;
+import utilities.MyScale;
 import utilities.perforations.Perforation;
+import utilities.regions.MyRegion;
 
-public class CircularRegion implements MyRegion {
-
+public abstract class CircularRegion implements MyRegion {
+	double innerR;
+	double outerR;
+	MyPoint center;
+	MyScale scale;
+	
+	public CircularRegion(double iR, double oR, MyPoint c, MyScale s){
+		innerR = iR;
+		outerR = oR;
+		center = c;
+		scale = s;	
+	}
+	
 	@Override
 	public boolean isInside(MyPoint point) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
-	@Override
-	public void drawRegion(Graphics2D g2d) {
-		// TODO Auto-generated method stub
-
-	}
 
 	@Override
 	public MyPoint[] generateNonUniform(double initX, double multX, double initY,
@@ -59,8 +67,7 @@ public class CircularRegion implements MyRegion {
 
 	@Override
 	public void addPerforation(Perforation p) {
-		// TODO Auto-generated method stub
+		perforation.add(p);
 		
 	}
-
 }
