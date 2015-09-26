@@ -3,13 +3,12 @@ package utilities.regions;
 import java.awt.Graphics2D;
 
 import utilities.MyPoint;
+import utilities.perforations.Perforation;
 
 public interface MyRegion {
 	
 	public boolean isInside(MyPoint point);
 	public void drawRegion(Graphics2D g2d);
-	
-	public void setPixelValues(MyPoint[] pixelValues);
 
 	public MyPoint[] generateNonUniform(double initX, double multX, double initY, double multY);
 	public MyPoint[] generateRandom(int number);
@@ -18,5 +17,7 @@ public interface MyRegion {
 
 	public MyPoint[] generateBorderByNumber(int[] numbers, boolean forAll);
 	public MyPoint[] generateBorderByDistance(double[] distances, boolean forAll);
+	
+	public void addPerforation(Perforation p);
 
 }

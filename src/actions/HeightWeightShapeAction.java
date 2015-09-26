@@ -82,12 +82,10 @@ public class HeightWeightShapeAction extends AbstractAction {
 			MyPoint[] pointArray = {origen,p2};
 			
 			PointInitProcess pip = new PointInitProcess(pointArray,window);
-			MyPoint[] regionPoints = pip.getPointList();
 			MyScale scale = pip.getScale();
 			
-			MyRegion region = new RectangleRegion(origen,p2);	
-			region.setPixelValues(regionPoints);
-						
+			MyRegion region = new RectangleRegion(origen,p2,scale);	
+									
 			window.drawRegionInPanel(region,scale);
 			window.repaint();
 		}

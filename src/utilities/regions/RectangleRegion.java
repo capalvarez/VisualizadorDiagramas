@@ -15,19 +15,20 @@ import org.apache.commons.lang3.ArrayUtils;
 
 import utilities.MyEdge;
 import utilities.MyPoint;
+import utilities.MyScale;
 import utilities.perforations.Perforation;
 
 public class RectangleRegion implements MyRegion{
 	MyPoint upLeftReal;
 	MyPoint downRightReal;
-	MyPoint upLeftPixel;
-	MyPoint downRightPixel;
+	MyScale scale;
 	MyEdge[] regionSides;
 	ArrayList<Perforation> perforation = new ArrayList<Perforation>();
 			
-	public RectangleRegion(MyPoint pUL, MyPoint pDR){
+	public RectangleRegion(MyPoint pUL, MyPoint pDR, MyScale scale){
 		upLeftReal = pUL;
 		downRightReal = pDR;
+		this.scale = scale;
 		
 		MyEdge e1 = new MyEdge(new MyPoint(upLeftReal.getX(),upLeftReal.getY()),new MyPoint(upLeftReal.getX(),downRightReal.getY()));
 		MyEdge e2 = new MyEdge(new MyPoint(upLeftReal.getX(),downRightReal.getY()),new MyPoint(downRightReal.getX(),downRightReal.getY()));
@@ -40,12 +41,7 @@ public class RectangleRegion implements MyRegion{
 		regionSides[2] = e3;
 		regionSides[3] = e4;	
 	}
-	
-	public void setPixelValues(MyPoint[] p){
-		upLeftPixel = p[0];
-		downRightPixel = p[1];
-	}
-	
+		
 	public MyPoint[] getPoints(){
 		MyPoint p2 = new MyPoint(upLeftReal.getX(),downRightReal.getY());
 		MyPoint p4 = new MyPoint(downRightReal.getX(),upLeftReal.getY());
@@ -55,13 +51,23 @@ public class RectangleRegion implements MyRegion{
 		return points;
 	}
 	
+	public void addPerforation(Perforation p){
+		perforation.add(p);
+	}
 	
 	public void drawRegion(Graphics2D g2d){
+		MyPoint upLeftPixel = scale.getPixelValue(upLeftReal);
+		MyPoint downRightPixel = scale.getPixelValue(downRightReal);
+		
         double height = Math.abs(upLeftPixel.getY()- downRightPixel.getY());
         double width = Math.abs(upLeftPixel.getX()- downRightPixel.getX());
        
         g2d.draw(new Rectangle2D.Double(upLeftPixel.getX(),upLeftPixel.getY(),width,height));
-		
+        
+        /*Se deben dibujar las perforaciones como corresponden*/
+        for(Perforation p: perforation){
+        	p.drawPerforation(g2d,scale);
+        }	
 	}
 	
 	public double getHeight(){

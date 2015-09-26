@@ -85,13 +85,12 @@ public class DisplayWindow extends IWindow{
 		
 		Panel.setRegion(currentRegion);	
 		Panel.setScale(scale);
+		this.scale = scale; 
 		
 		Panel.switchRegion(true);	
 		repaint();
 		validate();
 	}
-	
-	
 	
 	
 	public void drawPointsInPanel(MyPoint[] pointsToDraw, MyPoint[] points){

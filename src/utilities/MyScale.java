@@ -21,8 +21,14 @@ public class MyScale {
 		double xPix = upLeftPixel.getX() + (toChange.getX() - upLeftReal.getX())*(downRightPixel.getX() - upLeftPixel.getX())/(downRightReal.getX() - upLeftReal.getX());
 		double yPix = upLeftPixel.getY() + (toChange.getY() - upLeftReal.getY())*(downRightPixel.getY() - upLeftPixel.getY())/(downRightReal.getY() - upLeftReal.getY());	
 		
-		return new MyPoint(xPix, 0.9*window.getHeight() - yPix);
+		return new MyPoint(xPix,yPix);
 	
+	}
+	
+	public double getPixelValue(double value){
+		double newValue = value/(downRightReal.getX() - upLeftReal.getX())*(downRightPixel.getX() - upLeftPixel.getX());
+
+		return newValue;
 	}
 	
 	public void printScale(){

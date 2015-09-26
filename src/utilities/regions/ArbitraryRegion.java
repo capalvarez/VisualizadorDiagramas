@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import utilities.MyPoint;
 import utilities.MyScale;
+import utilities.perforations.Perforation;
 
 public class ArbitraryRegion implements MyRegion {
 	MyPoint[] points;
@@ -46,12 +47,6 @@ public class ArbitraryRegion implements MyRegion {
 	}
 
 	@Override
-	public void setPixelValues(MyPoint[] pixelValues) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public MyPoint[] generateRandom(int number) {
 		// TODO Auto-generated method stub
 		return null;
@@ -80,6 +75,12 @@ public class ArbitraryRegion implements MyRegion {
 	public MyPoint[] generateBorderByDistance(double[] distances, boolean forAll) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void addPerforation(Perforation p) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

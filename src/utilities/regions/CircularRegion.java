@@ -3,6 +3,7 @@ package utilities.regions;
 import java.awt.Graphics2D;
 
 import utilities.MyPoint;
+import utilities.perforations.Perforation;
 
 public class CircularRegion implements MyRegion {
 
@@ -23,12 +24,6 @@ public class CircularRegion implements MyRegion {
 			double multY) {
 		// TODO Auto-generated method stub
 		return null;
-	}
-
-	@Override
-	public void setPixelValues(MyPoint[] pixelValues) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
@@ -60,6 +55,12 @@ public class CircularRegion implements MyRegion {
 	public MyPoint[] generateBorderByDistance(double[] distances, boolean forAll) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void addPerforation(Perforation p) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

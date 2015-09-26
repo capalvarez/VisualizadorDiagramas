@@ -90,8 +90,6 @@ public class DrawPanel extends AbstractPanel{
     
     private void doDrawingDelaunay(Graphics g){
     	Graphics2D g2d = (Graphics2D) g;
-    	  MyPoint[] p = {scale.getPixelValue(new MyPoint(6.25,95.31))};
-          (new PointDrawer(p,pointSize)).drawPoints(g2d);
     	g2d.setColor(DelaunayColor);
               
         
