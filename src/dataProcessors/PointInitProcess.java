@@ -19,11 +19,7 @@ public class PointInitProcess extends PointProcess {
 		initRegionPoints = points;
 		endPoints = new MyPoint[2];
 				
-		processPoints();
-	
-		System.out.println(endPoints[0]);
-		System.out.println(endPoints[1]);
-	
+		processPoints();	
 	}
 	
 	private MyPoint[] getBoundingPoints(MyPoint[] points){
@@ -56,8 +52,7 @@ public class PointInitProcess extends PointProcess {
 
 		return bounding;
 	}
-	
-	
+		
 	private void processPoints(){
 		MyPoint right = initPointsList[0].getPointRight(initPointsList[1]);
 		MyPoint left = initPointsList[0].getPointLeft(initPointsList[1]);

@@ -15,6 +15,9 @@ import javax.swing.JTextField;
 import utilities.MyPoint;
 import utilities.perforations.MyCircle;
 import utilities.perforations.Perforation;
+import utilities.regions.MyRegion;
+import utilities.regions.circular.FullCircularRegion;
+import utilities.regions.circular.PartialCircularRegion;
 
 import display.IWindow;
 
@@ -27,9 +30,8 @@ public class CircularRegionAction extends AbstractAction {
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		String[] options = { "Completo", "Cuarto", "Medio", "Otro"};
-		
-		/*Pedir input al usuario*/
+		String[] options = { "Completo", "Medio", "Cuarto", "Otro"};
+	
 		JTextField xFieldO = new JTextField(5);
 		JTextField yFieldO = new JTextField(5);
 		JTextField InnerRadius = new JTextField(5);
@@ -107,12 +109,44 @@ public class CircularRegionAction extends AbstractAction {
 				origenY = Double.parseDouble(yFieldO.getText());
 			}
 		
-			double r = Double.parseDouble(InnerRadius.getText());
+			if(InnerRadius.getText().length() != 0){
+				double InnerR = Double.parseDouble(InnerRadius.getText());
+				double OuterR = Double.parseDouble(OuterRadius.getText());
+				MyPoint origen = new MyPoint(origenX,origenY);
+				
+				MyRegion region;
+				
+				switch(optionList.getSelectedIndex()){
+					case 0:
+						region = new FullCircularRegion(InnerR,OuterR,origen,null);
+						break;
+					case 1:
+						double[] anglesHalf = {0,180};
+						region = new PartialCircularRegion(InnerR,OuterR,origen,null,anglesHalf);
+						break;
+					case 2:
+						double[] anglesQuarter = {0,90};
+						region = new PartialCircularRegion(InnerR,OuterR,origen,null,anglesQuarter);
+						break;
+					case 3:
+						double angle1 = Double.parseDouble(initAngle.getText());
+						double angle2 = Double.parseDouble(endAngle.getText());
+						double[] anglesOther = {angle1,angle2};
+						
+						region = new PartialCircularRegion(InnerR,OuterR,origen,null,anglesOther);
+						break;
+				}
+				
+			}
 			
-			MyPoint origen = new MyPoint(origenX,origenY);
-			Perforation p = new MyCircle(origen,r);
 			
-			window.getCurrentRegion().addPerforation(p);
+			
+			
+			
+			
+			
+			
+			
 			window.repaint();
 		}
 
