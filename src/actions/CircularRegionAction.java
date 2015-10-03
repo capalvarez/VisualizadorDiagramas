@@ -161,8 +161,14 @@ public class CircularRegionAction extends AbstractAction {
 						region = new PartialCircularRegion(InnerR,OuterR,origen,scale,anglesQuarter);
 						break;
 					default:
-						pip = new PointInitProcess(cbp.otherCircleBounding(),window);
+						pip = new PointInitProcess(cbp.otherCircleBounding(InnerR),window);
 						scale = pip.getScale();
+//						MyPoint[] arr2 = cbp.otherCircleBounding(); 
+//						for(int i=0;i<2;i++){
+//							System.out.println(arr2[i]);
+//						}
+						
+						scale.printScale();
 						
 						double angle1 = Double.parseDouble(initAngle.getText());
 						double angle2 = Double.parseDouble(endAngle.getText());

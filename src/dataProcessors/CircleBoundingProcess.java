@@ -10,7 +10,12 @@ public class CircleBoundingProcess {
 	public CircleBoundingProcess(MyPoint origin, double radius, double[] angles){
 		this.origin = origin;
 		r = radius;
-		this.angles = angles;
+		
+		if(angles!=null){
+			this.angles = new double[2];
+			this.angles[0] = angles[0]*Math.PI/180;
+			this.angles[1] = angles[1]*Math.PI/180;
+		}	
 	}
 	
 	public MyPoint[] circleBounding(){
@@ -31,12 +36,17 @@ public class CircleBoundingProcess {
 		return array;
 	}
 	
-	public MyPoint[] otherCircleBounding(){
-		double minX = Math.min(origin.getX(), Math.min(origin.getX()-r*Math.cos(angles[0]),origin.getX()+r*Math.cos(angles[1])));
-		double maxX = Math.max(origin.getX(), Math.max(origin.getX()-r*Math.cos(angles[0]),origin.getX()+r*Math.cos(angles[1])));
+	public MyPoint[] otherCircleBounding(double otherR){
+		double minX = Math.min(Math.min(origin.getX()+otherR*Math.cos(angles[0]),origin.getX()+otherR*Math.cos(angles[1])),
+				Math.min(origin.getX()+r*Math.cos(angles[0]),origin.getX()+r*Math.cos(angles[1])));
+		double maxX = Math.max(Math.max(origin.getX()+otherR*Math.cos(angles[0]),origin.getX()+otherR*Math.cos(angles[1])), 
+				Math.max(origin.getX()+r*Math.cos(angles[0]),origin.getX()+r*Math.cos(angles[1])));
 		
-		double minY = Math.min(origin.getY(), Math.min(origin.getY()-r*Math.sin(angles[0]),origin.getY()+r*Math.sin(angles[1])));
-		double maxY = Math.max(origin.getY(), Math.max(origin.getY()-r*Math.sin(angles[0]),origin.getY()+r*Math.sin(angles[1])));
+		double minY = Math.min(Math.min(origin.getY()+otherR*Math.sin(angles[0]),origin.getY()+otherR*Math.sin(angles[1])),
+				Math.min(origin.getY()+r*Math.sin(angles[0]),origin.getY()+r*Math.sin(angles[1])));
+		
+		double maxY = Math.max(Math.max(origin.getY()+otherR*Math.sin(angles[0]),origin.getY()+otherR*Math.sin(angles[1])), 
+				Math.max(origin.getY()+r*Math.sin(angles[0]),origin.getY()+r*Math.sin(angles[1])));
 		
 		MyPoint[] array = {new MyPoint(minX,minY),new MyPoint(maxX,maxY)};
 		
