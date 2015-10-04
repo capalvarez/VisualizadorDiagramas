@@ -1,5 +1,9 @@
 package utilities;
 
+import java.util.ArrayList;
+
+import utilities.perforations.Perforation;
+
 public class MyEdge {
 	private int i1;
 	private int i2;
@@ -92,6 +96,10 @@ public class MyEdge {
 		MyEdge e = new MyEdge(new MyPoint(50,75),new MyPoint(0,50));
 	
 		System.out.println(e.inEdge(new MyPoint(0,50)));
+	}
+	
+	public ArrayList<MyPoint> intersectionPoint(Perforation p){
+			return p.intersectionPoints(p1, p2);
 	}
 	
 }

@@ -15,7 +15,8 @@ public class PointInitProcess extends PointProcess {
 		wHeight = (int) (window.getHeight()*0.9);
 		this.window = window; 
 	
-		initPointsList = getBoundingPoints(points);
+		//initPointsList = getBoundingPoints(points);
+		initPointsList = points;
 		initRegionPoints = points;
 		endPoints = new MyPoint[2];
 				
@@ -54,11 +55,18 @@ public class PointInitProcess extends PointProcess {
 	}
 		
 	private void processPoints(){
+		System.out.println(initPointsList[0]);
+		System.out.println(initPointsList[1]);
+		
 		MyPoint right = initPointsList[0].getPointRight(initPointsList[1]);
 		MyPoint left = initPointsList[0].getPointLeft(initPointsList[1]);
 		MyPoint up = initPointsList[0].getPointUp(initPointsList[1]);
 		MyPoint down = initPointsList[0].getPointDown(initPointsList[1]);
 		double rel = 0.2;
+		
+		System.out.println(right);
+		System.out.println(up);
+	
 		
 		if((right.getX()-left.getX())<=(up.getY()-down.getY())){
 			/*Coordenada mas larga es la vertical, se usa esta escala*/

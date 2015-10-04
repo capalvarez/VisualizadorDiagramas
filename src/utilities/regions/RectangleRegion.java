@@ -9,9 +9,11 @@ import generalTools.RowPointGenerator;
 import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Random;
 
 import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.tuple.Pair;
 
 import utilities.MyEdge;
 import utilities.MyPoint;
@@ -60,14 +62,38 @@ public class RectangleRegion implements MyRegion{
 		
         double height = Math.abs(upLeftPixel.getY()- downRightPixel.getY());
         double width = Math.abs(upLeftPixel.getX()- downRightPixel.getX());
-       
-        g2d.draw(new Rectangle2D.Double(upLeftPixel.getX(),upLeftPixel.getY(),width,height));
+                
+        HashMap<MyEdge,Pair<Perforation,ArrayList<MyPoint>>> map; 
         
         /*Se deben dibujar las perforaciones como corresponden*/
         for(Perforation p: perforation){
         	p.drawPerforation(g2d,scale);
+        	
+        	Pair<MyEdge,ArrayList<MyPoint>> interInfo = intersects(p);
+        	
+        	if(interInfo!=null){
+        		Pair<Perforation,ArrayList<MyPoint>> previous = map.get(interInfo.getLeft());
+        		
+        		if(previous!=null){
+        			map.put(interInfo.getLeft(), new Pair(p,previous.getRight().addAll(interInfo.getRight())));
+        		
+        		
+        		
+        		
+        	}
         }	
 	}
+	
+	public Pair<MyEdge,ArrayList<MyPoint>> intersects(Perforation p){
+		ArrayList<MyPoint> inter = new ArrayList<MyPoint>();
+		
+		for(int i=0;i<regionSides.length;i++){
+			
+		}
+		
+		return inter;
+	}
+	
 	
 	public double getHeight(){
 		return Math.abs(upLeftReal.getY() - downRightReal.getY()); 
