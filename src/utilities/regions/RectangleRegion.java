@@ -60,13 +60,8 @@ public class RectangleRegion implements MyRegion{
 		MyPoint upLeftPixel = scale.getPixelValue(upLeftReal);
 		MyPoint downRightPixel = scale.getPixelValue(downRightReal);
 		
-        double height = Math.abs(upLeftPixel.getY()- downRightPixel.getY());
-        double width = Math.abs(upLeftPixel.getX()- downRightPixel.getX());
-                       
         ArrayList<PointPair> pointsToDraw = initPointPair();
-        
-        //g2d.draw(new Rectangle2D.Double(upLeftPixel.getX(),upLeftPixel.getY(),width,height));
-        
+                
         /*Se deben dibujar las perforaciones como corresponden*/
         for(Perforation p: perforation){
         	if(!processIntersection(pointsToDraw,p)){

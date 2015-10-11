@@ -26,14 +26,25 @@ public class MyCircle implements Perforation{
 			Ellipse2D.Double ellipse2D = new Ellipse2D.Double(scaledCenter.getX()-scaledRadius,scaledCenter.getY()-scaledRadius, 2*scaledRadius, 2*scaledRadius);
 			g2d.draw(ellipse2D);
 		}else{
-			double heightInit = Math.abs(center.getY()-p[0].getY());
-			double heightEnd = Math.abs(center.getY()-p[1].getY());
+			double heightInit = p[1].getY()-center.getY();
+			double heightEnd = p[0].getY()-center.getY();			
 			
-			double initAngle = Math.asin(heightInit/r);
-			double endAngle = Math.asin(heightEnd/r);
+			double widthInit = p[1].getX()-center.getX();
+			double widthEnd = p[0].getX()-center.getX();
 			
-			g2d.draw(new Arc2D.Double(scaledCenter.getX()-scaledRadius*Math.sin(initAngle),scaledCenter.getY()+scaledRadius*Math.cos(endAngle),
-					2*scaledRadius,2*scaledRadius,initAngle,endAngle-initAngle, Arc2D.OPEN));		
+			double initAngle = 180*Math.atan(heightInit/widthInit)/Math.PI;
+			double endAngle = 180*Math.atan(heightEnd/widthEnd)/Math.PI;
+			
+			if(heightInit==0 && widthInit<0){
+				initAngle = 180;
+			}
+			
+			if(heightEnd==0 && widthEnd<0){
+				endAngle = 180;
+			}
+		
+			g2d.draw(new Arc2D.Double(scaledCenter.getX()-scaledRadius,scaledCenter.getY()-scaledRadius,
+					2*scaledRadius,2*scaledRadius,initAngle,Math.abs(endAngle-initAngle), Arc2D.OPEN));		
 		}
 		
 
