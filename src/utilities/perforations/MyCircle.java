@@ -1,6 +1,7 @@
 package utilities.perforations;
 
 import java.awt.Graphics2D;
+import java.awt.geom.Arc2D;
 import java.awt.geom.Ellipse2D;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -17,12 +18,24 @@ public class MyCircle implements Perforation{
 		this.r = radius;
 	}
 		
-	public void drawPerforation(Graphics2D g2d, MyScale scale){
+	public void drawPerforation(Graphics2D g2d, MyScale scale, MyPoint[] p){
 		double scaledRadius = scale.getPixelValue(r);
 		MyPoint scaledCenter = scale.getPixelValue(center);
 		
-		Ellipse2D.Double ellipse2D = new Ellipse2D.Double(scaledCenter.getX()-scaledRadius,scaledCenter.getY()-scaledRadius, 2*scaledRadius, 2*scaledRadius);
-		g2d.draw(ellipse2D);
+		if(p==null){
+			Ellipse2D.Double ellipse2D = new Ellipse2D.Double(scaledCenter.getX()-scaledRadius,scaledCenter.getY()-scaledRadius, 2*scaledRadius, 2*scaledRadius);
+			g2d.draw(ellipse2D);
+		}else{
+			double heightInit = Math.abs(center.getY()-p[0].getY());
+			double heightEnd = Math.abs(center.getY()-p[1].getY());
+			
+			double initAngle = Math.asin(heightInit/r);
+			double endAngle = Math.asin(heightEnd/r);
+			
+			g2d.draw(new Arc2D.Double(scaledCenter.getX()-scaledRadius*Math.sin(initAngle),scaledCenter.getY()+scaledRadius*Math.cos(endAngle),
+					2*scaledRadius,2*scaledRadius,initAngle,endAngle-initAngle, Arc2D.OPEN));		
+		}
+		
 
 	}
 	

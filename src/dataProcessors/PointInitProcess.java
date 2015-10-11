@@ -62,7 +62,7 @@ public class PointInitProcess extends PointProcess {
 		MyPoint left = initPointsList[0].getPointLeft(initPointsList[1]);
 		MyPoint up = initPointsList[0].getPointUp(initPointsList[1]);
 		MyPoint down = initPointsList[0].getPointDown(initPointsList[1]);
-		double rel = 0.2;
+		double rel = 0.1;
 		
 		System.out.println(right);
 		System.out.println(up);

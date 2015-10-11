@@ -13,11 +13,11 @@ import java.util.HashMap;
 import java.util.Random;
 
 import org.apache.commons.lang3.ArrayUtils;
-import org.apache.commons.lang3.tuple.Pair;
 
 import utilities.MyEdge;
 import utilities.MyPoint;
 import utilities.MyScale;
+import utilities.PointPair;
 import utilities.perforations.Perforation;
 
 public class RectangleRegion implements MyRegion{
@@ -62,36 +62,56 @@ public class RectangleRegion implements MyRegion{
 		
         double height = Math.abs(upLeftPixel.getY()- downRightPixel.getY());
         double width = Math.abs(upLeftPixel.getX()- downRightPixel.getX());
-                
-        HashMap<MyEdge,Pair<Perforation,ArrayList<MyPoint>>> map; 
+                       
+        ArrayList<PointPair> pointsToDraw = initPointPair();
+        
+        //g2d.draw(new Rectangle2D.Double(upLeftPixel.getX(),upLeftPixel.getY(),width,height));
         
         /*Se deben dibujar las perforaciones como corresponden*/
         for(Perforation p: perforation){
-        	p.drawPerforation(g2d,scale);
-        	
-        	Pair<MyEdge,ArrayList<MyPoint>> interInfo = intersects(p);
-        	
-        	if(interInfo!=null){
-        		Pair<Perforation,ArrayList<MyPoint>> previous = map.get(interInfo.getLeft());
-        		
-        		if(previous!=null){
-        			map.put(interInfo.getLeft(), new Pair(p,previous.getRight().addAll(interInfo.getRight())));
-        		
-        		
-        		
-        		
-        	}
+        	if(!processIntersection(pointsToDraw,p)){
+        		p.drawPerforation(g2d, scale, null);
+        	}		
         }	
+        
+        for(PointPair p: pointsToDraw){
+        	p.draw(g2d,scale);
+        }
+        
 	}
 	
-	public Pair<MyEdge,ArrayList<MyPoint>> intersects(Perforation p){
-		ArrayList<MyPoint> inter = new ArrayList<MyPoint>();
+	private ArrayList<PointPair> initPointPair(){
+		ArrayList<PointPair> list = new ArrayList<PointPair>();
 		
-		for(int i=0;i<regionSides.length;i++){
+		list.add(new PointPair(upLeftReal,new MyPoint(upLeftReal.getX(),downRightReal.getY())));
+		list.add(new PointPair(new MyPoint(upLeftReal.getX(),downRightReal.getY()),downRightReal));
+		list.add(new PointPair(downRightReal,new MyPoint(downRightReal.getX(),upLeftReal.getY())));
+		list.add(new PointPair(new MyPoint(downRightReal.getX(),upLeftReal.getY()),upLeftReal));
+	
+		return list;
+	}
+	
+	public boolean processIntersection(ArrayList<PointPair> list,Perforation p){
+		ArrayList<MyPoint> inter = new ArrayList<MyPoint>();
+		boolean changed = false;
+		int n = list.size();
+		
+		for(int i=0;i<n;i++){
+			inter = list.get(i).intersectionPoint(p);
 			
+			if(inter.size()==2){
+				changed = true;
+				PointPair newPair = list.get(i).divide(inter.get(0));
+				PointPair newPair2 = newPair.divide(inter.get(1));
+				
+				newPair.setPerforation(p);
+				
+				list.add(newPair);
+				list.add(newPair2);
+			}	
 		}
 		
-		return inter;
+		return changed;
 	}
 	
 	
