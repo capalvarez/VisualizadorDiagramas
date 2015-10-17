@@ -66,7 +66,12 @@ public class RectangleRegion implements MyRegion{
         for(Perforation p: perforation){
         	if(!processIntersection(pointsToDraw,p)){
         		p.drawPerforation(g2d, scale, null);
-        	}		
+        	}else{
+        		System.out.println();
+        		for(int i=0;i<pointsToDraw.size();i++){
+        			System.out.println(pointsToDraw.get(i));
+        		}
+        	}
         }	
         
         for(PointPair p: pointsToDraw){
@@ -93,6 +98,7 @@ public class RectangleRegion implements MyRegion{
 		
 		for(int i=0;i<n;i++){
 			inter = list.get(i).intersectionPoint(p);
+			System.out.println("aqui " + list.get(i) );
 			
 			if(inter.size()==2){
 				changed = true;

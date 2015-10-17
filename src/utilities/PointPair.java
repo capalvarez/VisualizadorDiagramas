@@ -57,5 +57,10 @@ public class PointPair{
     
     public ArrayList<MyPoint> intersectionPoint(Perforation p){
 		return p.intersectionPoints(first, second);
-}
+    }
+    
+    @Override
+    public String toString(){
+    	return first.toString() + "-> " + second.toString();
+    }
 }

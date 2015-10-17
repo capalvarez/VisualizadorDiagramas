@@ -77,16 +77,42 @@ public class MyCircle implements Perforation{
         MyPoint p1 = new MyPoint(pA.getX() - baX * abScalingFactor1, pA.getY()
                 - baY * abScalingFactor1);
         if (disc == 0) {
-        	returnList.add(p1);
+        	if(inSegment(pA,pB,p1)){
+        		returnList.add(p1);
+        	}
+        	
             return returnList;
         }
         
         MyPoint p2 = new MyPoint(pA.getX() - baX * abScalingFactor2, pA.getY()
                 - baY * abScalingFactor2);
         
-        returnList.add(p1);
-        returnList.add(p2);
+        if(inSegment(pA,pB,p1)){
+    		returnList.add(p1);
+    	}
         
+        if(inSegment(pA,pB,p2)){
+    		returnList.add(p2);
+    	}
+   
         return returnList;
     }
+	
+	public boolean inSegment(MyPoint pA, MyPoint pB, MyPoint pC){
+		double AB = Math.sqrt(Math.pow(pB.getX()-pA.getX(),2)+Math.pow(pB.getY()-pA.getY(),2));
+		double AP = Math.sqrt(Math.pow(pC.getX()-pA.getX(),2)+Math.pow(pC.getY()-pA.getY(),2));
+		double PB = Math.sqrt(Math.pow(pB.getX()-pC.getX(),2)+Math.pow(pB.getY()-pC.getY(),2));
+		
+		if(AB == AP + PB){
+			if(pA.getPointLeft(pB).getX()<=pC.getX() && pA.getPointRight(pB).getX()>=pC.getX() &&
+					pA.getPointDown(pB).getY()<=pC.getY() && pA.getPointUp(pB).getY()>=pC.getY()){
+				return true;
+			}else{
+				return false;
+			}	
+		}else{
+			return false;
+		}
+		    
+	}
 }
