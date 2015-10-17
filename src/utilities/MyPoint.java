@@ -1,5 +1,9 @@
 package utilities;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+
 public class MyPoint {
 	private double x;
 	private double y;
@@ -43,10 +47,6 @@ public class MyPoint {
 		return dimension;
 	}
 	
-	public double distanceZero(){
-		return Math.pow(x, 2) + Math.pow(y, 2) + Math.pow(z, 2);
-	}
-	
 	@Override
 	public boolean equals(Object o){
 		if(o instanceof MyPoint){
@@ -65,7 +65,7 @@ public class MyPoint {
 	}
 	
 	public double distance(MyPoint p2){
-		return Math.sqrt(distanceZero() + p2.distanceZero());
+		return Math.sqrt(Math.pow(p2.getX() - getX(), 2) + Math.pow(p2.getY() - getY(), 2));
 	}
 	
 	public MyPoint getPointRight(MyPoint p2){
@@ -105,5 +105,61 @@ public class MyPoint {
 		double y = this.getY() - p.getY();
 		
 		return new MyPoint(x,y);
-	}	
+	}
+	
+	public MyPoint getSmallestPoint(MyPoint p){
+		if(this.getX()<p.getX()){
+			return this;
+		}else{
+			if(this.getX()==p.getX()){
+				if(this.getY()<p.getY()){
+					return this;
+				}else{
+					return p;
+				}
+			}else{
+				return p;
+			}
+		}
+	}
+	
+	public MyPoint getGreatestPoint(MyPoint p){
+		if(this.getX()>p.getX()){
+			return this;
+		}else{
+			if(this.getX()==p.getX()){
+				if(this.getY()>p.getY()){
+					return this;
+				}else{
+					return p;
+				}
+			}else{
+				return p;
+			}
+		}
+	}
+	
+	public MyPoint closestTo(ArrayList<MyPoint> list){
+		final MyPoint thisPoint = this;
+				
+		Collections.sort(list, new Comparator<MyPoint>() {
+	         @Override
+	         public int compare(MyPoint p1, MyPoint p2) {
+	           	 double dist1 = p1.distance(thisPoint);
+	         	 double dist2 = p2.distance(thisPoint); 
+	    	         	 
+	        	 if(dist1<dist2){
+	             	return -1;
+	             }else{
+	            	if(dist1==dist2)
+	            		return 0;
+	            	else
+	            		return 1;
+	             }
+	         }
+	     });
+		
+		return list.get(0);
+	}
+	
 }

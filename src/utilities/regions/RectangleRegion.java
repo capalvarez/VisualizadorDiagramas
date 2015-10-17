@@ -98,12 +98,14 @@ public class RectangleRegion implements MyRegion{
 		
 		for(int i=0;i<n;i++){
 			inter = list.get(i).intersectionPoint(p);
-			System.out.println("aqui " + list.get(i) );
-			
+					
 			if(inter.size()==2){
 				changed = true;
-				PointPair newPair = list.get(i).divide(inter.get(0));
-				PointPair newPair2 = newPair.divide(inter.get(1));
+				
+				MyPoint first = list.get(i).getFirst().closestTo(inter);
+				PointPair newPair = list.get(i).divide(first);
+				inter.remove(first);
+				PointPair newPair2 = newPair.divide(inter.get(0));
 				
 				newPair.setPerforation(p);
 				

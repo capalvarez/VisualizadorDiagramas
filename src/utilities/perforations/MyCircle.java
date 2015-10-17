@@ -5,6 +5,7 @@ import java.awt.geom.Arc2D;
 import java.awt.geom.Ellipse2D;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 
 import utilities.MyPoint;
 import utilities.MyScale;
@@ -26,11 +27,14 @@ public class MyCircle implements Perforation{
 			Ellipse2D.Double ellipse2D = new Ellipse2D.Double(scaledCenter.getX()-scaledRadius,scaledCenter.getY()-scaledRadius, 2*scaledRadius, 2*scaledRadius);
 			g2d.draw(ellipse2D);
 		}else{
-			double heightInit = p[1].getY()-center.getY();
-			double heightEnd = p[0].getY()-center.getY();			
+			MyPoint smallest = p[0].getSmallestPoint(p[1]);
+			MyPoint greatest = p[0].getGreatestPoint(p[1]);
 			
-			double widthInit = p[1].getX()-center.getX();
-			double widthEnd = p[0].getX()-center.getX();
+			double heightInit = smallest.getY()-center.getY();
+			double heightEnd = greatest.getY()-center.getY();			
+			
+			double widthInit = smallest.getX()-center.getX();
+			double widthEnd = greatest.getX()-center.getX();
 			
 			double initAngle = 180*Math.atan(heightInit/widthInit)/Math.PI;
 			double endAngle = 180*Math.atan(heightEnd/widthEnd)/Math.PI;
@@ -50,7 +54,7 @@ public class MyCircle implements Perforation{
 
 	}
 	
-	public ArrayList<MyPoint> intersectionPoints(MyPoint pA, MyPoint pB){
+	public ArrayList<MyPoint> intersectionPoints(final MyPoint pA, final MyPoint pB){
 		ArrayList<MyPoint> returnList = new ArrayList<MyPoint>();	
 		
 		double baX = pB.getX() - pA.getX();
@@ -74,8 +78,8 @@ public class MyCircle implements Perforation{
         double abScalingFactor1 = -pBy2 + tmpSqrt;
         double abScalingFactor2 = -pBy2 - tmpSqrt;
 
-        MyPoint p1 = new MyPoint(pA.getX() - baX * abScalingFactor1, pA.getY()
-                - baY * abScalingFactor1);
+        MyPoint p1 = new MyPoint(pA.getX() - baX * abScalingFactor1, Math.abs(pA.getY()
+                - baY * abScalingFactor1));
         if (disc == 0) {
         	if(inSegment(pA,pB,p1)){
         		returnList.add(p1);
@@ -84,8 +88,8 @@ public class MyCircle implements Perforation{
             return returnList;
         }
         
-        MyPoint p2 = new MyPoint(pA.getX() - baX * abScalingFactor2, pA.getY()
-                - baY * abScalingFactor2);
+        MyPoint p2 = new MyPoint(pA.getX() - baX * abScalingFactor2, Math.abs(pA.getY()
+                - baY * abScalingFactor2));
         
         if(inSegment(pA,pB,p1)){
     		returnList.add(p1);
@@ -94,7 +98,24 @@ public class MyCircle implements Perforation{
         if(inSegment(pA,pB,p2)){
     		returnList.add(p2);
     	}
-   
+        
+        Collections.sort(returnList, new Comparator<MyPoint>() {
+	         @Override
+	         public int compare(MyPoint p1, MyPoint p2) {
+	        	 MyPoint smallest = pA.getSmallestPoint(pB);
+	           	 double diff = p1.distance(smallest) - p2.distance(smallest); 
+	             	        	 
+	        	 if(diff<0){
+	             	return -1;
+	             }else{
+	            	if(diff==0)
+	            		return 0;
+	            	else
+	            		return 1;
+	             }
+	         }
+	     });
+        
         return returnList;
     }
 	
@@ -102,7 +123,7 @@ public class MyCircle implements Perforation{
 		double AB = Math.sqrt(Math.pow(pB.getX()-pA.getX(),2)+Math.pow(pB.getY()-pA.getY(),2));
 		double AP = Math.sqrt(Math.pow(pC.getX()-pA.getX(),2)+Math.pow(pC.getY()-pA.getY(),2));
 		double PB = Math.sqrt(Math.pow(pB.getX()-pC.getX(),2)+Math.pow(pB.getY()-pC.getY(),2));
-		
+			
 		if(AB == AP + PB){
 			if(pA.getPointLeft(pB).getX()<=pC.getX() && pA.getPointRight(pB).getX()>=pC.getX() &&
 					pA.getPointDown(pB).getY()<=pC.getY() && pA.getPointUp(pB).getY()>=pC.getY()){
