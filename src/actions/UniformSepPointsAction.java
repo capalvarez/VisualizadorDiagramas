@@ -63,8 +63,8 @@ public class UniformSepPointsAction extends AbstractAction {
 		optionList.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				if(optionList.getSelectedIndex()==1){					
-					firstLabel.setText("Separación en ángulo:");
-					secondLabel.setText("Separación en radio:");
+					firstLabel.setText("Separación en radio:");
+					secondLabel.setText("Separación en ángulo:");
 				}else{
 					firstLabel.setText("Separación en X:");
 					secondLabel.setText("Separación en Y:");

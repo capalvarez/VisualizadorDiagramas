@@ -63,8 +63,8 @@ public class UniformNumPointsAction extends AbstractAction {
 		optionList.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				if(optionList.getSelectedIndex()==1){					
-					firstLabel.setText("N de puntos en ángulo:");
-					secondLabel.setText("N de puntos en radio:");
+					firstLabel.setText("N de puntos en radio:");
+					secondLabel.setText("N de puntos en ángulo:");
 				}else{
 					firstLabel.setText("Numero de puntos en X:");
 					secondLabel.setText("Numero de puntos en Y:");
