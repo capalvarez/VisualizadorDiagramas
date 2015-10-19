@@ -5,10 +5,12 @@ import generalTools.RowPointGenerator;
 
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.AbstractAction;
 import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -32,16 +34,24 @@ public class UniformSepPointsAction extends AbstractAction {
 		JTextField deltaX = new JTextField(5);
 		JTextField deltaY = new JTextField(5);
 	
-		JPanel inputPanel = new JPanel();
+		String[] options = { "Cartesiano", "Cilindrico"};
+		final JComboBox<String> optionList = new JComboBox<String>(options);
+		optionList.setSelectedIndex(0);	
+		
+		final JPanel inputPanel = new JPanel();
+		inputPanel.add(optionList);
+		
 		GridLayout layout = new GridLayout(0,1);
 		inputPanel.setLayout(layout);
-		inputPanel.add(new JLabel("Separacion en X:"));
+		final JLabel firstLabel = new JLabel("Separacion en X:"); 
+		inputPanel.add(firstLabel);
 		
 		JPanel xPanel = new JPanel();
 		xPanel.add(deltaX);
 		inputPanel.add(xPanel);
 		
-		inputPanel.add(new JLabel("Separacion en Y:"));
+		final JLabel secondLabel = new JLabel("Separacion en Y:");
+		inputPanel.add(secondLabel);
 		JPanel yPanel = new JPanel();
 		yPanel.add(deltaY);
 		inputPanel.add(yPanel);
@@ -49,6 +59,21 @@ public class UniformSepPointsAction extends AbstractAction {
 		final JCheckBox secondRow = new JCheckBox("Segunda fila desfasada");
 		secondRow.setSelected(false);   
 		inputPanel.add(secondRow);
+		
+		optionList.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				if(optionList.getSelectedIndex()==1){					
+					firstLabel.setText("Separación en ángulo:");
+					secondLabel.setText("Separación en radio:");
+				}else{
+					firstLabel.setText("Separación en X:");
+					secondLabel.setText("Separación en Y:");
+				}
+				
+				inputPanel.repaint();
+	       		inputPanel.revalidate();	
+			}
+		});
 		
 		int result = JOptionPane.showConfirmDialog(null, inputPanel, 
 				"Puntos uniforme por separacion", JOptionPane.OK_CANCEL_OPTION);
@@ -66,7 +91,6 @@ public class UniformSepPointsAction extends AbstractAction {
 			window.repaint();
 			
 		}
-		
 	}
 
 }

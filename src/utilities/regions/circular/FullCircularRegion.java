@@ -11,6 +11,10 @@ public class FullCircularRegion extends CircularRegion {
 		super(iR,oR,c,s);
 	}
 	
+	private double radian(double angle){
+		return angle*Math.PI/180.0;	
+	}
+	
 	public void drawRegion(Graphics2D g2d) {
 		double sInnerR = scale.getPixelValue(innerR);
 		double sOuterR = scale.getPixelValue(outerR);
@@ -22,6 +26,30 @@ public class FullCircularRegion extends CircularRegion {
 		
 		g2d.draw(innerCircle);
 		g2d.draw(outerCircle);
+	}
+	
+	@Override
+	public MyPoint[] generateUniformByNumber(int nX, int nY, boolean secondRow) {
+		double delta = (outerR - innerR)/(nX-1);
+		double dA = 360/nY; 
+						
+		MyPoint[] retPoints = new MyPoint[nX*nY];
+		int k = 0;	
+		
+		for(int i=0;i<nX;i++){
+			double rad = innerR + delta*i;
+			
+			for(int j=0;j<nY;j++){
+				double angle = j*dA;
+				double x = center.getX() + rad*Math.cos(radian(angle));
+				double y = center.getY() + rad*Math.sin(radian(angle));
+								
+				retPoints[k] = new MyPoint(x,y);
+				k++;
+			}	
+		}
+		
+		return retPoints;
 	}
 	
 }

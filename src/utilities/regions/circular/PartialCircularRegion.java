@@ -48,4 +48,9 @@ public class PartialCircularRegion extends CircularRegion {
 		//g2d.draw(new Line2D.Double(pInner1.getX(), pInner1.getY(), pOuter1.getX(), pOuter1.getY()));
 		g2d.draw(new Line2D.Double(pInner2.getX(), pInner2.getY(), pOuter2.getX(), pOuter2.getY()));
 	}
+
+	@Override
+	public MyPoint[] generateUniformByNumber(int nX, int nY, boolean secondRow) {
+		return null;
+	}
 }

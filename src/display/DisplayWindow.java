@@ -86,6 +86,7 @@ public class DisplayWindow extends IWindow{
 		Panel.setRegion(currentRegion);	
 		Panel.setScale(scale);
 		this.scale = scale; 
+		scale.printScale();
 		
 		Panel.switchRegion(true);	
 		repaint();
@@ -96,7 +97,7 @@ public class DisplayWindow extends IWindow{
 	public void drawPointsInPanel(MyPoint[] pointsToDraw, MyPoint[] points){
 		menu.setDiagramasEnabled(true);
 		currentPoints = points;
-
+			
 		MyPoint[] pixelPoints = new MyPoint[pointsToDraw.length];
 		for(int i=0; i<pixelPoints.length; i++){
 			pixelPoints[i] = scale.getPixelValue(pointsToDraw[i]);

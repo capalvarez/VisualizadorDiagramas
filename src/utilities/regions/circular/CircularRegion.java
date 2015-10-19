@@ -26,7 +26,6 @@ public abstract class CircularRegion implements MyRegion {
 		return false;
 	}
 
-
 	@Override
 	public MyPoint[] generateNonUniform(double initX, double multX, double initY,
 			double multY) {
@@ -47,11 +46,7 @@ public abstract class CircularRegion implements MyRegion {
 		return null;
 	}
 
-	@Override
-	public MyPoint[] generateUniformByNumber(int nX, int nY, boolean secondRow) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 
 	@Override
 	public MyPoint[] generateBorderByNumber(int[] numbers, boolean forAll) {
