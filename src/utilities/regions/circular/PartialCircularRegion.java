@@ -28,9 +28,7 @@ public class PartialCircularRegion extends CircularRegion {
 		double sOuterR = scale.getPixelValue(outerR);
 		
 		MyPoint scaledCenter = scale.getPixelValue(center);
-
-		//g2d.draw(new Rectangle2D.Double(120,27,360,305));
-		
+				
 		g2d.draw(new Arc2D.Double(scaledCenter.getX()-sInnerR,scaledCenter.getY()+sInnerR,2*sInnerR,2*sInnerR,angles[0],angles[1], Arc2D.OPEN));
 		g2d.draw(new Arc2D.Double(scaledCenter.getX()-sOuterR,scaledCenter.getY(),2*sOuterR,2*sOuterR,angles[0],angles[1], Arc2D.OPEN));
 					
@@ -45,6 +43,33 @@ public class PartialCircularRegion extends CircularRegion {
 
 	@Override
 	public MyPoint[] generateUniformByNumber(int nX, int nY, boolean secondRow) {
-		return null;
+		double delta = (outerR - innerR)/(nX-1);
+		double dA = Math.abs(angles[1]-angles[0])/(nY-1); 
+	
+		MyPoint[] retPoints = new MyPoint[nX*nY];
+		int k = 0;	
+		
+		for(int i=0;i<nX;i++){
+			double rad = innerR + delta*i;
+			
+			for(int j=0;j<nY;j++){
+				double angle = angles[0] + j*dA;
+				double x = center.getX() + rad*Math.cos(radian(angle));
+				double y = center.getY() + outerR - rad*Math.sin(radian(angle));
+								
+				retPoints[k] = new MyPoint(x,y);
+				k++;
+			}	
+		}
+		
+		return retPoints;
+	}
+	
+	@Override
+	public MyPoint[] generateUniformByDistance(double dx, double dy,boolean secondRow) {
+		int nX = (int) Math.floor((outerR-innerR)/dx);
+		int nY = (int) Math.floor(Math.abs(angles[1]-angles[0])/dy);
+	
+		return generateUniformByNumber(nX,nY,secondRow);
 	}
 }

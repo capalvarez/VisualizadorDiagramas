@@ -67,10 +67,7 @@ public class RectangleRegion implements MyRegion{
         	if(!processIntersection(pointsToDraw,p)){
         		p.drawPerforation(g2d, scale, null);
         	}else{
-        		System.out.println();
-        		for(int i=0;i<pointsToDraw.size();i++){
-        			System.out.println(pointsToDraw.get(i));
-        		}
+        		
         	}
         }	
         

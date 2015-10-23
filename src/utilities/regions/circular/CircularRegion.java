@@ -39,14 +39,6 @@ public abstract class CircularRegion implements MyRegion {
 		return null;
 	}
 
-	@Override
-	public MyPoint[] generateUniformByDistance(double dx, double dy,
-			boolean secondRow) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	
 
 	@Override
 	public MyPoint[] generateBorderByNumber(int[] numbers, boolean forAll) {

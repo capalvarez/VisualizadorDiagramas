@@ -48,14 +48,6 @@ public class PointFileReader {
 			e.printStackTrace();
 		}				
     }
-
-	private void printCoord(String[] coord){
-		System.out.println("punto nuevo, son"+coord.length);
-		
-		for(int i=0;i<coord.length;i++){
-			System.out.println(coord[i]);
-		}
-	}
 	
 	public String[] getPointList(){
 		return pointList;

@@ -86,6 +86,7 @@ public class DisplayWindow extends IWindow{
 		Panel.setRegion(currentRegion);	
 		Panel.setScale(scale);
 		this.scale = scale; 
+		scale.printScale();
 			
 		Panel.switchRegion(true);	
 		repaint();

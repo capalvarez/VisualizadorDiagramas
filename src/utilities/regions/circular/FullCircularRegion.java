@@ -56,11 +56,7 @@ public class FullCircularRegion extends CircularRegion {
 	public MyPoint[] generateUniformByDistance(double dx, double dy, boolean secondRow) {
 		int nX = (int) Math.floor((outerR-innerR)/dx);
 		int nY = (int) Math.floor(360/dy);
-		
-		System.out.println(outerR);
-		System.out.println(innerR);
-		System.out.println(dx);
-		
+	
 		return generateUniformByNumber(nX,nY,secondRow);
 	}
 }
