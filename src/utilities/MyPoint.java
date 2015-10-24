@@ -162,4 +162,8 @@ public class MyPoint {
 		return list.get(0);
 	}
 	
+	public void add(double xVal, double yVal){
+		x = x + xVal;
+		y = y + yVal;
+	}
 }

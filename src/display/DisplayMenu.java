@@ -16,6 +16,7 @@ public class DisplayMenu {
 	JMenuItem voronoi;
 	JMenu ingresarItem;
 	JMenuItem azarItem;
+	JMenu pertubarItem;
 	JMenu uniformeItem;
 	JMenu noUniformeItem;
 	JMenuItem imprimir;
@@ -121,7 +122,22 @@ public class DisplayMenu {
 				
 		dibujar.add(noUniformeItem);
 		noUniformeItem.setEnabled(false);
-
+				
+		pertubarItem = new JMenu("Ingresar perturbacion");
+		pertubarItem.setMnemonic(KeyEvent.VK_P);
+		
+		JMenuItem sinusoidal = new JMenuItem("Sinusoide");
+		sinusoidal.addActionListener(new SinusoidPerturbationAction(window));
+		
+		JMenuItem polinomio = new JMenuItem("Polinomio");
+		dNoUNiRad.addActionListener(new PolinomicPerturbationAction(window));
+		
+		pertubarItem.add(sinusoidal);
+		pertubarItem.add(polinomio);
+				
+		dibujar.add(pertubarItem);
+		pertubarItem.setEnabled(false);
+	
 	}
 	
 	public void setBordesMenu(JMenu bordes){
@@ -271,6 +287,7 @@ public class DisplayMenu {
 		azarItem.setEnabled(shown);
 		uniformeItem.setEnabled(shown);
 		noUniformeItem.setEnabled(shown);
+		pertubarItem.setEnabled(shown);
 	}
 	
 	public void setBordesEnabled(boolean shown){
