@@ -130,7 +130,7 @@ public class DisplayMenu {
 		sinusoidal.addActionListener(new SinusoidPerturbationAction(window));
 		
 		JMenuItem polinomio = new JMenuItem("Polinomio");
-		dNoUNiRad.addActionListener(new PolinomicPerturbationAction(window));
+		polinomio.addActionListener(new PolinomicPerturbationAction(window));
 		
 		pertubarItem.add(sinusoidal);
 		pertubarItem.add(polinomio);

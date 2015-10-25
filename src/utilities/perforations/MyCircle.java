@@ -55,12 +55,12 @@ public class MyCircle implements Perforation{
 	}
 	
 	public ArrayList<MyPoint> intersectionPoints(final MyPoint pA, final MyPoint pB){
-		ArrayList<MyPoint> returnList = new ArrayList<MyPoint>();	
+		ArrayList<MyPoint> returnList = new ArrayList<MyPoint>();		
 		
 		double baX = pB.getX() - pA.getX();
         double baY = pB.getY() - pA.getY();
         double caX = center.getX() - pA.getX();
-        double caY = center.getY() - pB.getY();
+        double caY = center.getY() - pA.getY();
 
         double a = baX * baX + baY * baY;
         double bBy2 = baX * caX + baY * caY;
@@ -71,7 +71,7 @@ public class MyCircle implements Perforation{
 
         double disc = pBy2 * pBy2 - q;
         if (disc < 0) {
-            return returnList;
+             return returnList;
         }
         
         double tmpSqrt = Math.sqrt(disc);
@@ -82,7 +82,7 @@ public class MyCircle implements Perforation{
                 - baY * abScalingFactor1));
         if (disc == 0) {
         	if(inSegment(pA,pB,p1)){
-        		returnList.add(p1);
+           		returnList.add(p1);
         	}
         	
             return returnList;
@@ -133,7 +133,14 @@ public class MyCircle implements Perforation{
 			}	
 		}else{
 			return false;
-		}
-		    
+		}    
+	}
+	
+	public boolean contains(MyPoint p){
+		return Math.pow((p.getX() - center.getX()),2) + Math.pow((p.getY() - center.getY()),2) < Math.pow(r,2);
+	}
+	
+	public String toString(){
+		return center.toString()+ "   "+ r;
 	}
 }

@@ -62,7 +62,7 @@ public class SinusoidPerturbationAction extends AbstractAction {
 	
 				
 		int result = JOptionPane.showConfirmDialog(null, inputPanel, 
-				"Región desde altura y ancho", JOptionPane.OK_CANCEL_OPTION);
+				"Perturbacion sinusoidal", JOptionPane.OK_CANCEL_OPTION);
 		
 		/*Solamente hacemos algo si el usuario confirmo el ingreso de los puntos*/
 		if (result == JOptionPane.OK_OPTION) {
@@ -86,10 +86,13 @@ public class SinusoidPerturbationAction extends AbstractAction {
 			MyPoint[] points = window.getCurrentPoints();
 			
 			for(int i=0;i<points.length;i++){
-				double xVal = amC*Math.cos(frC*points[i].getX()) + amS*Math.sin(frS*points[i].getX());
+				//double xVal = amC*Math.cos(frC*points[i].getX()) + amS*Math.sin(frS*points[i].getX());
 				double yVal = amC*Math.cos(frC*points[i].getY()) + amS*Math.sin(frS*points[i].getY());
 				
-				points[i].add(xVal,yVal);
+				//System.out.println(xVal);
+				System.out.println(yVal);
+				
+				points[i].add(0,yVal);
 			}
 			window.drawPointsInPanel(points, points);
 			window.repaint();

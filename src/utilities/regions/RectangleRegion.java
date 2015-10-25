@@ -63,7 +63,7 @@ public class RectangleRegion implements MyRegion{
         ArrayList<PointPair> pointsToDraw = initPointPair();
                 
         /*Se deben dibujar las perforaciones como corresponden*/
-        for(Perforation p: perforation){
+        for(Perforation p: perforation){	
         	if(!processIntersection(pointsToDraw,p)){
         		p.drawPerforation(g2d, scale, null);
         	}else{
@@ -84,7 +84,7 @@ public class RectangleRegion implements MyRegion{
 		list.add(new PointPair(new MyPoint(upLeftReal.getX(),downRightReal.getY()),downRightReal));
 		list.add(new PointPair(downRightReal,new MyPoint(downRightReal.getX(),upLeftReal.getY())));
 		list.add(new PointPair(new MyPoint(downRightReal.getX(),upLeftReal.getY()),upLeftReal));
-	
+			
 		return list;
 	}
 	
@@ -95,7 +95,8 @@ public class RectangleRegion implements MyRegion{
 		
 		for(int i=0;i<n;i++){
 			inter = list.get(i).intersectionPoint(p);
-					
+			System.out.println(p + "            " + inter.size());
+			
 			if(inter.size()==2){
 				changed = true;
 				
@@ -108,7 +109,27 @@ public class RectangleRegion implements MyRegion{
 				
 				list.add(newPair);
 				list.add(newPair2);
-			}	
+			}
+			
+			if(inter.size()==1){
+				/*Hay que distinguir entre contacto e interseccion "interrumpida"*/
+				PointPair side = list.get(i);
+				System.out.println(list.get(i));
+				
+				if(p.contains(side.getFirst())){
+					PointPair newPair = side.divide(inter.get(0));
+					newPair.setPerforation(p);
+					list.add(newPair);
+					System.out.println(inter.get(0));
+				}else{
+					if(p.contains(side.getSecond())){
+						PointPair newPair = side.divide(inter.get(0));
+						newPair.setPerforation(p);
+						list.add(newPair);
+					}
+				}
+			}
+			
 		}
 		
 		return changed;
