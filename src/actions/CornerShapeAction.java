@@ -72,7 +72,8 @@ public class CornerShapeAction extends AbstractAction {
 			MyPoint[] regionPoints = pip.getPointList();
 			MyScale scale = pip.getScale();
 			
-			MyRegion region = new RectangleRegion(p1,p2,scale);	
+			MyRegion region = new RectangleRegion(p1,p2,scale);
+			region.emptyPerforations();
 		
 			window.drawRegionInPanel(region,scale);
 			window.repaint();

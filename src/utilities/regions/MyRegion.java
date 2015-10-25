@@ -7,8 +7,6 @@ import utilities.MyPoint;
 import utilities.perforations.Perforation;
 
 public interface MyRegion {
-	ArrayList<Perforation> perforation = new ArrayList<Perforation>();
-	
 	public boolean isInside(MyPoint point);
 	public void drawRegion(Graphics2D g2d);
 
@@ -21,5 +19,6 @@ public interface MyRegion {
 	public MyPoint[] generateBorderByDistance(double[] distances, boolean forAll);
 	
 	public void addPerforation(Perforation p);
+	public void emptyPerforations();
 
 }

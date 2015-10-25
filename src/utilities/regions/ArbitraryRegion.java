@@ -83,4 +83,10 @@ public class ArbitraryRegion implements MyRegion {
 		
 	}
 
+	@Override
+	public void emptyPerforations() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

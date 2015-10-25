@@ -220,6 +220,7 @@ public class DisplayWindow extends IWindow{
 	public void deleteRegion(){
 		deleteDiagram();
 		deletePoints();
+		currentRegion = null;
 		Panel.switchRegion(false);
 			
 		menu.setPuntosEnabled(false);

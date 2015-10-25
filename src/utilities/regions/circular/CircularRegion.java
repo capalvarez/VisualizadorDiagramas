@@ -1,6 +1,7 @@
 package utilities.regions.circular;
 
 import java.awt.Graphics2D;
+import java.util.ArrayList;
 
 import utilities.MyPoint;
 import utilities.MyScale;
@@ -8,6 +9,7 @@ import utilities.perforations.Perforation;
 import utilities.regions.MyRegion;
 
 public abstract class CircularRegion implements MyRegion {
+	ArrayList<Perforation> perforation = new ArrayList<Perforation>();
 	double innerR;
 	double outerR;
 	MyPoint center;
@@ -54,7 +56,12 @@ public abstract class CircularRegion implements MyRegion {
 
 	@Override
 	public void addPerforation(Perforation p) {
-		perforation.add(p);
+		perforation.add(p);	
+	}
+	
+	@Override
+	public void emptyPerforations() {
+		// TODO Auto-generated method stub
 		
 	}
 }

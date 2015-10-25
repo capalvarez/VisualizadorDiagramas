@@ -21,6 +21,7 @@ import utilities.PointPair;
 import utilities.perforations.Perforation;
 
 public class RectangleRegion implements MyRegion{
+	ArrayList<Perforation> perforation = new ArrayList<Perforation>();
 	MyPoint upLeftReal;
 	MyPoint downRightReal;
 	MyScale scale;
@@ -158,6 +159,10 @@ public class RectangleRegion implements MyRegion{
 	
 	public double getDownCorner(){
 		return downRightReal.getY();
+	}
+	
+	public void emptyPerforations(){
+		perforation = new ArrayList<Perforation>();
 	}
 	
 	@Override

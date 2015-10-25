@@ -59,4 +59,6 @@ public class FullCircularRegion extends CircularRegion {
 	
 		return generateUniformByNumber(nX,nY,secondRow);
 	}
+
+	
 }
