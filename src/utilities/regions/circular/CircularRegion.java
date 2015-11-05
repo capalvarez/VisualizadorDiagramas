@@ -41,19 +41,6 @@ public abstract class CircularRegion implements MyRegion {
 		return null;
 	}
 
-
-	@Override
-	public MyPoint[] generateBorderByNumber(int[] numbers, boolean forAll) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public MyPoint[] generateBorderByDistance(double[] distances, boolean forAll) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	@Override
 	public void addPerforation(Perforation p) {
 		perforation.add(p);	
