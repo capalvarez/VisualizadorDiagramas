@@ -3,12 +3,16 @@ package utilities.regions;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
 
+import utilities.MyEdge;
 import utilities.MyPoint;
 import utilities.perforations.Perforation;
 
 public interface MyRegion {
 	public boolean isInside(MyPoint point);
 	public void drawRegion(Graphics2D g2d);
+	
+	public MyEdge[] getEdges();
+	public MyPoint[] getPoints();
 
 	public MyPoint[] generateNonUniform(double initX, double multX, double initY, double multY);
 	public MyPoint[] generateRandom(int number);

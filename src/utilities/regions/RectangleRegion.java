@@ -57,6 +57,17 @@ public class RectangleRegion implements MyRegion{
 		perforation.add(p);
 	}
 	
+	public MyEdge[] getEdges(){
+		MyEdge[] indexEdges = new MyEdge[4];
+		
+		indexEdges[0] = new MyEdge(1,2);
+		indexEdges[1] = new MyEdge(2,3);
+		indexEdges[2] = new MyEdge(3,4);
+		indexEdges[3] = new MyEdge(4,1);
+		
+		return indexEdges;
+	}
+	
 	public void drawRegion(Graphics2D g2d){
 		MyPoint upLeftPixel = scale.getPixelValue(upLeftReal);
 		MyPoint downRightPixel = scale.getPixelValue(downRightReal);

@@ -20,6 +20,7 @@ public class DisplayMenu {
 	JMenu uniformeItem;
 	JMenu noUniformeItem;
 	JMenuItem imprimir;
+	JMenuItem printPoly;
 	JMenuItem ingresarAncho;
 	JMenuItem ingresarPuntos; 
 	
@@ -265,16 +266,23 @@ public class DisplayMenu {
 	}
 	
 	public void setPrintMenu(JMenu print){
+		printPoly = new JMenuItem("Imprimir archivo poly");
+		printPoly.addActionListener(new PolyFileAction(window));
+		
 		imprimir = new JMenuItem("Imprimir archivo");
 		imprimir.setToolTipText("Crea archivo de output");
 		imprimir.addActionListener(new OutputFileAction(window));
 		imprimir.setMnemonic(KeyEvent.VK_P);
 		imprimir.setEnabled(false);
-		print.add(imprimir);		
+		
+		print.add(imprimir);
+		print.add(printPoly);
+		
 	}
 	
 	public void setPrintEnabled(boolean shown){
 		imprimir.setEnabled(shown);
+
 	}
 	
 	public void setDiagramasEnabled(boolean shown){
