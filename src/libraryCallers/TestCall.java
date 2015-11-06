@@ -5,8 +5,9 @@ import java.io.IOException;
 public class TestCall {
 
 	public static void main(String[] args) throws IOException, InterruptedException{
-		VoronoiLibraryCall v = new VoronoiLibraryCall("input");
+		TriangleDelaunayCall v = new TriangleDelaunayCall("ej");
 		v.callSystem();
+		
 	}
 	
 }
