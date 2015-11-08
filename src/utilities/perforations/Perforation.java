@@ -11,4 +11,6 @@ public interface Perforation {
 	public ArrayList<MyPoint> intersectionPoints(MyPoint a, MyPoint b);
 	public boolean contains(MyPoint p);
 	public String toString();
+
+	public ArrayList<MyPoint> getPerforationPoints();
 }

@@ -13,6 +13,7 @@ public interface MyRegion {
 	
 	public MyEdge[] getEdges();
 	public MyPoint[] getPoints();
+	public MyPoint[] getPerforationPoints();
 
 	public MyPoint[] generateNonUniform(double initX, double multX, double initY, double multY);
 	public MyPoint[] generateRandom(int number);

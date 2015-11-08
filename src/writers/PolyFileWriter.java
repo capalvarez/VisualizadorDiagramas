@@ -25,7 +25,9 @@ public class PolyFileWriter {
 		PrintWriter writer = new PrintWriter(fileName, "UTF-8");
 		
 		MyPoint[] regionPoints = region.getPoints();
-		int totalPoints = points.length + regionPoints.length;
+		MyPoint[] perforationPoints = region.getPerforationPoints();
+			
+		int totalPoints = points.length + regionPoints.length + perforationPoints.length;
 		
 		/*Primera linea, por ahora se asume todo en cero*/
 		writer.println(totalPoints + " 2 0 0" );
@@ -33,12 +35,19 @@ public class PolyFileWriter {
 		/*Escribir uno a uno los puntos a procesar*/
 		int i = 1;
 		while(i<=points.length){
-			writer.println(i + " " + points[i-1].getX()+" "+points[i-1].getY());
+			writer.println(i + " " + points[i-1].toString());
 			i++;
 		}
 		int j = 0;
-		while(i<=totalPoints){
-			writer.println(i + " " + regionPoints[j].getX()+" "+regionPoints[j].getY());
+		while(j<regionPoints.length){
+			writer.println(i + " " + regionPoints[j].toString());
+			i++;
+			j++;
+		}
+		
+		j=0;
+		while(j<perforationPoints.length){
+			writer.println(i + " " + perforationPoints[j].toString());
 			i++;
 			j++;
 		}

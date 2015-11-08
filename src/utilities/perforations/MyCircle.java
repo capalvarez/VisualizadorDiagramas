@@ -1,5 +1,7 @@
 package utilities.perforations;
 
+import generalTools.CurveDiscretizer;
+
 import java.awt.Graphics2D;
 import java.awt.geom.Arc2D;
 import java.awt.geom.Ellipse2D;
@@ -142,5 +144,11 @@ public class MyCircle implements Perforation{
 	
 	public String toString(){
 		return center.toString()+ "   "+ r;
+	}
+	
+	public ArrayList<MyPoint> getPerforationPoints(){
+		CurveDiscretizer c = new CurveDiscretizer(r,center);
+		
+		return c.discretizeCircle(20);
 	}
 }

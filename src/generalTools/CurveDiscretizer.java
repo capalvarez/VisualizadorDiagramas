@@ -17,7 +17,7 @@ public class CurveDiscretizer {
 		return angle*Math.PI/180.0;	
 	}
 	
-	public MyPoint[] discretizeCircleFine(){
+	public ArrayList<MyPoint>  discretizeCircleFine(){
 		ArrayList<MyPoint> points = new ArrayList<MyPoint>();
 		
 		double x = 0;
@@ -43,15 +43,15 @@ public class CurveDiscretizer {
 	        }
 	      }while(x<=y);
 	
-	    return pointListToArray(points);
+	    return points;
 	}
 	
-	public MyPoint[] discretizeCircle(int grade){
+	public ArrayList<MyPoint> discretizeCircle(int grade){
 		return discretizeArc(0,360,grade);
 	}
 	
 	
-	public MyPoint[] discretizeArc(double init, double end, double grade){
+	public ArrayList<MyPoint> discretizeArc(double init, double end, double grade){
 		ArrayList<MyPoint> points = new ArrayList<MyPoint>();
 		double delta = Math.abs(end-init)/grade;
 		
@@ -65,14 +65,6 @@ public class CurveDiscretizer {
 			angle += delta;
 		}
 		
-		return pointListToArray(points);	
+		return points;	
 	}
-	
-	public MyPoint[] pointListToArray(ArrayList<MyPoint> list){	
-		MyPoint[] array = new MyPoint[list.size()];
-		array = list.toArray(array);
-		
-		return array;
-	}
-
 }

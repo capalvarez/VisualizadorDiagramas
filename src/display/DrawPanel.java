@@ -61,15 +61,7 @@ public class DrawPanel extends AbstractPanel{
     private void doDrawingRegion(Graphics g) {	
     	Graphics2D g2d = (Graphics2D) g;
     	g2d.setColor(color);
-        region.drawRegion(g2d);    
-        
-        
-        CurveDiscretizer c = new CurveDiscretizer(100,new MyPoint(300,300));
-        MyPoint[] p = c.discretizeArc(0,70,20);
-        
-        (new PointDrawer(p,pointSize)).drawPoints(g2d);
-        region.drawRegion(g2d);    
-        
+        region.drawRegion(g2d);           
     }
     
     private void doDrawingPoints(Graphics g){

@@ -107,7 +107,7 @@ public class RectangleRegion implements MyRegion{
 		
 		for(int i=0;i<n;i++){
 			inter = list.get(i).intersectionPoint(p);
-			System.out.println(p + "            " + inter.size());
+			//System.out.println(p + "            " + inter.size());
 			
 			if(inter.size()==2){
 				changed = true;
@@ -336,4 +336,22 @@ public class RectangleRegion implements MyRegion{
 			return generateBorderByDistance(distances ,forAll);
 		}
 	}
+	
+	public MyPoint[] getPerforationPoints(){
+		ArrayList<MyPoint> finalList = new ArrayList<MyPoint>();
+			
+		for(Perforation p: perforation){
+			finalList.addAll(p.getPerforationPoints());
+		}
+
+		return pointListToArray(finalList);
+	}
+	
+	public MyPoint[] pointListToArray(ArrayList<MyPoint> list){	
+		MyPoint[] array = new MyPoint[list.size()];
+		array = list.toArray(array);
+		
+		return array;
+	}
+
 }
