@@ -5,21 +5,19 @@ import java.util.ArrayList;
 import utilities.MyPoint;
 
 public class CurveDiscretizer {
-	public MyPoint init;
-	public MyPoint end;
 	private double radius;
 	private MyPoint center;
 	
-	public CurveDiscretizer(MyPoint i, MyPoint e, double rad, MyPoint center){
-		init = i;
-		end = e;
+	public CurveDiscretizer(double rad, MyPoint center){
 		this.center = center;
-		radius = rad;
-		
-		
+		radius = rad;	
 	}
 	
-	public MyPoint[] discretizeCircle(){
+	private double radian(double angle){
+		return angle*Math.PI/180.0;	
+	}
+	
+	public MyPoint[] discretizeCircleFine(){
 		ArrayList<MyPoint> points = new ArrayList<MyPoint>();
 		
 		double x = 0;
@@ -48,6 +46,27 @@ public class CurveDiscretizer {
 	    return pointListToArray(points);
 	}
 	
+	public MyPoint[] discretizeCircle(int grade){
+		return discretizeArc(0,360,grade);
+	}
+	
+	
+	public MyPoint[] discretizeArc(double init, double end, double grade){
+		ArrayList<MyPoint> points = new ArrayList<MyPoint>();
+		double delta = Math.abs(end-init)/grade;
+		
+		double angle = init;
+		while(angle<end){
+			double x = center.getX() + radius*Math.cos(radian(angle));
+			double y = center.getY() + radius*Math.sin(radian(angle));
+			
+			points.add(new MyPoint(x,y));
+			
+			angle += delta;
+		}
+		
+		return pointListToArray(points);	
+	}
 	
 	public MyPoint[] pointListToArray(ArrayList<MyPoint> list){	
 		MyPoint[] array = new MyPoint[list.size()];
@@ -55,5 +74,5 @@ public class CurveDiscretizer {
 		
 		return array;
 	}
-	
+
 }
