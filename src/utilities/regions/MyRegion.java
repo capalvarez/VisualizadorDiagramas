@@ -24,6 +24,7 @@ public interface MyRegion {
 	public MyPoint[] generateBorderByDistance(double[] distances, boolean forAll);
 	
 	public void addPerforation(Perforation p);
+	public ArrayList<Perforation> getPerforationList();
 	public void emptyPerforations();
 
 }

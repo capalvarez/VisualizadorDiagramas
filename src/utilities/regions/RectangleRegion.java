@@ -10,6 +10,7 @@ import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Random;
 
 import org.apache.commons.lang3.ArrayUtils;
@@ -55,6 +56,10 @@ public class RectangleRegion implements MyRegion{
 	
 	public void addPerforation(Perforation p){
 		perforation.add(p);
+	}
+	
+	public ArrayList<Perforation> getPerforationList(){
+		return perforation;
 	}
 	
 	public MyEdge[] getEdges(){
@@ -226,25 +231,30 @@ public class RectangleRegion implements MyRegion{
 		int nX = (int)Math.floor(getWidth()/dX)+1;
 		int nY = (int)Math.floor(getHeight()/dY)+1;
 		
-		return generateUniform(dX,dY,nX,nY,secondRow);
+		ArrayList<MyPoint> list = generateUniform(dX,dY,nX,nY,secondRow);
+		cleanPerforation(list);
+		
+		return pointListToArray(list);
 	}
 	
 	public MyPoint[] generateUniformByNumber(int nX, int nY, boolean secondRow){
 		double dX = getWidth()/(nX-1);
 		double dY = getHeight()/(nY-1);
 		
-		return generateUniform(dX,dY,nX,nY,secondRow);
+		ArrayList<MyPoint> list = generateUniform(dX,dY,nX,nY,secondRow);
+		cleanPerforation(list);
+		
+		return pointListToArray(list);
 	}
 	
-	public MyPoint[] generateUniform(double dX, double dY, int nX, int nY, boolean secondRow){
-		MyPoint[] pointArray;
-						
+	public ArrayList<MyPoint> generateUniform(double dX, double dY, int nX, int nY, boolean secondRow){
+		ArrayList<MyPoint> finalList = new ArrayList<MyPoint>();	
+		
 		if(!secondRow){				
 			/*Generar los puntos*/
-			pointArray = (new PointGenerator(nX,dX,nY,dY,getUpCorner(),getLeftCorner())).getPoints();		
+			finalList = (new PointGenerator(nX,dX,nY,dY,getUpCorner(),getLeftCorner())).getPoints();		
 		}else{
-			ArrayList<MyPoint> finalList = new ArrayList<MyPoint>();
-						
+									
 			for(int i=0; i<nY;i++){
 				double yValue = i*dY + getUpCorner(); 
 				ArrayList<MyPoint> pointList;
@@ -268,14 +278,11 @@ public class RectangleRegion implements MyRegion{
 					
 				}
 				finalList.addAll(pointList);
-			}
-			
-			pointArray = new MyPoint[finalList.size()];
-			pointArray = finalList.toArray(pointArray);				
+			}	
 			
 		}
 		
-		return pointArray;
+		return finalList;
 	}
 	
 	public MyPoint[] generateBorderByDistance(double distances[], boolean forAll){
@@ -354,4 +361,17 @@ public class RectangleRegion implements MyRegion{
 		return array;
 	}
 
+	
+	public void cleanPerforation(ArrayList<MyPoint> points){
+		for(Perforation p: perforation){
+			Iterator<MyPoint> it = points.iterator();
+			
+			while (it.hasNext()){
+			    MyPoint point = it.next();
+			    if (p.contains(point)){
+			        it.remove();
+			    }
+			}
+		}
+	}
 }

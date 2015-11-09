@@ -13,4 +13,7 @@ public interface Perforation {
 	public String toString();
 
 	public ArrayList<MyPoint> getPerforationPoints();
+	
+	public String writeCenter();
+	
 }

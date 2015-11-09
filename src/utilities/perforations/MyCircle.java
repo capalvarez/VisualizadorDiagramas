@@ -139,7 +139,7 @@ public class MyCircle implements Perforation{
 	}
 	
 	public boolean contains(MyPoint p){
-		return Math.pow((p.getX() - center.getX()),2) + Math.pow((p.getY() - center.getY()),2) < Math.pow(r,2);
+		return Math.pow((p.getX() - center.getX()),2) + Math.pow((p.getY() - center.getY()),2) <= Math.pow(r,2);
 	}
 	
 	public String toString(){
@@ -150,5 +150,9 @@ public class MyCircle implements Perforation{
 		CurveDiscretizer c = new CurveDiscretizer(r,center);
 		
 		return c.discretizeCircle(20);
+	}
+	
+	public String writeCenter(){
+		return center.toString();
 	}
 }

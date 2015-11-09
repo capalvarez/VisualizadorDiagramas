@@ -3,11 +3,13 @@ package writers;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 
 import org.apache.commons.lang3.RandomStringUtils;
 
 import utilities.MyEdge;
 import utilities.MyPoint;
+import utilities.perforations.Perforation;
 import utilities.regions.MyRegion;
 
 public class PolyFileWriter {
@@ -53,8 +55,8 @@ public class PolyFileWriter {
 		}
 		
 		MyEdge[] regionEdges = region.getEdges();
-		
-		writer.println(regionEdges.length + " 0");
+		int regionTotal = regionEdges.length + perforationPoints.length;
+		writer.println(regionTotal + " 0");
 		
 		i = 1;
 		while(i<=regionEdges.length){
@@ -65,7 +67,36 @@ public class PolyFileWriter {
 			i++;
 		}
 		
-		writer.println("0 0");
+		j = 1;
+		int perforationMod = perforationPoints.length; 
+		int lengths = points.length + regionPoints.length;
+		while(j<=perforationPoints.length){
+			int k_0 = j%perforationMod;
+			int k = (j+1)%perforationMod;
+			
+			if(k_0 == 0)
+				k_0 = perforationMod;
+					
+			if(k == 0)
+				k = perforationMod;
+			
+			int i1 = k_0 + lengths;
+			int i2 = k + lengths;
+			
+			writer.println(i + " " + i1 + " " + i2);
+			j++;
+			i++;
+		}
+		
+		ArrayList<Perforation> perforation = region.getPerforationList();
+		
+		writer.println(perforation.size());
+		
+		int k = 1;
+		while(k<=perforation.size()){
+			writer.println(k + " " + perforation.get(k-1).writeCenter());
+			k++;
+		}
 		
 		writer.close();
 	
