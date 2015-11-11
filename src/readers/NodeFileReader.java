@@ -4,17 +4,16 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import utilities.MyPoint;
 
-public class PointFileReader {
-	String[] pointList;
+public class NodeFileReader {
 	MyPoint[] points;
 	
-	public PointFileReader(File input){
-		readFile(input);
+	public NodeFileReader(String name){
+		File file = new File(name + ".1.node");
+		
+		readFile(file);
 	}
 	
 	private void readFile(File input){
@@ -23,22 +22,23 @@ public class PointFileReader {
 			String currentLine;
 			br = new BufferedReader(new FileReader(input));		
 			currentLine = br.readLine();
+			
 			/*Leemos en la primera linea la dimension de los puntos (2 o 3)*/
-			int dimension = Integer.parseInt(currentLine.trim());
+			String[] firstLine = currentLine.trim().split("\\s+");
 
 			/*Leemos la segunda linea, que contiene el numero de puntos*/
-			int nPoints = Integer.parseInt(br.readLine().trim());  
-			pointList = new String[nPoints];
-			points = new MyPoint[nPoints];
-			
-			int i = 0;
-			while((currentLine=br.readLine())!=null){
+			int totalPoints = Integer.parseInt(firstLine[0]);
+			points = new MyPoint[totalPoints + 1];
+						
+			int i = 1;
+			while(i<=totalPoints){
+				currentLine=br.readLine();
+				
 				String[] coord = currentLine.split("\\s+");
 				
 				if(coord.length>0){
 					/*Para asegurarse de no tomar lineas vacias*/
-					pointList[i] = (coord[0].trim() +" " + (coord[1].trim()));
-					points[i] = new MyPoint(Double.parseDouble(coord[0].trim()),Double.parseDouble(coord[1].trim()));
+					points[i] = new MyPoint(Double.parseDouble(coord[1].trim()),Double.parseDouble(coord[2].trim()));
 				}
 				
 				i++;
@@ -49,12 +49,7 @@ public class PointFileReader {
 		}				
     }
 	
-	public String[] getPointList(){
-		return pointList;
-	}
-	
 	public MyPoint[] getPoints(){
 		return points;
 	}
-	
 }

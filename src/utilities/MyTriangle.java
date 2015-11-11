@@ -22,6 +22,16 @@ public class MyTriangle {
 		
 	}
 	
+	public MyTriangle(ArrayList<MyPoint> p){
+		points = p;
+		neighbours = new MyTriangle[3];
+		
+		for(int i=0;i<3;i++){
+			neighbours[i] = null;
+		}
+		
+	}
+	
 	public MyTriangle(){}
 	
 	public void setNeighbours(MyTriangle[] n){

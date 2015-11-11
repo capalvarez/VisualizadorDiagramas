@@ -11,7 +11,7 @@ public class TriangleDelaunayCall extends LibraryCall {
 			
 	public String callSystem() throws IOException, InterruptedException{
 		
-		ProcessBuilder pb = new ProcessBuilder("./triangle","-p",inputFile);
+		ProcessBuilder pb = new ProcessBuilder("./triangle","-p","-n",inputFile);
 		callBashMethod(pb);	
 						
 		return outputFile;
