@@ -60,6 +60,4 @@ public class EleFileReader {
 	public MyTriangle[] getTriangles(){
 		return triangles;
 	}
-	
-	
 }
