@@ -10,6 +10,7 @@ import javax.swing.AbstractAction;
 import libraryCallers.DelaunayLibraryCall;
 import libraryCallers.TriangleDelaunayCall;
 import readers.DelaunayOFFReader;
+import readers.TriangleDelaunayFilesReader;
 import utilities.MyPoint;
 import writers.PointInputWriter;
 import writers.PolyFileWriter;
@@ -37,13 +38,13 @@ public class DelaunayDiagramAction extends AbstractAction {
 		/*Llamar a libreria para obtener diagrama de Voronoi*/
 		TriangleDelaunayCall v = new TriangleDelaunayCall(fileName);
 		try {
-			String output = v.callSystem();
-			System.out.println(output);
-						
+			v.callSystem();
+								
 			/*Si llamada es exitosa puedo leer del archivo de output*/
 			//DelaunayOFFReader reader = new DelaunayOFFReader(output,pointArray);
-					
-			//window.drawDelaunay(reader.getTriangleList());
+			TriangleDelaunayFilesReader reader = new TriangleDelaunayFilesReader(fileName); 	
+						
+			window.drawDelaunay(reader.getTriangles());
 		
 		}catch (IOException e1) {
 			e1.printStackTrace();

@@ -9,15 +9,14 @@ import utilities.MyTriangle;
 
 public class NeighFileReader {
 	MyTriangle[] triangles;
+	File input;
 	
 	public NeighFileReader(String name, MyTriangle[] triangle){
-		File file = new File(name + ".1.neigh");
+		input = new File(name + ".1.neigh");
 		triangles = triangle;
-		
-		readFile(file);
 	}
 	
-	private void readFile(File input){
+	public void addNeighbours(){
 		BufferedReader br = null;	
 		try {
 			String currentLine;
@@ -34,7 +33,7 @@ public class NeighFileReader {
 			while(i<=totalTriangles){
 				currentLine=br.readLine();
 				
-				String[] coord = currentLine.split("\\s+");
+				String[] coord = currentLine.trim().split("\\s+");
 				
 				if(coord.length>0){
 					MyTriangle[] neighbours = new MyTriangle[3];

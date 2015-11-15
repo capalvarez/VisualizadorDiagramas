@@ -36,8 +36,8 @@ public class EleFileReader {
 			while(i<=totalTriangles){
 				currentLine=br.readLine();
 				
-				String[] coord = currentLine.split("\\s+");
-				
+				String[] coord = currentLine.trim().split("\\s+");
+			
 				if(coord.length>0){
 					ArrayList<MyPoint> trianglePoints = new ArrayList<MyPoint>();
 					

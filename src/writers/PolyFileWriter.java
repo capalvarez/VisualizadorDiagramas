@@ -22,7 +22,8 @@ public class PolyFileWriter {
 	}
 	
 	public String writeInFile() throws FileNotFoundException, UnsupportedEncodingException{
-		String fileName = "../data/" + RandomStringUtils.random(8, true, true) + ".poly";
+		String name = "../data/" + RandomStringUtils.random(8, true, true);
+		String fileName = name + ".poly";
 		
 		PrintWriter writer = new PrintWriter(fileName, "UTF-8");
 		
@@ -100,6 +101,6 @@ public class PolyFileWriter {
 		
 		writer.close();
 	
-		return fileName;
+		return name;
 	}		
 }

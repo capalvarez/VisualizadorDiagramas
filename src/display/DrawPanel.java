@@ -1,9 +1,6 @@
 package display;
 
-import generalTools.CurveDiscretizer;
-
 import java.awt.BasicStroke;
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -96,7 +93,9 @@ public class DrawPanel extends AbstractPanel{
               
         
     	for(int i=0;i<triangles.length;i++){
-    		triangles[i].draw(g2d, scale);
+    		if(triangles[i]!=null){
+    			triangles[i].draw(g2d, scale);
+    		}	
     	}
     }
     

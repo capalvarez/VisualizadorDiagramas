@@ -34,7 +34,7 @@ public class NodeFileReader {
 			while(i<=totalPoints){
 				currentLine=br.readLine();
 				
-				String[] coord = currentLine.split("\\s+");
+				String[] coord = currentLine.trim().split("\\s+");
 				
 				if(coord.length>0){
 					/*Para asegurarse de no tomar lineas vacias*/
