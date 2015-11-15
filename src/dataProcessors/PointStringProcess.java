@@ -14,10 +14,8 @@ public class PointStringProcess extends PointProcess{
 	private void process(){
 		endPoints = new MyPoint[initPoints.length];
 		initPointsList = new MyPoint[initPoints.length];
-	
-		endPoints[0] = new MyPoint(Integer.MIN_VALUE,Integer.MIN_VALUE);
 		
-		for(int i=1;i<endPoints.length;i++){
+		for(int i=0;i<endPoints.length;i++){
 			String[] info = (initPoints[i].trim()).split("\\s+");
 			double x = Double.parseDouble(info[0]);
 			double y = Double.parseDouble(info[1]);

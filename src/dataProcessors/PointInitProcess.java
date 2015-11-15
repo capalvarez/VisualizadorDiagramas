@@ -15,8 +15,8 @@ public class PointInitProcess extends PointProcess {
 		wHeight = (int) (window.getHeight()*0.9);
 		this.window = window; 
 	
-		//initPointsList = getBoundingPoints(points);
-		initPointsList = points;
+		initPointsList = getBoundingPoints(points);
+		//initPointsList = points;
 		initRegionPoints = points;
 		endPoints = new MyPoint[2];
 				
@@ -78,7 +78,6 @@ public class PointInitProcess extends PointProcess {
 				
 			scale = new MyScale(new MyPoint(left.getX(),down.getY()),p1,new MyPoint(right.getX(),up.getY()),p2,window);
 		}else{
-			System.out.println("aca");
 			double slope = wWidth*(1-2*rel)/(right.getX()-left.getX());
 			double nYUp = rel*wWidth+slope*(up.getY()-left.getX());
 			double nYDown = rel*wWidth+slope*(down.getY()-left.getX());

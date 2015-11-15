@@ -101,7 +101,7 @@ public class ArbitraryRegionAction extends AbstractAction {
 						while(it.hasNext()){
 							 Vector row = (Vector)it.next();
 							 Iterator i = row.iterator();
-							
+							 						 
 							 Object x = i.next();
 							 Object y = i.next();
 							 Object z = i.next();
@@ -109,7 +109,7 @@ public class ArbitraryRegionAction extends AbstractAction {
 							 if(x==null || y==null){
 								 continue;
 							 }
-							
+														 
 							 if(z==null){
 								points.add(x+" "+y); 
 							 }			 
@@ -147,8 +147,7 @@ public class ArbitraryRegionAction extends AbstractAction {
 				
 				addRow.add(addButton);
 				messagePane.add(addRow,BorderLayout.WEST);
-				
-				
+							
 				pack();
 				setVisible(true);	
 		

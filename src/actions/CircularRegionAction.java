@@ -162,7 +162,7 @@ public class CircularRegionAction extends AbstractAction {
 //							System.out.println(arr2[i]);
 //						}
 						
-						scale.printScale();
+						//scale.printScale();
 						
 						double angle1 = Double.parseDouble(initAngle.getText());
 						double angle2 = Double.parseDouble(endAngle.getText());
