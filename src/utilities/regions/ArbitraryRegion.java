@@ -34,7 +34,7 @@ public class ArbitraryRegion implements MyRegion {
 			
 			MyPoint pixelP1 = scale.getPixelValue(p1);
 			MyPoint pixelP2 = scale.getPixelValue(p2);
-			
+					
 			g2d.draw(new Line2D.Double(pixelP1.getX(), pixelP1.getY(), pixelP2.getX(), pixelP2.getY()));
 		
 			//g2d.draw(new Line2D.Double(p1.getX(), p1.getY(), p2.getX(), p2.getY()));
