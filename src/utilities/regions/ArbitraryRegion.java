@@ -4,11 +4,13 @@ import java.awt.Graphics2D;
 import java.awt.geom.Line2D;
 import java.util.ArrayList;
 
+import regionBounders.ArbitraryRegionBounder;
+
 import utilities.MyPoint;
 import utilities.MyScale;
 import utilities.perforations.Perforation;
 
-public class ArbitraryRegion implements MyRegion {
+public class ArbitraryRegion extends AbstractRegion {
 	MyPoint[] points;
 	MyScale scale;
 	
@@ -18,9 +20,22 @@ public class ArbitraryRegion implements MyRegion {
 	}
 		
 	@Override
-	public boolean isInside(MyPoint point) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean isInside(MyPoint p) {
+		int j = points.length - 1 ;
+		boolean oddNodes = false;
+
+		for (int i=0; i<points.length; i++) {
+			if (points[i].getY()<p.getY() && points[j].getY()>=p.getY() 
+					|| points[j].getY()<p.getY() && points[i].getY()>=p.getY()) {
+			     
+				if (points[i].getX() + (p.getY()-points[i].getY())/(points[j].getY()-points[i].getY())*(points[j].getX()-points[i].getX())<p.getX()){
+			        oddNodes=!oddNodes; 
+			    }
+			}
+			j = i; 
+		}
+		
+		return oddNodes;
 	}
 
 	@Override
@@ -36,8 +51,6 @@ public class ArbitraryRegion implements MyRegion {
 			MyPoint pixelP2 = scale.getPixelValue(p2);
 					
 			g2d.draw(new Line2D.Double(pixelP1.getX(), pixelP1.getY(), pixelP2.getX(), pixelP2.getY()));
-		
-			//g2d.draw(new Line2D.Double(p1.getX(), p1.getY(), p2.getX(), p2.getY()));
 		}
 	}
 
@@ -55,18 +68,38 @@ public class ArbitraryRegion implements MyRegion {
 	}
 
 	@Override
-	public MyPoint[] generateUniformByDistance(double dx, double dy,
-			boolean secondRow) {
-		// TODO Auto-generated method stub
-		return null;
+	public MyPoint[] generateUniformByDistance(double dx, double dy, boolean secondRow) {
+		MyPoint[] bounding = (new ArbitraryRegionBounder(points)).getMinMin();
+		RectangleRegion boundingRec = new RectangleRegion(bounding,scale);
+			
+		MyPoint[] pointRec = boundingRec.generateUniformByDistance(dx, dy, secondRow);
+	
+		return cleanOutsidePoints(pointRec);	
 	}
 
 	@Override
 	public MyPoint[] generateUniformByNumber(int nX, int nY, boolean secondRow) {
-		// TODO Auto-generated method stub
-		return null;
+		MyPoint[] bounding = (new ArbitraryRegionBounder(points)).getMinMin();
+		RectangleRegion boundingRec = new RectangleRegion(bounding,scale);
+		
+		MyPoint[] pointRec = boundingRec.generateUniformByNumber(nX, nY, secondRow);
+		
+		return cleanOutsidePoints(pointRec);
 	}
-
+	
+	private MyPoint[] cleanOutsidePoints(MyPoint[] p){
+		ArrayList<MyPoint> inside = new ArrayList<MyPoint>();
+		
+		for(int i=0;i<p.length;i++){
+				
+			if(isInside(p[i])){
+				inside.add(p[i]);
+			}
+		}
+		
+		return pointListToArray(inside);
+	}
+	
 	@Override
 	public MyPoint[] generateBorderByNumber(int[] numbers, boolean forAll) {
 		// TODO Auto-generated method stub
@@ -78,17 +111,4 @@ public class ArbitraryRegion implements MyRegion {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
-	@Override
-	public void addPerforation(Perforation p) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void emptyPerforations() {
-		// TODO Auto-generated method stub
-		
-	}
-
 }

@@ -21,8 +21,7 @@ import utilities.MyScale;
 import utilities.PointPair;
 import utilities.perforations.Perforation;
 
-public class RectangleRegion implements MyRegion{
-	ArrayList<Perforation> perforation = new ArrayList<Perforation>();
+public class RectangleRegion extends AbstractRegion{
 	MyPoint upLeftReal;
 	MyPoint downRightReal;
 	MyScale scale;
@@ -44,7 +43,11 @@ public class RectangleRegion implements MyRegion{
 		regionSides[2] = e3;
 		regionSides[3] = e4;	
 	}
-		
+	
+	public RectangleRegion(MyPoint[] p, MyScale scale){
+		this(p[0],p[1],scale);
+	}
+	
 	public MyPoint[] getPoints(){
 		MyPoint p2 = new MyPoint(upLeftReal.getX(),downRightReal.getY());
 		MyPoint p4 = new MyPoint(downRightReal.getX(),upLeftReal.getY());
@@ -53,15 +56,7 @@ public class RectangleRegion implements MyRegion{
 		
 		return points;
 	}
-	
-	public void addPerforation(Perforation p){
-		perforation.add(p);
-	}
-	
-	public ArrayList<Perforation> getPerforationList(){
-		return perforation;
-	}
-	
+		
 	public MyEdge[] getEdges(){
 		MyEdge[] indexEdges = new MyEdge[4];
 		
@@ -176,11 +171,7 @@ public class RectangleRegion implements MyRegion{
 	public double getDownCorner(){
 		return downRightReal.getY();
 	}
-	
-	public void emptyPerforations(){
-		perforation = new ArrayList<Perforation>();
-	}
-	
+		
 	@Override
 	public String toString(){
 		return upLeftReal.toString() + " " + downRightReal.toString(); 
@@ -344,34 +335,9 @@ public class RectangleRegion implements MyRegion{
 		}
 	}
 	
-	public MyPoint[] getPerforationPoints(){
-		ArrayList<MyPoint> finalList = new ArrayList<MyPoint>();
-			
-		for(Perforation p: perforation){
-			finalList.addAll(p.getPerforationPoints());
-		}
-
-		return pointListToArray(finalList);
-	}
 	
-	public MyPoint[] pointListToArray(ArrayList<MyPoint> list){	
-		MyPoint[] array = new MyPoint[list.size()];
-		array = list.toArray(array);
-		
-		return array;
-	}
+	
 
 	
-	public void cleanPerforation(ArrayList<MyPoint> points){
-		for(Perforation p: perforation){
-			Iterator<MyPoint> it = points.iterator();
-			
-			while (it.hasNext()){
-			    MyPoint point = it.next();
-			    if (p.contains(point)){
-			        it.remove();
-			    }
-			}
-		}
-	}
+	
 }

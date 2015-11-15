@@ -1,13 +1,13 @@
-package dataProcessors;
+package regionBounders;
 
 import utilities.MyPoint;
 
-public class CircleBoundingProcess {
+public class CircleBounder {
 	MyPoint origin;
 	double r;
 	double[] angles;
 	
-	public CircleBoundingProcess(MyPoint origin, double radius, double[] angles){
+	public CircleBounder(MyPoint origin, double radius, double[] angles){
 		this.origin = origin;
 		r = radius;
 		

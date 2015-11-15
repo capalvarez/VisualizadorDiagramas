@@ -12,6 +12,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import regionBounders.CircleBounder;
+
 import utilities.MyPoint;
 import utilities.MyScale;
 import utilities.perforations.MyCircle;
@@ -20,7 +22,6 @@ import utilities.regions.MyRegion;
 import utilities.regions.circular.FullCircularRegion;
 import utilities.regions.circular.PartialCircularRegion;
 
-import dataProcessors.CircleBoundingProcess;
 import dataProcessors.PointInitProcess;
 import display.IWindow;
 
@@ -129,7 +130,7 @@ public class CircularRegionAction extends AbstractAction {
 					angles[1] = angle2;
 				}
 								
-				CircleBoundingProcess cbp = new CircleBoundingProcess(origen,OuterR,angles);			
+				CircleBounder cbp = new CircleBounder(origen,OuterR,angles);			
 				MyScale scale;
 				
 				switch(optionList.getSelectedIndex()){
