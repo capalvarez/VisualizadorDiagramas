@@ -47,6 +47,10 @@ public class MyPoint {
 		return dimension;
 	}
 	
+	public double squareNorm(){
+		return (Math.pow(getX(), 2) + Math.pow(getY(), 2));
+	}
+	
 	@Override
 	public boolean equals(Object o){
 		if(o instanceof MyPoint){

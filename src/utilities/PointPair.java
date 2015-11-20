@@ -63,4 +63,28 @@ public class PointPair{
     public String toString(){
     	return first.toString() + "-> " + second.toString();
     }
+    
+    @Override
+    public boolean equals(Object obj){
+    	if (this == obj){
+            return true;
+    	}
+    	
+        if (obj == null){
+            return false;
+        }
+        
+        if (getClass() != obj.getClass()){
+            return false;
+        }    
+            
+        PointPair other = (PointPair) obj;
+        
+        if (other.getFirst().equals(first) && other.getSecond().equals(second) ||
+        		other.getFirst().equals(second) && other.getSecond().equals(first)){
+        	return true;	
+        }
+                    
+        return false;
+    }
 }

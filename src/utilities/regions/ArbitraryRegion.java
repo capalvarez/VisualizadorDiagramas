@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import regionBounders.ArbitraryRegionBounder;
 
+import utilities.MyEdge;
 import utilities.MyPoint;
 import utilities.MyScale;
 import utilities.perforations.Perforation;
@@ -108,6 +109,18 @@ public class ArbitraryRegion extends AbstractRegion {
 
 	@Override
 	public MyPoint[] generateBorderByDistance(double[] distances, boolean forAll) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public MyEdge[] getEdges() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public MyPoint[] getPoints() {
 		// TODO Auto-generated method stub
 		return null;
 	}

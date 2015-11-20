@@ -9,6 +9,7 @@ public class MyEdge {
 	private int i2;
 	private MyPoint p1;
 	private MyPoint p2;
+	private ArrayList<MyTriangle> triangles = new ArrayList<MyTriangle>();
 	
 	public MyEdge(MyPoint p1, MyPoint p2){
 		setPoints(p1,p2);
@@ -22,6 +23,14 @@ public class MyEdge {
 	public void setPoints(MyPoint p1,MyPoint p2){
 		this.p1 = p1;
 		this.p2 = p2;
+	}
+	
+	public ArrayList<MyTriangle> getTriangles(){
+		return triangles;
+	}
+	
+	public void setTriangle(MyTriangle t){
+		triangles.add(t);
 	}
 	
 	public MyPoint[] getPoints(){

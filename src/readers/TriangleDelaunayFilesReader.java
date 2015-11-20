@@ -8,14 +8,9 @@ public class TriangleDelaunayFilesReader{
 	
 	public TriangleDelaunayFilesReader(String fileName){
 		MyPoint[] nodes = (new NodeFileReader(fileName)).getPoints();
-		
-		for(int i=0;i<nodes.length;i++){
-			if(nodes[i]!=null){
-				System.out.println(nodes[i].toString());
-			}
-		}
-				
-		triangles = (new EleFileReader(fileName,nodes)).getTriangles();
+		EdgeFileReader efr = new EdgeFileReader(fileName,nodes);
+						
+		triangles = (new EleFileReader(fileName,nodes,efr.getDictionary())).getTriangles();
 		
 		(new NeighFileReader(fileName,triangles)).addNeighbours();
 	}
