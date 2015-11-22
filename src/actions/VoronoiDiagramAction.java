@@ -9,15 +9,19 @@ import java.io.UnsupportedEncodingException;
 import javax.swing.AbstractAction;
 
 import readers.DelaunayOFFReader;
+import readers.TriangleDelaunayFilesReader;
 import readers.VoronoiOFFReader;
 
 import utilities.MyCell;
 import utilities.MyEdge;
 import utilities.MyPoint;
 import utilities.MyTriangle;
+import voronoiProcessors.DelaunayToVoronoiProcess;
 import writers.PointInputWriter;
+import writers.PolyFileWriter;
 
 import libraryCallers.DelaunayLibraryCall;
+import libraryCallers.TriangleDelaunayCall;
 import libraryCallers.VoronoiLibraryCall;
 
 import dataProcessors.PointStringProcess;
@@ -37,57 +41,28 @@ public class VoronoiDiagramAction extends AbstractAction {
 		MyPoint[] pointArray = window.getCurrentPoints();
 		String fileName;
 		try {
-			fileName = (new PointInputWriter(pointArray)).writeInFile();
+			fileName = (new PolyFileWriter(pointArray, window.getCurrentRegion())).writeInFile();
 		} catch (FileNotFoundException | UnsupportedEncodingException e2) {
 			e2.printStackTrace();
 			return;
 		}
-		
-		MyTriangle[] triangles = null;
-		
+			
 		/*Llamar a libreria para obtener diagrama de Voronoi*/
-		DelaunayLibraryCall del = new DelaunayLibraryCall(fileName);
+		TriangleDelaunayCall del = new TriangleDelaunayCall(fileName);
 		try {
-			String outputDelaunay = del.callSystem();
+			del.callSystem();
 			
 			/*Si llamada es exitosa puedo leer del archivo de output*/
-			DelaunayOFFReader DelReader = new DelaunayOFFReader(outputDelaunay,pointArray);
-			triangles = DelReader.getTriangleList();
+			TriangleDelaunayFilesReader reader = new TriangleDelaunayFilesReader(fileName);
+			DelaunayToVoronoiProcess voronoi = new DelaunayToVoronoiProcess(reader.getTriangles(),reader.getEdges());
+			
+			window.drawDiagramInPanel(voronoi.getVoronoiPoints(),voronoi.getVoronoiEdges());		
 		}catch (IOException e1) {
 			e1.printStackTrace();
 		}catch (InterruptedException e1) {
 			e1.printStackTrace();
 		}	
 		
-		/*Si no puedo llamar a qdelaunay, termino la ejecución*/
-		if(triangles==null){
-			return;
-		}
-			
-		/*Llamar a libreria para obtener diagrama de Voronoi*/
-		VoronoiLibraryCall v = new VoronoiLibraryCall(fileName);
-		try {
-			String output = v.callSystem();
-			
-			/*Si llamada es exitosa puedo leer del archivo de output*/
-			VoronoiOFFReader reader = new VoronoiOFFReader(output);
-			String[] points = reader.getPointList();
-			PointStringProcess psp = new PointStringProcess(points);		
-						
-			VoronoiRegionProcess vrp = new VoronoiRegionProcess(reader.getRegionList(),pointArray,psp.getPointList(),window.getCurrentRegion(),triangles,window);
-			MyEdge[] edges = vrp.getEdgeList();
-			MyCell[] voronoiCells = vrp.getCellList();  			
-			
-			MyPoint[] pointsToDraw = vrp.getPointList();
-	
-			window.setVoronoiCells(voronoiCells);
-			window.drawDiagramInPanel(pointsToDraw,edges);
-			
-		}catch (IOException e1) {
-			e1.printStackTrace();
-		}catch (InterruptedException e1) {
-			e1.printStackTrace();
-		}
 	}
 
 }

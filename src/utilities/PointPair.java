@@ -61,7 +61,7 @@ public class PointPair{
     
     @Override
     public String toString(){
-    	return first.toString() + "-> " + second.toString();
+    	return "(" +  first.toString() + ", " + second.toString() +")";
     }
     
     @Override
@@ -86,5 +86,10 @@ public class PointPair{
         }
                     
         return false;
+    }
+    
+    @Override
+    public int hashCode(){
+    	return first.hashCode() + second.hashCode();
     }
 }

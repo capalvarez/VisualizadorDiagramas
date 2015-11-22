@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 
 import utilities.MyPoint;
 import utilities.MyTriangle;
@@ -53,7 +54,7 @@ public class EleFileReader {
 					trianglePoints.add(p3);
 					
 					triangles[i] = new MyTriangle(trianglePoints);
-					
+													
 					edges.get(new PointPair(p1,p2)).setTriangle(triangles[i]);
 					edges.get(new PointPair(p2,p3)).setTriangle(triangles[i]);
 					edges.get(new PointPair(p3,p1)).setTriangle(triangles[i]);

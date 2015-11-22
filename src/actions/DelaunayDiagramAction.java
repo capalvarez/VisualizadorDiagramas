@@ -34,14 +34,13 @@ public class DelaunayDiagramAction extends AbstractAction {
 			e2.printStackTrace();
 			return;
 		}
-		System.out.println(fileName);
+		
 		/*Llamar a libreria para obtener diagrama de Voronoi*/
 		TriangleDelaunayCall v = new TriangleDelaunayCall(fileName);
 		try {
 			v.callSystem();
 								
 			/*Si llamada es exitosa puedo leer del archivo de output*/
-			//DelaunayOFFReader reader = new DelaunayOFFReader(output,pointArray);
 			TriangleDelaunayFilesReader reader = new TriangleDelaunayFilesReader(fileName); 	
 						
 			window.drawDelaunay(reader.getTriangles());
