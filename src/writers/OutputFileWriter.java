@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 
 import utilities.*;
+import utilities.edges.MyEdge;
 
 public class OutputFileWriter {
 	MyPoint[] points;

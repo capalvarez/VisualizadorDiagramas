@@ -6,9 +6,12 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
 
-import utilities.MyEdge;
 import utilities.MyPoint;
 import utilities.PointPair;
+import utilities.edges.ExternalEdge;
+import utilities.edges.InternalEdge;
+import utilities.edges.AbstractEdge;
+import utilities.edges.MyEdge;
 
 public class EdgeFileReader {
 	MyEdge[] edges;
@@ -43,8 +46,14 @@ public class EdgeFileReader {
 				if(coord.length>0){
 					int i1 = Integer.parseInt(coord[1]);
 					int i2 = Integer.parseInt(coord[2]);
-					
-					MyEdge edge = new MyEdge(i1,i2);
+							
+					AbstractEdge edge;
+					if(coord[3].equals("0")){
+						edge = new InternalEdge(i1,i2);
+					}else{
+						edge = new ExternalEdge(i1,i2);
+					}
+										
 					edge.setPoints(points[i1],points[i2]);
 					
 					dictionary.put(new PointPair(points[i1],points[i2]), edge);

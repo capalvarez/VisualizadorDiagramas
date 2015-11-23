@@ -3,9 +3,9 @@ package drawers;
 import java.awt.Graphics2D;
 import java.awt.geom.Line2D;
 
-import utilities.MyEdge;
 import utilities.MyPoint;
 import utilities.MyScale;
+import utilities.edges.MyEdge;
 
 public class VoronoiDrawer {
 	private MyEdge[] edges;

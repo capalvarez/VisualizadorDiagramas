@@ -9,11 +9,11 @@ import drawers.CoordSysDrawer;
 import drawers.PointDrawer;
 import drawers.VoronoiDrawer;
 
-import utilities.MyEdge;
 import utilities.MyPoint;
 import utilities.MyScale;
-import utilities.MyTriangle;
+import utilities.edges.MyEdge;
 import utilities.regions.MyRegion;
+import utilities.triangles.MyTriangle;
 
 public class DrawPanel extends AbstractPanel{
 	private MyPoint[] points;
@@ -77,7 +77,7 @@ public class DrawPanel extends AbstractPanel{
     	 
     	 g2d.setColor(Color.RED);
     	/*Dibujar los puntos de input*/
-    	//(new PointDrawer(points,pointSize)).drawPoints(g2d);
+    	(new PointDrawer(points,pointSize)).drawPoints(g2d);
     }
 
     private void doDrawingCoord(Graphics g){

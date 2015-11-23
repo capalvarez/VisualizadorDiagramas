@@ -11,6 +11,9 @@ import utilities.regions.MyRegion;
 
 public abstract class CircularRegion extends AbstractRegion {
 	ArrayList<Perforation> perforation = new ArrayList<Perforation>();
+	ArrayList<MyPoint> innerPointsDiscrete;
+	ArrayList<MyPoint> outerPointsDiscrete;
+	
 	double innerR;
 	double outerR;
 	MyPoint center;

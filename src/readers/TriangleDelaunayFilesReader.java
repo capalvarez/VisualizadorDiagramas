@@ -1,8 +1,9 @@
 package readers;
 
-import utilities.MyEdge;
 import utilities.MyPoint;
-import utilities.MyTriangle;
+import utilities.edges.MyEdge;
+import utilities.triangles.AbstractTriangle;
+import utilities.triangles.MyTriangle;
 
 public class TriangleDelaunayFilesReader{
 	MyTriangle[] triangles;

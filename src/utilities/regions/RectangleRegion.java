@@ -15,10 +15,11 @@ import java.util.Random;
 
 import org.apache.commons.lang3.ArrayUtils;
 
-import utilities.MyEdge;
 import utilities.MyPoint;
 import utilities.MyScale;
 import utilities.PointPair;
+import utilities.edges.InternalEdge;
+import utilities.edges.MyEdge;
 import utilities.perforations.Perforation;
 
 public class RectangleRegion extends AbstractRegion{
@@ -32,10 +33,10 @@ public class RectangleRegion extends AbstractRegion{
 		downRightReal = pDR;
 		this.scale = scale;
 		
-		MyEdge e1 = new MyEdge(new MyPoint(upLeftReal.getX(),upLeftReal.getY()),new MyPoint(upLeftReal.getX(),downRightReal.getY()));
-		MyEdge e2 = new MyEdge(new MyPoint(upLeftReal.getX(),downRightReal.getY()),new MyPoint(downRightReal.getX(),downRightReal.getY()));
-		MyEdge e3 = new MyEdge(new MyPoint(downRightReal.getX(),upLeftReal.getY()),new MyPoint(downRightReal.getX(),downRightReal.getY()));
-		MyEdge e4 = new MyEdge(new MyPoint(upLeftReal.getX(),upLeftReal.getY()),new MyPoint(downRightReal.getX(),upLeftReal.getY()));	
+		MyEdge e1 = new InternalEdge(new MyPoint(upLeftReal.getX(),upLeftReal.getY()),new MyPoint(upLeftReal.getX(),downRightReal.getY()));
+		MyEdge e2 = new InternalEdge(new MyPoint(upLeftReal.getX(),downRightReal.getY()),new MyPoint(downRightReal.getX(),downRightReal.getY()));
+		MyEdge e3 = new InternalEdge(new MyPoint(downRightReal.getX(),upLeftReal.getY()),new MyPoint(downRightReal.getX(),downRightReal.getY()));
+		MyEdge e4 = new InternalEdge(new MyPoint(upLeftReal.getX(),upLeftReal.getY()),new MyPoint(downRightReal.getX(),upLeftReal.getY()));	
 		
 		regionSides = new MyEdge[4];
 		regionSides[0] = e1;
@@ -60,10 +61,10 @@ public class RectangleRegion extends AbstractRegion{
 	public MyEdge[] getEdges(){
 		MyEdge[] indexEdges = new MyEdge[4];
 		
-		indexEdges[0] = new MyEdge(1,2);
-		indexEdges[1] = new MyEdge(2,3);
-		indexEdges[2] = new MyEdge(3,4);
-		indexEdges[3] = new MyEdge(4,1);
+		indexEdges[0] = new InternalEdge(1,2);
+		indexEdges[1] = new InternalEdge(2,3);
+		indexEdges[2] = new InternalEdge(3,4);
+		indexEdges[3] = new InternalEdge(4,1);
 		
 		return indexEdges;
 	}

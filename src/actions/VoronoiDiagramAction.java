@@ -41,7 +41,7 @@ public class VoronoiDiagramAction extends AbstractAction {
 			TriangleDelaunayFilesReader reader = new TriangleDelaunayFilesReader(fileName);
 			DelaunayToVoronoiProcess voronoi = new DelaunayToVoronoiProcess(reader.getTriangles(),reader.getEdges());
 			
-			window.drawPointsInPanel(voronoi.getVoronoiPoints(), voronoi.getVoronoiPoints());
+			//window.drawPointsInPanel(voronoi.getVoronoiPoints(), voronoi.getVoronoiPoints());
 			window.drawDiagramInPanel(voronoi.getVoronoiPoints(),voronoi.getVoronoiEdges());		
 		}catch (IOException e1) {
 			e1.printStackTrace();

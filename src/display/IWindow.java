@@ -5,11 +5,11 @@ import java.awt.Color;
 import javax.swing.JFrame;
 
 import utilities.MyCell;
-import utilities.MyEdge;
 import utilities.MyPoint;
 import utilities.MyScale;
-import utilities.MyTriangle;
+import utilities.edges.MyEdge;
 import utilities.regions.MyRegion;
+import utilities.triangles.MyTriangle;
 
 public abstract class IWindow extends JFrame{
 	public abstract void drawPointsInPanel(MyPoint[] pointsToDraw,MyPoint[] points);

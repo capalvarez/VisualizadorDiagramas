@@ -1,7 +1,7 @@
 package generalTools;
 
-import utilities.MyEdge;
 import utilities.MyPoint;
+import utilities.edges.MyEdge;
 
 public class LineIntersector {
 	private MyEdge testLine;

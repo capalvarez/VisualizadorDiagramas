@@ -8,12 +8,12 @@ import java.awt.event.ComponentListener;
 import dataProcessors.*;
 
 import utilities.MyCell;
-import utilities.MyEdge;
 import utilities.MyPoint;
 import utilities.MyScale;
-import utilities.MyTriangle;
+import utilities.edges.MyEdge;
 import utilities.regions.MyRegion;
 import utilities.regions.RectangleRegion;
+import utilities.triangles.MyTriangle;
 
 public class DisplayWindow extends IWindow{
 	DisplayMenu menu;

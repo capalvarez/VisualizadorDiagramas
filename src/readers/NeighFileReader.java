@@ -5,7 +5,8 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
-import utilities.MyTriangle;
+import utilities.triangles.AbstractTriangle;
+import utilities.triangles.MyTriangle;
 
 public class NeighFileReader {
 	MyTriangle[] triangles;

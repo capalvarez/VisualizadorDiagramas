@@ -7,8 +7,8 @@ import java.util.ArrayList;
 
 import org.apache.commons.lang3.RandomStringUtils;
 
-import utilities.MyEdge;
 import utilities.MyPoint;
+import utilities.edges.MyEdge;
 import utilities.perforations.Perforation;
 import utilities.regions.MyRegion;
 

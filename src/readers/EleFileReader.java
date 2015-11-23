@@ -9,9 +9,13 @@ import java.util.HashMap;
 import java.util.Iterator;
 
 import utilities.MyPoint;
-import utilities.MyTriangle;
-import utilities.MyEdge;
 import utilities.PointPair;
+import utilities.edges.InternalEdge;
+import utilities.edges.AbstractEdge;
+import utilities.edges.MyEdge;
+import utilities.triangles.AbstractTriangle;
+import utilities.triangles.MyTriangle;
+import utilities.triangles.Triangle;
 
 public class EleFileReader {
 	MyTriangle[] triangles;
@@ -53,14 +57,14 @@ public class EleFileReader {
 					trianglePoints.add(p2);
 					trianglePoints.add(p3);
 					
-					triangles[i] = new MyTriangle(trianglePoints);
+					triangles[i] = new Triangle(trianglePoints);
 													
 					edges.get(new PointPair(p1,p2)).setTriangle(triangles[i]);
 					edges.get(new PointPair(p2,p3)).setTriangle(triangles[i]);
 					edges.get(new PointPair(p3,p1)).setTriangle(triangles[i]);
 															
 					/*Para asegurarse de no tomar lineas vacias*/
-					triangles[i] = new MyTriangle(trianglePoints);
+					triangles[i] = new Triangle(trianglePoints);
 				}
 				
 				i++;

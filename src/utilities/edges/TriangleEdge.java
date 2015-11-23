@@ -1,4 +1,6 @@
-package utilities;
+package utilities.edges;
+
+import utilities.MyPoint;
 
 public class TriangleEdge {
 	private MyPoint p1;

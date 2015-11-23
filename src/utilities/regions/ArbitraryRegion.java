@@ -6,9 +6,10 @@ import java.util.ArrayList;
 
 import regionBounders.ArbitraryRegionBounder;
 
-import utilities.MyEdge;
 import utilities.MyPoint;
 import utilities.MyScale;
+import utilities.edges.InternalEdge;
+import utilities.edges.MyEdge;
 import utilities.perforations.Perforation;
 
 public class ArbitraryRegion extends AbstractRegion {
@@ -119,7 +120,7 @@ public class ArbitraryRegion extends AbstractRegion {
 		MyEdge[] edges = new MyEdge[n];
 		
 		for(int i=0;i<n;i++){
-			edges[i] = new MyEdge(i%n+1,(i+1)%n+1);
+			edges[i] = new InternalEdge(i%n+1,(i+1)%n+1);
 		}
 		
 		return edges;

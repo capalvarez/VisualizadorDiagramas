@@ -3,8 +3,8 @@ package utilities.regions;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
 
-import utilities.MyEdge;
 import utilities.MyPoint;
+import utilities.edges.MyEdge;
 import utilities.perforations.Perforation;
 
 public interface MyRegion {

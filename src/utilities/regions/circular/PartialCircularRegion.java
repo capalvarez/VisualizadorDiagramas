@@ -1,5 +1,7 @@
 package utilities.regions.circular;
 
+import generalTools.CurveDiscretizer;
+
 import java.awt.Graphics2D;
 import java.awt.geom.Arc2D;
 import java.awt.geom.Line2D;
@@ -9,6 +11,7 @@ import drawers.PointDrawer;
 
 import utilities.MyPoint;
 import utilities.MyScale;
+import utilities.edges.MyEdge;
 
 public class PartialCircularRegion extends CircularRegion {
 	double[] angles;
@@ -16,6 +19,9 @@ public class PartialCircularRegion extends CircularRegion {
 	public PartialCircularRegion(double iR, double oR, MyPoint c, MyScale s, double[] angles){
 		super(iR,oR,c,s);
 		this.angles = angles;
+		
+		innerPointsDiscrete = new CurveDiscretizer(innerR,center).discretizeCircle(20);
+		outerPointsDiscrete = new CurveDiscretizer(outerR,center).discretizeCircle(20);
 	}
 	
 	private double radian(double angle){
@@ -37,11 +43,11 @@ public class PartialCircularRegion extends CircularRegion {
 		
 		MyPoint scaledCenter = scale.getPixelValue(center);
 				
-		g2d.draw(new Arc2D.Double(scaledCenter.getX()-sInnerR,scaledCenter.getY()+sInnerR,2*sInnerR,2*sInnerR,angles[0],angles[1], Arc2D.OPEN));
-		g2d.draw(new Arc2D.Double(scaledCenter.getX()-sOuterR,scaledCenter.getY(),2*sOuterR,2*sOuterR,angles[0],angles[1], Arc2D.OPEN));
+		g2d.draw(new Arc2D.Double(scaledCenter.getX()-sInnerR,scaledCenter.getY()-sInnerR,2*sInnerR,2*sInnerR,angles[0],angles[1], Arc2D.OPEN));
+		g2d.draw(new Arc2D.Double(scaledCenter.getX()-sOuterR,scaledCenter.getY()-2*sInnerR,2*sOuterR,2*sOuterR,angles[0],angles[1], Arc2D.OPEN));
 					
-		MyPoint pInner1 = new MyPoint(scaledCenter.getX()+Math.cos(radian(angles[0]))*sInnerR,scaledCenter.getY()+Math.sin(radian(angles[0]))*sInnerR + sOuterR);
-		MyPoint pInner2 = new MyPoint(scaledCenter.getX()+Math.cos(radian(angles[1]))*sInnerR,scaledCenter.getY()-Math.sin(radian(angles[1]))*sInnerR + sOuterR);
+		MyPoint pInner1 = new MyPoint(scaledCenter.getX()+Math.cos(radian(angles[0]))*sInnerR,scaledCenter.getY()+Math.sin(radian(angles[0]))*sInnerR);
+		MyPoint pInner2 = new MyPoint(scaledCenter.getX()+Math.cos(radian(angles[1]))*sInnerR,scaledCenter.getY()-Math.sin(radian(angles[1]))*sInnerR);
 		MyPoint pOuter1 = new MyPoint(scaledCenter.getX()+Math.cos(radian(angles[0]))*sOuterR,scaledCenter.getY()+(1 + Math.sin(radian(angles[0])))*sOuterR);
 		MyPoint pOuter2 = new MyPoint(scaledCenter.getX()+Math.cos(radian(angles[1]))*sOuterR,scaledCenter.getY()+(1 - Math.sin(radian(angles[1])))*sOuterR);
 
@@ -141,5 +147,17 @@ public class PartialCircularRegion extends CircularRegion {
 			
 			return generateBorderByNumber(array,forAll);
 		}
+	}
+
+	@Override
+	public MyEdge[] getEdges() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public MyPoint[] getPoints() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

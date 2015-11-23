@@ -2,13 +2,15 @@ package voronoiProcessors;
 
 import java.util.ArrayList;
 
-import utilities.MyEdge;
 import utilities.MyPoint;
-import utilities.MyTriangle;
+import utilities.edges.InternalEdge;
+import utilities.edges.MyEdge;
+import utilities.triangles.MyTriangle;
+import utilities.triangles.Triangle;
 
 public class DelaunayToVoronoiProcess {
 	ArrayList<MyPoint> voronoiPoints = new ArrayList<MyPoint>();
-	ArrayList<MyEdge> voronoiEdges = new ArrayList<MyEdge>();
+	ArrayList<InternalEdge> voronoiEdges = new ArrayList<InternalEdge>();
 	
 	public DelaunayToVoronoiProcess(MyTriangle[] t, MyEdge[] e){
 		computeVoronoiPoints(t);
@@ -23,7 +25,7 @@ public class DelaunayToVoronoiProcess {
 	}
 	
 	public MyEdge[] getVoronoiEdges(){
-		MyEdge[] array = new MyEdge[voronoiEdges.size()];
+		InternalEdge[] array = new InternalEdge[voronoiEdges.size()];
 		array = voronoiEdges.toArray(array);
 				
 		return array;
@@ -32,37 +34,26 @@ public class DelaunayToVoronoiProcess {
 	
 	private void computeVoronoiPoints(MyTriangle[] triangle){
 		for(int i=1;i<triangle.length;i++){
-			voronoiPoints.add(getCircumcenter(triangle[i]));
+			voronoiPoints.add(triangle[i].getCircumcenter());
 		}
 	}
-	
-	private MyPoint getCircumcenter(MyTriangle t){
-		ArrayList<MyPoint> p = t.getPoints();
-		MyPoint A = p.get(0);
-		MyPoint B = p.get(1);
-		MyPoint C = p.get(2);
-				
-		double d = 2*(A.getX()*(B.getY() - C.getY()) + B.getX()*(C.getY() - A.getY()) + C.getX()*(A.getY() - B.getY()));
-				
-		double uX = (A.squareNorm()*(B.getY() - C.getY()) + B.squareNorm()*(C.getY() - A.getY()) + C.squareNorm()*(A.getY() - B.getY()))/d;
-		double uY = (A.squareNorm()*(C.getX() - B.getX()) + B.squareNorm()*(A.getX() - C.getX()) + C.squareNorm()*(B.getX() - A.getX()))/d;
-	
-		return new MyPoint(uX,uY);
-	}
-	
+		
 	private void computeVoronoiEdges(MyEdge[] edge){
 		for(int i=1;i<edge.length;i++){
 			ArrayList<MyTriangle> triangles = edge[i].getTriangles();
 		
 			if(triangles.size()==2){
-				MyPoint p1 = getCircumcenter(triangles.get(0));
-				MyPoint p2 = getCircumcenter(triangles.get(1));
+				MyPoint p1 = triangles.get(0).getCircumcenter();
+				MyPoint p2 = triangles.get(1).getCircumcenter();
 						
-				MyEdge newEdge = new MyEdge(voronoiPoints.indexOf(p1), voronoiPoints.indexOf(p2));
+				InternalEdge newEdge = new InternalEdge(voronoiPoints.indexOf(p1), voronoiPoints.indexOf(p2));
 				newEdge.setPoints(p1,p2);
 				
 				voronoiEdges.add(newEdge);
-			}	
+			}else{
+				
+				 
+			}
 		}	
 	}
 	

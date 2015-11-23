@@ -6,13 +6,15 @@ import java.awt.Graphics2D;
 import java.awt.geom.Ellipse2D;
 import java.util.ArrayList;
 
-import utilities.MyEdge;
 import utilities.MyPoint;
 import utilities.MyScale;
+import utilities.edges.InternalEdge;
+import utilities.edges.MyEdge;
+import utilities.perforations.MyCircle;
+import utilities.perforations.Perforation;
 
 public class FullCircularRegion extends CircularRegion {
-	ArrayList<MyPoint> innerPointsDiscrete;
-	ArrayList<MyPoint> outerPointsDiscrete;
+	
 	
 	public FullCircularRegion(double iR, double oR, MyPoint c, MyScale s){
 		super(iR,oR,c,s);
@@ -148,14 +150,14 @@ public class FullCircularRegion extends CircularRegion {
 		int nOut = outerPointsDiscrete.size();
 		
 		for(int i=0;i<nOut;i++){
-			edges[j] = new MyEdge(i%nOut+1,(i+1)%nOut+1);
+			edges[j] = new InternalEdge(i%nOut+1,(i+1)%nOut+1);
 			j++;
 		}
 		
 		int nIn = innerPointsDiscrete.size();
 		
 		for(int i=0;i<nIn;i++){
-			edges[j] = new MyEdge(i%nIn+1+nOut,(i+1)%nIn+1+nOut);
+			edges[j] = new InternalEdge(i%nIn+1+nOut,(i+1)%nIn+1+nOut);
 			j++;
 		}
 		
@@ -171,6 +173,12 @@ public class FullCircularRegion extends CircularRegion {
 						
 		return pointListToArray(circlePoints);
 	}
-
 	
+	@Override
+	public ArrayList<Perforation> getPerforationList(){
+		perforation.add(new MyCircle(center,innerR));
+		
+		return perforation;
+	}
+
 }

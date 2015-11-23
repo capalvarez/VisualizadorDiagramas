@@ -8,10 +8,12 @@ import java.io.IOException;
 import dataProcessors.DelaunayTriangleSorter;
 
 import utilities.MyPoint;
-import utilities.MyTriangle;
+import utilities.triangles.AbstractTriangle;
+import utilities.triangles.MyTriangle;
+import utilities.triangles.Triangle;
 
 public class DelaunayOFFReader {
-	private MyTriangle[] triangleList;
+	private AbstractTriangle[] triangleList;
 		
 	public DelaunayOFFReader(String fileName, MyPoint[] inputPoints){
 		BufferedReader br = null;	
@@ -25,7 +27,7 @@ public class DelaunayOFFReader {
 			currentLine = br.readLine();
 			int triangleNumber = Integer.parseInt(currentLine);
 			
-			triangleList = new MyTriangle[triangleNumber];
+			triangleList = new AbstractTriangle[triangleNumber];
 			
 			for(int i=0;i<triangleNumber;i++){
 				currentLine = br.readLine();
@@ -34,7 +36,7 @@ public class DelaunayOFFReader {
 				MyPoint[] points = {inputPoints[Integer.parseInt(indexes[0])],
 						inputPoints[Integer.parseInt(indexes[1])],inputPoints[Integer.parseInt(indexes[2])]};
 				
-				triangleList[i] = new MyTriangle(points);	
+				triangleList[i] = new Triangle(points);	
 			}
 			
 			currentLine = br.readLine();
