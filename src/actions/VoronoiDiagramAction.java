@@ -1,31 +1,16 @@
 package actions;
 
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-
 import javax.swing.AbstractAction;
 
-import readers.DelaunayOFFReader;
 import readers.TriangleDelaunayFilesReader;
-import readers.VoronoiOFFReader;
-
-import utilities.MyCell;
-import utilities.MyEdge;
 import utilities.MyPoint;
-import utilities.MyTriangle;
 import voronoiProcessors.DelaunayToVoronoiProcess;
-import writers.PointInputWriter;
 import writers.PolyFileWriter;
-
-import libraryCallers.DelaunayLibraryCall;
 import libraryCallers.TriangleDelaunayCall;
-import libraryCallers.VoronoiLibraryCall;
-
-import dataProcessors.PointStringProcess;
-import dataProcessors.VoronoiRegionProcess;
 import display.IWindow;
 
 public class VoronoiDiagramAction extends AbstractAction {
@@ -56,6 +41,7 @@ public class VoronoiDiagramAction extends AbstractAction {
 			TriangleDelaunayFilesReader reader = new TriangleDelaunayFilesReader(fileName);
 			DelaunayToVoronoiProcess voronoi = new DelaunayToVoronoiProcess(reader.getTriangles(),reader.getEdges());
 			
+			window.drawPointsInPanel(voronoi.getVoronoiPoints(), voronoi.getVoronoiPoints());
 			window.drawDiagramInPanel(voronoi.getVoronoiPoints(),voronoi.getVoronoiEdges());		
 		}catch (IOException e1) {
 			e1.printStackTrace();

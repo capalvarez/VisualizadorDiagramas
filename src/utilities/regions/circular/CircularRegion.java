@@ -6,9 +6,10 @@ import java.util.ArrayList;
 import utilities.MyPoint;
 import utilities.MyScale;
 import utilities.perforations.Perforation;
+import utilities.regions.AbstractRegion;
 import utilities.regions.MyRegion;
 
-public abstract class CircularRegion implements MyRegion {
+public abstract class CircularRegion extends AbstractRegion {
 	ArrayList<Perforation> perforation = new ArrayList<Perforation>();
 	double innerR;
 	double outerR;

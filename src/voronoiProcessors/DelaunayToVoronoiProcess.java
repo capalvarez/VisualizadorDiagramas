@@ -39,11 +39,11 @@ public class DelaunayToVoronoiProcess {
 	private MyPoint getCircumcenter(MyTriangle t){
 		ArrayList<MyPoint> p = t.getPoints();
 		MyPoint A = p.get(0);
-		MyPoint B = p.get(0);
-		MyPoint C = p.get(0);
+		MyPoint B = p.get(1);
+		MyPoint C = p.get(2);
 				
 		double d = 2*(A.getX()*(B.getY() - C.getY()) + B.getX()*(C.getY() - A.getY()) + C.getX()*(A.getY() - B.getY()));
-		
+				
 		double uX = (A.squareNorm()*(B.getY() - C.getY()) + B.squareNorm()*(C.getY() - A.getY()) + C.squareNorm()*(A.getY() - B.getY()))/d;
 		double uY = (A.squareNorm()*(C.getX() - B.getX()) + B.squareNorm()*(A.getX() - C.getX()) + C.squareNorm()*(B.getX() - A.getX()))/d;
 	
@@ -53,8 +53,7 @@ public class DelaunayToVoronoiProcess {
 	private void computeVoronoiEdges(MyEdge[] edge){
 		for(int i=1;i<edge.length;i++){
 			ArrayList<MyTriangle> triangles = edge[i].getTriangles();
-			
-			/*PARCHE*/
+		
 			if(triangles.size()==2){
 				MyPoint p1 = getCircumcenter(triangles.get(0));
 				MyPoint p2 = getCircumcenter(triangles.get(1));

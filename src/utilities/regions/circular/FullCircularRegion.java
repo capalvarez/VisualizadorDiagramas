@@ -1,14 +1,24 @@
 package utilities.regions.circular;
 
+import generalTools.CurveDiscretizer;
+
 import java.awt.Graphics2D;
 import java.awt.geom.Ellipse2D;
+import java.util.ArrayList;
+
+import utilities.MyEdge;
 import utilities.MyPoint;
 import utilities.MyScale;
 
 public class FullCircularRegion extends CircularRegion {
-
+	ArrayList<MyPoint> innerPointsDiscrete;
+	ArrayList<MyPoint> outerPointsDiscrete;
+	
 	public FullCircularRegion(double iR, double oR, MyPoint c, MyScale s){
 		super(iR,oR,c,s);
+		
+		innerPointsDiscrete = new CurveDiscretizer(outerR,center).discretizeCircle(20);
+		outerPointsDiscrete = new CurveDiscretizer(innerR,center).discretizeCircle(20);
 	}
 	
 	private double radian(double angle){
@@ -128,6 +138,38 @@ public class FullCircularRegion extends CircularRegion {
 			
 			return generateBorderByNumber(array,forAll);
 		}
+	}
+
+	@Override
+	public MyEdge[] getEdges() {
+		MyEdge[] edges = new MyEdge[outerPointsDiscrete.size() + innerPointsDiscrete.size()];
+		
+		int j = 0;
+		int nOut = outerPointsDiscrete.size();
+		
+		for(int i=0;i<nOut;i++){
+			edges[j] = new MyEdge(i%nOut+1,(i+1)%nOut+1);
+			j++;
+		}
+		
+		int nIn = innerPointsDiscrete.size();
+		
+		for(int i=0;i<nIn;i++){
+			edges[j] = new MyEdge(i%nIn+1+nOut,(i+1)%nIn+1+nOut);
+			j++;
+		}
+		
+		return edges;	
+	}
+
+	@Override
+	public MyPoint[] getPoints() {		
+		ArrayList<MyPoint> circlePoints = new ArrayList<MyPoint>();
+		
+		circlePoints.addAll(outerPointsDiscrete);
+		circlePoints.addAll(innerPointsDiscrete);
+						
+		return pointListToArray(circlePoints);
 	}
 
 	

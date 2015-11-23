@@ -115,13 +115,18 @@ public class ArbitraryRegion extends AbstractRegion {
 
 	@Override
 	public MyEdge[] getEdges() {
-		// TODO Auto-generated method stub
-		return null;
+		int n = points.length;
+		MyEdge[] edges = new MyEdge[n];
+		
+		for(int i=0;i<n;i++){
+			edges[i] = new MyEdge(i%n+1,(i+1)%n+1);
+		}
+		
+		return edges;
 	}
 
 	@Override
 	public MyPoint[] getPoints() {
-		// TODO Auto-generated method stub
-		return null;
+		return points;
 	}
 }
