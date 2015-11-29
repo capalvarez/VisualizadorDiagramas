@@ -1,13 +1,12 @@
 package utilities.regions.circular;
 
-import java.awt.Graphics2D;
 import java.util.ArrayList;
 
 import utilities.MyPoint;
 import utilities.MyScale;
+import utilities.perforations.MyCircle;
 import utilities.perforations.Perforation;
 import utilities.regions.AbstractRegion;
-import utilities.regions.MyRegion;
 
 public abstract class CircularRegion extends AbstractRegion {
 	ArrayList<Perforation> perforation = new ArrayList<Perforation>();
@@ -54,5 +53,12 @@ public abstract class CircularRegion extends AbstractRegion {
 	public void emptyPerforations() {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	@Override
+	public ArrayList<Perforation> getPerforationList(){
+		perforation.add(new MyCircle(center,innerR));
+		
+		return perforation;
 	}
 }

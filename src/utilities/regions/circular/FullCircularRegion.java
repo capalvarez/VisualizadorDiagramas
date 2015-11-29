@@ -167,18 +167,12 @@ public class FullCircularRegion extends CircularRegion {
 	@Override
 	public MyPoint[] getPoints() {		
 		ArrayList<MyPoint> circlePoints = new ArrayList<MyPoint>();
-		
+			
 		circlePoints.addAll(outerPointsDiscrete);
 		circlePoints.addAll(innerPointsDiscrete);
 						
 		return pointListToArray(circlePoints);
 	}
 	
-	@Override
-	public ArrayList<Perforation> getPerforationList(){
-		perforation.add(new MyCircle(center,innerR));
-		
-		return perforation;
-	}
 
 }

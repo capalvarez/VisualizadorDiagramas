@@ -108,7 +108,6 @@ public class RectangleRegion extends AbstractRegion{
 		
 		for(int i=0;i<n;i++){
 			inter = list.get(i).intersectionPoint(p);
-			//System.out.println(p + "            " + inter.size());
 			
 			if(inter.size()==2){
 				changed = true;

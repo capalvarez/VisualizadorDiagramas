@@ -58,7 +58,7 @@ public class DrawPanel extends AbstractPanel{
     private void doDrawingRegion(Graphics g) {	
     	Graphics2D g2d = (Graphics2D) g;
     	g2d.setColor(color);
-        region.drawRegion(g2d);           
+        region.drawRegion(g2d);
     }
     
     private void doDrawingPoints(Graphics g){
@@ -94,7 +94,10 @@ public class DrawPanel extends AbstractPanel{
         
     	for(int i=0;i<triangles.length;i++){
     		if(triangles[i]!=null){
-    			triangles[i].draw(g2d, scale);
+    			//if(triangles[i].getCircumcenter().equals(new MyPoint(0,0))){
+    				triangles[i].draw(g2d, scale);
+    			//}
+    			
     		}	
     	}
     }

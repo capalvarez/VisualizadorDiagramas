@@ -30,30 +30,23 @@ public class DelaunayToVoronoiProcess {
 				
 		return array;
 	}
-	
-	
+		
 	private void computeVoronoiPoints(MyTriangle[] triangle){
 		for(int i=1;i<triangle.length;i++){
-			voronoiPoints.add(triangle[i].getCircumcenter());
+			voronoiPoints.add(triangle[i].getCircumcenter());	
 		}
 	}
 		
 	private void computeVoronoiEdges(MyEdge[] edge){
 		for(int i=1;i<edge.length;i++){
 			ArrayList<MyTriangle> triangles = edge[i].getTriangles();
-		
-			if(triangles.size()==2){
-				MyPoint p1 = triangles.get(0).getCircumcenter();
-				MyPoint p2 = triangles.get(1).getCircumcenter();
-						
-				InternalEdge newEdge = new InternalEdge(voronoiPoints.indexOf(p1), voronoiPoints.indexOf(p2));
-				newEdge.setPoints(p1,p2);
-				
-				voronoiEdges.add(newEdge);
-			}else{
-				
-				 
-			}
+			MyPoint p1 = triangles.get(0).getCircumcenter();
+			MyPoint p2 = triangles.get(1).getCircumcenter();
+
+			InternalEdge newEdge = new InternalEdge(voronoiPoints.indexOf(p1), voronoiPoints.indexOf(p2));
+			newEdge.setPoints(p1,p2);
+
+			voronoiEdges.add(newEdge);
 		}	
 	}
 	

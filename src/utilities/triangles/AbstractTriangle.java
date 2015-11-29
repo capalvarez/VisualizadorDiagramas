@@ -24,6 +24,14 @@ public abstract class AbstractTriangle implements MyTriangle {
 	public void setNeighbour(MyTriangle t, int i) {
 		neighbours[i] = t;
 	}
+	
+	public double getArea(){
+		MyPoint pA = points.get(0);
+		MyPoint pB = points.get(1);
+		MyPoint pC = points.get(2);
+		
+		return Math.abs((pA.getX() - pC.getX())*(pB.getY() - pA.getY()) - (pA.getX() - pB.getX())*(pC.getY() - pA.getY()))/2;
+	}
 
 	public void draw(Graphics2D g2d, MyScale scale) {	
 		MyPoint p1 = scale.getPixelValue(points.get(0));

@@ -38,5 +38,7 @@ public interface MyTriangle {
 	public TriangleEdge getCommonEdge(AbstractTriangle t);
 	
 	public MyPoint getCircumcenter();
+	
+	public double getArea();
 
 }
