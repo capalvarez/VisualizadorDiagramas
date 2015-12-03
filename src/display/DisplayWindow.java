@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
+import java.util.Arrays;
 
 import dataProcessors.*;
 
@@ -86,8 +87,7 @@ public class DisplayWindow extends IWindow{
 		Panel.setRegion(currentRegion);	
 		Panel.setScale(scale);
 		this.scale = scale; 
-		//scale.printScale();
-			
+	
 		Panel.switchRegion(true);	
 		repaint();
 		validate();
@@ -111,11 +111,17 @@ public class DisplayWindow extends IWindow{
 	
 	public void drawDiagramInPanel(MyPoint[] points, MyEdge[] edges){
 		menu.setPrintEnabled(true);
-		
-		Panel.setLinesToPaint(edges,scale);
+				
 		voronoiPoints = points;
 		voronoiEdges = edges;		
-
+		
+		MyPoint[] pixelPoints = new MyPoint[points.length];
+		for(int i=0; i<pixelPoints.length; i++){
+			pixelPoints[i] = scale.getPixelValue(points[i]);
+		}
+		
+		Panel.setLinesToPaint(edges,pixelPoints,scale);
+				
 		Panel.switchDiagram(true);	
 		repaint();
 		validate();	
@@ -227,6 +233,11 @@ public class DisplayWindow extends IWindow{
 		
 		repaint();
 		validate();	
+	}
+
+	@Override
+	public void setPoints(MyPoint[] p) {
+		currentPoints = p;
 	}
 	
 }

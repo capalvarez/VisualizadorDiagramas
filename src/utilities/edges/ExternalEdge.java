@@ -18,7 +18,5 @@ public class ExternalEdge extends AbstractEdge {
 	public void setTriangle(MyTriangle t){
 		triangles.add(t);
 		triangles.add(new NullTriangle(this));
-		
-		
 	}
 }

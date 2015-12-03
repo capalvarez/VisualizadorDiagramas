@@ -17,6 +17,7 @@ import utilities.triangles.MyTriangle;
 
 public class DrawPanel extends AbstractPanel{
 	private MyPoint[] points;
+	private MyPoint[] voronoiPoints;
 	private MyRegion region;
 	private MyEdge[] edges;
 	private MyScale scale;
@@ -41,8 +42,9 @@ public class DrawPanel extends AbstractPanel{
     	this.region = region;
     }
     
-    public void setLinesToPaint(MyEdge[] edges, MyScale scale){
+    public void setLinesToPaint(MyEdge[] edges, MyPoint[] points, MyScale scale){
       	this.edges = edges;
+      	this.voronoiPoints = points;
       	this.scale = scale;
     }
     
@@ -77,7 +79,7 @@ public class DrawPanel extends AbstractPanel{
     	 
     	 g2d.setColor(Color.RED);
     	/*Dibujar los puntos de input*/
-    	(new PointDrawer(points,pointSize)).drawPoints(g2d);
+    	(new PointDrawer(voronoiPoints,pointSize)).drawPoints(g2d);
     }
 
     private void doDrawingCoord(Graphics g){
@@ -105,7 +107,6 @@ public class DrawPanel extends AbstractPanel{
     @Override
     public void paintComponent(Graphics g) {   
         super.paintComponent(g);
-        
         
         if(shownRegion){
         	doDrawingRegion(g);

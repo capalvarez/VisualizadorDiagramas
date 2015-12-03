@@ -56,13 +56,13 @@ public class OutputFileWriter {
 		}
 				
 		/*Escribir el numero de regiones de Voronoi*/
-		writer.write(voronoiCells.length - 1 + "\n");
-		
-		/*Escribir las regiones de Voronoi*/
-		for(int i=1;i<voronoiCells.length;i++){
-			/*Por ahora, se asume trabajar en 2D*/
-			writer.write(voronoiCells[i].toString() + "\n");
-		}
+//		writer.write(voronoiCells.length - 1 + "\n");
+//		
+//		/*Escribir las regiones de Voronoi*/
+//		for(int i=1;i<voronoiCells.length;i++){
+//			/*Por ahora, se asume trabajar en 2D*/
+//			writer.write(voronoiCells[i].toString() + "\n");
+//		}
 				
 		writer.close();
 	}

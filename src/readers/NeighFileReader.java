@@ -41,6 +41,7 @@ public class NeighFileReader {
 					
 					for(int j=0;j<3;j++){
 						neighbours[j] = getNeighbour(Integer.parseInt(coord[j+1]));
+						triangles[i].setNeighbourInMap(neighbours[j], i);
 					}
 										
 					/*Para asegurarse de no tomar lineas vacias*/

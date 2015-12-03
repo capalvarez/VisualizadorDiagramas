@@ -19,11 +19,19 @@ import utilities.triangles.Triangle;
 
 public class EleFileReader {
 	MyTriangle[] triangles;
+	HashMap<MyPoint,ArrayList<MyTriangle>> pointMap = new HashMap<MyPoint,ArrayList<MyTriangle>>();
 	
 	public EleFileReader(String name, MyPoint[] points, HashMap<PointPair,MyEdge> edges){
 		File file = new File(name + ".1.ele");
 		
+		initMap(points);
 		readFile(file,points,edges);
+	}
+	
+	private void initMap(MyPoint[] points){
+		for(int i=1;i<points.length;i++){
+			pointMap.put(points[i], new ArrayList<MyTriangle>());
+		}
 	}
 	
 	private void readFile(File input, MyPoint[] points, HashMap<PointPair,MyEdge> edges){
@@ -58,7 +66,9 @@ public class EleFileReader {
 					trianglePoints.add(p3);
 					
 					triangles[i] = new Triangle(trianglePoints);
-													
+					
+					addToMap(trianglePoints,triangles[i]);
+										
 					edges.get(new PointPair(p1,p2)).setTriangle(triangles[i]);
 					edges.get(new PointPair(p2,p3)).setTriangle(triangles[i]);
 					edges.get(new PointPair(p3,p1)).setTriangle(triangles[i]);
@@ -77,5 +87,15 @@ public class EleFileReader {
 	
 	public MyTriangle[] getTriangles(){
 		return triangles;
+	}
+	
+	private void addToMap(ArrayList<MyPoint> points, MyTriangle triangle){
+		for(int i=0;i<points.size();i++){
+			pointMap.get(points.get(i)).add(triangle);
+		}
+	}
+	
+	public HashMap<MyPoint,ArrayList<MyTriangle>> getPointMap(){
+		return pointMap;
 	}
 }

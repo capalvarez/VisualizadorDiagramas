@@ -47,6 +47,8 @@ public abstract class IWindow extends JFrame{
 	public abstract MyScale getScale();
 	
 	public abstract void setVoronoiCells(MyCell[] cells);
+	
+	public abstract void setPoints(MyPoint[] p);
 
 	public abstract void drawDelaunay(MyTriangle[] triangleList);
 	

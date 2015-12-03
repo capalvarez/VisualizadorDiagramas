@@ -9,36 +9,40 @@ import utilities.edges.TriangleEdge;
 
 public interface MyTriangle {
 
-	public abstract void setNeighbours(MyTriangle[] n);
+	public void setNeighbours(MyTriangle[] n);
 
-	public abstract void setNeighbour(MyTriangle t, int i);
+	public void setNeighbour(MyTriangle t, int i);
 
-	public abstract void draw(Graphics2D g2d, MyScale scale);
+	public void draw(Graphics2D g2d, MyScale scale);
 
-	public abstract ArrayList<TriangleEdge> nullNeighbours();
+	public ArrayList<TriangleEdge> nullNeighbours();
 
-	public abstract ArrayList<TriangleEdge> getEdges();
+	public ArrayList<TriangleEdge> getEdges();
 
-	public abstract ArrayList<MyPoint> getPoints();
+	public ArrayList<MyPoint> getPoints();
 
-	public abstract MyTriangle[] getNeighbours();
+	public MyTriangle[] getNeighbours();
 
-	public abstract void setPoints(ArrayList<MyPoint> newPoints);
+	public void setPoints(ArrayList<MyPoint> newPoints);
 
-	public abstract boolean hasNullNeighbours();
+	public boolean hasNullNeighbours();
 
-	public abstract boolean contains(MyPoint point, double precision);
+	public boolean contains(MyPoint point, double precision);
 
-	public abstract boolean insideTriangle(MyPoint point, double precision);
+	public boolean insideTriangle(MyPoint point, double precision);
 
-	public abstract boolean inEdge(MyPoint p);
+	public boolean inEdge(MyPoint p);
 
-	public abstract String toString();
+	public String toString();
 	
 	public TriangleEdge getCommonEdge(AbstractTriangle t);
 	
 	public MyPoint getCircumcenter();
 	
 	public double getArea();
+	
+	public void setNeighbourInMap(MyTriangle t, int i);
+	
+	public MyTriangle getNeighbourByPoint(MyPoint p);
 
 }

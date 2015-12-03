@@ -3,6 +3,7 @@ package utilities.triangles;
 import java.awt.Graphics2D;
 import java.awt.geom.Line2D;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import utilities.MyPoint;
 import utilities.MyScale;
@@ -12,6 +13,7 @@ public abstract class AbstractTriangle implements MyTriangle {
 
 	protected ArrayList<MyPoint> points;
 	protected MyTriangle[] neighbours;
+	protected HashMap<MyPoint,MyTriangle> neighboursMap = new HashMap<MyPoint,MyTriangle>();
 
 	public AbstractTriangle() {
 		super();
@@ -23,6 +25,14 @@ public abstract class AbstractTriangle implements MyTriangle {
 
 	public void setNeighbour(MyTriangle t, int i) {
 		neighbours[i] = t;
+	}
+	
+	public void setNeighbourInMap(MyTriangle t, int index){
+		neighboursMap.put(points.get(index),t);
+	}
+	
+	public MyTriangle getNeighbourByPoint(MyPoint p){
+		return neighboursMap.get(p);
 	}
 	
 	public double getArea(){
