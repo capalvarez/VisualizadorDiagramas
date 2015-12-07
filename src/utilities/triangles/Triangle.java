@@ -2,6 +2,7 @@ package utilities.triangles;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 
 import utilities.MyPoint;
 
@@ -35,6 +36,13 @@ public class Triangle extends AbstractTriangle {
 		double uY = (A.squareNorm()*(C.getX() - B.getX()) + B.squareNorm()*(A.getX() - C.getX()) + C.squareNorm()*(B.getX() - A.getX()))/d;
 	
 		return new MyPoint(uX,uY);
+	}
+	
+	public Collection<MyTriangle> getNeighboursByPoint(MyPoint p){
+		Collection<MyTriangle> copy = neighboursMap.values();
+		copy.remove(neighboursMap.get(p));	
+				
+		return copy;
 	}
 	
 }

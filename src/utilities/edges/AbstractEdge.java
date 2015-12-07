@@ -56,7 +56,7 @@ public abstract class AbstractEdge implements MyEdge {
 	 */
 	@Override
 	public String toString() {
-		return this.i1+" "+this.i2 + " " + getNormal();
+		return this.i1+" "+this.i2 + " "; //+ getNormal();
 	}
 
 	public String getNormal() {
@@ -105,5 +105,9 @@ public abstract class AbstractEdge implements MyEdge {
 
 	public MyPoint getMidPoint(){
 		return new MyPoint((p1.getX() + p2.getX())/2,(p1.getY() + p2.getY())/2); 
+	}
+	
+	public int exactCompare(MyEdge e){
+		return (i1==e.getIndexFirst() && i2==e.getIndexSecond())? 1:-1;
 	}
 }

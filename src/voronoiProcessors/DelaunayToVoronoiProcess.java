@@ -1,7 +1,9 @@
 package voronoiProcessors;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
 
 import utilities.MyCell;
 import utilities.MyPoint;
@@ -12,7 +14,7 @@ import utilities.triangles.Triangle;
 
 public class DelaunayToVoronoiProcess {
 	ArrayList<MyPoint> voronoiPoints = new ArrayList<MyPoint>();
-	ArrayList<InternalEdge> voronoiEdges = new ArrayList<InternalEdge>();
+	ArrayList<MyEdge> voronoiEdges = new ArrayList<MyEdge>();
 	ArrayList<MyCell> voronoiCells = new ArrayList<MyCell>();
 	
 	public DelaunayToVoronoiProcess(MyTriangle[] t, MyEdge[] e, HashMap<MyPoint,ArrayList<MyTriangle>> map){
@@ -72,20 +74,53 @@ public class DelaunayToVoronoiProcess {
 	private void computeVoronoiCells(HashMap<MyPoint,ArrayList<MyTriangle>> map){
 		for (MyPoint point : map.keySet()) {
 			ArrayList<MyTriangle> list = map.get(point);
+			MyCell newCell = new MyCell();
 			
-			MyTriangle t = list.get(0);
-			
-			while(true){
+			int i = 0;
+			MyTriangle t = list.get(i);
+						
+			while(!t.equals(list.get(0)) || i==0){
 				MyPoint p1 = t.getCircumcenter();
-				MyPoint p2 = t.getNeighbourByPoint(point).getCircumcenter();
+			
+				Collection<MyTriangle> usefulNeighbours = t.getNeighboursByPoint(point); 
+				Iterator<MyTriangle> it = usefulNeighbours.iterator();
+		
+				MyTriangle first = it.next();
+				MyTriangle second = it.next();
+
+				MyPoint p21 = first.getCircumcenter();
+				MyPoint p22 = second.getCircumcenter();
+
+				MyEdge newEdge;
 				
-				int index = voronoiEdges.indexOf(new InternalEdge(p1,p2));
+				if (counterClockwise(point, p1, p21)){
+					newEdge = new InternalEdge(voronoiPoints.indexOf(p1), voronoiPoints.indexOf(p21));
+					t = first;
+				}else{
+					newEdge = new InternalEdge(voronoiPoints.indexOf(p1), voronoiPoints.indexOf(p22));
+					t = second;
+				}
 				
+				if(!voronoiEdges.contains(newEdge)){
+					voronoiEdges.add(newEdge);
+				}
 				
+				int index = voronoiEdges.indexOf(newEdge);			
+				
+				newCell.addEdge(index, voronoiEdges.get(index),	newEdge.exactCompare(voronoiEdges.get(index)));
+
+				i++;
+
 			}
-		    
+			
+			voronoiCells.add(newCell);
 		}
+	}	
+		
+	private boolean counterClockwise(MyPoint pA, MyPoint pB, MyPoint pC){
+		return ((pB.getX() * pC.getY() + pA.getX() * pB.getY() + pA.getY()* pC.getX()) - 
+				(pA.getY() * pB.getX() + pB.getY() * pC.getX() + pA.getX() * pC.getY())) > 0;
 	}
-	
-	
+
 }
+

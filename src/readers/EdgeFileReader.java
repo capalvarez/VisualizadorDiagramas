@@ -17,9 +17,14 @@ import utilities.edges.MyEdge;
 public class EdgeFileReader {
 	MyEdge[] edges;
 	HashMap<PointPair,MyEdge> dictionary = new HashMap<PointPair,MyEdge>();
+	HashMap<MyPoint,ArrayList<MyEdge>> externalDictionary = new HashMap<MyPoint,ArrayList<MyEdge>>(); 
 
-	public EdgeFileReader(String name, MyPoint[] points){
+	public EdgeFileReader(String name, MyPoint[] points, MyPoint[] externalPoints){
 		File file = new File(name + ".1.edge");
+			
+		for(int i=0;i<externalPoints.length;i++){
+			externalDictionary.put(externalPoints[i], new ArrayList<MyEdge>());
+		}
 		
 		readFile(file,points);
 	}
@@ -52,9 +57,12 @@ public class EdgeFileReader {
 					if(coord[3].equals("0")){
 						edge = new InternalEdge(i1,i2);
 						edge.setPoints(points[i1],points[i2]);
-					}else{
+					}else{	
 						edge = new ExternalEdge(i1,i2);
 						edge.setPoints(points[i1],points[i2]);
+						
+						externalDictionary.get(points[i1]).add(edge);
+						externalDictionary.get(points[i2]).add(edge);
 					}
 															
 					dictionary.put(new PointPair(points[i1],points[i2]), edge);
@@ -74,5 +82,9 @@ public class EdgeFileReader {
 	
 	public HashMap<PointPair,MyEdge> getDictionary(){
 		return dictionary;
+	}
+	
+	public HashMap<MyPoint,ArrayList<MyEdge>> getExternalDictionary(){
+		return externalDictionary;
 	}
 }
