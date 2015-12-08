@@ -44,5 +44,5 @@ public interface MyTriangle {
 	public void setNeighbourInMap(MyTriangle t, int i);
 	
 	public MyTriangle getNeighbourByPoint(MyPoint p);
-	
+
 }

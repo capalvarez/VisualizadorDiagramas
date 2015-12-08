@@ -114,4 +114,5 @@ public abstract class AbstractEdge implements MyEdge {
 		
 		return getSecondPoint();
 	}
+
 }

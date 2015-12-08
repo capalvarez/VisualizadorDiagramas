@@ -70,7 +70,7 @@ public class DelaunayToVoronoiProcess {
 	}
 	
 	private void computeVoronoiCells(){
-		
+
 	}
 	
 	

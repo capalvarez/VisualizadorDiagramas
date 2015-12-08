@@ -21,4 +21,5 @@ public class NullTriangle extends AbstractTriangle {
 			neighboursMap.put(new MyPoint(),t);
 		}
 	}
+
 }

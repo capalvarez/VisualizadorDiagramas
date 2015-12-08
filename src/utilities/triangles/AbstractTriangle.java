@@ -26,11 +26,7 @@ public abstract class AbstractTriangle implements MyTriangle {
 	public void setNeighbour(MyTriangle t, int i) {
 		neighbours[i] = t;
 	}
-	
-	public void setNeighbourInMap(MyTriangle t, int index){
-		neighboursMap.put(points.get(index),t);
-	}
-	
+		
 	public MyTriangle getNeighbourByPoint(MyPoint p){
 		return neighboursMap.get(p);
 	}
