@@ -45,4 +45,7 @@ public class Triangle extends AbstractTriangle {
 		return copy;
 	}
 	
+	public void setNeighbourInMap(MyTriangle t, int index){
+		neighboursMap.put(points.get(index),t);
+	}
 }

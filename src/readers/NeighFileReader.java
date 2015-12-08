@@ -19,10 +19,14 @@ public class NeighFileReader {
 	File input;
 	HashMap<MyEdge,MyTriangle> nullTriangleMap = new HashMap<MyEdge,MyTriangle>();
 	HashMap<MyPoint,ArrayList<MyEdge>> externalDictionary;
+	MyEdge lastEdge;
+	HashMap<MyPoint,ArrayList<MyTriangle>> pointMap;
 	
-	public NeighFileReader(String name, MyTriangle[] triangle){
+	public NeighFileReader(String name, MyTriangle[] triangle, HashMap<MyPoint,ArrayList<MyEdge>> e, HashMap<MyPoint,ArrayList<MyTriangle>> map){
 		input = new File(name + ".1.neigh");
 		triangles = triangle;
+		externalDictionary = e;
+		pointMap = map;
 	}
 	
 	public void addNeighbours(){
@@ -48,7 +52,7 @@ public class NeighFileReader {
 					MyTriangle[] neighbours = new MyTriangle[3];
 					
 					for(int j=0;j<3;j++){
-						neighbours[j] = getNeighbour(Integer.parseInt(coord[j+1]),triangles[i].getOppositeEdge(j),j);
+						neighbours[j] = getNeighbour(Integer.parseInt(coord[j+1]),triangles[i].getOppositeEdge(j),j,triangles[i]);
 						triangles[i].setNeighbourInMap(neighbours[j], j);
 					}
 										
@@ -66,35 +70,43 @@ public class NeighFileReader {
 		}				
     }
 	
-	private MyTriangle getNeighbour(int index, MyEdge e, int pointIndex){
+	private MyTriangle getNeighbour(int index, MyEdge e, int i, MyTriangle t){
 		if(index>0){
 			return triangles[index];
 		}else{
 			NullTriangle nullT = new NullTriangle(e); 
+			nullT.setNeighbourInMap(t, 2);
 			nullTriangleMap.put(e, nullT);
+			lastEdge = e;
+			
+			pointMap.get(e.getFirstPoint()).add(nullT);
+			pointMap.get(e.getSecondPoint()).add(nullT);
 			
 			return nullT;
 		}
 	}
 	
 	private void correctNullNeighbours(){
-		MyEdge initEdge = null;
+		MyEdge initEdge = lastEdge;
 		MyEdge e = initEdge;
 		
 		MyTriangle t = nullTriangleMap.get(initEdge);
-		t.setNeighbourInMap(nullTriangleMap.get(getNextEdge(initEdge.getFirstPoint(),initEdge)), 0);
+		t.setNeighbourInMap(nullTriangleMap.get(getNextEdge(initEdge.getSecondPoint(),initEdge)), 0);
 		
-		MyEdge nextEdge = getNextEdge(initEdge.getFirstPoint(),initEdge);
+		MyPoint p = initEdge.getFirstPoint();
+		MyEdge nextEdge = getNextEdge(p,initEdge);
 		int i = 0;		
 		MyTriangle nextTriangle;
 		
 		while(!initEdge.equals(e) || i==0){
 			nextTriangle = nullTriangleMap.get(nextEdge);
-			t.setNeighbourInMap(nullTriangleMap.get(nextEdge), 0);
+			t.setNeighbourInMap(nextTriangle, 1);
 			nextTriangle.setNeighbourInMap(t, 0);
 			
 			t = nextTriangle;
-			e = nextEdge;		
+			e = nextEdge;
+			p = nextEdge.getNextPoint(p);
+			nextEdge = getNextEdge(p,nextEdge);
 			
 			i++;
 		}
@@ -108,6 +120,5 @@ public class NeighFileReader {
 		}else{
 			return edges.get(0);
 		}
-		
 	}
 }

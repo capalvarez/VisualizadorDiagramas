@@ -30,10 +30,6 @@ public abstract class AbstractTriangle implements MyTriangle {
 		neighbours[i] = t;
 	}
 	
-	public void setNeighbourInMap(MyTriangle t, int index){
-		neighboursMap.put(points.get(index),t);
-	}
-
 	public MyEdge getOppositeEdge(int i){
 		ArrayList<MyPoint> copy = (ArrayList<MyPoint>) points.clone();
 		copy.remove(points.get(i));

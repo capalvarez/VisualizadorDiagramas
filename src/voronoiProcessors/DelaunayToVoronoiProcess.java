@@ -85,7 +85,7 @@ public class DelaunayToVoronoiProcess {
 				Collection<MyTriangle> usefulNeighbours = t.getNeighboursByPoint(point); 
 				Iterator<MyTriangle> it = usefulNeighbours.iterator();
 		
-				MyTriangle first = it.next();
+                MyTriangle first = it.next();
 				MyTriangle second = it.next();
 
 				MyPoint p21 = first.getCircumcenter();
@@ -117,7 +117,7 @@ public class DelaunayToVoronoiProcess {
 		}
 	}	
 		
-	private boolean counterClockwise(MyPoint pA, MyPoint pB, MyPoint pC){
+	private boolean counterClockwise(MyPoint pA, MyPoint pB, MyPoint pC){	
 		return ((pB.getX() * pC.getY() + pA.getX() * pB.getY() + pA.getY()* pC.getX()) - 
 				(pA.getY() * pB.getX() + pB.getY() * pC.getX() + pA.getX() * pC.getY())) > 0;
 	}

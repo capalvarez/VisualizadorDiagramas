@@ -14,16 +14,19 @@ public class TriangleDelaunayFilesReader{
 	HashMap<MyPoint,ArrayList<MyTriangle>> pointMap;
 	
 	public TriangleDelaunayFilesReader(String fileName){
-		nodes = (new NodeFileReader(fileName)).getPoints();
+		NodeFileReader nfr = new NodeFileReader(fileName);
+		nodes = nfr.getPoints();
 		
-		EdgeFileReader efr = new EdgeFileReader(fileName,nodes);
+		MyPoint[] externalNodes = nfr.getExternalPoints();
+		
+		EdgeFileReader efr = new EdgeFileReader(fileName,nodes,externalNodes);
 		EleFileReader elefr = new EleFileReader(fileName,nodes,efr.getDictionary());
 		
-		edges = efr.getEdges();	
+		edges = efr.getEdges();
 		triangles = elefr.getTriangles();	
 		pointMap = elefr.getPointMap();
 		
-		(new NeighFileReader(fileName,triangles)).addNeighbours();
+		(new NeighFileReader(fileName,triangles,efr.getExternalDictionary(),pointMap)).addNeighbours();
 	}
 	
 	public MyTriangle[] getTriangles(){
