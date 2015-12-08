@@ -3,13 +3,10 @@ package utilities.triangles;
 import java.awt.Graphics2D;
 import java.awt.geom.Line2D;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 
 import utilities.MyPoint;
 import utilities.MyScale;
-import utilities.edges.InternalEdge;
-import utilities.edges.MyEdge;
 import utilities.edges.TriangleEdge;
 
 public abstract class AbstractTriangle implements MyTriangle {
@@ -33,13 +30,9 @@ public abstract class AbstractTriangle implements MyTriangle {
 	public void setNeighbourInMap(MyTriangle t, int index){
 		neighboursMap.put(points.get(index),t);
 	}
-
-	public MyEdge getOppositeEdge(int i){
-		ArrayList<MyPoint> copy = (ArrayList<MyPoint>) points.clone();
-		copy.remove(points.get(i));
-		
-		return new InternalEdge(copy.get(0),copy.get(1));
-				
+	
+	public MyTriangle getNeighbourByPoint(MyPoint p){
+		return neighboursMap.get(p);
 	}
 	
 	public double getArea(){

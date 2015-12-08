@@ -139,6 +139,7 @@ public class DrawPanel extends AbstractPanel{
     
     public void switchDiagram(boolean shown){
    		shownDiagram = shown;
+   		shownRegion = false;
     }
 	
     public void switchCoordSys(MyPoint origin, boolean shown){

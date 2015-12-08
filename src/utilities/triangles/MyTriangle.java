@@ -2,11 +2,9 @@ package utilities.triangles;
 
 import java.awt.Graphics2D;
 import java.util.ArrayList;
-import java.util.Collection;
 
 import utilities.MyPoint;
 import utilities.MyScale;
-import utilities.edges.MyEdge;
 import utilities.edges.TriangleEdge;
 
 public interface MyTriangle {
@@ -45,8 +43,6 @@ public interface MyTriangle {
 	
 	public void setNeighbourInMap(MyTriangle t, int i);
 	
-	public Collection<MyTriangle> getNeighboursByPoint(MyPoint p);
+	public MyTriangle getNeighbourByPoint(MyPoint p);
 	
-	public MyEdge getOppositeEdge(int i);
-
 }

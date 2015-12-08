@@ -3,17 +3,17 @@ package utilities;
 import java.util.ArrayList;
 
 import utilities.edges.InternalEdge;
-import utilities.edges.MyEdge;
+
 
 public class MyCell {
 	private ArrayList<Integer> edgeIndexList = new ArrayList<Integer>();
-	private ArrayList<MyEdge> edges = new ArrayList<MyEdge>();
+	private ArrayList<InternalEdge> edges = new ArrayList<InternalEdge>();
 	private ArrayList<Integer> normalDir = new ArrayList<Integer>();
 	MyPoint centerPoint;
 	
 	public MyCell(){}
 	
-	public void addEdge(int edgeIndex, MyEdge edge, int norm){
+	public void addEdge(int edgeIndex, InternalEdge edge, int norm){
 		edgeIndexList.add(edgeIndex);
 		edges.add(edge);
 		normalDir.add(norm);

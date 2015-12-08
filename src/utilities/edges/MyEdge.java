@@ -38,6 +38,6 @@ public interface MyEdge {
 	
 	public void setTriangle(MyTriangle t);
 	
-	public int exactCompare(MyEdge e);
+	public MyPoint getPoint(int index);
 
 }

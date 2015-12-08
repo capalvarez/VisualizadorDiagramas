@@ -42,7 +42,7 @@ public class VoronoiDiagramAction extends AbstractAction {
 			
 			/*Si llamada es exitosa puedo leer del archivo de output*/
 			TriangleDelaunayFilesReader reader = new TriangleDelaunayFilesReader(fileName);
-			DelaunayToVoronoiProcess voronoi = new DelaunayToVoronoiProcess(reader.getTriangles(),reader.getEdges(), reader.getPointMap());
+			DelaunayToVoronoiProcess voronoi = new DelaunayToVoronoiProcess(reader.getTriangles(),reader.getEdges());
 			
 			window.setPoints(Arrays.copyOfRange(reader.getDelaunayNodes(),1,reader.getDelaunayNodes().length));
 					
