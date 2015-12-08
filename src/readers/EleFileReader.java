@@ -72,6 +72,9 @@ public class EleFileReader {
 					edges.get(new PointPair(p1,p2)).setTriangle(triangles[i]);
 					edges.get(new PointPair(p2,p3)).setTriangle(triangles[i]);
 					edges.get(new PointPair(p3,p1)).setTriangle(triangles[i]);
+															
+					/*Para asegurarse de no tomar lineas vacias*/
+					triangles[i] = new Triangle(trianglePoints);
 				}
 				
 				i++;

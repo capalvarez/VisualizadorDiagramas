@@ -1,9 +1,7 @@
 package voronoiProcessors;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
-import java.util.Iterator;
 
 import utilities.MyCell;
 import utilities.MyPoint;
@@ -14,13 +12,13 @@ import utilities.triangles.Triangle;
 
 public class DelaunayToVoronoiProcess {
 	ArrayList<MyPoint> voronoiPoints = new ArrayList<MyPoint>();
-	ArrayList<MyEdge> voronoiEdges = new ArrayList<MyEdge>();
+	ArrayList<InternalEdge> voronoiEdges = new ArrayList<InternalEdge>();
 	ArrayList<MyCell> voronoiCells = new ArrayList<MyCell>();
 	
 	public DelaunayToVoronoiProcess(MyTriangle[] t, MyEdge[] e, HashMap<MyPoint,ArrayList<MyTriangle>> map){
 		computeVoronoiPoints(t);
 		computeVoronoiEdges(e);
-		//computeVoronoiCells(map);
+		computeVoronoiCells(map);
 	}
 	
 	public MyPoint[] getVoronoiPoints(){
@@ -74,66 +72,20 @@ public class DelaunayToVoronoiProcess {
 	private void computeVoronoiCells(HashMap<MyPoint,ArrayList<MyTriangle>> map){
 		for (MyPoint point : map.keySet()) {
 			ArrayList<MyTriangle> list = map.get(point);
-			MyCell newCell = new MyCell();
 			
-			int i = 0;
-			MyTriangle t = list.get(i);
-			MyTriangle lastTriangle = null;
-						
-			while(!t.equals(list.get(0)) || i==0){
+			MyTriangle t = list.get(0);
+			
+			while(true){
 				MyPoint p1 = t.getCircumcenter();
-			
-				Collection<MyTriangle> usefulNeighbours = t.getNeighboursByPoint(point); 
-				Iterator<MyTriangle> it = usefulNeighbours.iterator();
-		
-                MyTriangle first = it.next();
-				MyTriangle second = it.next();
-
-				MyPoint p21 = first.getCircumcenter();
-				MyPoint p22 = second.getCircumcenter();
-
-				MyEdge newEdge;
+				MyPoint p2 = t.getNeighbourByPoint(point).getCircumcenter();
 				
-				if(lastTriangle==null){
-					if(counterClockwise(point, p1, p21)){
-						newEdge = new InternalEdge(voronoiPoints.indexOf(p1), voronoiPoints.indexOf(p21));
-						lastTriangle = t;
-						t = first;
-					}else{
-						newEdge = new InternalEdge(voronoiPoints.indexOf(p1), voronoiPoints.indexOf(p22));
-						lastTriangle = t;
-						t = second;
-					}
-				}else{
-					if(!first.equals(lastTriangle)){
-						newEdge = new InternalEdge(voronoiPoints.indexOf(p1), voronoiPoints.indexOf(p21));
-						lastTriangle = t;
-						t = first;
-					}else{
-						newEdge = new InternalEdge(voronoiPoints.indexOf(p1), voronoiPoints.indexOf(p22));
-						lastTriangle = t;
-						t = second;
-					}
-				}
-					
-				if(!voronoiEdges.contains(newEdge)){
-					voronoiEdges.add(newEdge);
-				}
+				int index = voronoiEdges.indexOf(new InternalEdge(p1,p2));
 				
-				int index = voronoiEdges.indexOf(newEdge);			
 				
-				newCell.addEdge(index, voronoiEdges.get(index),	newEdge.exactCompare(voronoiEdges.get(index)));
-
-				i++;
 			}
-			
-			voronoiCells.add(newCell);
+		    
 		}
-	}	
-		
-	private boolean counterClockwise(MyPoint pA, MyPoint pB, MyPoint pC){	
-		return ((pB.getX() * pC.getY() + pA.getX() * pB.getY() + pA.getY()* pC.getX()) - 
-				(pA.getY() * pB.getX() + pB.getY() * pC.getX() + pA.getX() * pC.getY())) >= 0;
 	}
+	
+	
 }
-

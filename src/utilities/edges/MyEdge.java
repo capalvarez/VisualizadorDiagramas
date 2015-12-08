@@ -37,11 +37,5 @@ public interface MyEdge {
 	public MyPoint getMidPoint();
 	
 	public void setTriangle(MyTriangle t);
-	
-	public int exactCompare(MyEdge e);
-	
-	public MyPoint getNextPoint(MyPoint p);
-	
-	public MyPoint getPoint(int index);
 
 }

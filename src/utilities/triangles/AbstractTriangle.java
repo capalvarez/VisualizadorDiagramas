@@ -3,13 +3,10 @@ package utilities.triangles;
 import java.awt.Graphics2D;
 import java.awt.geom.Line2D;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 
 import utilities.MyPoint;
 import utilities.MyScale;
-import utilities.edges.InternalEdge;
-import utilities.edges.MyEdge;
 import utilities.edges.TriangleEdge;
 
 public abstract class AbstractTriangle implements MyTriangle {
@@ -30,27 +27,12 @@ public abstract class AbstractTriangle implements MyTriangle {
 		neighbours[i] = t;
 	}
 	
-	public MyEdge getOppositeEdge(int i){
-		ArrayList<MyPoint> copy = (ArrayList<MyPoint>) points.clone();
-		copy.remove(points.get(i));
-		
-		return new InternalEdge(copy.get(0),copy.get(1));			
+	public void setNeighbourInMap(MyTriangle t, int index){
+		neighboursMap.put(points.get(index),t);
 	}
 	
-	@Override
-	public boolean equals(Object o){
-		if(o instanceof MyTriangle){
-			MyTriangle t = (MyTriangle)o;
-			ArrayList<MyPoint> p = t.getPoints();
-			
-			boolean p0 = points.get(0).equals(p.get(0)) || points.get(0).equals(p.get(1)) || points.get(0).equals(p.get(2));
-			boolean p1 = points.get(1).equals(p.get(0)) || points.get(1).equals(p.get(1)) || points.get(1).equals(p.get(2));
-			boolean p2 = points.get(2).equals(p.get(0)) || points.get(2).equals(p.get(1)) || points.get(2).equals(p.get(2));
-			
-			return p0 && p1 && p2;	
-		}else{
-			return false;
-		}		   	
+	public MyTriangle getNeighbourByPoint(MyPoint p){
+		return neighboursMap.get(p);
 	}
 	
 	public double getArea(){

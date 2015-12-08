@@ -4,13 +4,11 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
 
 import utilities.MyPoint;
 
 public class NodeFileReader {
 	MyPoint[] points;
-	ArrayList<MyPoint> externalPoints = new ArrayList<MyPoint>();
 	
 	public NodeFileReader(String name){
 		File file = new File(name + ".1.node");
@@ -41,10 +39,6 @@ public class NodeFileReader {
 				if(coord.length>0){
 					/*Para asegurarse de no tomar lineas vacias*/
 					points[i] = new MyPoint(Double.parseDouble(coord[1].trim()),Double.parseDouble(coord[2].trim()));
-					
-					if(coord[3].equals("1")){
-						externalPoints.add(points[i]);
-					}
 				}
 				
 				i++;
@@ -57,12 +51,5 @@ public class NodeFileReader {
 	
 	public MyPoint[] getPoints(){
 		return points;
-	}
-	
-	public MyPoint[] getExternalPoints(){
-		MyPoint[] array = new MyPoint[externalPoints.size()];
-		array = externalPoints.toArray(array);
-		
-		return array;
 	}
 }

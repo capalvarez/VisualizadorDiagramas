@@ -56,7 +56,7 @@ public abstract class AbstractEdge implements MyEdge {
 	 */
 	@Override
 	public String toString() {
-		return this.i1+" "+this.i2 + " "; //+ getNormal();
+		return this.i1+" "+this.i2 + " " + getNormal();
 	}
 
 	public String getNormal() {
@@ -75,31 +75,16 @@ public abstract class AbstractEdge implements MyEdge {
 
 	@Override
 	public boolean equals(Object o) {
-		if(o instanceof MyEdge){
+		if(o instanceof InternalEdge){
 			MyEdge e2 = (MyEdge)o;
 		
-			if((i1==e2.getIndexFirst() && i2==e2.getIndexSecond()) ||
-			   (i2==e2.getIndexFirst() && i1==e2.getIndexSecond())){
-				return true;
-			}else{
-				if(p1 == null || p2 == null){
-					return false;
-				}
-				
-				return (p1.equals(e2.getFirstPoint()) && p2.equals(e2.getSecondPoint())) ||
-				       (p1.equals(e2.getSecondPoint()) && p2.equals(e2.getFirstPoint()));
-			}
-			 		
+			return (i1==e2.getIndexFirst() && i2==e2.getIndexSecond()) ||
+				   (i2==e2.getIndexFirst() && i1==e2.getIndexSecond()); 		
 		}else{
 			return false;
 		}
 	}
 
-	@Override
-	public int hashCode(){
-		return p1.hashCode() + p2.hashCode();
-	}
-	
 	public int getNormalDir(AbstractEdge e) {
 		if(e.p1.equals(this.p1) && e.p2.equals(this.p2)){
 			return 1;
@@ -120,25 +105,5 @@ public abstract class AbstractEdge implements MyEdge {
 
 	public MyPoint getMidPoint(){
 		return new MyPoint((p1.getX() + p2.getX())/2,(p1.getY() + p2.getY())/2); 
-	}
-	
-	public int exactCompare(MyEdge e){
-		return (i1==e.getIndexFirst() && i2==e.getIndexSecond())? 1:-1;
-	}
-
-	public MyPoint getNextPoint(MyPoint p){
-		if(p.equals(p1)){
-			return p2;
-		}else{
-			return p1;
-		}
-	}
-	
-	public MyPoint getPoint(int index){
-		if(index==0){
-			return getFirstPoint();
-		}
-		
-		return getSecondPoint();
 	}
 }

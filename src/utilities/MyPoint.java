@@ -10,8 +10,6 @@ public class MyPoint {
 	private double z;
 	private int dimension;
 	
-	public MyPoint(){}
-	
 	public MyPoint(double x, double y, double z){
 		this.x = x;
 		this.y = y;
