@@ -20,7 +20,7 @@ public class DelaunayToVoronoiProcess {
 	public DelaunayToVoronoiProcess(MyTriangle[] t, MyEdge[] e, HashMap<MyPoint,ArrayList<MyTriangle>> map){
 		computeVoronoiPoints(t);
 		computeVoronoiEdges(e);
-		computeVoronoiCells(map);
+		//computeVoronoiCells(map);
 	}
 	
 	public MyPoint[] getVoronoiPoints(){
@@ -78,6 +78,7 @@ public class DelaunayToVoronoiProcess {
 			
 			int i = 0;
 			MyTriangle t = list.get(i);
+			MyTriangle lastTriangle = null;
 						
 			while(!t.equals(list.get(0)) || i==0){
 				MyPoint p1 = t.getCircumcenter();
@@ -93,14 +94,28 @@ public class DelaunayToVoronoiProcess {
 
 				MyEdge newEdge;
 				
-				if (counterClockwise(point, p1, p21)){
-					newEdge = new InternalEdge(voronoiPoints.indexOf(p1), voronoiPoints.indexOf(p21));
-					t = first;
+				if(lastTriangle==null){
+					if(counterClockwise(point, p1, p21)){
+						newEdge = new InternalEdge(voronoiPoints.indexOf(p1), voronoiPoints.indexOf(p21));
+						lastTriangle = t;
+						t = first;
+					}else{
+						newEdge = new InternalEdge(voronoiPoints.indexOf(p1), voronoiPoints.indexOf(p22));
+						lastTriangle = t;
+						t = second;
+					}
 				}else{
-					newEdge = new InternalEdge(voronoiPoints.indexOf(p1), voronoiPoints.indexOf(p22));
-					t = second;
+					if(!first.equals(lastTriangle)){
+						newEdge = new InternalEdge(voronoiPoints.indexOf(p1), voronoiPoints.indexOf(p21));
+						lastTriangle = t;
+						t = first;
+					}else{
+						newEdge = new InternalEdge(voronoiPoints.indexOf(p1), voronoiPoints.indexOf(p22));
+						lastTriangle = t;
+						t = second;
+					}
 				}
-				
+					
 				if(!voronoiEdges.contains(newEdge)){
 					voronoiEdges.add(newEdge);
 				}
@@ -110,7 +125,6 @@ public class DelaunayToVoronoiProcess {
 				newCell.addEdge(index, voronoiEdges.get(index),	newEdge.exactCompare(voronoiEdges.get(index)));
 
 				i++;
-
 			}
 			
 			voronoiCells.add(newCell);
@@ -119,8 +133,7 @@ public class DelaunayToVoronoiProcess {
 		
 	private boolean counterClockwise(MyPoint pA, MyPoint pB, MyPoint pC){	
 		return ((pB.getX() * pC.getY() + pA.getX() * pB.getY() + pA.getY()* pC.getX()) - 
-				(pA.getY() * pB.getX() + pB.getY() * pC.getX() + pA.getX() * pC.getY())) > 0;
+				(pA.getY() * pB.getX() + pB.getY() * pC.getX() + pA.getX() * pC.getY())) >= 0;
 	}
-
 }
 

@@ -34,8 +34,23 @@ public abstract class AbstractTriangle implements MyTriangle {
 		ArrayList<MyPoint> copy = (ArrayList<MyPoint>) points.clone();
 		copy.remove(points.get(i));
 		
-		return new InternalEdge(copy.get(0),copy.get(1));
-				
+		return new InternalEdge(copy.get(0),copy.get(1));			
+	}
+	
+	@Override
+	public boolean equals(Object o){
+		if(o instanceof MyTriangle){
+			MyTriangle t = (MyTriangle)o;
+			ArrayList<MyPoint> p = t.getPoints();
+			
+			boolean p0 = points.get(0).equals(p.get(0)) || points.get(0).equals(p.get(1)) || points.get(0).equals(p.get(2));
+			boolean p1 = points.get(1).equals(p.get(0)) || points.get(1).equals(p.get(1)) || points.get(1).equals(p.get(2));
+			boolean p2 = points.get(2).equals(p.get(0)) || points.get(2).equals(p.get(1)) || points.get(2).equals(p.get(2));
+			
+			return p0 && p1 && p2;	
+		}else{
+			return false;
+		}		   	
 	}
 	
 	public double getArea(){

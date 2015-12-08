@@ -67,7 +67,7 @@ public class DrawPanel extends AbstractPanel{
     	Graphics2D g2d = (Graphics2D) g;
         g2d.setColor(color);
         (new PointDrawer(points,pointSize)).drawPoints(g2d);
-        region.drawRegion(g2d);    
+        //region.drawRegion(g2d);    
     }
     
     private void doDrawingDiagram(Graphics g){
@@ -139,6 +139,7 @@ public class DrawPanel extends AbstractPanel{
     
     public void switchDiagram(boolean shown){
    		shownDiagram = shown;
+   		shownRegion = false;
     }
 	
     public void switchCoordSys(MyPoint origin, boolean shown){
