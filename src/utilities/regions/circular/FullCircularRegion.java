@@ -6,16 +6,18 @@ import java.awt.Graphics2D;
 import java.awt.geom.Ellipse2D;
 import java.util.ArrayList;
 
+import regionBounders.CircleBounder;
+
 import utilities.MyPoint;
 import utilities.MyScale;
 import utilities.edges.InternalEdge;
 import utilities.edges.MyEdge;
 import utilities.perforations.MyCircle;
 import utilities.perforations.Perforation;
+import utilities.regions.RectangleRegion;
 
 public class FullCircularRegion extends CircularRegion {
-	
-	
+		
 	public FullCircularRegion(double iR, double oR, MyPoint c, MyScale s){
 		super(iR,oR,c,s);
 		
@@ -33,6 +35,21 @@ public class FullCircularRegion extends CircularRegion {
 	
 	private double getOuterPerimeter(){
 		return 2*Math.PI*outerR;
+	}
+	
+	@Override
+	public MyPoint[] generateRandom(int number) {
+		MyPoint[] bounding = (new CircleBounder(center,outerR,null)).circleBounding();
+		RectangleRegion boundingRec = new RectangleRegion(bounding,scale);
+				
+		return cleanOutsidePoints(boundingRec.generateRandom(number));
+	}
+	
+	@Override
+	public boolean isInside(MyPoint p){
+		double value = Math.pow((p.getX() - center.getX()),2) + Math.pow((p.getY() - center.getY()),2);
+		
+		return value <= Math.pow(outerR,2) && value >= Math.pow(innerR,2); 			
 	}
 	
 	public void drawRegion(Graphics2D g2d) {

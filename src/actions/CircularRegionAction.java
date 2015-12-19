@@ -1,6 +1,5 @@
 package actions;
 
-import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -16,8 +15,6 @@ import regionBounders.CircleBounder;
 
 import utilities.MyPoint;
 import utilities.MyScale;
-import utilities.perforations.MyCircle;
-import utilities.perforations.Perforation;
 import utilities.regions.MyRegion;
 import utilities.regions.circular.FullCircularRegion;
 import utilities.regions.circular.PartialCircularRegion;
@@ -34,7 +31,7 @@ public class CircularRegionAction extends AbstractAction {
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		String[] options = { "Completo", "Medio", "Cuarto", "Otro"};
+		String[] options = { "Completo", "Medio", "Cuarto"};
 	
 		JTextField xFieldO = new JTextField(5);
 		JTextField yFieldO = new JTextField(5);
@@ -141,8 +138,7 @@ public class CircularRegionAction extends AbstractAction {
 						region = new FullCircularRegion(InnerR,OuterR,origen,scale);
 						break;
 					case 1:
-						pip = new PointInitProcess(cbp.halfCircleBounding(),window);
-//																	
+						pip = new PointInitProcess(cbp.halfCircleBounding(),window);														
 						scale = pip.getScale();
 												
 						double[] anglesHalf = {0,180};
@@ -158,13 +154,7 @@ public class CircularRegionAction extends AbstractAction {
 					default:
 						pip = new PointInitProcess(cbp.otherCircleBounding(InnerR),window);
 						scale = pip.getScale();
-//						MyPoint[] arr2 = cbp.otherCircleBounding(); 
-//						for(int i=0;i<2;i++){
-//							System.out.println(arr2[i]);
-//						}
-						
-						//scale.printScale();
-						
+					
 						double angle1 = Double.parseDouble(initAngle.getText());
 						double angle2 = Double.parseDouble(endAngle.getText());
 						double[] anglesOther = {angle1,angle2};

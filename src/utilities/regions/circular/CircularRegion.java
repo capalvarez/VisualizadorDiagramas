@@ -2,11 +2,14 @@ package utilities.regions.circular;
 
 import java.util.ArrayList;
 
+import regionBounders.ArbitraryRegionBounder;
+
 import utilities.MyPoint;
 import utilities.MyScale;
 import utilities.perforations.MyCircle;
 import utilities.perforations.Perforation;
 import utilities.regions.AbstractRegion;
+import utilities.regions.RectangleRegion;
 
 public abstract class CircularRegion extends AbstractRegion {
 	ArrayList<Perforation> perforation = new ArrayList<Perforation>();
@@ -24,22 +27,10 @@ public abstract class CircularRegion extends AbstractRegion {
 		center = c;
 		scale = s;	
 	}
-	
-	@Override
-	public boolean isInside(MyPoint point) {
-		// TODO Auto-generated method stub
-		return false;
-	}
 
 	@Override
 	public MyPoint[] generateNonUniform(double initX, double multX, double initY,
 			double multY) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public MyPoint[] generateRandom(int number) {
 		// TODO Auto-generated method stub
 		return null;
 	}

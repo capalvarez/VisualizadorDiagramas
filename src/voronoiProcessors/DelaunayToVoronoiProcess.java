@@ -20,7 +20,7 @@ public class DelaunayToVoronoiProcess {
 	public DelaunayToVoronoiProcess(MyTriangle[] t, MyEdge[] e, HashMap<MyPoint,ArrayList<MyTriangle>> map){
 		computeVoronoiPoints(t);
 		computeVoronoiEdges(e);
-		computeVoronoiCells(map);
+		//computeVoronoiCells(map);
 	}
 	
 	public MyPoint[] getVoronoiPoints(){

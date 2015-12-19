@@ -51,6 +51,18 @@ public abstract class AbstractRegion implements MyRegion {
 		return pointListToArray(finalList);
 	}
 
+	protected MyPoint[] cleanOutsidePoints(MyPoint[] p){
+		ArrayList<MyPoint> inside = new ArrayList<MyPoint>();
+		
+		for(int i=0;i<p.length;i++){
+				
+			if(isInside(p[i])){
+				inside.add(p[i]);
+			}
+		}
+		
+		return pointListToArray(inside);
+	}
 	
 	
 }

@@ -8,12 +8,15 @@ import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 
+import regionBounders.CircleBounder;
+
 import drawers.PointDrawer;
 
 import utilities.MyPoint;
 import utilities.MyScale;
 import utilities.edges.InternalEdge;
 import utilities.edges.MyEdge;
+import utilities.regions.RectangleRegion;
 
 public class PartialCircularRegion extends CircularRegion {
 	double[] angles;
@@ -39,6 +42,12 @@ public class PartialCircularRegion extends CircularRegion {
 	}
 	
 	@Override
+	public boolean isInside(MyPoint point) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	
+	@Override
 	public void drawRegion(Graphics2D g2d) {
 		double sInnerR = scale.getPixelValue(innerR);
 		double sOuterR = scale.getPixelValue(outerR);
@@ -46,7 +55,7 @@ public class PartialCircularRegion extends CircularRegion {
 		MyPoint scaledCenter = scale.getPixelValue(center);
 				
 		g2d.draw(new Arc2D.Double(scaledCenter.getX()-sInnerR,scaledCenter.getY()-sInnerR,2*sInnerR,2*sInnerR,angles[0],angles[1], Arc2D.OPEN));
-		g2d.draw(new Arc2D.Double(scaledCenter.getX()-sOuterR,scaledCenter.getY()-2*sInnerR,2*sOuterR,2*sOuterR,angles[0],angles[1], Arc2D.OPEN));
+		g2d.draw(new Arc2D.Double(scaledCenter.getX()-sOuterR,scaledCenter.getY()-sOuterR,2*sOuterR,2*sOuterR,angles[0],angles[1], Arc2D.OPEN));
 					
 		MyPoint pInner1 = new MyPoint(scaledCenter.getX()+Math.cos(radian(angles[0]))*sInnerR,scaledCenter.getY()+Math.sin(radian(angles[0]))*sInnerR);
 		MyPoint pInner2 = new MyPoint(scaledCenter.getX()+Math.cos(radian(angles[1]))*sInnerR,scaledCenter.getY()-Math.sin(radian(angles[1]))*sInnerR);
@@ -57,6 +66,14 @@ public class PartialCircularRegion extends CircularRegion {
 		g2d.draw(new Line2D.Double(pInner2.getX(), pInner2.getY(), pOuter2.getX(), pOuter2.getY()));
 	}
 
+	@Override
+	public MyPoint[] generateRandom(int number) {
+		MyPoint[] bounding = (new CircleBounder(center,outerR,angles)).otherCircleBounding(innerR);
+		RectangleRegion boundingRec = new RectangleRegion(bounding,scale);
+				
+		return cleanOutsidePoints(boundingRec.generateRandom(number));
+	}
+	
 	@Override
 	public MyPoint[] generateUniformByNumber(int nX, int nY, boolean secondRow) {
 		double delta = (outerR - innerR)/(nX-1);
@@ -185,4 +202,6 @@ public class PartialCircularRegion extends CircularRegion {
 						
 		return pointListToArray(circlePoints);
 	}
+
+	
 }

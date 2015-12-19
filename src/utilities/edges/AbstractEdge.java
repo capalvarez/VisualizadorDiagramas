@@ -109,9 +109,9 @@ public abstract class AbstractEdge implements MyEdge {
 	}
 
 	public boolean inEdge(MyPoint p) {
-		double res = p1.getX()*(p2.getY()-p.getY()) + p2.getX()*(p.getY()-p1.getY()) + p.getX()*(p1.getY()-p2.getY()); 
-	
-		return Math.abs(res)<0.00001;
+		return ((p.getX()>=p1.getX() && p.getX()<=p2.getX()) || (p.getX()>=p2.getX() && p.getX()<=p1.getX())) &&
+			   ((p.getY()>=p1.getY() && p.getY()<=p2.getY()) || (p.getY()>=p2.getY() && p.getY()<=p1.getY())) &&
+			   Math.abs(p1.getX()*(p2.getY()-p.getY()) + p2.getX()*(p.getY()-p1.getY()) + p.getX()*(p1.getY()-p2.getY()))<0.0001;
 	}
 
 	public ArrayList<MyPoint> intersectionPoint(Perforation p) {
