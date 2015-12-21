@@ -63,7 +63,20 @@ public class FullCircularRegion extends CircularRegion {
 		
 		g2d.draw(innerCircle);
 		g2d.draw(outerCircle);
+		
+		for (Perforation p : perforation) {
+			if (!processIntersection(p)) {
+				p.drawPerforation(g2d, scale, null);
+			} else {
+
+			}
+		}	
 	}
+	
+	public boolean processIntersection(Perforation p){
+		return false;
+	}
+	
 	
 	@Override
 	public MyPoint[] generateUniformByNumber(int nX, int nY, boolean secondRow) {

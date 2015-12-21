@@ -19,8 +19,7 @@ public abstract class CircularRegion extends AbstractRegion {
 	double innerR;
 	double outerR;
 	MyPoint center;
-	MyScale scale;
-	
+		
 	public CircularRegion(double iR, double oR, MyPoint c, MyScale s){
 		innerR = iR;
 		outerR = oR;

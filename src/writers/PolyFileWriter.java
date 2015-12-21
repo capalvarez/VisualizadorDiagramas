@@ -41,6 +41,7 @@ public class PolyFileWriter {
 			writer.println(i + " " + points[i-1].toString());
 			i++;
 		}
+		
 		int j = 0;
 		while(j<regionPoints.length){
 			writer.println(i + " " + regionPoints[j].toString());

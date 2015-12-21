@@ -16,6 +16,7 @@ import utilities.MyPoint;
 import utilities.MyScale;
 import utilities.edges.InternalEdge;
 import utilities.edges.MyEdge;
+import utilities.perforations.Perforation;
 import utilities.regions.RectangleRegion;
 
 public class PartialCircularRegion extends CircularRegion {
@@ -42,9 +43,15 @@ public class PartialCircularRegion extends CircularRegion {
 	}
 	
 	@Override
-	public boolean isInside(MyPoint point) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean isInside(MyPoint p) {
+		double value = Math.pow((p.getX() - center.getX()),2) + Math.pow((p.getY() - center.getY()),2);
+		boolean circle = value <= Math.pow(outerR,2) && value >= Math.pow(innerR,2); 		
+		
+		MyPoint[] bounding = (new CircleBounder(center,outerR,angles)).otherCircleBounding();
+		RectangleRegion boundingRec = new RectangleRegion(bounding,scale);	
+		System.out.println(boundingRec);
+		
+		return circle && boundingRec.isInside(p);
 	}
 	
 	@Override
@@ -64,11 +71,24 @@ public class PartialCircularRegion extends CircularRegion {
 
 		g2d.draw(new Line2D.Double(pInner1.getX(), pInner1.getY(), pOuter1.getX(), pOuter1.getY()));
 		g2d.draw(new Line2D.Double(pInner2.getX(), pInner2.getY(), pOuter2.getX(), pOuter2.getY()));
+		
+		for (Perforation p : perforation) {
+			if (!processIntersection(p)) {
+				p.drawPerforation(g2d, scale, null);
+			} else {
+
+			}
+		}
 	}
 
+	public boolean processIntersection(Perforation p) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	
 	@Override
 	public MyPoint[] generateRandom(int number) {
-		MyPoint[] bounding = (new CircleBounder(center,outerR,angles)).otherCircleBounding(innerR);
+		MyPoint[] bounding = (new CircleBounder(center,outerR,angles)).otherCircleBounding();
 		RectangleRegion boundingRec = new RectangleRegion(bounding,scale);
 				
 		return cleanOutsidePoints(boundingRec.generateRandom(number));
@@ -176,7 +196,7 @@ public class PartialCircularRegion extends CircularRegion {
 		int nOut = outerPointsDiscrete.size();
 		
 		for(int i=1;i<nOut;i++){
-			edges[j] = new InternalEdge(i%nOut,(i+1)%nOut);
+			edges[j] = new InternalEdge(i%nOut,i%nOut+1);
 			j++;
 		}
 		
@@ -203,5 +223,7 @@ public class PartialCircularRegion extends CircularRegion {
 		return pointListToArray(circlePoints);
 	}
 
+	
+	
 	
 }

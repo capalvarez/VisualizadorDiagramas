@@ -11,11 +11,13 @@ public class CircleBounder {
 		this.origin = origin;
 		r = radius;
 		
-		if(angles!=null){
-			this.angles = new double[2];
-			this.angles[0] = angles[0]*Math.PI/180;
-			this.angles[1] = angles[1]*Math.PI/180;
-		}	
+//		if(angles!=null){
+//			this.angles = new double[2];
+//			this.angles[0] = angles[0]*Math.PI/180;
+//			this.angles[1] = angles[1]*Math.PI/180;
+//		}	
+		this.angles = angles;
+	
 	}
 	
 	public MyPoint[] circleBounding(){
@@ -52,6 +54,18 @@ public class CircleBounder {
 		
 		return array;
 	
+	}
+	
+	public MyPoint[] otherCircleBounding(){
+		if(angles[1]==90.0){
+			return quarterCircleBounding();
+		}
+		
+		if(angles[1]==180.0){
+			return halfCircleBounding();
+		}
+		
+		return null;
 	}
 	
 }

@@ -110,62 +110,64 @@ public class CircularRegionAction extends AbstractAction {
 				origenY = Double.parseDouble(yFieldO.getText());
 			}
 		
+			double InnerR = 0;	
 			if(InnerRadius.getText().length() != 0){
-				double InnerR = Double.parseDouble(InnerRadius.getText());
-				double OuterR = Double.parseDouble(OuterRadius.getText());
-				MyPoint origen = new MyPoint(origenX,origenY);
-							
-				MyRegion region;
+				InnerR = Double.parseDouble(InnerRadius.getText());	
+			}
+			
+			double OuterR = Double.parseDouble(OuterRadius.getText());
+			MyPoint origen = new MyPoint(origenX,origenY);
+						
+			MyRegion region;
+			
+			double[] angles = null;
+			if(optionList.getSelectedIndex()==3){
+				double angle1 = Double.parseDouble(initAngle.getText());
+				double angle2 = Double.parseDouble(endAngle.getText());
 				
-				double[] angles = null;
-				if(optionList.getSelectedIndex()==3){
+				angles = new double[2];
+				angles[0] = angle1;
+				angles[1] = angle2;
+			}
+							
+			CircleBounder cbp = new CircleBounder(origen,OuterR,angles);			
+			MyScale scale;
+			
+			switch(optionList.getSelectedIndex()){
+				case 0:
+					PointInitProcess pip = new PointInitProcess(cbp.circleBounding(),window);					
+					scale = pip.getScale();
+					
+					region = new FullCircularRegion(InnerR,OuterR,origen,scale);
+					break;
+				case 1:
+					pip = new PointInitProcess(cbp.halfCircleBounding(),window);														
+					scale = pip.getScale();
+											
+					double[] anglesHalf = {0,180};
+					region = new PartialCircularRegion(InnerR,OuterR,origen,scale,anglesHalf);
+					break;
+				case 2:
+					pip = new PointInitProcess(cbp.quarterCircleBounding(),window);
+					scale = pip.getScale();
+					
+					double[] anglesQuarter = {0,90};
+					region = new PartialCircularRegion(InnerR,OuterR,origen,scale,anglesQuarter);
+					break;
+				default:
+					pip = new PointInitProcess(cbp.otherCircleBounding(InnerR),window);
+					scale = pip.getScale();
+				
 					double angle1 = Double.parseDouble(initAngle.getText());
 					double angle2 = Double.parseDouble(endAngle.getText());
+					double[] anglesOther = {angle1,angle2};
 					
-					angles = new double[2];
-					angles[0] = angle1;
-					angles[1] = angle2;
-				}
-								
-				CircleBounder cbp = new CircleBounder(origen,OuterR,angles);			
-				MyScale scale;
-				
-				switch(optionList.getSelectedIndex()){
-					case 0:
-						PointInitProcess pip = new PointInitProcess(cbp.circleBounding(),window);					
-						scale = pip.getScale();
-						
-						region = new FullCircularRegion(InnerR,OuterR,origen,scale);
-						break;
-					case 1:
-						pip = new PointInitProcess(cbp.halfCircleBounding(),window);														
-						scale = pip.getScale();
-												
-						double[] anglesHalf = {0,180};
-						region = new PartialCircularRegion(InnerR,OuterR,origen,scale,anglesHalf);
-						break;
-					case 2:
-						pip = new PointInitProcess(cbp.quarterCircleBounding(),window);
-						scale = pip.getScale();
-						
-						double[] anglesQuarter = {0,90};
-						region = new PartialCircularRegion(InnerR,OuterR,origen,scale,anglesQuarter);
-						break;
-					default:
-						pip = new PointInitProcess(cbp.otherCircleBounding(InnerR),window);
-						scale = pip.getScale();
-					
-						double angle1 = Double.parseDouble(initAngle.getText());
-						double angle2 = Double.parseDouble(endAngle.getText());
-						double[] anglesOther = {angle1,angle2};
-						
-						region = new PartialCircularRegion(InnerR,OuterR,origen,scale,anglesOther);
-						break;
-				}
-				
-				window.drawRegionInPanel(region, scale);
-				window.repaint();
+					region = new PartialCircularRegion(InnerR,OuterR,origen,scale,anglesOther);
+					break;
 			}
+			
+			window.drawRegionInPanel(region, scale);
+			window.repaint();
 			
 			
 		}

@@ -19,8 +19,7 @@ import utilities.perforations.Perforation;
 
 public class ArbitraryRegion extends AbstractRegion {
 	MyPoint[] points;
-	MyScale scale;
-	
+		
 	public ArbitraryRegion(MyPoint[] p, MyScale s){
 		points = p;
 		scale = s;
@@ -72,8 +71,21 @@ public class ArbitraryRegion extends AbstractRegion {
 					
 			g2d.draw(new Line2D.Double(pixelP1.getX(), pixelP1.getY(), pixelP2.getX(), pixelP2.getY()));
 		}
+		
+		for (Perforation p : perforation) {
+			if (!processIntersection(p)) {
+				p.drawPerforation(g2d, scale, null);
+			} else {
+
+			}
+		}	
 	}
 
+	public boolean processIntersection(Perforation p){
+		return false;
+	}
+	
+	
 	@Override
 	public MyPoint[] generateNonUniform(double initX, double multX, double initY, double multY) {
 		MyPoint[] bounding = (new ArbitraryRegionBounder(points)).getMinMin();

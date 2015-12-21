@@ -25,7 +25,6 @@ import utilities.perforations.Perforation;
 public class RectangleRegion extends AbstractRegion{
 	MyPoint upLeftReal;
 	MyPoint downRightReal;
-	MyScale scale;
 	MyEdge[] regionSides;
 				
 	public RectangleRegion(MyPoint pUL, MyPoint pDR, MyScale scale){
@@ -102,49 +101,52 @@ public class RectangleRegion extends AbstractRegion{
 	}
 	
 	public boolean processIntersection(ArrayList<PointPair> list,Perforation p){
-		ArrayList<MyPoint> inter = new ArrayList<MyPoint>();
-		boolean changed = false;
-		int n = list.size();
+//		ArrayList<MyPoint> inter = new ArrayList<MyPoint>();
+//		boolean changed = false;
+//		int n = list.size();
+//		
+//		for(int i=0;i<n;i++){
+//			inter = list.get(i).intersectionPoint(p);
+//			
+//			if(inter.size()==2){
+//				changed = true;
+//				
+//				MyPoint first = list.get(i).getFirst().closestTo(inter);
+//				PointPair newPair = list.get(i).divide(first);
+//				inter.remove(first);
+//				PointPair newPair2 = newPair.divide(inter.get(0));
+//				
+//				newPair.setPerforation(p);
+//				
+//				list.add(newPair);
+//				list.add(newPair2);
+//			}
+//			
+//			if(inter.size()==1){
+//				/*Hay que distinguir entre contacto e interseccion "interrumpida"*/
+//				PointPair side = list.get(i);
+//				System.out.println(list.get(i));
+//				
+//				if(p.contains(side.getFirst())){
+//					PointPair newPair = side.divide(inter.get(0));
+//					newPair.setPerforation(p);
+//					list.add(newPair);
+//					System.out.println(inter.get(0));
+//				}else{
+//					if(p.contains(side.getSecond())){
+//						PointPair newPair = side.divide(inter.get(0));
+//						newPair.setPerforation(p);
+//						list.add(newPair);
+//					}
+//				}
+//			}
+//			
+//		}
 		
-		for(int i=0;i<n;i++){
-			inter = list.get(i).intersectionPoint(p);
-			
-			if(inter.size()==2){
-				changed = true;
-				
-				MyPoint first = list.get(i).getFirst().closestTo(inter);
-				PointPair newPair = list.get(i).divide(first);
-				inter.remove(first);
-				PointPair newPair2 = newPair.divide(inter.get(0));
-				
-				newPair.setPerforation(p);
-				
-				list.add(newPair);
-				list.add(newPair2);
-			}
-			
-			if(inter.size()==1){
-				/*Hay que distinguir entre contacto e interseccion "interrumpida"*/
-				PointPair side = list.get(i);
-				System.out.println(list.get(i));
-				
-				if(p.contains(side.getFirst())){
-					PointPair newPair = side.divide(inter.get(0));
-					newPair.setPerforation(p);
-					list.add(newPair);
-					System.out.println(inter.get(0));
-				}else{
-					if(p.contains(side.getSecond())){
-						PointPair newPair = side.divide(inter.get(0));
-						newPair.setPerforation(p);
-						list.add(newPair);
-					}
-				}
-			}
-			
-		}
+		//return changed;
 		
-		return changed;
+		return false;
+		
 	}
 	
 	
@@ -201,8 +203,7 @@ public class RectangleRegion extends AbstractRegion{
 	}
 	
 	public MyPoint[] generateRandom(int number){
-		/*Generar puntos aleatoriamente*/
-		MyPoint[] pointArray = new MyPoint[number];
+		ArrayList<MyPoint> list = new ArrayList<MyPoint>();
 						
 		double w =  getWidth();
 		double h =  getHeight();
@@ -212,10 +213,12 @@ public class RectangleRegion extends AbstractRegion{
 			double x = Math.abs(r.nextInt()) % w + getLeftCorner();
 			double y = Math.abs(r.nextInt()) % h + getUpCorner();
 			
-			pointArray[i] = new MyPoint(x,y);
+			list.add(new MyPoint(x,y));
 		}
 		
-		return pointArray;
+		cleanPerforation(list);
+		
+		return pointListToArray(list);
 	}
 	
 	public MyPoint[] generateUniformByDistance(double dX, double dY, boolean secondRow){
@@ -333,11 +336,5 @@ public class RectangleRegion extends AbstractRegion{
 			
 			return generateBorderByDistance(distances ,forAll);
 		}
-	}
-	
-	
-	
-
-	
-	
+	}	
 }

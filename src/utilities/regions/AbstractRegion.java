@@ -4,10 +4,12 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import utilities.MyPoint;
+import utilities.MyScale;
 import utilities.perforations.Perforation;
 
 public abstract class AbstractRegion implements MyRegion {
 	ArrayList<Perforation> perforation = new ArrayList<Perforation>();
+	protected MyScale scale;
 	
 	public void emptyPerforations(){
 		perforation = new ArrayList<Perforation>();
